@@ -1,7 +1,15 @@
+'use client';
+
+import { useAuth } from "@/context/AuthContext";
 import Container from "./Container";
 import Link from 'next/link';
+import {BellIcon, UserIcon} from '@heroicons/react/24/outline'
+
+
 
 export default function Navbar() {
+    const { user, loading } = useAuth();
+
     return (
         <nav className="bg-navbar-background-light text-navbar-foreground-light py-4 shadow">
             <Container>
@@ -10,7 +18,7 @@ export default function Navbar() {
                         <Link href="/" className="text-2xl font-bold text-primary">Hiplando</Link>
                     </div>
                     <div className="flex items-center space-x-6">
-                        <ul className="flex space-x-4">
+                        <ul className="flex space-x-4 hidden">
                             <li className="cursor-pointer">Horses</li>
                             <li className="cursor-pointer">Transport</li>
                             <li className="cursor-pointer">Competitions</li>
@@ -18,9 +26,22 @@ export default function Navbar() {
                             {/* <li className="cursor-pointer">About</li>
                             <li className="cursor-pointer">Contact</li> */}
                         </ul>
-                        <Link href="/login" className="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
-                            Login
-                        </Link>
+                        {
+                            user ? (
+                                <div className="flex gap-2 items-center">
+                                    <button className="text-primary shadow bg-background border border-zinc-200 p-2 rounded-lg">
+                                        <UserIcon className="h-5" />
+                                    </button>
+                                    <button className="text-primary shadow bg-background border border-zinc-200 p-2 rounded-lg">
+                                        <BellIcon className="h-5" />
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link href="/auth" className="bg-primary font-bold text-sm text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                                    Login
+                                </Link>
+                            )
+                        }
                     </div>
                 </div>
             </Container>
