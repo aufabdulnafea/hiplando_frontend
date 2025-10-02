@@ -7,6 +7,7 @@ import { BellIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import NotificationsDropDown from "./NotificationsDropDown";
 import UserDropDown from "./UserDropDown";
+import Button, { PrimaryButton } from "./formElements/Button";
 
 
 
@@ -36,7 +37,7 @@ export default function Navbar() {
                                     <NotificationsDropDown />
                                 </div>
                             ) : (
-                                <Link href="/auth" className="bg-primary font-bold text-sm text-white px-4 py-2 rounded-xl hover:bg-primary/90 transition">
+                                <Link href='/auth' className="bg-primary py-1.5 px-4 rounded-2xl text-sm text-white">
                                     Login
                                 </Link>
                             )
