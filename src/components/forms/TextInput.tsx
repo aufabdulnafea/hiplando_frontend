@@ -17,7 +17,7 @@ export default function TextInput(props: TextInputProps) {
                 <UserIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
             </div>
             <input
-                className="w-full rounded-2xl border border-zinc-300 bg-white px-4 py-4.5 pl-12 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
+                className="w-full rounded-2xl border border-zinc-300 bg-white px-4 py-3 pl-12 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
                 type={type}
                 id={id || ''}
                 placeholder={placeholder || ''}

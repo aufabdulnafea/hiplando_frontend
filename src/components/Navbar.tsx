@@ -3,7 +3,10 @@
 import { useAuth } from "@/context/AuthContext";
 import Container from "./Container";
 import Link from 'next/link';
-import {BellIcon, UserIcon} from '@heroicons/react/24/outline'
+import { BellIcon, UserIcon } from '@heroicons/react/24/outline'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import NotificationsDropDown from "./NotificationsDropDown";
+import UserDropDown from "./UserDropDown";
 
 
 
@@ -29,15 +32,11 @@ export default function Navbar() {
                         {
                             user ? (
                                 <div className="flex gap-2 items-center">
-                                    <button className="text-primary shadow bg-background border border-zinc-200 p-2 rounded-lg">
-                                        <UserIcon className="h-5" />
-                                    </button>
-                                    <button className="text-primary shadow bg-background border border-zinc-200 p-2 rounded-lg">
-                                        <BellIcon className="h-5" />
-                                    </button>
+                                    <UserDropDown />
+                                    <NotificationsDropDown />
                                 </div>
                             ) : (
-                                <Link href="/auth" className="bg-primary font-bold text-sm text-white px-4 py-2 rounded-full hover:bg-primary/90 transition">
+                                <Link href="/auth" className="bg-primary font-bold text-sm text-white px-4 py-2 rounded-xl hover:bg-primary/90 transition">
                                     Login
                                 </Link>
                             )
@@ -46,7 +45,7 @@ export default function Navbar() {
                 </div>
             </Container>
 
-            
+
         </nav>
     )
 }
