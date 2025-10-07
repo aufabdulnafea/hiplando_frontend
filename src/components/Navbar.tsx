@@ -1,21 +1,17 @@
 'use client';
-
 import { useAuth } from "@/context/AuthContext";
 import Container from "./Container";
 import Link from 'next/link';
-import { BellIcon, UserIcon } from '@heroicons/react/24/outline'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import NotificationsDropDown from "./NotificationsDropDown";
 import UserDropDown from "./UserDropDown";
-import Button, { PrimaryButton } from "./formElements/Button";
 
 
 
 export default function Navbar() {
-    const { user, loading } = useAuth();
+    const { user } = useAuth();
 
     return (
-        <nav className="bg-navbar-background-light text-navbar-foreground-light py-4 shadow">
+        <nav className="bg-navbar-background-light text-navbar-foreground-light py-4 shadow z-20">
             <Container>
                 <div className="flex items-center justify-between">
                     <div>

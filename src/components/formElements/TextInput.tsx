@@ -21,7 +21,7 @@ export default function TextInput(props: TextInputProps) {
                 {icon || null}
             </div>
             <input
-                className={`w-full rounded-2xl border border-zinc-300 bg-white px-4 py-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary 
+                className={`w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary 
                     ${icon ? 'pl-10' : ''}
                     ${type === 'password' ? 'pr-10' : ''}
                     `}
