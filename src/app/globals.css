@@ -1,4 +1,11 @@
 @import "tailwindcss";
+@plugin 'tailwind-scrollbar';
+
+@plugin 'tailwind-scrollbar' {
+    nocompatible: true;
+    preferredStrategy: 'pseudoelements';
+}
+
 
 :root {
   --background: #f9fafb;
@@ -20,7 +27,8 @@
   --color-navbar-foreground-light: var(--navbar-foreground-light);
   --color-navbar-background-light: var(--navbar-background-light);
   --color-primary: var(--primary);
-  --color-tabs-background-light: var(--tabs-background-light)
+  --color-tabs-background-light: var(--tabs-background-light);
+  --color-secondary: #d4af37;
 }
 
 /* @media (prefers-color-scheme: dark) {

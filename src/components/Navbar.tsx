@@ -18,7 +18,7 @@ export default function Navbar() {
                         <Link href="/" className="text-2xl font-bold text-primary">Hiplando</Link>
                     </div>
                     <div className="flex items-center space-x-6">
-                        <ul className="flex space-x-4 hidden">
+                        <ul className="hidden space-x-4">
                             <li className="cursor-pointer">Horses</li>
                             <li className="cursor-pointer">Transport</li>
                             <li className="cursor-pointer">Competitions</li>

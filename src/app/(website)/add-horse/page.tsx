@@ -142,7 +142,6 @@ export default function AddHorse() {
                 }
             }
         } else {
-            // final submit: validate whole form and call onSubmit
             direction.current = 1;
             methods.handleSubmit(onSubmit)();
         }
