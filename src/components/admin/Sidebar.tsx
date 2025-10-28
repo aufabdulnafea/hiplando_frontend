@@ -1,32 +1,101 @@
 'use client';
-// import { useState } from "react";
-// import { Dialog, Transition } from "@headlessui/react";
 
-import { LiaHorseHeadSolid } from "react-icons/lia";
-import { AiOutlineUser } from 'react-icons/ai'
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { LiaHorseHeadSolid } from 'react-icons/lia';
+import { AiOutlineUser } from 'react-icons/ai';
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
+const NAV_ITEMS = [
+  { label: 'Horses', href: '/dashboard/horses', icon: LiaHorseHeadSolid },
+  { label: 'Users', href: '/dashboard/users', icon: AiOutlineUser },
+];
 
 export default function Sidebar() {
-    // const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
-    return (
-        <div className="flex flex-col overflow-hidden w-2xs bottom-0 left-0 h-screen shadow text-zinc-50 border-r border-zinc-900 bg-zinc-950 select-none">
-            <div className="text-2xl px-5 py-5 font-bold text-zinc-300">Hiplando</div>
-            <div className="flex gap-2 flex-col pr-5 flex-1 overflow-auto ml-5 scrollbar scrollbar-thin scrollbar-thumb-zinc-900 scrollbar-track-zinc-950">
-                <button className="cursor-pointer p-2 px-3 border text-primary font-semibold border-primary/20 bg-primary/10 rounded-xl flex gap-2 items-center">
-                    <LiaHorseHeadSolid className="w-6 h-8" />
-                    <h4>Horses</h4>
-                </button>
+  const NavigationLinks = () => (
+    <nav className="flex flex-col gap-2 mt-4" role="navigation" aria-label="Sidebar navigation">
+      {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+        const isActive = pathname === href;
+        return (
+          <Link
+            key={label}
+            href={href}
+            onClick={() => setOpen(false)}
+            className={cn(
+              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition border",
+              isActive
+                ? "bg-primary/10 text-primary border-primary/15"
+                : "text-muted-foreground hover:bg-muted border-transparent"
+            )}
+          >
+            <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
+            {label}
+          </Link>
+        );
+      })}
+    </nav>
+  );
 
-                <div className="p-2 px-3 border text-zinc-400 font-semibold border-primary/0 rounded-lg flex gap-2 items-center">
-                    <AiOutlineUser className="w-6 h-8" />
-                    <h4>Users</h4>
-                </div>
+  return (
+    <>
+      <div className="lg:hidden fixed top-3 left-4 z-50">
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label="Toggle sidebar menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </Button>
+          </SheetTrigger>
+
+          <SheetContent side="left" className="p-4 bg-background">
+            <div className="flex flex-col h-full">
+              <h2 className="text-xl font-semibold mb-4">Hiplando</h2>
+              <NavigationLinks />
+              <Button variant="default" className="mt-auto w-full">
+                Logout
+              </Button>
             </div>
+          </SheetContent>
+        </Sheet>
+      </div>
 
-            <div className="py-5 px-5">
-                <button className="bg-primary cursor-pointer px-4 py-2 rounded-md w-full hover:bg-primary/90 transition text-sm">Logout</button>
-            </div>
-        </div>
-    );
+      <aside
+        className="hidden lg:flex flex-col w-64 h-screen border-r bg-background p-4"
+        role="complementary"
+        aria-label="Main sidebar"
+      >
+        <h2 className="text-2xl font-bold mb-4">Hiplando</h2>
+        <NavigationLinks />
+        <Button variant="default" className="mt-auto w-full">
+          Logout
+        </Button>
+      </aside>
+    </>
+  );
 }

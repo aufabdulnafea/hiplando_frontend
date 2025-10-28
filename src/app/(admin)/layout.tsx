@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
 import "../globals.css";
 import Sidebar from "@/components/admin/Sidebar";
+import { ThemeProvider } from "@/components/theme-provider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,23 +22,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
       >
-        <AuthProvider>
-          <div className="w-screen h-screen bg-zinc-950 flex text-zinc-400">
-            <Sidebar />
-            <div className="flex flex-1 flex-col">
-              {children}
+        <ThemeProvider
+          attribute='class'
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            <div className="w-screen h-screen text-foreground flex">
+              <Sidebar />
+              <main className="flex flex-1 flex-col overflow-y-auto">
+                {children}
+              </main>
             </div>
-          </div>
-
-        </AuthProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
