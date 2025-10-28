@@ -8,6 +8,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogFooter,
+    DialogOverlay,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -48,7 +49,9 @@ export default function AddItemModal({
     }, [isOpen])
 
     return (
+
         <Dialog open={isOpen} onOpenChange={onClose}>
+            <DialogOverlay className="backdrop-blur-xs" />
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>

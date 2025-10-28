@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
 import "../globals.css";
-import Sidebar from "@/components/admin/Sidebar";
+// import Sidebar from "@/components/admin/Sidebar";
+import { AppSidebar } from "@/components/admin/NewSidebar";
 import { ThemeProvider } from "@/components/theme-provider"
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar"
+import { SiteHeader } from '@/components/admin/site-header'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,16 +42,44 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+
           <AuthProvider>
-            <div className="w-screen h-screen text-foreground flex">
-              <Sidebar />
-              <main className="flex flex-1 flex-col overflow-y-auto">
-                {children}
-              </main>
-            </div>
+            <SidebarProvider
+              style={
+                {
+                  "--sidebar-width": "calc(var(--spacing) * 72)",
+                  "--header-height": "calc(var(--spacing) * 12)",
+                } as React.CSSProperties
+              }
+            >
+
+              <div className="w-screen h-screen text-foreground flex">
+                {/* <Sidebar /> */}
+                <AppSidebar />
+                <SidebarInset>
+                  <SiteHeader />
+                  <div className="flex flex-1 flex-col">
+                    <div className="@container/main flex flex-1 flex-col gap-2">
+                      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                        {/* <SectionCards /> */}
+                        <div className="px-4 lg:px-6">
+                          {/* <ChartAreaInteractive /> */}
+                        </div>
+                        {/* <DataTable data={data} /> */}
+                      </div>
+                    </div>
+                  </div>
+                </SidebarInset>
+                {/* <main className="flex flex-1 flex-col overflow-y-auto">
+                  {children}
+                </main> */}
+              </div>
+            </SidebarProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
+
