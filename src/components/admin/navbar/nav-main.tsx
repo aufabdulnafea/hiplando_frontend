@@ -1,7 +1,7 @@
 "use client"
 
-import * as React from "react"
 import { type Icon } from "@tabler/icons-react"
+import Link from 'next/link'
 
 import {
     SidebarGroup,
@@ -10,29 +10,33 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { usePathname } from "next/navigation"
 
-export function NavSecondary({
+export function NavMain({
     items,
-    ...props
 }: {
     items: {
         title: string
         url: string
-        icon: Icon
+        icon?: Icon
     }[]
-} & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
+}) {
+    const pathname = usePathname()
+    
     return (
-        <SidebarGroup {...props}>
-            <SidebarGroupContent>
+        <SidebarGroup>
+            <SidebarGroupContent className="flex flex-col gap-2">
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-                            <SidebarMenuButton asChild>
-                                <a href={item.url}>
-                                    <item.icon />
+
+                            <Link href={item.url}>
+                                <SidebarMenuButton isActive={pathname === item.url} tooltip={item.title}>
+                                    {item.icon && <item.icon />}
                                     <span>{item.title}</span>
-                                </a>
-                            </SidebarMenuButton>
+                                </SidebarMenuButton>
+                            </Link>
+
                         </SidebarMenuItem>
                     ))}
                 </SidebarMenu>
