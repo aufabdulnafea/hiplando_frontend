@@ -1,6 +1,6 @@
 
 
-export default function SettingsDashboardPage() {
+export default function AdminSettingsDashboardPage() {
     return (
         <div>Settings</div>
     )

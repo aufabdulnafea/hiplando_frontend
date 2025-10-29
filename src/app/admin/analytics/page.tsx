@@ -1,6 +1,6 @@
 
 
-export default function AnalyticsPage() {
+export default function AdminAnalyticsPage() {
     return (
         <div>Analytics Page</div>
     )

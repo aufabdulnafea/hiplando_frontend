@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+// import * as React from "react"
 import {
     IconChartBar,
     IconDashboard,
@@ -8,7 +8,7 @@ import {
     IconUsers,
     IconHorse,
     IconDeviceMobile,
-    // IconHorseshoe
+    IconGavel
 } from "@tabler/icons-react"
 
 import { NavMain } from "./nav-main"
@@ -47,6 +47,11 @@ const data = {
             icon: IconUsers,
         },
         {
+            title: "Auctions",
+            url: "/admin/auctions",
+            icon: IconGavel
+        },
+        {
             title: "Analytics",
             url: "/admin/analytics",
             icon: IconChartBar,
@@ -70,7 +75,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
 
-                            <Link href="/dashboard">
+                            <Link href="/admin/dashboard">
                                 <IconInnerShadowTop className="!size-5" />
                                 <span className="text-base font-semibold">Hiplando</span>
                             </Link>

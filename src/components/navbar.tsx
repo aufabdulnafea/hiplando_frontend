@@ -1,11 +1,10 @@
 'use client';
+
 import { useAuth } from "@/context/AuthContext";
 import Container from "./Container";
 import Link from 'next/link';
-import NotificationsDropDown from "./NotificationsDropDown";
-import UserDropDown from "./UserDropDown";
-
-
+import NotificationsDropDown from "./notifications-dropdown";
+import UserDropDown from "./user-dropdown";
 
 export default function Navbar() {
     const { user } = useAuth();
@@ -23,8 +22,6 @@ export default function Navbar() {
                             <li className="cursor-pointer">Transport</li>
                             <li className="cursor-pointer">Competitions</li>
                             <li className="cursor-pointer">Services</li>
-                            {/* <li className="cursor-pointer">About</li>
-                            <li className="cursor-pointer">Contact</li> */}
                         </ul>
                         {
                             user ? (

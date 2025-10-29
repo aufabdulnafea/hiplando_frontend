@@ -1,6 +1,6 @@
 
 
-export default function ExpoPage() {
+export default function AdminExpoPage() {
     return (
         <div>Expo Page</div>
     )
