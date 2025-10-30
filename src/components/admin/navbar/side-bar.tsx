@@ -8,7 +8,8 @@ import {
     IconUsers,
     IconHorse,
     IconDeviceMobile,
-    IconGavel
+    IconGavel,
+    IconAdCircle
 } from "@tabler/icons-react"
 
 import { NavMain } from "./nav-main"
@@ -50,6 +51,11 @@ const data = {
             title: "Auctions",
             url: "/admin/auctions",
             icon: IconGavel
+        },
+        {
+            title: "Marketing",
+            url: "/admin/marketing",
+            icon: IconAdCircle
         },
         {
             title: "Analytics",

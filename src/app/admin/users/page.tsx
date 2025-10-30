@@ -1,18 +1,12 @@
-import UsersTable from "./usersTable";
-
-// import NotificationsDropDown from "@/components/NotificationsDropDown";
-// show tabs to add and edit
-// horses
-// horseCategories
-// horseSexes
-// horseDisciplines
+import { DataTableDemo } from '@/components/data-table'
 
 export default function AdminUsersPage() {
     return (
-        <div className="flex-1 flex flex-col">
-            <div className="p-4">
-                <UsersTable />
-            </div>
+      <div className="flex-1 relative">
+        <div className="absolute inset-0 overflow-hidden flex">
+          <DataTableDemo />
         </div>
+      </div>
     )
-}
+  }
+  
