@@ -1,0 +1,7512 @@
+import type { GraphQLClient, RequestOptions } from 'graphql-request';
+import gql from 'graphql-tag';
+export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+type GraphQLClientRequestHeaders = RequestOptions['requestHeaders'];
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  BigInt: { input: any; output: any; }
+  Bytes: { input: any; output: any; }
+  DateTime: { input: any; output: any; }
+  Decimal: { input: any; output: any; }
+  Json: { input: any; output: any; }
+};
+
+export type AggregateHorse = {
+  __typename?: 'AggregateHorse';
+  _avg?: Maybe<HorseAvgAggregateOutputType>;
+  _count?: Maybe<HorseCountAggregateOutputType>;
+  _max?: Maybe<HorseMaxAggregateOutputType>;
+  _min?: Maybe<HorseMinAggregateOutputType>;
+  _sum?: Maybe<HorseSumAggregateOutputType>;
+};
+
+export type AggregateHorseCategory = {
+  __typename?: 'AggregateHorseCategory';
+  _count?: Maybe<HorseCategoryCountAggregateOutputType>;
+  _max?: Maybe<HorseCategoryMaxAggregateOutputType>;
+  _min?: Maybe<HorseCategoryMinAggregateOutputType>;
+};
+
+export type AggregateHorseDiscipline = {
+  __typename?: 'AggregateHorseDiscipline';
+  _count?: Maybe<HorseDisciplineCountAggregateOutputType>;
+  _max?: Maybe<HorseDisciplineMaxAggregateOutputType>;
+  _min?: Maybe<HorseDisciplineMinAggregateOutputType>;
+};
+
+export type AggregateHorseGender = {
+  __typename?: 'AggregateHorseGender';
+  _count?: Maybe<HorseGenderCountAggregateOutputType>;
+  _max?: Maybe<HorseGenderMaxAggregateOutputType>;
+  _min?: Maybe<HorseGenderMinAggregateOutputType>;
+};
+
+export type AggregateHorseImage = {
+  __typename?: 'AggregateHorseImage';
+  _count?: Maybe<HorseImageCountAggregateOutputType>;
+  _max?: Maybe<HorseImageMaxAggregateOutputType>;
+  _min?: Maybe<HorseImageMinAggregateOutputType>;
+};
+
+export type AggregateHorseVetReport = {
+  __typename?: 'AggregateHorseVetReport';
+  _count?: Maybe<HorseVetReportCountAggregateOutputType>;
+  _max?: Maybe<HorseVetReportMaxAggregateOutputType>;
+  _min?: Maybe<HorseVetReportMinAggregateOutputType>;
+};
+
+export type AggregateHorseXrayResults = {
+  __typename?: 'AggregateHorseXrayResults';
+  _count?: Maybe<HorseXrayResultsCountAggregateOutputType>;
+  _max?: Maybe<HorseXrayResultsMaxAggregateOutputType>;
+  _min?: Maybe<HorseXrayResultsMinAggregateOutputType>;
+};
+
+export type AggregateNotification = {
+  __typename?: 'AggregateNotification';
+  _count?: Maybe<NotificationCountAggregateOutputType>;
+  _max?: Maybe<NotificationMaxAggregateOutputType>;
+  _min?: Maybe<NotificationMinAggregateOutputType>;
+};
+
+export type AggregateUser = {
+  __typename?: 'AggregateUser';
+  _count?: Maybe<UserCountAggregateOutputType>;
+  _max?: Maybe<UserMaxAggregateOutputType>;
+  _min?: Maybe<UserMinAggregateOutputType>;
+};
+
+export type AggregateUserFavoriteHorses = {
+  __typename?: 'AggregateUserFavoriteHorses';
+  _count?: Maybe<UserFavoriteHorsesCountAggregateOutputType>;
+  _max?: Maybe<UserFavoriteHorsesMaxAggregateOutputType>;
+  _min?: Maybe<UserFavoriteHorsesMinAggregateOutputType>;
+};
+
+export type AggregateUserReview = {
+  __typename?: 'AggregateUserReview';
+  _avg?: Maybe<UserReviewAvgAggregateOutputType>;
+  _count?: Maybe<UserReviewCountAggregateOutputType>;
+  _max?: Maybe<UserReviewMaxAggregateOutputType>;
+  _min?: Maybe<UserReviewMinAggregateOutputType>;
+  _sum?: Maybe<UserReviewSumAggregateOutputType>;
+};
+
+export type BatchPayload = {
+  __typename?: 'BatchPayload';
+  count: Scalars['Int']['output'];
+};
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type BoolFilter = {
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolFilter>;
+};
+
+export type BoolWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedBoolFilter>;
+  _min?: InputMaybe<NestedBoolFilter>;
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolWithAggregatesFilter>;
+};
+
+export type CreateManyHorseAndReturnOutputType = {
+  __typename?: 'CreateManyHorseAndReturnOutputType';
+  age: Scalars['Int']['output'];
+  category: HorseCategory;
+  categoryId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  discipline: HorseDiscipline;
+  disciplineId: Scalars['String']['output'];
+  gender: HorseGender;
+  genderId: Scalars['String']['output'];
+  height: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  location: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  pedigree?: Maybe<Scalars['String']['output']>;
+  price: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+  veterinaryDocumentAvailable: Scalars['Boolean']['output'];
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  xrayResultsAvailable: Scalars['Boolean']['output'];
+};
+
+export type CreateManyHorseCategoryAndReturnOutputType = {
+  __typename?: 'CreateManyHorseCategoryAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  imageUrl: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CreateManyHorseDisciplineAndReturnOutputType = {
+  __typename?: 'CreateManyHorseDisciplineAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CreateManyHorseGenderAndReturnOutputType = {
+  __typename?: 'CreateManyHorseGenderAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CreateManyHorseImageAndReturnOutputType = {
+  __typename?: 'CreateManyHorseImageAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type CreateManyHorseVetReportAndReturnOutputType = {
+  __typename?: 'CreateManyHorseVetReportAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  reportUrl: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CreateManyHorseXrayResultsAndReturnOutputType = {
+  __typename?: 'CreateManyHorseXrayResultsAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  xrayUrl: Scalars['String']['output'];
+};
+
+export type CreateManyNotificationAndReturnOutputType = {
+  __typename?: 'CreateManyNotificationAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  read: Scalars['Boolean']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type CreateManyUserAndReturnOutputType = {
+  __typename?: 'CreateManyUserAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  firebaseUid: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  role: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  verifiedSeller: Scalars['Boolean']['output'];
+  whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type CreateManyUserFavoriteHorsesAndReturnOutputType = {
+  __typename?: 'CreateManyUserFavoriteHorsesAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type CreateManyUserReviewAndReturnOutputType = {
+  __typename?: 'CreateManyUserReviewAndReturnOutputType';
+  comment?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  rating: Scalars['Int']['output'];
+  reviewer: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type DateTimeFilter = {
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  not?: InputMaybe<NestedDateTimeFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+};
+
+export type DateTimeWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedDateTimeFilter>;
+  _min?: InputMaybe<NestedDateTimeFilter>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  not?: InputMaybe<NestedDateTimeWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+};
+
+export type FloatFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Float']['input']>;
+  divide?: InputMaybe<Scalars['Float']['input']>;
+  increment?: InputMaybe<Scalars['Float']['input']>;
+  multiply?: InputMaybe<Scalars['Float']['input']>;
+  set?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type FloatFilter = {
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type FloatWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedFloatFilter>;
+  _min?: InputMaybe<NestedFloatFilter>;
+  _sum?: InputMaybe<NestedFloatFilter>;
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type Horse = {
+  __typename?: 'Horse';
+  _count: HorseCountOutputType;
+  age: Scalars['Int']['output'];
+  category: HorseCategory;
+  categoryId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  discipline: HorseDiscipline;
+  disciplineId: Scalars['String']['output'];
+  favoriteByUsers: Array<UserFavoriteHorses>;
+  gender: HorseGender;
+  genderId: Scalars['String']['output'];
+  height: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  images: Array<HorseImage>;
+  location: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  pedigree?: Maybe<Scalars['String']['output']>;
+  price: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+  vetReport?: Maybe<HorseVetReport>;
+  veterinaryDocumentAvailable: Scalars['Boolean']['output'];
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  xrayResults?: Maybe<HorseXrayResults>;
+  xrayResultsAvailable: Scalars['Boolean']['output'];
+};
+
+
+export type HorseFavoriteByUsersArgs = {
+  cursor?: InputMaybe<UserFavoriteHorsesWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type HorseImagesArgs = {
+  cursor?: InputMaybe<HorseImageWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseImageScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseImageOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type HorseVetReportArgs = {
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type HorseXrayResultsArgs = {
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+export type HorseAvgAggregateOutputType = {
+  __typename?: 'HorseAvgAggregateOutputType';
+  age?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+  price?: Maybe<Scalars['Float']['output']>;
+};
+
+export type HorseAvgOrderByAggregateInput = {
+  age?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  price?: InputMaybe<SortOrder>;
+};
+
+export type HorseCategory = {
+  __typename?: 'HorseCategory';
+  _count: HorseCategoryCountOutputType;
+  createdAt: Scalars['DateTime']['output'];
+  horses: Array<Horse>;
+  id: Scalars['String']['output'];
+  imageUrl: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type HorseCategoryHorsesArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseCategoryCountAggregateOutputType = {
+  __typename?: 'HorseCategoryCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  imageUrl: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type HorseCategoryCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseCategoryCountOutputType = {
+  __typename?: 'HorseCategoryCountOutputType';
+  horses: Scalars['Int']['output'];
+};
+
+export type HorseCategoryCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horses?: InputMaybe<HorseCreateNestedManyWithoutCategoryInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  imageUrl: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseCategoryCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  imageUrl: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseCategoryCreateNestedOneWithoutHorsesInput = {
+  connect?: InputMaybe<HorseCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCategoryCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<HorseCategoryCreateWithoutHorsesInput>;
+};
+
+export type HorseCategoryCreateOrConnectWithoutHorsesInput = {
+  create: HorseCategoryCreateWithoutHorsesInput;
+  where: HorseCategoryWhereUniqueInput;
+};
+
+export type HorseCategoryCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  imageUrl: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseCategoryGroupByOutputType = {
+  __typename?: 'HorseCategoryGroupByOutputType';
+  _count?: Maybe<HorseCategoryCountAggregateOutputType>;
+  _max?: Maybe<HorseCategoryMaxAggregateOutputType>;
+  _min?: Maybe<HorseCategoryMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  imageUrl: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type HorseCategoryMaxAggregateOutputType = {
+  __typename?: 'HorseCategoryMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  imageUrl?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseCategoryMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseCategoryMinAggregateOutputType = {
+  __typename?: 'HorseCategoryMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  imageUrl?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseCategoryMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseCategoryOrderByWithAggregationInput = {
+  _count?: InputMaybe<HorseCategoryCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseCategoryMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseCategoryMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseCategoryOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horses?: InputMaybe<HorseOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  imageUrl?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum HorseCategoryScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  ImageUrl = 'imageUrl',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type HorseCategoryScalarRelationFilter = {
+  is?: InputMaybe<HorseCategoryWhereInput>;
+  isNot?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+export type HorseCategoryScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseCategoryScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseCategoryScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseCategoryScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  imageUrl?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type HorseCategoryUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutCategoryInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  imageUrl: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseCategoryUncheckedCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  imageUrl: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseCategoryUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutCategoryNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseCategoryUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseCategoryUncheckedUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseCategoryUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutCategoryNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseCategoryUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput = {
+  connect?: InputMaybe<HorseCategoryWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCategoryCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<HorseCategoryCreateWithoutHorsesInput>;
+  update?: InputMaybe<HorseCategoryUpdateToOneWithWhereWithoutHorsesInput>;
+  upsert?: InputMaybe<HorseCategoryUpsertWithoutHorsesInput>;
+};
+
+export type HorseCategoryUpdateToOneWithWhereWithoutHorsesInput = {
+  data: HorseCategoryUpdateWithoutHorsesInput;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+export type HorseCategoryUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseCategoryUpsertWithoutHorsesInput = {
+  create: HorseCategoryCreateWithoutHorsesInput;
+  update: HorseCategoryUpdateWithoutHorsesInput;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+export type HorseCategoryWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseCategoryWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseCategoryWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseCategoryWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  imageUrl?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseCategoryWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseCategoryWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseCategoryWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseCategoryWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  imageUrl?: InputMaybe<StringFilter>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseCountAggregateOutputType = {
+  __typename?: 'HorseCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  age: Scalars['Int']['output'];
+  categoryId: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  description: Scalars['Int']['output'];
+  disciplineId: Scalars['Int']['output'];
+  genderId: Scalars['Int']['output'];
+  height: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  location: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  pedigree: Scalars['Int']['output'];
+  price: Scalars['Int']['output'];
+  status: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  userId: Scalars['Int']['output'];
+  veterinaryDocumentAvailable: Scalars['Int']['output'];
+  videoUrl: Scalars['Int']['output'];
+  xrayResultsAvailable: Scalars['Int']['output'];
+};
+
+export type HorseCountOrderByAggregateInput = {
+  age?: InputMaybe<SortOrder>;
+  categoryId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  disciplineId?: InputMaybe<SortOrder>;
+  genderId?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  location?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  pedigree?: InputMaybe<SortOrder>;
+  price?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  veterinaryDocumentAvailable?: InputMaybe<SortOrder>;
+  videoUrl?: InputMaybe<SortOrder>;
+  xrayResultsAvailable?: InputMaybe<SortOrder>;
+};
+
+export type HorseCountOutputType = {
+  __typename?: 'HorseCountOutputType';
+  favoriteByUsers: Scalars['Int']['output'];
+  images: Scalars['Int']['output'];
+};
+
+export type HorseCreateInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateManyCategoryInput = {
+  age: Scalars['Int']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateManyCategoryInputEnvelope = {
+  data: HorseCreateManyCategoryInput;
+};
+
+export type HorseCreateManyDisciplineInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateManyDisciplineInputEnvelope = {
+  data: HorseCreateManyDisciplineInput;
+};
+
+export type HorseCreateManyGenderInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateManyGenderInputEnvelope = {
+  data: HorseCreateManyGenderInput;
+};
+
+export type HorseCreateManyInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateManyUserInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateManyUserInputEnvelope = {
+  data: HorseCreateManyUserInput;
+};
+
+export type HorseCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutCategoryInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutCategoryInput>>>;
+  createMany?: InputMaybe<HorseCreateManyCategoryInputEnvelope>;
+};
+
+export type HorseCreateNestedManyWithoutDisciplineInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutDisciplineInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutDisciplineInput>>>;
+  createMany?: InputMaybe<HorseCreateManyDisciplineInputEnvelope>;
+};
+
+export type HorseCreateNestedManyWithoutGenderInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutGenderInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutGenderInput>>>;
+  createMany?: InputMaybe<HorseCreateManyGenderInputEnvelope>;
+};
+
+export type HorseCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<HorseCreateManyUserInputEnvelope>;
+};
+
+export type HorseCreateNestedOneWithoutFavoriteByUsersInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutFavoriteByUsersInput>;
+  create?: InputMaybe<HorseCreateWithoutFavoriteByUsersInput>;
+};
+
+export type HorseCreateNestedOneWithoutImagesInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutImagesInput>;
+  create?: InputMaybe<HorseCreateWithoutImagesInput>;
+};
+
+export type HorseCreateNestedOneWithoutVetReportInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutVetReportInput>;
+  create?: InputMaybe<HorseCreateWithoutVetReportInput>;
+};
+
+export type HorseCreateNestedOneWithoutXrayResultsInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutXrayResultsInput>;
+  create?: InputMaybe<HorseCreateWithoutXrayResultsInput>;
+};
+
+export type HorseCreateOrConnectWithoutCategoryInput = {
+  create: HorseCreateWithoutCategoryInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutDisciplineInput = {
+  create: HorseCreateWithoutDisciplineInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutFavoriteByUsersInput = {
+  create: HorseCreateWithoutFavoriteByUsersInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutGenderInput = {
+  create: HorseCreateWithoutGenderInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutImagesInput = {
+  create: HorseCreateWithoutImagesInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutUserInput = {
+  create: HorseCreateWithoutUserInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutVetReportInput = {
+  create: HorseCreateWithoutVetReportInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateOrConnectWithoutXrayResultsInput = {
+  create: HorseCreateWithoutXrayResultsInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseCreateWithoutCategoryInput = {
+  age: Scalars['Int']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutDisciplineInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutFavoriteByUsersInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutGenderInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutImagesInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutUserInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutVetReportInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateWithoutXrayResultsInput = {
+  age: Scalars['Int']['input'];
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<HorseVetReportCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseDiscipline = {
+  __typename?: 'HorseDiscipline';
+  _count: HorseDisciplineCountOutputType;
+  createdAt: Scalars['DateTime']['output'];
+  horses: Array<Horse>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type HorseDisciplineHorsesArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseDisciplineCountAggregateOutputType = {
+  __typename?: 'HorseDisciplineCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type HorseDisciplineCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseDisciplineCountOutputType = {
+  __typename?: 'HorseDisciplineCountOutputType';
+  horses: Scalars['Int']['output'];
+};
+
+export type HorseDisciplineCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horses?: InputMaybe<HorseCreateNestedManyWithoutDisciplineInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseDisciplineCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseDisciplineCreateNestedOneWithoutHorsesInput = {
+  connect?: InputMaybe<HorseDisciplineWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseDisciplineCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<HorseDisciplineCreateWithoutHorsesInput>;
+};
+
+export type HorseDisciplineCreateOrConnectWithoutHorsesInput = {
+  create: HorseDisciplineCreateWithoutHorsesInput;
+  where: HorseDisciplineWhereUniqueInput;
+};
+
+export type HorseDisciplineCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseDisciplineGroupByOutputType = {
+  __typename?: 'HorseDisciplineGroupByOutputType';
+  _count?: Maybe<HorseDisciplineCountAggregateOutputType>;
+  _max?: Maybe<HorseDisciplineMaxAggregateOutputType>;
+  _min?: Maybe<HorseDisciplineMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type HorseDisciplineMaxAggregateOutputType = {
+  __typename?: 'HorseDisciplineMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseDisciplineMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseDisciplineMinAggregateOutputType = {
+  __typename?: 'HorseDisciplineMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseDisciplineMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseDisciplineOrderByWithAggregationInput = {
+  _count?: InputMaybe<HorseDisciplineCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseDisciplineMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseDisciplineMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseDisciplineOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horses?: InputMaybe<HorseOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum HorseDisciplineScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type HorseDisciplineScalarRelationFilter = {
+  is?: InputMaybe<HorseDisciplineWhereInput>;
+  isNot?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+export type HorseDisciplineScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseDisciplineScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseDisciplineScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseDisciplineScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type HorseDisciplineUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutDisciplineInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseDisciplineUncheckedCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseDisciplineUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutDisciplineNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseDisciplineUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseDisciplineUncheckedUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseDisciplineUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutDisciplineNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseDisciplineUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput = {
+  connect?: InputMaybe<HorseDisciplineWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseDisciplineCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<HorseDisciplineCreateWithoutHorsesInput>;
+  update?: InputMaybe<HorseDisciplineUpdateToOneWithWhereWithoutHorsesInput>;
+  upsert?: InputMaybe<HorseDisciplineUpsertWithoutHorsesInput>;
+};
+
+export type HorseDisciplineUpdateToOneWithWhereWithoutHorsesInput = {
+  data: HorseDisciplineUpdateWithoutHorsesInput;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+export type HorseDisciplineUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseDisciplineUpsertWithoutHorsesInput = {
+  create: HorseDisciplineCreateWithoutHorsesInput;
+  update: HorseDisciplineUpdateWithoutHorsesInput;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+export type HorseDisciplineWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseDisciplineWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseDisciplineWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseDisciplineWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseDisciplineWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseDisciplineWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseDisciplineWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseDisciplineWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseGender = {
+  __typename?: 'HorseGender';
+  _count: HorseGenderCountOutputType;
+  createdAt: Scalars['DateTime']['output'];
+  horses: Array<Horse>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+export type HorseGenderHorsesArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseGenderCountAggregateOutputType = {
+  __typename?: 'HorseGenderCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type HorseGenderCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseGenderCountOutputType = {
+  __typename?: 'HorseGenderCountOutputType';
+  horses: Scalars['Int']['output'];
+};
+
+export type HorseGenderCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horses?: InputMaybe<HorseCreateNestedManyWithoutGenderInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseGenderCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseGenderCreateNestedOneWithoutHorsesInput = {
+  connect?: InputMaybe<HorseGenderWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseGenderCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<HorseGenderCreateWithoutHorsesInput>;
+};
+
+export type HorseGenderCreateOrConnectWithoutHorsesInput = {
+  create: HorseGenderCreateWithoutHorsesInput;
+  where: HorseGenderWhereUniqueInput;
+};
+
+export type HorseGenderCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseGenderGroupByOutputType = {
+  __typename?: 'HorseGenderGroupByOutputType';
+  _count?: Maybe<HorseGenderCountAggregateOutputType>;
+  _max?: Maybe<HorseGenderMaxAggregateOutputType>;
+  _min?: Maybe<HorseGenderMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type HorseGenderMaxAggregateOutputType = {
+  __typename?: 'HorseGenderMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseGenderMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseGenderMinAggregateOutputType = {
+  __typename?: 'HorseGenderMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseGenderMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseGenderOrderByWithAggregationInput = {
+  _count?: InputMaybe<HorseGenderCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseGenderMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseGenderMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseGenderOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horses?: InputMaybe<HorseOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum HorseGenderScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type HorseGenderScalarRelationFilter = {
+  is?: InputMaybe<HorseGenderWhereInput>;
+  isNot?: InputMaybe<HorseGenderWhereInput>;
+};
+
+export type HorseGenderScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseGenderScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseGenderScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseGenderScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type HorseGenderUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutGenderInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseGenderUncheckedCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseGenderUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutGenderNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseGenderUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseGenderUncheckedUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseGenderUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutGenderNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseGenderUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseGenderUpdateOneRequiredWithoutHorsesNestedInput = {
+  connect?: InputMaybe<HorseGenderWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseGenderCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<HorseGenderCreateWithoutHorsesInput>;
+  update?: InputMaybe<HorseGenderUpdateToOneWithWhereWithoutHorsesInput>;
+  upsert?: InputMaybe<HorseGenderUpsertWithoutHorsesInput>;
+};
+
+export type HorseGenderUpdateToOneWithWhereWithoutHorsesInput = {
+  data: HorseGenderUpdateWithoutHorsesInput;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+export type HorseGenderUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseGenderUpsertWithoutHorsesInput = {
+  create: HorseGenderCreateWithoutHorsesInput;
+  update: HorseGenderUpdateWithoutHorsesInput;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+export type HorseGenderWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseGenderWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseGenderWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseGenderWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseGenderWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseGenderWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseGenderWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseGenderWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseGroupByOutputType = {
+  __typename?: 'HorseGroupByOutputType';
+  _avg?: Maybe<HorseAvgAggregateOutputType>;
+  _count?: Maybe<HorseCountAggregateOutputType>;
+  _max?: Maybe<HorseMaxAggregateOutputType>;
+  _min?: Maybe<HorseMinAggregateOutputType>;
+  _sum?: Maybe<HorseSumAggregateOutputType>;
+  age: Scalars['Int']['output'];
+  categoryId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  disciplineId: Scalars['String']['output'];
+  genderId: Scalars['String']['output'];
+  height: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  location: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  pedigree?: Maybe<Scalars['String']['output']>;
+  price: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+  veterinaryDocumentAvailable: Scalars['Boolean']['output'];
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  xrayResultsAvailable: Scalars['Boolean']['output'];
+};
+
+export type HorseImage = {
+  __typename?: 'HorseImage';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type HorseImageCountAggregateOutputType = {
+  __typename?: 'HorseImageCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  horseId: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  url: Scalars['Int']['output'];
+};
+
+export type HorseImageCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  url?: InputMaybe<SortOrder>;
+};
+
+export type HorseImageCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horse: HorseCreateNestedOneWithoutImagesInput;
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  url: Scalars['String']['input'];
+};
+
+export type HorseImageCreateManyHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  url: Scalars['String']['input'];
+};
+
+export type HorseImageCreateManyHorseInputEnvelope = {
+  data: HorseImageCreateManyHorseInput;
+};
+
+export type HorseImageCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  url: Scalars['String']['input'];
+};
+
+export type HorseImageCreateNestedManyWithoutHorseInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseImageCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseImageCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<HorseImageCreateManyHorseInputEnvelope>;
+};
+
+export type HorseImageCreateOrConnectWithoutHorseInput = {
+  create: HorseImageCreateWithoutHorseInput;
+  where: HorseImageWhereUniqueInput;
+};
+
+export type HorseImageCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  url: Scalars['String']['input'];
+};
+
+export type HorseImageGroupByOutputType = {
+  __typename?: 'HorseImageGroupByOutputType';
+  _count?: Maybe<HorseImageCountAggregateOutputType>;
+  _max?: Maybe<HorseImageMaxAggregateOutputType>;
+  _min?: Maybe<HorseImageMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type HorseImageListRelationFilter = {
+  every?: InputMaybe<HorseImageWhereInput>;
+  none?: InputMaybe<HorseImageWhereInput>;
+  some?: InputMaybe<HorseImageWhereInput>;
+};
+
+export type HorseImageMaxAggregateOutputType = {
+  __typename?: 'HorseImageMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type HorseImageMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  url?: InputMaybe<SortOrder>;
+};
+
+export type HorseImageMinAggregateOutputType = {
+  __typename?: 'HorseImageMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type HorseImageMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  url?: InputMaybe<SortOrder>;
+};
+
+export type HorseImageOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type HorseImageOrderByWithAggregationInput = {
+  _count?: InputMaybe<HorseImageCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseImageMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseImageMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  url?: InputMaybe<SortOrder>;
+};
+
+export type HorseImageOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horse?: InputMaybe<HorseOrderByWithRelationInput>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  url?: InputMaybe<SortOrder>;
+};
+
+export enum HorseImageScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  HorseId = 'horseId',
+  Id = 'id',
+  UpdatedAt = 'updatedAt',
+  Url = 'url'
+}
+
+export type HorseImageScalarWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type HorseImageScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  horseId?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  url?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type HorseImageUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  url: Scalars['String']['input'];
+};
+
+export type HorseImageUncheckedCreateNestedManyWithoutHorseInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseImageCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseImageCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<HorseImageCreateManyHorseInputEnvelope>;
+};
+
+export type HorseImageUncheckedCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  url: Scalars['String']['input'];
+};
+
+export type HorseImageUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUncheckedUpdateManyWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUncheckedUpdateManyWithoutHorseNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseImageCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseImageCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<HorseImageCreateManyHorseInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseImageUpdateWithWhereUniqueWithoutHorseInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseImageUpdateManyWithWhereWithoutHorseInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseImageUpsertWithWhereUniqueWithoutHorseInput>>>;
+};
+
+export type HorseImageUncheckedUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horse?: InputMaybe<HorseUpdateOneRequiredWithoutImagesNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUpdateManyWithWhereWithoutHorseInput = {
+  data: HorseImageUpdateManyMutationInput;
+  where: HorseImageScalarWhereInput;
+};
+
+export type HorseImageUpdateManyWithoutHorseNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseImageCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseImageCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<HorseImageCreateManyHorseInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseImageScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseImageWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseImageUpdateWithWhereUniqueWithoutHorseInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseImageUpdateManyWithWhereWithoutHorseInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseImageUpsertWithWhereUniqueWithoutHorseInput>>>;
+};
+
+export type HorseImageUpdateWithWhereUniqueWithoutHorseInput = {
+  data: HorseImageUpdateWithoutHorseInput;
+  where: HorseImageWhereUniqueInput;
+};
+
+export type HorseImageUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  url?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseImageUpsertWithWhereUniqueWithoutHorseInput = {
+  create: HorseImageCreateWithoutHorseInput;
+  update: HorseImageUpdateWithoutHorseInput;
+  where: HorseImageWhereUniqueInput;
+};
+
+export type HorseImageWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseImageWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseImageWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseImageWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type HorseImageWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseImageWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseImageWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseImageWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type HorseListRelationFilter = {
+  every?: InputMaybe<HorseWhereInput>;
+  none?: InputMaybe<HorseWhereInput>;
+  some?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseMaxAggregateOutputType = {
+  __typename?: 'HorseMaxAggregateOutputType';
+  age?: Maybe<Scalars['Int']['output']>;
+  categoryId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  disciplineId?: Maybe<Scalars['String']['output']>;
+  genderId?: Maybe<Scalars['String']['output']>;
+  height?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  pedigree?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+  veterinaryDocumentAvailable?: Maybe<Scalars['Boolean']['output']>;
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  xrayResultsAvailable?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type HorseMaxOrderByAggregateInput = {
+  age?: InputMaybe<SortOrder>;
+  categoryId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  disciplineId?: InputMaybe<SortOrder>;
+  genderId?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  location?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  pedigree?: InputMaybe<SortOrder>;
+  price?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  veterinaryDocumentAvailable?: InputMaybe<SortOrder>;
+  videoUrl?: InputMaybe<SortOrder>;
+  xrayResultsAvailable?: InputMaybe<SortOrder>;
+};
+
+export type HorseMinAggregateOutputType = {
+  __typename?: 'HorseMinAggregateOutputType';
+  age?: Maybe<Scalars['Int']['output']>;
+  categoryId?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  disciplineId?: Maybe<Scalars['String']['output']>;
+  genderId?: Maybe<Scalars['String']['output']>;
+  height?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  pedigree?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+  veterinaryDocumentAvailable?: Maybe<Scalars['Boolean']['output']>;
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  xrayResultsAvailable?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type HorseMinOrderByAggregateInput = {
+  age?: InputMaybe<SortOrder>;
+  categoryId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  disciplineId?: InputMaybe<SortOrder>;
+  genderId?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  location?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  pedigree?: InputMaybe<SortOrder>;
+  price?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  veterinaryDocumentAvailable?: InputMaybe<SortOrder>;
+  videoUrl?: InputMaybe<SortOrder>;
+  xrayResultsAvailable?: InputMaybe<SortOrder>;
+};
+
+export type HorseOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type HorseOrderByWithAggregationInput = {
+  _avg?: InputMaybe<HorseAvgOrderByAggregateInput>;
+  _count?: InputMaybe<HorseCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseMinOrderByAggregateInput>;
+  _sum?: InputMaybe<HorseSumOrderByAggregateInput>;
+  age?: InputMaybe<SortOrder>;
+  categoryId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  disciplineId?: InputMaybe<SortOrder>;
+  genderId?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  location?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  pedigree?: InputMaybe<SortOrderInput>;
+  price?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  veterinaryDocumentAvailable?: InputMaybe<SortOrder>;
+  videoUrl?: InputMaybe<SortOrderInput>;
+  xrayResultsAvailable?: InputMaybe<SortOrder>;
+};
+
+export type HorseOrderByWithRelationInput = {
+  age?: InputMaybe<SortOrder>;
+  category?: InputMaybe<HorseCategoryOrderByWithRelationInput>;
+  categoryId?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  discipline?: InputMaybe<HorseDisciplineOrderByWithRelationInput>;
+  disciplineId?: InputMaybe<SortOrder>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesOrderByRelationAggregateInput>;
+  gender?: InputMaybe<HorseGenderOrderByWithRelationInput>;
+  genderId?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  images?: InputMaybe<HorseImageOrderByRelationAggregateInput>;
+  location?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  pedigree?: InputMaybe<SortOrderInput>;
+  price?: InputMaybe<SortOrder>;
+  status?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userId?: InputMaybe<SortOrder>;
+  vetReport?: InputMaybe<HorseVetReportOrderByWithRelationInput>;
+  veterinaryDocumentAvailable?: InputMaybe<SortOrder>;
+  videoUrl?: InputMaybe<SortOrderInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsOrderByWithRelationInput>;
+  xrayResultsAvailable?: InputMaybe<SortOrder>;
+};
+
+export enum HorseScalarFieldEnum {
+  Age = 'age',
+  CategoryId = 'categoryId',
+  CreatedAt = 'createdAt',
+  Description = 'description',
+  DisciplineId = 'disciplineId',
+  GenderId = 'genderId',
+  Height = 'height',
+  Id = 'id',
+  Location = 'location',
+  Name = 'name',
+  Pedigree = 'pedigree',
+  Price = 'price',
+  Status = 'status',
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId',
+  VeterinaryDocumentAvailable = 'veterinaryDocumentAvailable',
+  VideoUrl = 'videoUrl',
+  XrayResultsAvailable = 'xrayResultsAvailable'
+}
+
+export type HorseScalarRelationFilter = {
+  is?: InputMaybe<HorseWhereInput>;
+  isNot?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseScalarWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  age?: InputMaybe<IntFilter>;
+  categoryId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  disciplineId?: InputMaybe<StringFilter>;
+  genderId?: InputMaybe<StringFilter>;
+  height?: InputMaybe<IntFilter>;
+  id?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  pedigree?: InputMaybe<StringNullableFilter>;
+  price?: InputMaybe<FloatFilter>;
+  status?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringFilter>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFilter>;
+  videoUrl?: InputMaybe<StringNullableFilter>;
+  xrayResultsAvailable?: InputMaybe<BoolFilter>;
+};
+
+export type HorseScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
+  age?: InputMaybe<IntWithAggregatesFilter>;
+  categoryId?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  description?: InputMaybe<StringWithAggregatesFilter>;
+  disciplineId?: InputMaybe<StringWithAggregatesFilter>;
+  genderId?: InputMaybe<StringWithAggregatesFilter>;
+  height?: InputMaybe<IntWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  location?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  pedigree?: InputMaybe<StringNullableWithAggregatesFilter>;
+  price?: InputMaybe<FloatWithAggregatesFilter>;
+  status?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  userId?: InputMaybe<StringWithAggregatesFilter>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolWithAggregatesFilter>;
+  videoUrl?: InputMaybe<StringNullableWithAggregatesFilter>;
+  xrayResultsAvailable?: InputMaybe<BoolWithAggregatesFilter>;
+};
+
+export type HorseSumAggregateOutputType = {
+  __typename?: 'HorseSumAggregateOutputType';
+  age?: Maybe<Scalars['Int']['output']>;
+  height?: Maybe<Scalars['Int']['output']>;
+  price?: Maybe<Scalars['Float']['output']>;
+};
+
+export type HorseSumOrderByAggregateInput = {
+  age?: InputMaybe<SortOrder>;
+  height?: InputMaybe<SortOrder>;
+  price?: InputMaybe<SortOrder>;
+};
+
+export type HorseUncheckedCreateInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateNestedManyWithoutCategoryInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutCategoryInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutCategoryInput>>>;
+  createMany?: InputMaybe<HorseCreateManyCategoryInputEnvelope>;
+};
+
+export type HorseUncheckedCreateNestedManyWithoutDisciplineInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutDisciplineInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutDisciplineInput>>>;
+  createMany?: InputMaybe<HorseCreateManyDisciplineInputEnvelope>;
+};
+
+export type HorseUncheckedCreateNestedManyWithoutGenderInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutGenderInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutGenderInput>>>;
+  createMany?: InputMaybe<HorseCreateManyGenderInputEnvelope>;
+};
+
+export type HorseUncheckedCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<HorseCreateManyUserInputEnvelope>;
+};
+
+export type HorseUncheckedCreateWithoutCategoryInput = {
+  age: Scalars['Int']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutDisciplineInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutFavoriteByUsersInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutGenderInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutImagesInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutUserInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutVetReportInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedCreateWithoutXrayResultsInput = {
+  age: Scalars['Int']['input'];
+  categoryId: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageUncheckedCreateNestedManyWithoutHorseInput>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['String']['input']>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+  vetReport?: InputMaybe<HorseVetReportUncheckedCreateNestedOneWithoutHorseInput>;
+  veterinaryDocumentAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+  videoUrl?: InputMaybe<Scalars['String']['input']>;
+  xrayResultsAvailable?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseUncheckedUpdateInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyWithoutCategoryInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutCategoryInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutCategoryInput>>>;
+  createMany?: InputMaybe<HorseCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutCategoryInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutCategoryInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutCategoryInput>>>;
+};
+
+export type HorseUncheckedUpdateManyWithoutDisciplineInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyWithoutDisciplineNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutDisciplineInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutDisciplineInput>>>;
+  createMany?: InputMaybe<HorseCreateManyDisciplineInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutDisciplineInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutDisciplineInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutDisciplineInput>>>;
+};
+
+export type HorseUncheckedUpdateManyWithoutGenderInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyWithoutGenderNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutGenderInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutGenderInput>>>;
+  createMany?: InputMaybe<HorseCreateManyGenderInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutGenderInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutGenderInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutGenderInput>>>;
+};
+
+export type HorseUncheckedUpdateManyWithoutUserInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<HorseCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type HorseUncheckedUpdateWithoutCategoryInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutDisciplineInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutFavoriteByUsersInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutGenderInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutImagesInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutUserInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutVetReportInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateWithoutXrayResultsInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUncheckedUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateManyMutationInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateManyWithWhereWithoutCategoryInput = {
+  data: HorseUpdateManyMutationInput;
+  where: HorseScalarWhereInput;
+};
+
+export type HorseUpdateManyWithWhereWithoutDisciplineInput = {
+  data: HorseUpdateManyMutationInput;
+  where: HorseScalarWhereInput;
+};
+
+export type HorseUpdateManyWithWhereWithoutGenderInput = {
+  data: HorseUpdateManyMutationInput;
+  where: HorseScalarWhereInput;
+};
+
+export type HorseUpdateManyWithWhereWithoutUserInput = {
+  data: HorseUpdateManyMutationInput;
+  where: HorseScalarWhereInput;
+};
+
+export type HorseUpdateManyWithoutCategoryNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutCategoryInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutCategoryInput>>>;
+  createMany?: InputMaybe<HorseCreateManyCategoryInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutCategoryInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutCategoryInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutCategoryInput>>>;
+};
+
+export type HorseUpdateManyWithoutDisciplineNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutDisciplineInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutDisciplineInput>>>;
+  createMany?: InputMaybe<HorseCreateManyDisciplineInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutDisciplineInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutDisciplineInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutDisciplineInput>>>;
+};
+
+export type HorseUpdateManyWithoutGenderNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutGenderInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutGenderInput>>>;
+  createMany?: InputMaybe<HorseCreateManyGenderInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutGenderInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutGenderInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutGenderInput>>>;
+};
+
+export type HorseUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<HorseCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type HorseUpdateOneRequiredWithoutFavoriteByUsersNestedInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutFavoriteByUsersInput>;
+  create?: InputMaybe<HorseCreateWithoutFavoriteByUsersInput>;
+  update?: InputMaybe<HorseUpdateToOneWithWhereWithoutFavoriteByUsersInput>;
+  upsert?: InputMaybe<HorseUpsertWithoutFavoriteByUsersInput>;
+};
+
+export type HorseUpdateOneRequiredWithoutImagesNestedInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutImagesInput>;
+  create?: InputMaybe<HorseCreateWithoutImagesInput>;
+  update?: InputMaybe<HorseUpdateToOneWithWhereWithoutImagesInput>;
+  upsert?: InputMaybe<HorseUpsertWithoutImagesInput>;
+};
+
+export type HorseUpdateOneRequiredWithoutVetReportNestedInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutVetReportInput>;
+  create?: InputMaybe<HorseCreateWithoutVetReportInput>;
+  update?: InputMaybe<HorseUpdateToOneWithWhereWithoutVetReportInput>;
+  upsert?: InputMaybe<HorseUpsertWithoutVetReportInput>;
+};
+
+export type HorseUpdateOneRequiredWithoutXrayResultsNestedInput = {
+  connect?: InputMaybe<HorseWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseCreateOrConnectWithoutXrayResultsInput>;
+  create?: InputMaybe<HorseCreateWithoutXrayResultsInput>;
+  update?: InputMaybe<HorseUpdateToOneWithWhereWithoutXrayResultsInput>;
+  upsert?: InputMaybe<HorseUpsertWithoutXrayResultsInput>;
+};
+
+export type HorseUpdateToOneWithWhereWithoutFavoriteByUsersInput = {
+  data: HorseUpdateWithoutFavoriteByUsersInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpdateToOneWithWhereWithoutImagesInput = {
+  data: HorseUpdateWithoutImagesInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpdateToOneWithWhereWithoutVetReportInput = {
+  data: HorseUpdateWithoutVetReportInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpdateToOneWithWhereWithoutXrayResultsInput = {
+  data: HorseUpdateWithoutXrayResultsInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpdateWithWhereUniqueWithoutCategoryInput = {
+  data: HorseUpdateWithoutCategoryInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpdateWithWhereUniqueWithoutDisciplineInput = {
+  data: HorseUpdateWithoutDisciplineInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpdateWithWhereUniqueWithoutGenderInput = {
+  data: HorseUpdateWithoutGenderInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpdateWithWhereUniqueWithoutUserInput = {
+  data: HorseUpdateWithoutUserInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpdateWithoutCategoryInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutDisciplineInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutFavoriteByUsersInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutGenderInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutImagesInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutUserInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutVetReportInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<HorseXrayResultsUpdateOneWithoutHorseNestedInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpdateWithoutXrayResultsInput = {
+  age?: InputMaybe<IntFieldUpdateOperationsInput>;
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  images?: InputMaybe<HorseImageUpdateManyWithoutHorseNestedInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<HorseVetReportUpdateOneWithoutHorseNestedInput>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  videoUrl?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResultsAvailable?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type HorseUpsertWithWhereUniqueWithoutCategoryInput = {
+  create: HorseCreateWithoutCategoryInput;
+  update: HorseUpdateWithoutCategoryInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpsertWithWhereUniqueWithoutDisciplineInput = {
+  create: HorseCreateWithoutDisciplineInput;
+  update: HorseUpdateWithoutDisciplineInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpsertWithWhereUniqueWithoutGenderInput = {
+  create: HorseCreateWithoutGenderInput;
+  update: HorseUpdateWithoutGenderInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpsertWithWhereUniqueWithoutUserInput = {
+  create: HorseCreateWithoutUserInput;
+  update: HorseUpdateWithoutUserInput;
+  where: HorseWhereUniqueInput;
+};
+
+export type HorseUpsertWithoutFavoriteByUsersInput = {
+  create: HorseCreateWithoutFavoriteByUsersInput;
+  update: HorseUpdateWithoutFavoriteByUsersInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpsertWithoutImagesInput = {
+  create: HorseCreateWithoutImagesInput;
+  update: HorseUpdateWithoutImagesInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpsertWithoutVetReportInput = {
+  create: HorseCreateWithoutVetReportInput;
+  update: HorseUpdateWithoutVetReportInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseUpsertWithoutXrayResultsInput = {
+  create: HorseCreateWithoutXrayResultsInput;
+  update: HorseUpdateWithoutXrayResultsInput;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type HorseVetReport = {
+  __typename?: 'HorseVetReport';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  reportUrl: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type HorseVetReportCountAggregateOutputType = {
+  __typename?: 'HorseVetReportCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  horseId: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  public: Scalars['Int']['output'];
+  reportUrl: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type HorseVetReportCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  reportUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseVetReportCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horse: HorseCreateNestedOneWithoutVetReportInput;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  reportUrl: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseVetReportCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  reportUrl: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseVetReportCreateNestedOneWithoutHorseInput = {
+  connect?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseVetReportCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseVetReportCreateWithoutHorseInput>;
+};
+
+export type HorseVetReportCreateOrConnectWithoutHorseInput = {
+  create: HorseVetReportCreateWithoutHorseInput;
+  where: HorseVetReportWhereUniqueInput;
+};
+
+export type HorseVetReportCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  reportUrl: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseVetReportGroupByOutputType = {
+  __typename?: 'HorseVetReportGroupByOutputType';
+  _count?: Maybe<HorseVetReportCountAggregateOutputType>;
+  _max?: Maybe<HorseVetReportMaxAggregateOutputType>;
+  _min?: Maybe<HorseVetReportMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  reportUrl: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type HorseVetReportMaxAggregateOutputType = {
+  __typename?: 'HorseVetReportMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  public?: Maybe<Scalars['Boolean']['output']>;
+  reportUrl?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseVetReportMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  reportUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseVetReportMinAggregateOutputType = {
+  __typename?: 'HorseVetReportMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  public?: Maybe<Scalars['Boolean']['output']>;
+  reportUrl?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type HorseVetReportMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  reportUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseVetReportNullableScalarRelationFilter = {
+  is?: InputMaybe<HorseVetReportWhereInput>;
+  isNot?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+export type HorseVetReportOrderByWithAggregationInput = {
+  _count?: InputMaybe<HorseVetReportCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseVetReportMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseVetReportMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  reportUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type HorseVetReportOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horse?: InputMaybe<HorseOrderByWithRelationInput>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  reportUrl?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum HorseVetReportScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  HorseId = 'horseId',
+  Id = 'id',
+  Public = 'public',
+  ReportUrl = 'reportUrl',
+  UpdatedAt = 'updatedAt'
+}
+
+export type HorseVetReportScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseVetReportScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseVetReportScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseVetReportScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  horseId?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  public?: InputMaybe<BoolWithAggregatesFilter>;
+  reportUrl?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type HorseVetReportUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  reportUrl: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseVetReportUncheckedCreateNestedOneWithoutHorseInput = {
+  connect?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseVetReportCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseVetReportCreateWithoutHorseInput>;
+};
+
+export type HorseVetReportUncheckedCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  reportUrl: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type HorseVetReportUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reportUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseVetReportUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reportUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseVetReportUncheckedUpdateOneWithoutHorseNestedInput = {
+  connect?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseVetReportCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseVetReportCreateWithoutHorseInput>;
+  delete?: InputMaybe<HorseVetReportWhereInput>;
+  disconnect?: InputMaybe<HorseVetReportWhereInput>;
+  update?: InputMaybe<HorseVetReportUpdateToOneWithWhereWithoutHorseInput>;
+  upsert?: InputMaybe<HorseVetReportUpsertWithoutHorseInput>;
+};
+
+export type HorseVetReportUncheckedUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reportUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseVetReportUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horse?: InputMaybe<HorseUpdateOneRequiredWithoutVetReportNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reportUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseVetReportUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reportUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseVetReportUpdateOneWithoutHorseNestedInput = {
+  connect?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseVetReportCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseVetReportCreateWithoutHorseInput>;
+  delete?: InputMaybe<HorseVetReportWhereInput>;
+  disconnect?: InputMaybe<HorseVetReportWhereInput>;
+  update?: InputMaybe<HorseVetReportUpdateToOneWithWhereWithoutHorseInput>;
+  upsert?: InputMaybe<HorseVetReportUpsertWithoutHorseInput>;
+};
+
+export type HorseVetReportUpdateToOneWithWhereWithoutHorseInput = {
+  data: HorseVetReportUpdateWithoutHorseInput;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+export type HorseVetReportUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reportUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type HorseVetReportUpsertWithoutHorseInput = {
+  create: HorseVetReportCreateWithoutHorseInput;
+  update: HorseVetReportUpdateWithoutHorseInput;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+export type HorseVetReportWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseVetReportWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseVetReportWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseVetReportWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  public?: InputMaybe<BoolFilter>;
+  reportUrl?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseVetReportWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseVetReportWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseVetReportWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseVetReportWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<BoolFilter>;
+  reportUrl?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type HorseWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  age?: InputMaybe<IntFilter>;
+  category?: InputMaybe<HorseCategoryScalarRelationFilter>;
+  categoryId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  discipline?: InputMaybe<HorseDisciplineScalarRelationFilter>;
+  disciplineId?: InputMaybe<StringFilter>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesListRelationFilter>;
+  gender?: InputMaybe<HorseGenderScalarRelationFilter>;
+  genderId?: InputMaybe<StringFilter>;
+  height?: InputMaybe<IntFilter>;
+  id?: InputMaybe<StringFilter>;
+  images?: InputMaybe<HorseImageListRelationFilter>;
+  location?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  pedigree?: InputMaybe<StringNullableFilter>;
+  price?: InputMaybe<FloatFilter>;
+  status?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+  vetReport?: InputMaybe<HorseVetReportNullableScalarRelationFilter>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFilter>;
+  videoUrl?: InputMaybe<StringNullableFilter>;
+  xrayResults?: InputMaybe<HorseXrayResultsNullableScalarRelationFilter>;
+  xrayResultsAvailable?: InputMaybe<BoolFilter>;
+};
+
+export type HorseWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  age?: InputMaybe<IntFilter>;
+  category?: InputMaybe<HorseCategoryScalarRelationFilter>;
+  categoryId?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  discipline?: InputMaybe<HorseDisciplineScalarRelationFilter>;
+  disciplineId?: InputMaybe<StringFilter>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesListRelationFilter>;
+  gender?: InputMaybe<HorseGenderScalarRelationFilter>;
+  genderId?: InputMaybe<StringFilter>;
+  height?: InputMaybe<IntFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<HorseImageListRelationFilter>;
+  location?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  pedigree?: InputMaybe<StringNullableFilter>;
+  price?: InputMaybe<FloatFilter>;
+  status?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+  vetReport?: InputMaybe<HorseVetReportNullableScalarRelationFilter>;
+  veterinaryDocumentAvailable?: InputMaybe<BoolFilter>;
+  videoUrl?: InputMaybe<StringNullableFilter>;
+  xrayResults?: InputMaybe<HorseXrayResultsNullableScalarRelationFilter>;
+  xrayResultsAvailable?: InputMaybe<BoolFilter>;
+};
+
+export type HorseXrayResults = {
+  __typename?: 'HorseXrayResults';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  xrayUrl: Scalars['String']['output'];
+};
+
+export type HorseXrayResultsCountAggregateOutputType = {
+  __typename?: 'HorseXrayResultsCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  horseId: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  public: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  xrayUrl: Scalars['Int']['output'];
+};
+
+export type HorseXrayResultsCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  xrayUrl?: InputMaybe<SortOrder>;
+};
+
+export type HorseXrayResultsCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horse: HorseCreateNestedOneWithoutXrayResultsInput;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  xrayUrl: Scalars['String']['input'];
+};
+
+export type HorseXrayResultsCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  xrayUrl: Scalars['String']['input'];
+};
+
+export type HorseXrayResultsCreateNestedOneWithoutHorseInput = {
+  connect?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseXrayResultsCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseXrayResultsCreateWithoutHorseInput>;
+};
+
+export type HorseXrayResultsCreateOrConnectWithoutHorseInput = {
+  create: HorseXrayResultsCreateWithoutHorseInput;
+  where: HorseXrayResultsWhereUniqueInput;
+};
+
+export type HorseXrayResultsCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  xrayUrl: Scalars['String']['input'];
+};
+
+export type HorseXrayResultsGroupByOutputType = {
+  __typename?: 'HorseXrayResultsGroupByOutputType';
+  _count?: Maybe<HorseXrayResultsCountAggregateOutputType>;
+  _max?: Maybe<HorseXrayResultsMaxAggregateOutputType>;
+  _min?: Maybe<HorseXrayResultsMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  xrayUrl: Scalars['String']['output'];
+};
+
+export type HorseXrayResultsMaxAggregateOutputType = {
+  __typename?: 'HorseXrayResultsMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  public?: Maybe<Scalars['Boolean']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  xrayUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type HorseXrayResultsMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  xrayUrl?: InputMaybe<SortOrder>;
+};
+
+export type HorseXrayResultsMinAggregateOutputType = {
+  __typename?: 'HorseXrayResultsMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  public?: Maybe<Scalars['Boolean']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  xrayUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type HorseXrayResultsMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  xrayUrl?: InputMaybe<SortOrder>;
+};
+
+export type HorseXrayResultsNullableScalarRelationFilter = {
+  is?: InputMaybe<HorseXrayResultsWhereInput>;
+  isNot?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+export type HorseXrayResultsOrderByWithAggregationInput = {
+  _count?: InputMaybe<HorseXrayResultsCountOrderByAggregateInput>;
+  _max?: InputMaybe<HorseXrayResultsMaxOrderByAggregateInput>;
+  _min?: InputMaybe<HorseXrayResultsMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  xrayUrl?: InputMaybe<SortOrder>;
+};
+
+export type HorseXrayResultsOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horse?: InputMaybe<HorseOrderByWithRelationInput>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  public?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  xrayUrl?: InputMaybe<SortOrder>;
+};
+
+export enum HorseXrayResultsScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  HorseId = 'horseId',
+  Id = 'id',
+  Public = 'public',
+  UpdatedAt = 'updatedAt',
+  XrayUrl = 'xrayUrl'
+}
+
+export type HorseXrayResultsScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseXrayResultsScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseXrayResultsScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseXrayResultsScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  horseId?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  public?: InputMaybe<BoolWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  xrayUrl?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type HorseXrayResultsUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  xrayUrl: Scalars['String']['input'];
+};
+
+export type HorseXrayResultsUncheckedCreateNestedOneWithoutHorseInput = {
+  connect?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseXrayResultsCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseXrayResultsCreateWithoutHorseInput>;
+};
+
+export type HorseXrayResultsUncheckedCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<Scalars['Boolean']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  xrayUrl: Scalars['String']['input'];
+};
+
+export type HorseXrayResultsUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  xrayUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseXrayResultsUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  xrayUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseXrayResultsUncheckedUpdateOneWithoutHorseNestedInput = {
+  connect?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseXrayResultsCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseXrayResultsCreateWithoutHorseInput>;
+  delete?: InputMaybe<HorseXrayResultsWhereInput>;
+  disconnect?: InputMaybe<HorseXrayResultsWhereInput>;
+  update?: InputMaybe<HorseXrayResultsUpdateToOneWithWhereWithoutHorseInput>;
+  upsert?: InputMaybe<HorseXrayResultsUpsertWithoutHorseInput>;
+};
+
+export type HorseXrayResultsUncheckedUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  xrayUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseXrayResultsUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horse?: InputMaybe<HorseUpdateOneRequiredWithoutXrayResultsNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  xrayUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseXrayResultsUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  xrayUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseXrayResultsUpdateOneWithoutHorseNestedInput = {
+  connect?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<HorseXrayResultsCreateOrConnectWithoutHorseInput>;
+  create?: InputMaybe<HorseXrayResultsCreateWithoutHorseInput>;
+  delete?: InputMaybe<HorseXrayResultsWhereInput>;
+  disconnect?: InputMaybe<HorseXrayResultsWhereInput>;
+  update?: InputMaybe<HorseXrayResultsUpdateToOneWithWhereWithoutHorseInput>;
+  upsert?: InputMaybe<HorseXrayResultsUpsertWithoutHorseInput>;
+};
+
+export type HorseXrayResultsUpdateToOneWithWhereWithoutHorseInput = {
+  data: HorseXrayResultsUpdateWithoutHorseInput;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+export type HorseXrayResultsUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  public?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  xrayUrl?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type HorseXrayResultsUpsertWithoutHorseInput = {
+  create: HorseXrayResultsCreateWithoutHorseInput;
+  update: HorseXrayResultsUpdateWithoutHorseInput;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+export type HorseXrayResultsWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseXrayResultsWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseXrayResultsWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseXrayResultsWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  public?: InputMaybe<BoolFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  xrayUrl?: InputMaybe<StringFilter>;
+};
+
+export type HorseXrayResultsWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<HorseXrayResultsWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<HorseXrayResultsWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<HorseXrayResultsWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  public?: InputMaybe<BoolFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  xrayUrl?: InputMaybe<StringFilter>;
+};
+
+export type IntFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Int']['input']>;
+  divide?: InputMaybe<Scalars['Int']['input']>;
+  increment?: InputMaybe<Scalars['Int']['input']>;
+  multiply?: InputMaybe<Scalars['Int']['input']>;
+  set?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type IntFilter = {
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type IntWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedIntFilter>;
+  _min?: InputMaybe<NestedIntFilter>;
+  _sum?: InputMaybe<NestedIntFilter>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createOneHorse: Horse;
+  createOneHorseCategory: HorseCategory;
+  createOneHorseDiscipline: HorseDiscipline;
+  createOneHorseGender: HorseGender;
+  createOneHorseImage: HorseImage;
+  createOneHorseVetReport: HorseVetReport;
+  createOneHorseXrayResults: HorseXrayResults;
+  createOneNotification: Notification;
+  createOneUser: User;
+  createOneUserFavoriteHorses: UserFavoriteHorses;
+  createOneUserReview: UserReview;
+  deleteManyHorse: BatchPayload;
+  deleteManyHorseCategory: BatchPayload;
+  deleteManyHorseDiscipline: BatchPayload;
+  deleteManyHorseGender: BatchPayload;
+  deleteManyHorseImage: BatchPayload;
+  deleteManyHorseVetReport: BatchPayload;
+  deleteManyHorseXrayResults: BatchPayload;
+  deleteManyNotification: BatchPayload;
+  deleteManyUser: BatchPayload;
+  deleteManyUserFavoriteHorses: BatchPayload;
+  deleteManyUserReview: BatchPayload;
+  deleteOneHorse?: Maybe<Horse>;
+  deleteOneHorseCategory?: Maybe<HorseCategory>;
+  deleteOneHorseDiscipline?: Maybe<HorseDiscipline>;
+  deleteOneHorseGender?: Maybe<HorseGender>;
+  deleteOneHorseImage?: Maybe<HorseImage>;
+  deleteOneHorseVetReport?: Maybe<HorseVetReport>;
+  deleteOneHorseXrayResults?: Maybe<HorseXrayResults>;
+  deleteOneNotification?: Maybe<Notification>;
+  deleteOneUser?: Maybe<User>;
+  deleteOneUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
+  deleteOneUserReview?: Maybe<UserReview>;
+  updateManyHorse: BatchPayload;
+  updateManyHorseCategory: BatchPayload;
+  updateManyHorseDiscipline: BatchPayload;
+  updateManyHorseGender: BatchPayload;
+  updateManyHorseImage: BatchPayload;
+  updateManyHorseVetReport: BatchPayload;
+  updateManyHorseXrayResults: BatchPayload;
+  updateManyNotification: BatchPayload;
+  updateManyUser: BatchPayload;
+  updateManyUserFavoriteHorses: BatchPayload;
+  updateManyUserReview: BatchPayload;
+  updateOneHorse: Horse;
+  updateOneHorseCategory: HorseCategory;
+  updateOneHorseDiscipline: HorseDiscipline;
+  updateOneHorseGender: HorseGender;
+  updateOneHorseImage: HorseImage;
+  updateOneHorseVetReport: HorseVetReport;
+  updateOneHorseXrayResults: HorseXrayResults;
+  updateOneNotification: Notification;
+  updateOneUser: User;
+  updateOneUserFavoriteHorses: UserFavoriteHorses;
+  updateOneUserReview: UserReview;
+  upsertOneHorse: Horse;
+  upsertOneHorseCategory: HorseCategory;
+  upsertOneHorseDiscipline: HorseDiscipline;
+  upsertOneHorseGender: HorseGender;
+  upsertOneHorseImage: HorseImage;
+  upsertOneHorseVetReport: HorseVetReport;
+  upsertOneHorseXrayResults: HorseXrayResults;
+  upsertOneNotification: Notification;
+  upsertOneUser: User;
+  upsertOneUserFavoriteHorses: UserFavoriteHorses;
+  upsertOneUserReview: UserReview;
+};
+
+
+export type MutationCreateOneHorseArgs = {
+  data: HorseCreateInput;
+};
+
+
+export type MutationCreateOneHorseCategoryArgs = {
+  data: HorseCategoryCreateInput;
+};
+
+
+export type MutationCreateOneHorseDisciplineArgs = {
+  data: HorseDisciplineCreateInput;
+};
+
+
+export type MutationCreateOneHorseGenderArgs = {
+  data: HorseGenderCreateInput;
+};
+
+
+export type MutationCreateOneHorseImageArgs = {
+  data: HorseImageCreateInput;
+};
+
+
+export type MutationCreateOneHorseVetReportArgs = {
+  data: HorseVetReportCreateInput;
+};
+
+
+export type MutationCreateOneHorseXrayResultsArgs = {
+  data: HorseXrayResultsCreateInput;
+};
+
+
+export type MutationCreateOneNotificationArgs = {
+  data: NotificationCreateInput;
+};
+
+
+export type MutationCreateOneUserArgs = {
+  data: UserCreateInput;
+};
+
+
+export type MutationCreateOneUserFavoriteHorsesArgs = {
+  data: UserFavoriteHorsesCreateInput;
+};
+
+
+export type MutationCreateOneUserReviewArgs = {
+  data: UserReviewCreateInput;
+};
+
+
+export type MutationDeleteManyHorseArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type MutationDeleteManyHorseCategoryArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+
+export type MutationDeleteManyHorseDisciplineArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+
+export type MutationDeleteManyHorseGenderArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+
+export type MutationDeleteManyHorseImageArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type MutationDeleteManyHorseVetReportArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type MutationDeleteManyHorseXrayResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+
+export type MutationDeleteManyNotificationArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type MutationDeleteManyUserArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type MutationDeleteManyUserFavoriteHorsesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type MutationDeleteManyUserReviewArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type MutationDeleteOneHorseArgs = {
+  where: HorseWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneHorseCategoryArgs = {
+  where: HorseCategoryWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneHorseDisciplineArgs = {
+  where: HorseDisciplineWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneHorseGenderArgs = {
+  where: HorseGenderWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneHorseImageArgs = {
+  where: HorseImageWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneHorseVetReportArgs = {
+  where: HorseVetReportWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneHorseXrayResultsArgs = {
+  where: HorseXrayResultsWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneNotificationArgs = {
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneUserArgs = {
+  where: UserWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneUserFavoriteHorsesArgs = {
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+
+export type MutationDeleteOneUserReviewArgs = {
+  where: UserReviewWhereUniqueInput;
+};
+
+
+export type MutationUpdateManyHorseArgs = {
+  data: HorseUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type MutationUpdateManyHorseCategoryArgs = {
+  data: HorseCategoryUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+
+export type MutationUpdateManyHorseDisciplineArgs = {
+  data: HorseDisciplineUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+
+export type MutationUpdateManyHorseGenderArgs = {
+  data: HorseGenderUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+
+export type MutationUpdateManyHorseImageArgs = {
+  data: HorseImageUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type MutationUpdateManyHorseVetReportArgs = {
+  data: HorseVetReportUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type MutationUpdateManyHorseXrayResultsArgs = {
+  data: HorseXrayResultsUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+
+export type MutationUpdateManyNotificationArgs = {
+  data: NotificationUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type MutationUpdateManyUserArgs = {
+  data: UserUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type MutationUpdateManyUserFavoriteHorsesArgs = {
+  data: UserFavoriteHorsesUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type MutationUpdateManyUserReviewArgs = {
+  data: UserReviewUpdateManyMutationInput;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type MutationUpdateOneHorseArgs = {
+  data: HorseUpdateInput;
+  where: HorseWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneHorseCategoryArgs = {
+  data: HorseCategoryUpdateInput;
+  where: HorseCategoryWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneHorseDisciplineArgs = {
+  data: HorseDisciplineUpdateInput;
+  where: HorseDisciplineWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneHorseGenderArgs = {
+  data: HorseGenderUpdateInput;
+  where: HorseGenderWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneHorseImageArgs = {
+  data: HorseImageUpdateInput;
+  where: HorseImageWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneHorseVetReportArgs = {
+  data: HorseVetReportUpdateInput;
+  where: HorseVetReportWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneHorseXrayResultsArgs = {
+  data: HorseXrayResultsUpdateInput;
+  where: HorseXrayResultsWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneNotificationArgs = {
+  data: NotificationUpdateInput;
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneUserArgs = {
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneUserFavoriteHorsesArgs = {
+  data: UserFavoriteHorsesUpdateInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneUserReviewArgs = {
+  data: UserReviewUpdateInput;
+  where: UserReviewWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseArgs = {
+  create: HorseCreateInput;
+  update: HorseUpdateInput;
+  where: HorseWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseCategoryArgs = {
+  create: HorseCategoryCreateInput;
+  update: HorseCategoryUpdateInput;
+  where: HorseCategoryWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseDisciplineArgs = {
+  create: HorseDisciplineCreateInput;
+  update: HorseDisciplineUpdateInput;
+  where: HorseDisciplineWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseGenderArgs = {
+  create: HorseGenderCreateInput;
+  update: HorseGenderUpdateInput;
+  where: HorseGenderWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseImageArgs = {
+  create: HorseImageCreateInput;
+  update: HorseImageUpdateInput;
+  where: HorseImageWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseVetReportArgs = {
+  create: HorseVetReportCreateInput;
+  update: HorseVetReportUpdateInput;
+  where: HorseVetReportWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneHorseXrayResultsArgs = {
+  create: HorseXrayResultsCreateInput;
+  update: HorseXrayResultsUpdateInput;
+  where: HorseXrayResultsWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneNotificationArgs = {
+  create: NotificationCreateInput;
+  update: NotificationUpdateInput;
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneUserArgs = {
+  create: UserCreateInput;
+  update: UserUpdateInput;
+  where: UserWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneUserFavoriteHorsesArgs = {
+  create: UserFavoriteHorsesCreateInput;
+  update: UserFavoriteHorsesUpdateInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+
+export type MutationUpsertOneUserReviewArgs = {
+  create: UserReviewCreateInput;
+  update: UserReviewUpdateInput;
+  where: UserReviewWhereUniqueInput;
+};
+
+export type NestedBoolFilter = {
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolFilter>;
+};
+
+export type NestedBoolWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedBoolFilter>;
+  _min?: InputMaybe<NestedBoolFilter>;
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+  not?: InputMaybe<NestedBoolWithAggregatesFilter>;
+};
+
+export type NestedDateTimeFilter = {
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  not?: InputMaybe<NestedDateTimeFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+};
+
+export type NestedDateTimeWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedDateTimeFilter>;
+  _min?: InputMaybe<NestedDateTimeFilter>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  not?: InputMaybe<NestedDateTimeWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+};
+
+export type NestedFloatFilter = {
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type NestedFloatWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedFloatFilter>;
+  _min?: InputMaybe<NestedFloatFilter>;
+  _sum?: InputMaybe<NestedFloatFilter>;
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type NestedIntFilter = {
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type NestedIntNullableFilter = {
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntNullableFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type NestedIntWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedIntFilter>;
+  _min?: InputMaybe<NestedIntFilter>;
+  _sum?: InputMaybe<NestedIntFilter>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  not?: InputMaybe<NestedIntWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type NestedStringFilter = {
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NestedStringNullableFilter = {
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringNullableFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NestedStringNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedStringNullableFilter>;
+  _min?: InputMaybe<NestedStringNullableFilter>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NestedStringWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedStringFilter>;
+  _min?: InputMaybe<NestedStringFilter>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Notification = {
+  __typename?: 'Notification';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  read: Scalars['Boolean']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type NotificationCountAggregateOutputType = {
+  __typename?: 'NotificationCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  message: Scalars['Int']['output'];
+  read: Scalars['Int']['output'];
+  title: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  userId: Scalars['Int']['output'];
+};
+
+export type NotificationCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  message?: InputMaybe<SortOrder>;
+  read?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type NotificationCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message: Scalars['String']['input'];
+  read?: InputMaybe<Scalars['Boolean']['input']>;
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutNotificationsInput;
+};
+
+export type NotificationCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message: Scalars['String']['input'];
+  read?: InputMaybe<Scalars['Boolean']['input']>;
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type NotificationCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message: Scalars['String']['input'];
+  read?: InputMaybe<Scalars['Boolean']['input']>;
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type NotificationCreateManyUserInputEnvelope = {
+  data: NotificationCreateManyUserInput;
+};
+
+export type NotificationCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<NotificationCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<NotificationCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<NotificationCreateManyUserInputEnvelope>;
+};
+
+export type NotificationCreateOrConnectWithoutUserInput = {
+  create: NotificationCreateWithoutUserInput;
+  where: NotificationWhereUniqueInput;
+};
+
+export type NotificationCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message: Scalars['String']['input'];
+  read?: InputMaybe<Scalars['Boolean']['input']>;
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type NotificationGroupByOutputType = {
+  __typename?: 'NotificationGroupByOutputType';
+  _count?: Maybe<NotificationCountAggregateOutputType>;
+  _max?: Maybe<NotificationMaxAggregateOutputType>;
+  _min?: Maybe<NotificationMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  read: Scalars['Boolean']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type NotificationListRelationFilter = {
+  every?: InputMaybe<NotificationWhereInput>;
+  none?: InputMaybe<NotificationWhereInput>;
+  some?: InputMaybe<NotificationWhereInput>;
+};
+
+export type NotificationMaxAggregateOutputType = {
+  __typename?: 'NotificationMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+  read?: Maybe<Scalars['Boolean']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type NotificationMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  message?: InputMaybe<SortOrder>;
+  read?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type NotificationMinAggregateOutputType = {
+  __typename?: 'NotificationMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+  read?: Maybe<Scalars['Boolean']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type NotificationMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  message?: InputMaybe<SortOrder>;
+  read?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type NotificationOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type NotificationOrderByWithAggregationInput = {
+  _count?: InputMaybe<NotificationCountOrderByAggregateInput>;
+  _max?: InputMaybe<NotificationMaxOrderByAggregateInput>;
+  _min?: InputMaybe<NotificationMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  message?: InputMaybe<SortOrder>;
+  read?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type NotificationOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  message?: InputMaybe<SortOrder>;
+  read?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export enum NotificationScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Message = 'message',
+  Read = 'read',
+  Title = 'title',
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId'
+}
+
+export type NotificationScalarWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<NotificationScalarWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<NotificationScalarWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<NotificationScalarWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  message?: InputMaybe<StringFilter>;
+  read?: InputMaybe<BoolFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type NotificationScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<NotificationScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<NotificationScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<NotificationScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  message?: InputMaybe<StringWithAggregatesFilter>;
+  read?: InputMaybe<BoolWithAggregatesFilter>;
+  title?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  userId?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type NotificationUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message: Scalars['String']['input'];
+  read?: InputMaybe<Scalars['Boolean']['input']>;
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<NotificationCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<NotificationCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<NotificationCreateManyUserInputEnvelope>;
+};
+
+export type NotificationUncheckedCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message: Scalars['String']['input'];
+  read?: InputMaybe<Scalars['Boolean']['input']>;
+  title: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type NotificationUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type NotificationUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type NotificationUncheckedUpdateManyWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<NotificationCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<NotificationCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<NotificationCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<NotificationScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<NotificationUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<NotificationUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<NotificationUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type NotificationUncheckedUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type NotificationUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutNotificationsNestedInput>;
+};
+
+export type NotificationUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type NotificationUpdateManyWithWhereWithoutUserInput = {
+  data: NotificationUpdateManyMutationInput;
+  where: NotificationScalarWhereInput;
+};
+
+export type NotificationUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<NotificationCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<NotificationCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<NotificationCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<NotificationScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<NotificationWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<NotificationUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<NotificationUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<NotificationUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
+  data: NotificationUpdateWithoutUserInput;
+  where: NotificationWhereUniqueInput;
+};
+
+export type NotificationUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  message?: InputMaybe<StringFieldUpdateOperationsInput>;
+  read?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
+  create: NotificationCreateWithoutUserInput;
+  update: NotificationUpdateWithoutUserInput;
+  where: NotificationWhereUniqueInput;
+};
+
+export type NotificationWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<NotificationWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<NotificationWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<NotificationWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  message?: InputMaybe<StringFilter>;
+  read?: InputMaybe<BoolFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type NotificationWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<NotificationWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<NotificationWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<NotificationWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  message?: InputMaybe<StringFilter>;
+  read?: InputMaybe<BoolFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum NullsOrder {
+  First = 'first',
+  Last = 'last'
+}
+
+export type Query = {
+  __typename?: 'Query';
+  aggregateHorse?: Maybe<AggregateHorse>;
+  aggregateHorseCategory?: Maybe<AggregateHorseCategory>;
+  aggregateHorseDiscipline?: Maybe<AggregateHorseDiscipline>;
+  aggregateHorseGender?: Maybe<AggregateHorseGender>;
+  aggregateHorseImage?: Maybe<AggregateHorseImage>;
+  aggregateHorseVetReport?: Maybe<AggregateHorseVetReport>;
+  aggregateHorseXrayResults?: Maybe<AggregateHorseXrayResults>;
+  aggregateNotification?: Maybe<AggregateNotification>;
+  aggregateUser?: Maybe<AggregateUser>;
+  aggregateUserFavoriteHorses?: Maybe<AggregateUserFavoriteHorses>;
+  aggregateUserReview?: Maybe<AggregateUserReview>;
+  findFirstHorse?: Maybe<Horse>;
+  findFirstHorseCategory?: Maybe<HorseCategory>;
+  findFirstHorseDiscipline?: Maybe<HorseDiscipline>;
+  findFirstHorseGender?: Maybe<HorseGender>;
+  findFirstHorseImage?: Maybe<HorseImage>;
+  findFirstHorseVetReport?: Maybe<HorseVetReport>;
+  findFirstHorseXrayResults?: Maybe<HorseXrayResults>;
+  findFirstNotification?: Maybe<Notification>;
+  findFirstUser?: Maybe<User>;
+  findFirstUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
+  findFirstUserReview?: Maybe<UserReview>;
+  findManyHorse: Array<Horse>;
+  findManyHorseCategory: Array<HorseCategory>;
+  findManyHorseCategoryCount: Scalars['Int']['output'];
+  findManyHorseCount: Scalars['Int']['output'];
+  findManyHorseDiscipline: Array<HorseDiscipline>;
+  findManyHorseDisciplineCount: Scalars['Int']['output'];
+  findManyHorseGender: Array<HorseGender>;
+  findManyHorseGenderCount: Scalars['Int']['output'];
+  findManyHorseImage: Array<HorseImage>;
+  findManyHorseImageCount: Scalars['Int']['output'];
+  findManyHorseVetReport: Array<HorseVetReport>;
+  findManyHorseVetReportCount: Scalars['Int']['output'];
+  findManyHorseXrayResults: Array<HorseXrayResults>;
+  findManyHorseXrayResultsCount: Scalars['Int']['output'];
+  findManyNotification: Array<Notification>;
+  findManyNotificationCount: Scalars['Int']['output'];
+  findManyUser: Array<User>;
+  findManyUserCount: Scalars['Int']['output'];
+  findManyUserFavoriteHorses: Array<UserFavoriteHorses>;
+  findManyUserFavoriteHorsesCount: Scalars['Int']['output'];
+  findManyUserReview: Array<UserReview>;
+  findManyUserReviewCount: Scalars['Int']['output'];
+  findUniqueHorse?: Maybe<Horse>;
+  findUniqueHorseCategory?: Maybe<HorseCategory>;
+  findUniqueHorseDiscipline?: Maybe<HorseDiscipline>;
+  findUniqueHorseGender?: Maybe<HorseGender>;
+  findUniqueHorseImage?: Maybe<HorseImage>;
+  findUniqueHorseVetReport?: Maybe<HorseVetReport>;
+  findUniqueHorseXrayResults?: Maybe<HorseXrayResults>;
+  findUniqueNotification?: Maybe<Notification>;
+  findUniqueUser?: Maybe<User>;
+  findUniqueUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
+  findUniqueUserReview?: Maybe<UserReview>;
+};
+
+
+export type QueryAggregateHorseArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type QueryAggregateHorseCategoryArgs = {
+  cursor?: InputMaybe<HorseCategoryWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseCategoryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+
+export type QueryAggregateHorseDisciplineArgs = {
+  cursor?: InputMaybe<HorseDisciplineWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseDisciplineOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+
+export type QueryAggregateHorseGenderArgs = {
+  cursor?: InputMaybe<HorseGenderWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseGenderOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+
+export type QueryAggregateHorseImageArgs = {
+  cursor?: InputMaybe<HorseImageWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseImageOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type QueryAggregateHorseVetReportArgs = {
+  cursor?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseVetReportOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type QueryAggregateHorseXrayResultsArgs = {
+  cursor?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseXrayResultsOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+
+export type QueryAggregateNotificationArgs = {
+  cursor?: InputMaybe<NotificationWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<NotificationOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type QueryAggregateUserArgs = {
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryAggregateUserFavoriteHorsesArgs = {
+  cursor?: InputMaybe<UserFavoriteHorsesWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type QueryAggregateUserReviewArgs = {
+  cursor?: InputMaybe<UserReviewWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserReviewOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindFirstHorseArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type QueryFindFirstHorseCategoryArgs = {
+  cursor?: InputMaybe<HorseCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseCategoryScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseCategoryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+
+export type QueryFindFirstHorseDisciplineArgs = {
+  cursor?: InputMaybe<HorseDisciplineWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseDisciplineScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseDisciplineOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+
+export type QueryFindFirstHorseGenderArgs = {
+  cursor?: InputMaybe<HorseGenderWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseGenderScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseGenderOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+
+export type QueryFindFirstHorseImageArgs = {
+  cursor?: InputMaybe<HorseImageWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseImageScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseImageOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type QueryFindFirstHorseVetReportArgs = {
+  cursor?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseVetReportScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseVetReportOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type QueryFindFirstHorseXrayResultsArgs = {
+  cursor?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseXrayResultsScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseXrayResultsOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+
+export type QueryFindFirstNotificationArgs = {
+  cursor?: InputMaybe<NotificationWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<NotificationScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<NotificationOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type QueryFindFirstUserArgs = {
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryFindFirstUserFavoriteHorsesArgs = {
+  cursor?: InputMaybe<UserFavoriteHorsesWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type QueryFindFirstUserReviewArgs = {
+  cursor?: InputMaybe<UserReviewWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserReviewScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserReviewOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindManyHorseArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type QueryFindManyHorseCategoryArgs = {
+  cursor?: InputMaybe<HorseCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseCategoryScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseCategoryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+
+export type QueryFindManyHorseCategoryCountArgs = {
+  cursor?: InputMaybe<HorseCategoryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseCategoryScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseCategoryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseCategoryWhereInput>;
+};
+
+
+export type QueryFindManyHorseCountArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type QueryFindManyHorseDisciplineArgs = {
+  cursor?: InputMaybe<HorseDisciplineWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseDisciplineScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseDisciplineOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+
+export type QueryFindManyHorseDisciplineCountArgs = {
+  cursor?: InputMaybe<HorseDisciplineWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseDisciplineScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseDisciplineOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseDisciplineWhereInput>;
+};
+
+
+export type QueryFindManyHorseGenderArgs = {
+  cursor?: InputMaybe<HorseGenderWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseGenderScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseGenderOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+
+export type QueryFindManyHorseGenderCountArgs = {
+  cursor?: InputMaybe<HorseGenderWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseGenderScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseGenderOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseGenderWhereInput>;
+};
+
+
+export type QueryFindManyHorseImageArgs = {
+  cursor?: InputMaybe<HorseImageWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseImageScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseImageOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type QueryFindManyHorseImageCountArgs = {
+  cursor?: InputMaybe<HorseImageWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseImageScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseImageOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseImageWhereInput>;
+};
+
+
+export type QueryFindManyHorseVetReportArgs = {
+  cursor?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseVetReportScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseVetReportOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type QueryFindManyHorseVetReportCountArgs = {
+  cursor?: InputMaybe<HorseVetReportWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseVetReportScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseVetReportOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseVetReportWhereInput>;
+};
+
+
+export type QueryFindManyHorseXrayResultsArgs = {
+  cursor?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseXrayResultsScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseXrayResultsOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+
+export type QueryFindManyHorseXrayResultsCountArgs = {
+  cursor?: InputMaybe<HorseXrayResultsWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseXrayResultsScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseXrayResultsOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseXrayResultsWhereInput>;
+};
+
+
+export type QueryFindManyNotificationArgs = {
+  cursor?: InputMaybe<NotificationWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<NotificationScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<NotificationOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type QueryFindManyNotificationCountArgs = {
+  cursor?: InputMaybe<NotificationWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<NotificationScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<NotificationOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type QueryFindManyUserArgs = {
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryFindManyUserCountArgs = {
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryFindManyUserFavoriteHorsesArgs = {
+  cursor?: InputMaybe<UserFavoriteHorsesWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type QueryFindManyUserFavoriteHorsesCountArgs = {
+  cursor?: InputMaybe<UserFavoriteHorsesWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+
+export type QueryFindManyUserReviewArgs = {
+  cursor?: InputMaybe<UserReviewWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserReviewScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserReviewOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindManyUserReviewCountArgs = {
+  cursor?: InputMaybe<UserReviewWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserReviewScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserReviewOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindUniqueHorseArgs = {
+  where: HorseWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueHorseCategoryArgs = {
+  where: HorseCategoryWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueHorseDisciplineArgs = {
+  where: HorseDisciplineWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueHorseGenderArgs = {
+  where: HorseGenderWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueHorseImageArgs = {
+  where: HorseImageWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueHorseVetReportArgs = {
+  where: HorseVetReportWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueHorseXrayResultsArgs = {
+  where: HorseXrayResultsWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueNotificationArgs = {
+  where: NotificationWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueUserArgs = {
+  where: UserWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueUserFavoriteHorsesArgs = {
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+
+export type QueryFindUniqueUserReviewArgs = {
+  where: UserReviewWhereUniqueInput;
+};
+
+export enum SortOrder {
+  Asc = 'asc',
+  Desc = 'desc'
+}
+
+export type SortOrderInput = {
+  nulls?: InputMaybe<NullsOrder>;
+  sort: SortOrder;
+};
+
+export type StringFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type StringFilter = {
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type StringNullableFilter = {
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringNullableFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type StringNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedStringNullableFilter>;
+  _min?: InputMaybe<NestedStringNullableFilter>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type StringWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedStringFilter>;
+  _min?: InputMaybe<NestedStringFilter>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<NestedStringWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum TransactionIsolationLevel {
+  Serializable = 'Serializable'
+}
+
+export type UpdateManyHorseAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseAndReturnOutputType';
+  age: Scalars['Int']['output'];
+  category: HorseCategory;
+  categoryId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  discipline: HorseDiscipline;
+  disciplineId: Scalars['String']['output'];
+  gender: HorseGender;
+  genderId: Scalars['String']['output'];
+  height: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  location: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  pedigree?: Maybe<Scalars['String']['output']>;
+  price: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+  veterinaryDocumentAvailable: Scalars['Boolean']['output'];
+  videoUrl?: Maybe<Scalars['String']['output']>;
+  xrayResultsAvailable: Scalars['Boolean']['output'];
+};
+
+export type UpdateManyHorseCategoryAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseCategoryAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  imageUrl: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type UpdateManyHorseDisciplineAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseDisciplineAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type UpdateManyHorseGenderAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseGenderAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type UpdateManyHorseImageAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseImageAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type UpdateManyHorseVetReportAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseVetReportAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  reportUrl: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type UpdateManyHorseXrayResultsAndReturnOutputType = {
+  __typename?: 'UpdateManyHorseXrayResultsAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  xrayUrl: Scalars['String']['output'];
+};
+
+export type UpdateManyNotificationAndReturnOutputType = {
+  __typename?: 'UpdateManyNotificationAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  read: Scalars['Boolean']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type UpdateManyUserAndReturnOutputType = {
+  __typename?: 'UpdateManyUserAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  firebaseUid: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  role: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  verifiedSeller: Scalars['Boolean']['output'];
+  whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type UpdateManyUserFavoriteHorsesAndReturnOutputType = {
+  __typename?: 'UpdateManyUserFavoriteHorsesAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type UpdateManyUserReviewAndReturnOutputType = {
+  __typename?: 'UpdateManyUserReviewAndReturnOutputType';
+  comment?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  rating: Scalars['Int']['output'];
+  reviewer: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type User = {
+  __typename?: 'User';
+  _count: UserCountOutputType;
+  createdAt: Scalars['DateTime']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  firebaseUid: Scalars['String']['output'];
+  horses: Array<Horse>;
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  notifications: Array<Notification>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  reviews: Array<UserReview>;
+  role: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userFavoriteHorses: Array<UserFavoriteHorses>;
+  verifiedSeller: Scalars['Boolean']['output'];
+  whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type UserHorsesArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+
+export type UserNotificationsArgs = {
+  cursor?: InputMaybe<NotificationWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<NotificationScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<NotificationOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NotificationWhereInput>;
+};
+
+
+export type UserReviewsArgs = {
+  cursor?: InputMaybe<UserReviewWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserReviewScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserReviewOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type UserUserFavoriteHorsesArgs = {
+  cursor?: InputMaybe<UserFavoriteHorsesWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+export type UserCountAggregateOutputType = {
+  __typename?: 'UserCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  email: Scalars['Int']['output'];
+  firebaseUid: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  phoneNumber: Scalars['Int']['output'];
+  role: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  verifiedSeller: Scalars['Int']['output'];
+  whatsAppNumber: Scalars['Int']['output'];
+};
+
+export type UserCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  firebaseUid?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  phoneNumber?: InputMaybe<SortOrder>;
+  role?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  verifiedSeller?: InputMaybe<SortOrder>;
+  whatsAppNumber?: InputMaybe<SortOrder>;
+};
+
+export type UserCountOutputType = {
+  __typename?: 'UserCountOutputType';
+  horses: Scalars['Int']['output'];
+  notifications: Scalars['Int']['output'];
+  reviews: Scalars['Int']['output'];
+  userFavoriteHorses: Scalars['Int']['output'];
+};
+
+export type UserCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserCreateNestedOneWithoutHorsesInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<UserCreateWithoutHorsesInput>;
+};
+
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutNotificationsInput>;
+  create?: InputMaybe<UserCreateWithoutNotificationsInput>;
+};
+
+export type UserCreateNestedOneWithoutReviewsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutReviewsInput>;
+  create?: InputMaybe<UserCreateWithoutReviewsInput>;
+};
+
+export type UserCreateNestedOneWithoutUserFavoriteHorsesInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutUserFavoriteHorsesInput>;
+  create?: InputMaybe<UserCreateWithoutUserFavoriteHorsesInput>;
+};
+
+export type UserCreateOrConnectWithoutHorsesInput = {
+  create: UserCreateWithoutHorsesInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  create: UserCreateWithoutNotificationsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutReviewsInput = {
+  create: UserCreateWithoutReviewsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateOrConnectWithoutUserFavoriteHorsesInput = {
+  create: UserCreateWithoutUserFavoriteHorsesInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserCreateWithoutNotificationsInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserCreateWithoutReviewsInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserCreateWithoutUserFavoriteHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserFavoriteHorses = {
+  __typename?: 'UserFavoriteHorses';
+  createdAt: Scalars['DateTime']['output'];
+  horse: Horse;
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type UserFavoriteHorsesCountAggregateOutputType = {
+  __typename?: 'UserFavoriteHorsesCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  horseId: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  userId: Scalars['Int']['output'];
+};
+
+export type UserFavoriteHorsesCountOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserFavoriteHorsesCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horse: HorseCreateNestedOneWithoutFavoriteByUsersInput;
+  id?: InputMaybe<Scalars['String']['input']>;
+  user: UserCreateNestedOneWithoutUserFavoriteHorsesInput;
+};
+
+export type UserFavoriteHorsesCreateManyHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type UserFavoriteHorsesCreateManyHorseInputEnvelope = {
+  data: UserFavoriteHorsesCreateManyHorseInput;
+};
+
+export type UserFavoriteHorsesCreateManyInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type UserFavoriteHorsesCreateManyUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserFavoriteHorsesCreateManyUserInputEnvelope = {
+  data: UserFavoriteHorsesCreateManyUserInput;
+};
+
+export type UserFavoriteHorsesCreateNestedManyWithoutHorseInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyHorseInputEnvelope>;
+};
+
+export type UserFavoriteHorsesCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyUserInputEnvelope>;
+};
+
+export type UserFavoriteHorsesCreateOrConnectWithoutHorseInput = {
+  create: UserFavoriteHorsesCreateWithoutHorseInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+export type UserFavoriteHorsesCreateOrConnectWithoutUserInput = {
+  create: UserFavoriteHorsesCreateWithoutUserInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+export type UserFavoriteHorsesCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  user: UserCreateNestedOneWithoutUserFavoriteHorsesInput;
+};
+
+export type UserFavoriteHorsesCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horse: HorseCreateNestedOneWithoutFavoriteByUsersInput;
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserFavoriteHorsesGroupByOutputType = {
+  __typename?: 'UserFavoriteHorsesGroupByOutputType';
+  _count?: Maybe<UserFavoriteHorsesCountAggregateOutputType>;
+  _max?: Maybe<UserFavoriteHorsesMaxAggregateOutputType>;
+  _min?: Maybe<UserFavoriteHorsesMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  horseId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type UserFavoriteHorsesListRelationFilter = {
+  every?: InputMaybe<UserFavoriteHorsesWhereInput>;
+  none?: InputMaybe<UserFavoriteHorsesWhereInput>;
+  some?: InputMaybe<UserFavoriteHorsesWhereInput>;
+};
+
+export type UserFavoriteHorsesMaxAggregateOutputType = {
+  __typename?: 'UserFavoriteHorsesMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserFavoriteHorsesMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserFavoriteHorsesMinAggregateOutputType = {
+  __typename?: 'UserFavoriteHorsesMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  horseId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserFavoriteHorsesMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserFavoriteHorsesOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type UserFavoriteHorsesOrderByWithAggregationInput = {
+  _count?: InputMaybe<UserFavoriteHorsesCountOrderByAggregateInput>;
+  _max?: InputMaybe<UserFavoriteHorsesMaxOrderByAggregateInput>;
+  _min?: InputMaybe<UserFavoriteHorsesMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserFavoriteHorsesOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  horse?: InputMaybe<HorseOrderByWithRelationInput>;
+  horseId?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export enum UserFavoriteHorsesScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  HorseId = 'horseId',
+  Id = 'id',
+  UserId = 'userId'
+}
+
+export type UserFavoriteHorsesScalarWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type UserFavoriteHorsesScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  horseId?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  userId?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type UserFavoriteHorsesUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyHorseInputEnvelope>;
+};
+
+export type UserFavoriteHorsesUncheckedCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyUserInputEnvelope>;
+};
+
+export type UserFavoriteHorsesUncheckedCreateWithoutHorseInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type UserFavoriteHorsesUncheckedCreateWithoutUserInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  horseId: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateManyWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyHorseInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateWithWhereUniqueWithoutHorseInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateManyWithWhereWithoutHorseInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpsertWithWhereUniqueWithoutHorseInput>>>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateManyWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUncheckedUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horseId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horse?: InputMaybe<HorseUpdateOneRequiredWithoutFavoriteByUsersNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutUserFavoriteHorsesNestedInput>;
+};
+
+export type UserFavoriteHorsesUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUpdateManyWithWhereWithoutHorseInput = {
+  data: UserFavoriteHorsesUpdateManyMutationInput;
+  where: UserFavoriteHorsesScalarWhereInput;
+};
+
+export type UserFavoriteHorsesUpdateManyWithWhereWithoutUserInput = {
+  data: UserFavoriteHorsesUpdateManyMutationInput;
+  where: UserFavoriteHorsesScalarWhereInput;
+};
+
+export type UserFavoriteHorsesUpdateManyWithoutHorseNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutHorseInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutHorseInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyHorseInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateWithWhereUniqueWithoutHorseInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateManyWithWhereWithoutHorseInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpsertWithWhereUniqueWithoutHorseInput>>>;
+};
+
+export type UserFavoriteHorsesUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserFavoriteHorsesCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type UserFavoriteHorsesUpdateWithWhereUniqueWithoutHorseInput = {
+  data: UserFavoriteHorsesUpdateWithoutHorseInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+export type UserFavoriteHorsesUpdateWithWhereUniqueWithoutUserInput = {
+  data: UserFavoriteHorsesUpdateWithoutUserInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+export type UserFavoriteHorsesUpdateWithoutHorseInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutUserFavoriteHorsesNestedInput>;
+};
+
+export type UserFavoriteHorsesUpdateWithoutUserInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  horse?: InputMaybe<HorseUpdateOneRequiredWithoutFavoriteByUsersNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserFavoriteHorsesUpsertWithWhereUniqueWithoutHorseInput = {
+  create: UserFavoriteHorsesCreateWithoutHorseInput;
+  update: UserFavoriteHorsesUpdateWithoutHorseInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+export type UserFavoriteHorsesUpsertWithWhereUniqueWithoutUserInput = {
+  create: UserFavoriteHorsesCreateWithoutUserInput;
+  update: UserFavoriteHorsesUpdateWithoutUserInput;
+  where: UserFavoriteHorsesWhereUniqueInput;
+};
+
+export type UserFavoriteHorsesUserIdHorseIdCompoundUniqueInput = {
+  horseId: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
+};
+
+export type UserFavoriteHorsesWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type UserFavoriteHorsesWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserFavoriteHorsesWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  horse?: InputMaybe<HorseScalarRelationFilter>;
+  horseId?: InputMaybe<StringFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+  userId_horseId?: InputMaybe<UserFavoriteHorsesUserIdHorseIdCompoundUniqueInput>;
+};
+
+export type UserGroupByOutputType = {
+  __typename?: 'UserGroupByOutputType';
+  _count?: Maybe<UserCountAggregateOutputType>;
+  _max?: Maybe<UserMaxAggregateOutputType>;
+  _min?: Maybe<UserMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  firebaseUid: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  role: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  verifiedSeller: Scalars['Boolean']['output'];
+  whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserMaxAggregateOutputType = {
+  __typename?: 'UserMaxAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  firebaseUid?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  verifiedSeller?: Maybe<Scalars['Boolean']['output']>;
+  whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserMaxOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  firebaseUid?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  phoneNumber?: InputMaybe<SortOrder>;
+  role?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  verifiedSeller?: InputMaybe<SortOrder>;
+  whatsAppNumber?: InputMaybe<SortOrder>;
+};
+
+export type UserMinAggregateOutputType = {
+  __typename?: 'UserMinAggregateOutputType';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  firebaseUid?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  verifiedSeller?: Maybe<Scalars['Boolean']['output']>;
+  whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserMinOrderByAggregateInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  firebaseUid?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  phoneNumber?: InputMaybe<SortOrder>;
+  role?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  verifiedSeller?: InputMaybe<SortOrder>;
+  whatsAppNumber?: InputMaybe<SortOrder>;
+};
+
+export type UserOrderByWithAggregationInput = {
+  _count?: InputMaybe<UserCountOrderByAggregateInput>;
+  _max?: InputMaybe<UserMaxOrderByAggregateInput>;
+  _min?: InputMaybe<UserMinOrderByAggregateInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrderInput>;
+  firebaseUid?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  phoneNumber?: InputMaybe<SortOrderInput>;
+  role?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  verifiedSeller?: InputMaybe<SortOrder>;
+  whatsAppNumber?: InputMaybe<SortOrderInput>;
+};
+
+export type UserOrderByWithRelationInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrderInput>;
+  firebaseUid?: InputMaybe<SortOrder>;
+  horses?: InputMaybe<HorseOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  notifications?: InputMaybe<NotificationOrderByRelationAggregateInput>;
+  phoneNumber?: InputMaybe<SortOrderInput>;
+  reviews?: InputMaybe<UserReviewOrderByRelationAggregateInput>;
+  role?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesOrderByRelationAggregateInput>;
+  verifiedSeller?: InputMaybe<SortOrder>;
+  whatsAppNumber?: InputMaybe<SortOrderInput>;
+};
+
+export type UserReview = {
+  __typename?: 'UserReview';
+  comment?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  rating: Scalars['Int']['output'];
+  reviewer: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  user: User;
+  userId: Scalars['String']['output'];
+};
+
+export type UserReviewAvgAggregateOutputType = {
+  __typename?: 'UserReviewAvgAggregateOutputType';
+  rating?: Maybe<Scalars['Float']['output']>;
+};
+
+export type UserReviewAvgOrderByAggregateInput = {
+  rating?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewCountAggregateOutputType = {
+  __typename?: 'UserReviewCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  comment: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  rating: Scalars['Int']['output'];
+  reviewer: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+  userId: Scalars['Int']['output'];
+};
+
+export type UserReviewCountOrderByAggregateInput = {
+  comment?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  reviewer?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewCreateInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating: Scalars['Int']['input'];
+  reviewer: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutReviewsInput;
+};
+
+export type UserReviewCreateManyInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating: Scalars['Int']['input'];
+  reviewer: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type UserReviewCreateManyUserInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating: Scalars['Int']['input'];
+  reviewer: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type UserReviewCreateManyUserInputEnvelope = {
+  data: UserReviewCreateManyUserInput;
+};
+
+export type UserReviewCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserReviewCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserReviewCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserReviewCreateManyUserInputEnvelope>;
+};
+
+export type UserReviewCreateOrConnectWithoutUserInput = {
+  create: UserReviewCreateWithoutUserInput;
+  where: UserReviewWhereUniqueInput;
+};
+
+export type UserReviewCreateWithoutUserInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating: Scalars['Int']['input'];
+  reviewer: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type UserReviewGroupByOutputType = {
+  __typename?: 'UserReviewGroupByOutputType';
+  _avg?: Maybe<UserReviewAvgAggregateOutputType>;
+  _count?: Maybe<UserReviewCountAggregateOutputType>;
+  _max?: Maybe<UserReviewMaxAggregateOutputType>;
+  _min?: Maybe<UserReviewMinAggregateOutputType>;
+  _sum?: Maybe<UserReviewSumAggregateOutputType>;
+  comment?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  rating: Scalars['Int']['output'];
+  reviewer: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type UserReviewListRelationFilter = {
+  every?: InputMaybe<UserReviewWhereInput>;
+  none?: InputMaybe<UserReviewWhereInput>;
+  some?: InputMaybe<UserReviewWhereInput>;
+};
+
+export type UserReviewMaxAggregateOutputType = {
+  __typename?: 'UserReviewMaxAggregateOutputType';
+  comment?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
+  reviewer?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserReviewMaxOrderByAggregateInput = {
+  comment?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  reviewer?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewMinAggregateOutputType = {
+  __typename?: 'UserReviewMinAggregateOutputType';
+  comment?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
+  reviewer?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userId?: Maybe<Scalars['String']['output']>;
+};
+
+export type UserReviewMinOrderByAggregateInput = {
+  comment?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  reviewer?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewOrderByWithAggregationInput = {
+  _avg?: InputMaybe<UserReviewAvgOrderByAggregateInput>;
+  _count?: InputMaybe<UserReviewCountOrderByAggregateInput>;
+  _max?: InputMaybe<UserReviewMaxOrderByAggregateInput>;
+  _min?: InputMaybe<UserReviewMinOrderByAggregateInput>;
+  _sum?: InputMaybe<UserReviewSumOrderByAggregateInput>;
+  comment?: InputMaybe<SortOrderInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  reviewer?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewOrderByWithRelationInput = {
+  comment?: InputMaybe<SortOrderInput>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  rating?: InputMaybe<SortOrder>;
+  reviewer?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export enum UserReviewScalarFieldEnum {
+  Comment = 'comment',
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Rating = 'rating',
+  Reviewer = 'reviewer',
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId'
+}
+
+export type UserReviewScalarWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereInput>>>;
+  comment?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<IntFilter>;
+  reviewer?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type UserReviewScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereWithAggregatesInput>>>;
+  comment?: InputMaybe<StringNullableWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  rating?: InputMaybe<IntWithAggregatesFilter>;
+  reviewer?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  userId?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type UserReviewSumAggregateOutputType = {
+  __typename?: 'UserReviewSumAggregateOutputType';
+  rating?: Maybe<Scalars['Int']['output']>;
+};
+
+export type UserReviewSumOrderByAggregateInput = {
+  rating?: InputMaybe<SortOrder>;
+};
+
+export type UserReviewUncheckedCreateInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating: Scalars['Int']['input'];
+  reviewer: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId: Scalars['String']['input'];
+};
+
+export type UserReviewUncheckedCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserReviewCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserReviewCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserReviewCreateManyUserInputEnvelope>;
+};
+
+export type UserReviewUncheckedCreateWithoutUserInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating: Scalars['Int']['input'];
+  reviewer: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type UserReviewUncheckedUpdateInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserReviewUncheckedUpdateManyInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userId?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserReviewUncheckedUpdateManyWithoutUserInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserReviewUncheckedUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserReviewCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserReviewCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserReviewCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<UserReviewUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<UserReviewUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<UserReviewUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type UserReviewUncheckedUpdateWithoutUserInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserReviewUpdateInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutReviewsNestedInput>;
+};
+
+export type UserReviewUpdateManyMutationInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserReviewUpdateManyWithWhereWithoutUserInput = {
+  data: UserReviewUpdateManyMutationInput;
+  where: UserReviewScalarWhereInput;
+};
+
+export type UserReviewUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<UserReviewCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserReviewCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<UserReviewCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<UserReviewScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<UserReviewWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<UserReviewUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<UserReviewUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<UserReviewUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type UserReviewUpdateWithWhereUniqueWithoutUserInput = {
+  data: UserReviewUpdateWithoutUserInput;
+  where: UserReviewWhereUniqueInput;
+};
+
+export type UserReviewUpdateWithoutUserInput = {
+  comment?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  rating?: InputMaybe<IntFieldUpdateOperationsInput>;
+  reviewer?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserReviewUpsertWithWhereUniqueWithoutUserInput = {
+  create: UserReviewCreateWithoutUserInput;
+  update: UserReviewUpdateWithoutUserInput;
+  where: UserReviewWhereUniqueInput;
+};
+
+export type UserReviewWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserReviewWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserReviewWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserReviewWhereInput>>>;
+  comment?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  rating?: InputMaybe<IntFilter>;
+  reviewer?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type UserReviewWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserReviewWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserReviewWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserReviewWhereInput>>>;
+  comment?: InputMaybe<StringNullableFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  rating?: InputMaybe<IntFilter>;
+  reviewer?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export enum UserScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Email = 'email',
+  FirebaseUid = 'firebaseUid',
+  Id = 'id',
+  Name = 'name',
+  PhoneNumber = 'phoneNumber',
+  Role = 'role',
+  UpdatedAt = 'updatedAt',
+  VerifiedSeller = 'verifiedSeller',
+  WhatsAppNumber = 'whatsAppNumber'
+}
+
+export type UserScalarRelationFilter = {
+  is?: InputMaybe<UserWhereInput>;
+  isNot?: InputMaybe<UserWhereInput>;
+};
+
+export type UserScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserScalarWhereWithAggregatesInput>>>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  email?: InputMaybe<StringNullableWithAggregatesFilter>;
+  firebaseUid?: InputMaybe<StringWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  phoneNumber?: InputMaybe<StringNullableWithAggregatesFilter>;
+  role?: InputMaybe<StringWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  verifiedSeller?: InputMaybe<BoolWithAggregatesFilter>;
+  whatsAppNumber?: InputMaybe<StringNullableWithAggregatesFilter>;
+};
+
+export type UserUncheckedCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationUncheckedCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewUncheckedCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserUncheckedCreateWithoutHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationUncheckedCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewUncheckedCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewUncheckedCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserUncheckedCreateWithoutReviewsInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationUncheckedCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserUncheckedCreateWithoutUserFavoriteHorsesInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid: Scalars['String']['input'];
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationUncheckedCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewUncheckedCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserUncheckedUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUncheckedUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUncheckedUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUncheckedUpdateManyInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUncheckedUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUncheckedUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUncheckedUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUncheckedUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUncheckedUpdateWithoutReviewsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUncheckedUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUncheckedUpdateWithoutUserFavoriteHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUncheckedUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUncheckedUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateOneRequiredWithoutHorsesNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<UserCreateWithoutHorsesInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutHorsesInput>;
+  upsert?: InputMaybe<UserUpsertWithoutHorsesInput>;
+};
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutNotificationsInput>;
+  create?: InputMaybe<UserCreateWithoutNotificationsInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutNotificationsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutNotificationsInput>;
+};
+
+export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutReviewsInput>;
+  create?: InputMaybe<UserCreateWithoutReviewsInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutReviewsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutReviewsInput>;
+};
+
+export type UserUpdateOneRequiredWithoutUserFavoriteHorsesNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutUserFavoriteHorsesInput>;
+  create?: InputMaybe<UserCreateWithoutUserFavoriteHorsesInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutUserFavoriteHorsesInput>;
+  upsert?: InputMaybe<UserUpsertWithoutUserFavoriteHorsesInput>;
+};
+
+export type UserUpdateToOneWithWhereWithoutHorsesInput = {
+  data: UserUpdateWithoutHorsesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  data: UserUpdateWithoutNotificationsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+  data: UserUpdateWithoutReviewsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpdateToOneWithWhereWithoutUserFavoriteHorsesInput = {
+  data: UserUpdateWithoutUserFavoriteHorsesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpdateWithoutHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutNotificationsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutReviewsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutUserFavoriteHorsesInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  firebaseUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithoutHorsesInput = {
+  create: UserCreateWithoutHorsesInput;
+  update: UserUpdateWithoutHorsesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpsertWithoutNotificationsInput = {
+  create: UserCreateWithoutNotificationsInput;
+  update: UserUpdateWithoutNotificationsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpsertWithoutReviewsInput = {
+  create: UserCreateWithoutReviewsInput;
+  update: UserUpdateWithoutReviewsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpsertWithoutUserFavoriteHorsesInput = {
+  create: UserCreateWithoutUserFavoriteHorsesInput;
+  update: UserUpdateWithoutUserFavoriteHorsesInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  email?: InputMaybe<StringNullableFilter>;
+  firebaseUid?: InputMaybe<StringFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  notifications?: InputMaybe<NotificationListRelationFilter>;
+  phoneNumber?: InputMaybe<StringNullableFilter>;
+  reviews?: InputMaybe<UserReviewListRelationFilter>;
+  role?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesListRelationFilter>;
+  verifiedSeller?: InputMaybe<BoolFilter>;
+  whatsAppNumber?: InputMaybe<StringNullableFilter>;
+};
+
+export type UserWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firebaseUid?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<StringFilter>;
+  notifications?: InputMaybe<NotificationListRelationFilter>;
+  phoneNumber?: InputMaybe<StringNullableFilter>;
+  reviews?: InputMaybe<UserReviewListRelationFilter>;
+  role?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesListRelationFilter>;
+  verifiedSeller?: InputMaybe<BoolFilter>;
+  whatsAppNumber?: InputMaybe<StringNullableFilter>;
+};
+
+export type FindManyHorseCategoryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindManyHorseCategoryQuery = { __typename?: 'Query', findManyHorseCategory: Array<{ __typename?: 'HorseCategory', id: string, name: string, imageUrl: string }> };
+
+export type CreateOneHorseCategoryMutationVariables = Exact<{
+  data: HorseCategoryCreateInput;
+}>;
+
+
+export type CreateOneHorseCategoryMutation = { __typename?: 'Mutation', createOneHorseCategory: { __typename?: 'HorseCategory', id: string, name: string, imageUrl: string } };
+
+export type DeleteOneHorseCategoryMutationVariables = Exact<{
+  where: HorseCategoryWhereUniqueInput;
+}>;
+
+
+export type DeleteOneHorseCategoryMutation = { __typename?: 'Mutation', deleteOneHorseCategory?: { __typename?: 'HorseCategory', id: string } | null };
+
+export type FindManyHorseGenderQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindManyHorseGenderQuery = { __typename?: 'Query', findManyHorseGender: Array<{ __typename?: 'HorseGender', id: string, name: string }> };
+
+export type CreateOneHorseGenderMutationVariables = Exact<{
+  data: HorseGenderCreateInput;
+}>;
+
+
+export type CreateOneHorseGenderMutation = { __typename?: 'Mutation', createOneHorseGender: { __typename?: 'HorseGender', id: string, name: string } };
+
+export type DeleteOneHorseGenderMutationVariables = Exact<{
+  where: HorseGenderWhereUniqueInput;
+}>;
+
+
+export type DeleteOneHorseGenderMutation = { __typename?: 'Mutation', deleteOneHorseGender?: { __typename?: 'HorseGender', id: string } | null };
+
+export type FindManyHorseDisciplineQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindManyHorseDisciplineQuery = { __typename?: 'Query', findManyHorseDiscipline: Array<{ __typename?: 'HorseDiscipline', id: string, name: string }> };
+
+export type CreateOneHorseDisciplineMutationVariables = Exact<{
+  data: HorseDisciplineCreateInput;
+}>;
+
+
+export type CreateOneHorseDisciplineMutation = { __typename?: 'Mutation', createOneHorseDiscipline: { __typename?: 'HorseDiscipline', id: string, name: string } };
+
+export type DeleteOneHorseDisciplineMutationVariables = Exact<{
+  where: HorseDisciplineWhereUniqueInput;
+}>;
+
+
+export type DeleteOneHorseDisciplineMutation = { __typename?: 'Mutation', deleteOneHorseDiscipline?: { __typename?: 'HorseDiscipline', id: string } | null };
+
+export type CreateOneHorseMutationVariables = Exact<{
+  data: HorseCreateInput;
+}>;
+
+
+export type CreateOneHorseMutation = { __typename?: 'Mutation', createOneHorse: { __typename?: 'Horse', id: string, name: string } };
+
+
+export const FindManyHorseCategoryDocument = gql`
+    query findManyHorseCategory {
+  findManyHorseCategory {
+    id
+    name
+    imageUrl
+  }
+}
+    `;
+export const CreateOneHorseCategoryDocument = gql`
+    mutation createOneHorseCategory($data: HorseCategoryCreateInput!) {
+  createOneHorseCategory(data: $data) {
+    id
+    name
+    imageUrl
+  }
+}
+    `;
+export const DeleteOneHorseCategoryDocument = gql`
+    mutation deleteOneHorseCategory($where: HorseCategoryWhereUniqueInput!) {
+  deleteOneHorseCategory(where: $where) {
+    id
+  }
+}
+    `;
+export const FindManyHorseGenderDocument = gql`
+    query findManyHorseGender {
+  findManyHorseGender {
+    id
+    name
+  }
+}
+    `;
+export const CreateOneHorseGenderDocument = gql`
+    mutation createOneHorseGender($data: HorseGenderCreateInput!) {
+  createOneHorseGender(data: $data) {
+    id
+    name
+  }
+}
+    `;
+export const DeleteOneHorseGenderDocument = gql`
+    mutation deleteOneHorseGender($where: HorseGenderWhereUniqueInput!) {
+  deleteOneHorseGender(where: $where) {
+    id
+  }
+}
+    `;
+export const FindManyHorseDisciplineDocument = gql`
+    query findManyHorseDiscipline {
+  findManyHorseDiscipline {
+    id
+    name
+  }
+}
+    `;
+export const CreateOneHorseDisciplineDocument = gql`
+    mutation createOneHorseDiscipline($data: HorseDisciplineCreateInput!) {
+  createOneHorseDiscipline(data: $data) {
+    id
+    name
+  }
+}
+    `;
+export const DeleteOneHorseDisciplineDocument = gql`
+    mutation deleteOneHorseDiscipline($where: HorseDisciplineWhereUniqueInput!) {
+  deleteOneHorseDiscipline(where: $where) {
+    id
+  }
+}
+    `;
+export const CreateOneHorseDocument = gql`
+    mutation createOneHorse($data: HorseCreateInput!) {
+  createOneHorse(data: $data) {
+    id
+    name
+  }
+}
+    `;
+
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
+
+
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
+
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+  return {
+    findManyHorseCategory(variables?: FindManyHorseCategoryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseCategoryQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseCategoryQuery>({ document: FindManyHorseCategoryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseCategory', 'query', variables);
+    },
+    createOneHorseCategory(variables: CreateOneHorseCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseCategoryMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseCategoryMutation>({ document: CreateOneHorseCategoryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorseCategory', 'mutation', variables);
+    },
+    deleteOneHorseCategory(variables: DeleteOneHorseCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<DeleteOneHorseCategoryMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteOneHorseCategoryMutation>({ document: DeleteOneHorseCategoryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'deleteOneHorseCategory', 'mutation', variables);
+    },
+    findManyHorseGender(variables?: FindManyHorseGenderQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseGenderQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseGenderQuery>({ document: FindManyHorseGenderDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseGender', 'query', variables);
+    },
+    createOneHorseGender(variables: CreateOneHorseGenderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseGenderMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseGenderMutation>({ document: CreateOneHorseGenderDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorseGender', 'mutation', variables);
+    },
+    deleteOneHorseGender(variables: DeleteOneHorseGenderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<DeleteOneHorseGenderMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteOneHorseGenderMutation>({ document: DeleteOneHorseGenderDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'deleteOneHorseGender', 'mutation', variables);
+    },
+    findManyHorseDiscipline(variables?: FindManyHorseDisciplineQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseDisciplineQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseDisciplineQuery>({ document: FindManyHorseDisciplineDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseDiscipline', 'query', variables);
+    },
+    createOneHorseDiscipline(variables: CreateOneHorseDisciplineMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseDisciplineMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseDisciplineMutation>({ document: CreateOneHorseDisciplineDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorseDiscipline', 'mutation', variables);
+    },
+    deleteOneHorseDiscipline(variables: DeleteOneHorseDisciplineMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<DeleteOneHorseDisciplineMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteOneHorseDisciplineMutation>({ document: DeleteOneHorseDisciplineDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'deleteOneHorseDiscipline', 'mutation', variables);
+    },
+    createOneHorse(variables: CreateOneHorseMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseMutation>({ document: CreateOneHorseDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorse', 'mutation', variables);
+    }
+  };
+}
+export type Sdk = ReturnType<typeof getSdk>;

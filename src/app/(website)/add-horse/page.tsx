@@ -1,30 +1,33 @@
 'use client';
 
-import Container from "@/components/Container";
-import SelectCategory from "./steps/SelectCategory";
-import HorseDetail from "./steps/HorseDetail";
-import Files from "./steps/Files";
-
-import { z } from "zod";
 import { useState, useRef } from "react";
 import { LuChevronRight, LuChevronLeft } from "react-icons/lu";
 import { motion, AnimatePresence } from "motion/react";
 import { useForm, FormProvider } from "react-hook-form";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import Container from "@/components/container";
+import { Button } from '@/components/ui/button'
+import SelectCategory from "./steps/select-category";
+import HorseDetail from "./steps/horse-detail";
+import Files from "./steps/files";
+import { graphql } from '@/lib/graphql'
+
+import { toast } from 'sonner'
+
 
 const schema = z.object({
     category: z.string().min(1, "Please select a category"),
     name: z.string().min(2, "Horse name is required"),
     pedigree: z.string().optional(),
     age: z.string().min(1, "Age is required"),
-    sex: z.string().min(1, "Sex is required"),
+    gender: z.string().min(1, "Gender is required"),
     height: z.string().min(1, "Height is required"),
     discipline: z.string().min(1, "Discipline is required"),
     location: z.string().min(1, "Location is required"),
-    priceRange: z.string().min(1, "Price range is required"),
+    price: z.string().min(1, "Price range is required"),
     description: z.string().optional(),
-    veterinaryDocuments: z.boolean().optional(),
-    xrayResults: z.boolean().optional(),
     photos: z.any().optional(),
     video: z.string().optional(),
 });
@@ -33,20 +36,14 @@ type FormData = z.infer<typeof schema>;
 
 function StepTimeLine({ step }: { step: number }) {
     return (
-        <div className="flex justify-center items-center gap-3 text-zinc-600 pt-10 pb-5">
+        <div className="flex justify-center items-center gap-3 text-zinc-600 pt-10 pb-2">
             {Array.from({ length: 3 }).map((_, index) => (
                 <div key={index} className="flex items-center gap-3">
-                    <div
-                        className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= index + 1 ? "font-bold bg-primary text-white" : "bg-zinc-200"
-                            }`}
-                    >
+                    <div className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= index + 1 ? "font-bold bg-primary text-white" : "bg-zinc-200"}`}>
                         {index + 1}
                     </div>
                     {index !== 2 && (
-                        <div
-                            className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > index ? "bg-primary" : "bg-zinc-200"
-                                }`}
-                        />
+                        <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > index ? "bg-primary" : "bg-zinc-200"}`} />
                     )}
                 </div>
             ))}
@@ -54,37 +51,24 @@ function StepTimeLine({ step }: { step: number }) {
     );
 }
 
-function StepController({
-    step,
-    previousStep,
-    handleNext,
-    isLastStep,
-}: {
+export interface StepControllerProps {
     step: number;
     previousStep: () => void;
     handleNext: () => void;
-    isLastStep: boolean;
-}) {
+    isLastStep: boolean
+}
+
+function StepController({ step, previousStep, handleNext, isLastStep }: StepControllerProps) {
     return (
         <div className="flex justify-between mb-20 mt-10">
-            <button
-                type="button"
-                onClick={previousStep}
-                disabled={step === 1}
-                className="p-2.5 cursor-pointer px-6 bg-transparent border border-zinc-300 hover:bg-white text-zinc-600 rounded-md flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+            <Button onClick={previousStep} type="button" variant='outline' size="lg" disabled={step === 1}>
                 <LuChevronLeft size={18} />
                 Back
-            </button>
-
-            <button
-                type="button"
-                onClick={handleNext}
-                className="p-2.5 cursor-pointer px-6 bg-primary text-white rounded-md flex items-center gap-1"
-            >
+            </Button>
+            <Button size="lg" onClick={handleNext}>
                 {isLastStep ? "Submit" : "Next"}
                 {!isLastStep && <LuChevronRight size={18} />}
-            </button>
+            </Button>
         </div>
     );
 }
@@ -101,28 +85,26 @@ export default function AddHorse() {
             name: "",
             pedigree: "",
             age: "",
-            sex: "",
+            gender: "",
             height: "",
             discipline: "",
             location: "",
-            priceRange: "",
+            price: "",
             description: "",
-            veterinaryDocuments: false,
-            xrayResults: false,
-            photos: undefined,
+            photos: [],
             video: "",
         },
     });
 
-    // fields to validate per step
     const stepFields: Record<number, (keyof FormData)[]> = {
         1: ["category"],
-        2: ["name", "age", "sex", "height", "discipline", "location", "priceRange"],
-        3: ["photos"], // final step might have optional requirements; adjust as needed
+        2: ["name", "pedigree", "age", "gender", "height", "discipline", "location", "price", "description"],
+        3: ["photos", "video"], // final step might have optional requirements; adjust as needed
     };
 
     async function handleNext() {
         console.log('handle next')
+        toast("Hello, World!")
         if (currentStep < 3) {
             const fields = stepFields[currentStep] ?? [];
             const valid = fields.length
@@ -148,6 +130,7 @@ export default function AddHorse() {
     }
 
     function previousStep() {
+        toast("Hello, World! 2")
         if (currentStep > 1) {
             direction.current = -1;
             setCurrentStep((s) => s - 1);
@@ -155,9 +138,26 @@ export default function AddHorse() {
     }
 
     function onSubmit(data: FormData) {
-        // final submission
         console.log("Form submitted:", data);
-        // proceed with API call or further action
+        // upload photos and get their ids
+        // upload the PDFs and get their ids
+        // create the item
+        graphql.createOneHorse({
+            data: {
+                ...data,
+                user: {},
+                age: Number(data.age),
+                description: data.description || "",
+                height: Number(data.height),
+                location: data.location,
+                name: data.name,
+                price: Number(data.price),
+                xrayResults: { connect: { id: "" } },
+                category: { connect: { id: data.category } },
+                gender: { connect: { id: data.gender } },
+                discipline: { connect: { id: data.discipline } }
+            }
+        })
     }
 
     const stepTitle =
@@ -169,7 +169,7 @@ export default function AddHorse() {
                 <form onSubmit={(e) => e.preventDefault()}>
                     <StepTimeLine step={currentStep} />
 
-                    <div className="text-center text-zinc-600">
+                    <div className="text-center text-neutral-600">
                         <h2 className="text-center text-2xl font-bold text-primary">
                             Step {currentStep} of 3 - {stepTitle}
                         </h2>
@@ -194,12 +194,7 @@ export default function AddHorse() {
                         </motion.div>
                     </AnimatePresence>
 
-                    <StepController
-                        previousStep={previousStep}
-                        handleNext={handleNext}
-                        step={currentStep}
-                        isLastStep={currentStep === 3}
-                    />
+                    <StepController previousStep={previousStep} handleNext={handleNext} step={currentStep} isLastStep={currentStep === 3} />
                 </form>
             </FormProvider>
         </Container>

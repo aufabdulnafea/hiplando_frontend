@@ -1,0 +1,69 @@
+query findManyHorseCategory {
+  findManyHorseCategory {
+    id
+    name
+    imageUrl
+  }
+}
+
+mutation createOneHorseCategory($data: HorseCategoryCreateInput!) {
+  createOneHorseCategory(data: $data) {
+    id
+    name
+    imageUrl
+  }
+}
+
+mutation deleteOneHorseCategory($where: HorseCategoryWhereUniqueInput!) {
+  deleteOneHorseCategory(where: $where) {
+    id
+  }
+}
+
+query findManyHorseGender {
+  findManyHorseGender {
+    id
+    name
+  }
+}
+
+mutation createOneHorseGender($data: HorseGenderCreateInput!) {
+  createOneHorseGender(data: $data) {
+    id
+    name
+  }
+}
+
+mutation deleteOneHorseGender($where: HorseGenderWhereUniqueInput!) {
+  deleteOneHorseGender(where: $where) {
+    id
+  }
+}
+
+query findManyHorseDiscipline {
+  findManyHorseDiscipline {
+    id
+    name
+  }
+}
+
+mutation createOneHorseDiscipline($data: HorseDisciplineCreateInput!) {
+  createOneHorseDiscipline(data: $data) {
+    id
+    name
+  }
+}
+
+mutation deleteOneHorseDiscipline($where: HorseDisciplineWhereUniqueInput!) {
+  deleteOneHorseDiscipline(where: $where) {
+    id
+  }
+}
+
+
+mutation createOneHorse($data: HorseCreateInput!) {
+  createOneHorse(data: $data) {
+    id
+    name
+  }
+}

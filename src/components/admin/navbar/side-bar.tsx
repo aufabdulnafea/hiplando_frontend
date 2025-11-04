@@ -1,15 +1,14 @@
 "use client"
 
-// import * as React from "react"
 import {
     IconChartBar,
     IconDashboard,
     IconInnerShadowTop,
     IconUsers,
     IconHorse,
-    IconDeviceMobile,
     IconGavel,
-    IconAdCircle
+    IconAdCircle,
+    IconPhoto
 } from "@tabler/icons-react"
 
 import { NavMain } from "./nav-main"
@@ -53,6 +52,11 @@ const data = {
             icon: IconGavel
         },
         {
+            title: "Media",
+            url: "/admin/media",
+            icon: IconPhoto
+        },
+        {
             title: "Marketing",
             url: "/admin/marketing",
             icon: IconAdCircle
@@ -61,12 +65,7 @@ const data = {
             title: "Analytics",
             url: "/admin/analytics",
             icon: IconChartBar,
-        },
-        {
-            title: "Expo",
-            url: "/admin/expo",
-            icon: IconDeviceMobile,
-        },
+        }
     ]
 }
 

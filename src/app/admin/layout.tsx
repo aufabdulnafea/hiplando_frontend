@@ -1,25 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { AuthProvider } from "@/context/AuthContext";
+
 import { AppSidebar } from "@/components/admin/navbar/side-bar";
-import { ThemeProvider } from "@/components/theme-provider"
+
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import { SiteHeader } from '@/components/admin/site-header'
 
-import "../globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Hiplando",
@@ -32,45 +20,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
-      >
-        <ThemeProvider
-          attribute='class'
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
 
-          <AuthProvider>
-            <SidebarProvider
-              style={
-                {
-                  "--sidebar-width": "calc(var(--spacing) * 72)",
-                  "--header-height": "calc(var(--spacing) * 12)",
-                } as React.CSSProperties
-              }
-            >
 
-              <div className="w-screen h-screen text-foreground flex">
-                <AppSidebar />
-                <SidebarInset>
-                  <SiteHeader />
-                  <div className="flex flex-1 flex-col">
-                    <div className="@container/main flex flex-1 flex-col gap-2">
-                      <div className="px-4 lg:px-6 flex flex-1">
-                        {children}
-                      </div>
-                    </div>
-                  </div>
-                </SidebarInset>
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+
+      <div className="w-screen h-screen text-foreground flex">
+        <AppSidebar />
+        <SidebarInset>
+          <SiteHeader />
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              <div className="px-4 lg:px-6 flex flex-1">
+                {children}
               </div>
-            </SidebarProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+            </div>
+          </div>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
+
+
   );
 }
 

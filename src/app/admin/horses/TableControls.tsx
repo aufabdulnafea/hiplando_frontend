@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import AddItemModal from "./ADdItemModal";
 import { useState } from "react";
+import { Plus } from "lucide-react";
 
 export interface TableControlsProps {
     onSubmit: (formData: Record<string, string>) => void;
@@ -25,7 +26,9 @@ export default function TableControls(props: TableControlsProps) {
         <div>
             <div className="flex items-center justify-between">
                 <div className="font-bold text-neutral-300">{lable}</div>
-                <Button size={'sm'} className="text-lg" onClick={() => setIsOpen(true)}>+</Button>
+                <Button size='icon-sm' variant='outline' onClick={() => setIsOpen(true)}>
+                    <Plus />
+                </Button>
             </div>
             <AddItemModal
                 fields={fields}
