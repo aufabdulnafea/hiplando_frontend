@@ -25,7 +25,7 @@ export default function TableControls(props: TableControlsProps) {
     return (
         <div>
             <div className="flex items-center justify-between">
-                <div className="font-bold text-neutral-300">{lable}</div>
+                <div className="font-bold">{lable}</div>
                 <Button size='icon-sm' variant='outline' onClick={() => setIsOpen(true)}>
                     <Plus />
                 </Button>

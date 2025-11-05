@@ -13,8 +13,7 @@ import SelectCategory from "./steps/select-category";
 import HorseDetail from "./steps/horse-detail";
 import Files from "./steps/files";
 import { graphql } from '@/lib/graphql'
-
-import { toast } from 'sonner'
+import { auth, storage } from '@/lib/firebase'
 
 
 const schema = z.object({
@@ -28,8 +27,12 @@ const schema = z.object({
     location: z.string().min(1, "Location is required"),
     price: z.string().min(1, "Price range is required"),
     description: z.string().optional(),
-    photos: z.any().optional(),
+    photos: z
+        .any()
+        .refine((files) => files?.length >= 1 && files?.length <= 3, "Upload 1–3 photos"),
     video: z.string().optional(),
+    xray: z.any().optional(),
+    veterinary: z.any().optional()
 });
 
 type FormData = z.infer<typeof schema>;
@@ -39,11 +42,12 @@ function StepTimeLine({ step }: { step: number }) {
         <div className="flex justify-center items-center gap-3 text-zinc-600 pt-10 pb-2">
             {Array.from({ length: 3 }).map((_, index) => (
                 <div key={index} className="flex items-center gap-3">
-                    <div className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= index + 1 ? "font-bold bg-primary text-white" : "bg-zinc-200"}`}>
+                    <div className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= index + 1 ? "font-bold bg-primary text-white" : "bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100"}`}>
                         {index + 1}
                     </div>
                     {index !== 2 && (
-                        <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > index ? "bg-primary" : "bg-zinc-200"}`} />
+                        <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > index ? "bg-primary" : "bg-neutral-200 dark:bg-neutral-700"}`} />
+
                     )}
                 </div>
             ))}
@@ -93,6 +97,8 @@ export default function AddHorse() {
             description: "",
             photos: [],
             video: "",
+            veterinary: null,
+            xray: null
         },
     });
 
@@ -103,8 +109,6 @@ export default function AddHorse() {
     };
 
     async function handleNext() {
-        console.log('handle next')
-        toast("Hello, World!")
         if (currentStep < 3) {
             const fields = stepFields[currentStep] ?? [];
             const valid = fields.length
@@ -130,34 +134,41 @@ export default function AddHorse() {
     }
 
     function previousStep() {
-        toast("Hello, World! 2")
         if (currentStep > 1) {
             direction.current = -1;
             setCurrentStep((s) => s - 1);
         }
     }
 
-    function onSubmit(data: FormData) {
+    async function onSubmit(data: FormData) {
         console.log("Form submitted:", data);
-        // upload photos and get their ids
-        // upload the PDFs and get their ids
-        // create the item
-        graphql.createOneHorse({
-            data: {
-                ...data,
-                user: {},
-                age: Number(data.age),
-                description: data.description || "",
-                height: Number(data.height),
-                location: data.location,
-                name: data.name,
-                price: Number(data.price),
-                xrayResults: { connect: { id: "" } },
-                category: { connect: { id: data.category } },
-                gender: { connect: { id: data.gender } },
-                discipline: { connect: { id: data.discipline } }
-            }
-        })
+        const user = auth.currentUser
+        console.log(user)
+        try {
+            const horse = await graphql.createOneHorse({
+                data: {
+                    // ...data,
+                    user: {
+                        connect: {
+                            uid: user?.uid
+                        }
+                    },
+                    age: Number(data.age),
+                    description: data.description || "",
+                    height: Number(data.height),
+                    location: data.location,
+                    name: data.name,
+                    price: Number(data.price),
+                    // xrayResults: { connect: { id: "" } },
+                    category: { connect: { id: data.category } },
+                    gender: { connect: { id: data.gender } },
+                    discipline: { connect: { id: data.discipline } }
+                }
+            })
+            console.log(horse)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const stepTitle =

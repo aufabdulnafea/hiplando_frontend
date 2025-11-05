@@ -49,7 +49,7 @@ export default function SelectCategory() {
               "hover:shadow-sm transition-colors ease-in-out duration-150",
               selected === cat.id
                 ? "border-yellow-300 bg-yellow-50 dark:bg-yellow-300/5 dark:border-yellow-300/30 text-primary shadow-md"
-                : "border-zinc-300 hover:bg-zinc-100"
+                : "border-neutral-300 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900"
             )}
           >
             <RadioGroupItem

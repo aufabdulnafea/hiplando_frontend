@@ -14,10 +14,10 @@ export default function TabsComponent(props: { tabs: Tab[] }) {
             className="w-full"
             defaultValue={props.tabs[0].label.split(" ").join("-")}
         >
-            <TabsList className="w-full rounded-full h-14 p-1.5 gap-1">
+            <TabsList className="w-full rounded-full h-12 p-1 gap-1 bg-neutral-200/60 dark:bg-neutral-800">
                 {props.tabs.map(el => (
                     <TabsTrigger
-                        className="rounded-full"
+                        className="rounded-full aria-selected:font-bold data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-700"
                         key={el.label.split(" ").join("-")}
                         value={el.label.split(" ").join("-")}
                     >

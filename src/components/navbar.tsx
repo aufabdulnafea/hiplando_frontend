@@ -16,7 +16,7 @@ export default function Navbar() {
             <Container>
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="text-2xl font-bold text-primary">
+                    <Link href="/" className="text-2xl font-extrabold text-primary">
                         Hiplando
                     </Link>
 
@@ -48,7 +48,7 @@ export default function Navbar() {
                                 <NotificationsDropDown />
                             </div>
                         ) : (
-                            <Button asChild className="rounded-full">
+                            <Button asChild>
                                 <Link href="/auth">Login</Link>
                             </Button>
                         )}

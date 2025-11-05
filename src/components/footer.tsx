@@ -41,7 +41,7 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        <Separator />
+                        <Separator className="bg-neutral-950/20" />
 
                         {/* Bottom Section */}
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4">

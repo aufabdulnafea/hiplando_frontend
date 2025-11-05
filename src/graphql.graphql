@@ -60,10 +60,37 @@ mutation deleteOneHorseDiscipline($where: HorseDisciplineWhereUniqueInput!) {
   }
 }
 
-
 mutation createOneHorse($data: HorseCreateInput!) {
   createOneHorse(data: $data) {
     id
     name
+  }
+}
+
+query findManyHorse(
+  $where: HorseWhereInput
+  $orderBy: [HorseOrderByWithRelationInput]
+  $cursor: HorseWhereUniqueInput
+  $take: Int
+  $skip: Int
+) {
+  findManyHorse(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    id
+    name
+    status
+    age
+    height
+    price
+    location
+    user { name }
+    category { name }
+    discipline { name }
+    gender { name }
   }
 }

@@ -1,83 +1,83 @@
 'use client';
 import { FormEvent, useState } from "react";
-// import TextInput from "../formElements/TextInput";
-import { EnvelopeIcon, LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
-// import { AppleButton, FacebookButton, GoogleButton, PrimaryButton } from "../formElements/Button";
+// import { UserIcon } from "@heroicons/react/24/outline";
+import { User } from 'lucide-react'
+import PasswordInput from '@/components/shadcn-studio/input/input-26'
+import InputWithIcon from '@/components/shadcn-studio/input/input-14'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
 export default function RegisterForm() {
+    const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
 
     async function register(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
         try {
-            await createUserWithEmailAndPassword(auth, email, password)
+            // await createUserWithEmailAndPassword(auth, email, password)
+
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Get Firebase ID token
+            const token = await user.getIdToken();
+
+            // Send token to your Express backend
+            const response = await fetch("http://localhost:4000/api/v1/users/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ full_name: fullName }),
+            });
+
+            console.log(response)
+
         } catch (err) {
             console.log(err)
         }
     }
 
     return (
-        <form onSubmit={register} className="flex flex-col gap-3">
-            <Input
-                id="full-name"
+        <form onSubmit={register} className="flex flex-col gap-2">
+            <InputWithIcon
                 type="text"
-                placeholder="Full Name"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                icon={<UserIcon className="h-5" />}
+                value={fullName}
+                onChange={e => setFullName(e.target.value)}
+                icon={<User className="size-4" />}
+                placeholder="Full name"
             />
-            <Input
-                id="email"
+            <InputWithIcon
                 type="email"
-                placeholder="E-mail"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                icon={<EnvelopeIcon className="h-5" />}
+                placeholder="Email"
             />
-            <Input
-                id="password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                icon={<LockClosedIcon className="h-5" />}
-            />
-            <Input
-                id="confirm-password"
-                type="password"
-                placeholder="Confirm Password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                icon={<LockClosedIcon className="h-5" />}
-            />
-            <div className="pt-3">
-                {/* <PrimaryButton type="submit">Login</PrimaryButton> */}
-                <Button type="submit" className="w-full rounded-full">Register</Button>
-            </div>
-            <div className="text-center text-primary">
-                <a href="">Forgot Password?</a>
-            </div>
-            <div className="flex items-center">
-                <div className="flex-grow border-t border-gray-300"></div>
-                <span className="mx-4 text-gray-500">Or continue with</span>
-                <div className="flex-grow border-t border-gray-300"></div>
+            <PasswordInput value={password} onChange={e => setPassword(e.target.value)} />
+            <PasswordInput value={passwordConfirm} onChange={e => setPasswordConfirm(e.target.value)} />
+            <Button size="lg" type="submit" className="w-full rounded-full">Register</Button>
+            <Button variant='link'>Forgot Password?</Button>
+
+            <div className="flex items-center mb-2">
+                <div className="flex-grow border-b border-neutral-300 dark:border-neutral-800"></div>
+                <span className="mx-4 text-neutral-500 text-sm dark:text-neutral-500">Or continue with</span>
+                <div className="flex-grow border-t border-neutral-300 dark:border-neutral-800"></div>
             </div>
 
-            <div className="flex flex-col gap-2">
-                <Button type="submit" className="w-full rounded-full bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300">
-                    <FaGoogle className="mr-2 text-red-600 h-5" /> Google Login
+            <div className="flex gap-2 pt-4">
+                <Button size='lg' className="flex-1 rounded-full bg-white hover:bg-zinc-100 text-zinc-700 border border-zinc-300">
+                    <FaGoogle className="mr-2 text-red-600 h-5" /> Google
                 </Button>
-                <Button type="submit" className="w-full rounded-full bg-black hover:bg-zinc-700 text-white">
-                    <FaApple className="mr-2 h-5" /> Apple Login
+                <Button size='lg' className="flex-1 rounded-full bg-black hover:bg-zinc-700 dark:border dark:border-neutral-800 text-white">
+                    <FaApple className="mr-2 h-5" /> Apple
                 </Button>
-                <Button type="submit" className="w-full rounded-full bg-[#2563eb] hover:bg-blue-500 text-white">
-                    <FaFacebookF className="mr-2 h-5" /> Facebook Login
+                <Button size='lg' className="flex-1 rounded-full bg-[#2563eb] hover:bg-blue-500 text-white">
+                    <FaFacebookF className="h-5" />Facebook
                 </Button>
             </div>
         </form>

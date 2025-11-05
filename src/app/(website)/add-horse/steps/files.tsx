@@ -1,30 +1,23 @@
 'use client';
-import { useFormContext } from "react-hook-form";
+
 import { useEffect, useState } from "react";
-import { Input } from '@/components/ui/input'
-import {
-  FileUpload,
-  FileUploadDropzone,
-  FileUploadItem,
-  FileUploadItemDelete,
-  FileUploadItemMetadata,
-  FileUploadItemPreview,
-  FileUploadList,
-  FileUploadTrigger,
-} from "@/components/ui/file-upload";
-import { Button } from "@/components/ui/button"
+import { useFormContext } from "react-hook-form";
 import { Upload, X } from "lucide-react";
-import { Label } from "@/components/ui/label";
+import { Input } from '@/components/ui/input'
+import { Button } from "@/components/ui/button"
+import { FileUpload, FileUploadDropzone, FileUploadItem, FileUploadItemDelete, FileUploadItemMetadata, FileUploadItemPreview, FileUploadList } from "@/components/ui/file-upload";
 
 
 export default function Files() {
   const { register, watch, setValue } = useFormContext();
-  const photos = watch("photos", []);
+  const photos = watch<"photos">("photos", []) as File[];
+  watch("xray", null);
+  watch("veterinary", null)
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
   useEffect(() => {
     if (photos && photos.length > 0) {
-      const filesArray = Array.from(photos as FileList);
+      const filesArray = Array.from(photos as File[]);
       const urls = filesArray.map((file) => URL.createObjectURL(file));
       setPreviewUrls(urls);
       return () => {
@@ -55,6 +48,17 @@ export default function Files() {
           className="w-full"
           multiple
         >
+          {photos.map((file) => (
+            <FileUploadItem key={file.name} value={file}>
+              <FileUploadItemPreview />
+              <FileUploadItemMetadata />
+              <FileUploadItemDelete asChild>
+                <Button variant="ghost" size="icon" className="size-7">
+                  <X />
+                </Button>
+              </FileUploadItemDelete>
+            </FileUploadItem>
+          ))}
           <FileUploadDropzone>
             <div className="flex flex-col items-center gap-1 py-4">
               <div className="flex items-center justify-center rounded-full border p-2.5">
@@ -67,17 +71,6 @@ export default function Files() {
             </div>
           </FileUploadDropzone>
           <FileUploadList>
-            {photos.map((file) => (
-              <FileUploadItem key={file.name} value={file}>
-                <FileUploadItemPreview />
-                <FileUploadItemMetadata />
-                <FileUploadItemDelete asChild>
-                  <Button variant="ghost" size="icon" className="size-7">
-                    <X />
-                  </Button>
-                </FileUploadItemDelete>
-              </FileUploadItem>
-            ))}
           </FileUploadList>
         </FileUpload>
 
@@ -102,10 +95,15 @@ export default function Files() {
           <h3 className="font-bold text-lg">
             X-Ray Results <span className="text-sm font-normal">(Optional)</span>
           </h3>
-          {/* <p className="text-sm text-neutral-500">X-Ray </p> */}
         </div>
         <div className="grid w-full items-center gap-3">
-          <Input id="picture" type="file" multiple={false} accept=".pdf,image/*" />
+          <Input
+            id="picture"
+            type="file"
+            multiple={false}
+            accept=".pdf,image/*"
+            onChange={el => setValue("xray", el)}
+          />
         </div>
       </div>
 
@@ -114,10 +112,15 @@ export default function Files() {
           <h3 className="font-bold text-lg">
             Veterinary Report <span className="text-sm font-normal">(Optional)</span>
           </h3>
-          {/* <p className="text-sm text-neutral-500"></p> */}
         </div>
         <div className="grid w-full items-center gap-3">
-          <Input id="picture" type="file" multiple={false} accept=".pdf,image/*" />
+          <Input
+            id="picture"
+            type="file"
+            multiple={false}
+            accept=".pdf,image/*"
+            onChange={el => setValue("veterinary", el)}
+          />
         </div>
       </div>
 
