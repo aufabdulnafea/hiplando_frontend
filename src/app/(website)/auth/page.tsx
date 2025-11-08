@@ -3,7 +3,7 @@
 import Container from "@/components/container";
 import LoginForm from "@/components/forms/login-form";
 import RegisterForm from "@/components/forms/register-form";
-import Tabs from "@/components/tabs";
+import { TabsComponent } from "@/components/tabs";
 // import { motion } from "motion/react";
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ export default function Login() {
                     <h2 className="text-3xl font-bold">Welcome back!</h2>
                     <p className="text-zinc-500">Sign in to continue your equestrian journey</p>
                 </div>
-                <Tabs tabs={[
+                <TabsComponent tabs={[
                     { label: 'Login', content: <LoginForm /> },
                     { label: 'Register', content: <RegisterForm /> },
                 ]} />

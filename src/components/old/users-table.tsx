@@ -2,20 +2,13 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useHorses } from "@/hooks/user-horses";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
+import { useUsers } from "@/hooks/use-users";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export function HorseTable() {
+export function UsersTable() {
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState<{
@@ -28,16 +21,15 @@ export function HorseTable() {
     const query = useQuery({
         queryKey: ["horses", page, search, sort],
         queryFn: () =>
-            useHorses({
+            useUsers({
                 page,
                 pageSize,
                 search,
                 sort,
-            }),
-        // keepPreviousData: true,
+            })
     });
 
-    const horses = query.data?.findManyHorse ?? [];
+    const horses = query.data?.findManyUser ?? [];
 
     const toggleSort = (field: string) => {
         setSort((prev) => {
@@ -47,9 +39,17 @@ export function HorseTable() {
         });
     };
 
+    const headers = [
+        { key: "name", label: "Name" },
+        { key: "email", label: "Email" },
+        { key: "phoneNumber", label: "Phone Number" },
+        { key: "whatsAppNumber", label: "WhatsApp Number" },
+        { key: "role", label: "Role" },
+        { key: "verifiedSeller", label: "Verified Seller" },
+    ]
+
     return (
         <div className="space-y-4">
-            {/* Search */}
             <Input
                 placeholder="Search horses..."
                 value={search}
@@ -65,14 +65,14 @@ export function HorseTable() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            {["name", "breed", "birthDate"].map((field) => (
+                            {headers.map((header) => (
                                 <TableHead
-                                    key={field}
-                                    onClick={() => toggleSort(field)}
+                                    key={header.key}
+                                    onClick={() => toggleSort(header.key)}
                                     className="cursor-pointer"
                                 >
-                                    {field}
-                                    {sort?.field === field &&
+                                    {header.label}
+                                    {sort?.field === header.key &&
                                         (sort.direction === "asc" ? " ▲" : " ▼")}
                                 </TableHead>
                             ))}
@@ -93,10 +93,13 @@ export function HorseTable() {
                             </TableRow>
                         ) : (
                             horses.map((h) => (
-                                <TableRow key={h.id}>
+                                <TableRow key={h.uid}>
                                     <TableCell>{h.name}</TableCell>
-                                    <TableCell>{h.name}</TableCell>
-                                    <TableCell>{h.name}</TableCell>
+                                    <TableCell>{h.email}</TableCell>
+                                    <TableCell>{h.phoneNumber}</TableCell>
+                                    <TableCell>{h.whatsAppNumber}</TableCell>
+                                    <TableCell>{h.role}</TableCell>
+                                    <TableCell>{h.verifiedSeller}</TableCell>
                                 </TableRow>
                             ))
                         )}

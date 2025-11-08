@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { graphql } from '@/lib/graphql'
+import { getGraphQLClient } from '@/lib/graphql'
 import { FindManyHorseDisciplineQuery } from "@/graphql/sdk"
 import TableControls from "./TableControls"
 
@@ -17,12 +17,12 @@ export default function HorseDisciplinesTable() {
   const [disciplines, setDisciplines] = useState<FindManyHorseDisciplineQuery['findManyHorseDiscipline']>([])
 
   useEffect(() => {
-    graphql.findManyHorseDiscipline().then(res => setDisciplines(res.findManyHorseDiscipline))
+    getGraphQLClient().then(client => client.findManyHorseDiscipline()).then(res => setDisciplines(res.findManyHorseDiscipline))
   }, [])
 
   const onSubmit = async (formData: Record<string, string>) => {
     try {
-      const category = await graphql.createOneHorseDiscipline({ data: { name: formData.name } })
+      const category = await (await getGraphQLClient()).createOneHorseDiscipline({ data: { name: formData.name } })
       if (category['createOneHorseDiscipline']) setDisciplines(prev => [...prev, category['createOneHorseDiscipline']])
     }
     catch (err) {

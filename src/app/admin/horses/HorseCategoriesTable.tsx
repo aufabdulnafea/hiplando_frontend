@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { graphql } from '@/lib/graphql'
+import { getGraphQLClient } from '@/lib/graphql'
 import { FindManyHorseCategoryQuery } from "@/graphql/sdk"
 import TableControls from "./TableControls"
 
@@ -17,12 +17,12 @@ export default function HorseCategoriesTable() {
   const [categories, setCategories] = useState<FindManyHorseCategoryQuery['findManyHorseCategory']>([])
 
   useEffect(() => {
-    graphql.findManyHorseCategory().then(res => setCategories(res.findManyHorseCategory))
+    getGraphQLClient().then(res => res.findManyHorseCategory()).then(res => setCategories(res.findManyHorseCategory))
   }, [])
 
   const onSubmit = async (formData: Record<string, string>) => {
     try {
-      const category = await graphql.createOneHorseCategory({ data: { name: formData.name, imageUrl: formData.imageUrl } })
+      const category = await (await getGraphQLClient()).createOneHorseCategory({ data: { name: formData.name, imageUrl: formData.imageUrl } })
       if (category['createOneHorseCategory']) setCategories(prev => [...prev, category['createOneHorseCategory']])
     }
     catch (err) {

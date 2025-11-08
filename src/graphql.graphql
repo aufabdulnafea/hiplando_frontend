@@ -88,9 +88,65 @@ query findManyHorse(
     height
     price
     location
-    user { name }
-    category { name }
-    discipline { name }
-    gender { name }
+    user {
+      name
+    }
+    category {
+      name
+    }
+    discipline {
+      name
+    }
+    gender {
+      name
+    }
+    createdAt
+    updatedAt
   }
+}
+
+query findManyHorseCount($where: HorseWhereInput) {
+  findManyHorseCount(where: $where)
+}
+
+query findManyUser(
+  $where: UserWhereInput
+  $orderBy: [UserOrderByWithRelationInput]
+  $cursor: UserWhereUniqueInput
+  $take: Int
+  $skip: Int
+) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    uid
+    name
+    phoneNumber
+    email
+    whatsAppNumber
+    verifiedSeller
+    role
+    createdAt
+    updatedAt
+    notifications {
+      id
+    }
+    horses {
+      id
+    }
+    reviews {
+      id
+    }
+    userFavoriteHorses {
+      id
+    }
+  }
+}
+
+query findManyUserCount($where: UserWhereInput) {
+  findManyUserCount(where: $where)
 }

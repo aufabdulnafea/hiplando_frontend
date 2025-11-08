@@ -7,7 +7,7 @@ import { LuTrophy } from "react-icons/lu"
 import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 import { FindManyHorseCategoryQuery } from "@/graphql/sdk"
-import { graphql } from '@/lib/graphql'
+import { getGraphQLClient } from '@/lib/graphql'
 
 // const categories = [
 //   "Show Jumpers",
@@ -30,7 +30,8 @@ export default function SelectCategory() {
   const selected = watch("category")
 
   useEffect(() => {
-    graphql.findManyHorseCategory().then(res => setCategories(res.findManyHorseCategory ?? []))
+    // graphql.findManyHorseCategory().then(res => setCategories(res.findManyHorseCategory ?? []))
+    getGraphQLClient().then(client => client.findManyHorseCategory()).then(res => setCategories(res.findManyHorseCategory))
   }, [])
 
   return (

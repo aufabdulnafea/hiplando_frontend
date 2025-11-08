@@ -1,12 +1,10 @@
-import { DataTableDemo } from '@/components/data-table'
+// import { DataTableDemo } from '@/components/data-table'
+// import { UsersTable } from '@/components/users-table'
 
 export default function AdminUsersPage() {
-    return (
-      <div className="flex-1 relative">
-        <div className="absolute inset-0 overflow-hidden flex">
-          <DataTableDemo />
-        </div>
-      </div>
-    )
-  }
-  
+  return (
+    <div className="max-w-screen overflow-hidden px-4 pt-4 flex flex-col gap-10">
+      {/* <UsersTable /> */}
+    </div>
+  )
+}

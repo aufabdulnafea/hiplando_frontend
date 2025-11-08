@@ -22,16 +22,18 @@ export function NavMain({
     }[]
 }) {
     const pathname = usePathname()
-    
+
     return (
         <SidebarGroup>
             <SidebarGroupContent className="flex flex-col gap-2">
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-
                             <Link href={item.url}>
-                                <SidebarMenuButton isActive={pathname === item.url} tooltip={item.title}>
+                                <SidebarMenuButton
+                                    isActive={pathname === item.url}
+                                    tooltip={item.title}
+                                >
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>
                                 </SidebarMenuButton>

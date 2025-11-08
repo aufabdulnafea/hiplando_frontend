@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FindManyHorseDisciplineQuery, FindManyHorseGenderQuery } from "@/graphql/sdk";
-import { graphql } from '@/lib/graphql'
+import { getGraphQLClient } from '@/lib/graphql'
 
 export default function HorseDetail() {
     const [genders, setGenders] = useState<FindManyHorseGenderQuery['findManyHorseGender']>([])
@@ -26,8 +26,12 @@ export default function HorseDetail() {
     // const xrayResults = watch('xrayResults')
 
     useEffect(() => {
-        graphql.findManyHorseGender().then(res => setGenders(res.findManyHorseGender))
-        graphql.findManyHorseDiscipline().then(res => setDisciplines(res.findManyHorseDiscipline))
+        // graphql.findManyHorseGender().then(res => setGenders(res.findManyHorseGender))
+        // graphql.findManyHorseDiscipline().then(res => setDisciplines(res.findManyHorseDiscipline))
+
+        getGraphQLClient().then(client => client.findManyHorseGender()).then(res => setGenders(res.findManyHorseGender))
+        getGraphQLClient().then(client => client.findManyHorseDiscipline()).then(res => setDisciplines(res.findManyHorseDiscipline))
+
     }, [])
 
     return (

@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { graphql } from '@/lib/graphql'
+import { getGraphQLClient } from '@/lib/graphql'
 import { FindManyHorseGenderQuery } from "@/graphql/sdk"
 import TableControls from "./TableControls"
 
@@ -17,12 +17,12 @@ export default function HorseGendersTable() {
     const [genders, setGenders] = useState<FindManyHorseGenderQuery['findManyHorseGender']>([])
 
     useEffect(() => {
-        graphql.findManyHorseGender().then(res => setGenders(res.findManyHorseGender))
+        getGraphQLClient().then(client => client.findManyHorseGender()).then(res => setGenders(res.findManyHorseGender))
     }, [])
 
     const onSubmit = async (formData: Record<string, string>) => {
         try {
-            const category = await graphql.createOneHorseGender({ data: { name: formData.name } })
+            const category = await (await getGraphQLClient()).createOneHorseGender({ data: { name: formData.name } })
             if (category['createOneHorseGender']) setGenders(prev => [...prev, category['createOneHorseGender']])
         }
         catch (err) {

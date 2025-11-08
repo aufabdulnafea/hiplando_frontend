@@ -1,35 +1,17 @@
 import type { Metadata } from "next";
 
 import { AppSidebar } from "@/components/admin/navbar/side-bar";
-
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { SiteHeader } from '@/components/admin/site-header'
 
 
-export const metadata: Metadata = {
-  title: "Hiplando",
-  description: "Hiplando admin dashboard",
-};
+export const metadata: Metadata = { title: "Hiplando", description: "Hiplando admin dashboard" };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
 
 
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
+    <SidebarProvider style={{ "--sidebar-width": "calc(var(--spacing) * 72)", "--header-height": "calc(var(--spacing) * 12)" } as React.CSSProperties}>
 
       <div className="w-screen h-screen text-foreground flex">
         <AppSidebar />
@@ -37,16 +19,12 @@ export default function RootLayout({
           <SiteHeader />
           <div className="flex flex-1 flex-col">
             <div className="@container/main flex flex-1 flex-col gap-2">
-              <div className="px-4 lg:px-6 flex flex-1">
-                {children}
-              </div>
+              {children}
             </div>
           </div>
         </SidebarInset>
       </div>
     </SidebarProvider>
-
-
   );
 }
 

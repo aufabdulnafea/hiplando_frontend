@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { LuChevronRight, LuChevronLeft } from "react-icons/lu";
 import { motion, AnimatePresence } from "motion/react";
 import { useForm, FormProvider } from "react-hook-form";
@@ -12,8 +12,11 @@ import { Button } from '@/components/ui/button'
 import SelectCategory from "./steps/select-category";
 import HorseDetail from "./steps/horse-detail";
 import Files from "./steps/files";
-import { graphql } from '@/lib/graphql'
-import { auth, storage } from '@/lib/firebase'
+import { getGraphQLClient } from '@/lib/graphql'
+import { auth } from '@/lib/firebase'
+import { toast } from 'sonner'
+import { useRouter } from "next/navigation";
+
 
 
 const schema = z.object({
@@ -79,7 +82,18 @@ function StepController({ step, previousStep, handleNext, isLastStep }: StepCont
 
 export default function AddHorse() {
     const [currentStep, setCurrentStep] = useState(1);
+    const [loading, setLoading] = useState(true)
     const direction = useRef<number>(0); // 1 = forward, -1 = back
+
+    const router = useRouter()
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (!user) return router.replace('/auth')
+            setLoading(false)
+        })
+        return unsubscribe
+    }, [router])
 
     const methods = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -145,7 +159,8 @@ export default function AddHorse() {
         const user = auth.currentUser
         console.log(user)
         try {
-            const horse = await graphql.createOneHorse({
+            const client = await getGraphQLClient()
+            const horse = await client.createOneHorse({
                 data: {
                     // ...data,
                     user: {
@@ -166,13 +181,19 @@ export default function AddHorse() {
                 }
             })
             console.log(horse)
-        } catch (err) {
+        } catch (err: any) {
             console.log(err)
+            console.log(err.response.extensions?.code)
+            toast.error("Error adding the horse", { duration: 5000 })
         }
     }
 
     const stepTitle =
         currentStep === 1 ? "Select Category" : currentStep === 2 ? "Horse Details" : "Upload Files";
+
+    if (loading) return <div className="flex-1 flex items-center justify-center">
+        Loading...
+    </div>
 
     return (
         <Container>

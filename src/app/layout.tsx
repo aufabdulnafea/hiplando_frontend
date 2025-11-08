@@ -16,12 +16,13 @@ export const metadata: Metadata = { title: "Hiplando", description: "Generated b
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html suppressHydrationWarning lang="en">
-            <body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
+            <body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans max-w-screen`}>
                 <ThemeProvider attribute='class' defaultTheme="system" enableSystem disableTransitionOnChange>
                     <AuthProvider>
                         <Toaster
                             closeButton
                             expand
+                            richColors
                             offset={{ top: 60 }}
                             mobileOffset={{ top: 70 }}
                             position="top-right"

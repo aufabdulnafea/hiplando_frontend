@@ -47,7 +47,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'http://localhost:4000/graphql',
+  schema: 'http://192.168.0.39:4000/graphql',
   // documents: 'src/**/*.ts',   // ✅ make sure this matches where your queries are
   documents: 'src/graphql.graphql',
   generates: {

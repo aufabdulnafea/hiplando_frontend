@@ -1,8 +1,16 @@
+'use client'
+
 import Link from "next/link";
 import Container from "@/components/container";
 import { Button } from '@/components/ui/button'
+import { auth } from '@/lib/firebase'
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    useEffect(() => auth.onAuthStateChanged(user => setLoggedIn(!!user)), [])
+
     return (
         <div className="bg-primary">
             <Container>
@@ -19,7 +27,7 @@ export default function Hero() {
                             </Button>
                         </Link>
 
-                        <Link href={'/add-horse'}>
+                        <Link href={loggedIn ? "/add-horse" : "/auth"}>
                             <Button variant="ghost" size="lg" className="rounded-md h-12 border-2">
                                 Post a Horse
                             </Button>

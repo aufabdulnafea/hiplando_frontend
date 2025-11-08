@@ -3,12 +3,12 @@
 import { JSX } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-interface Tab {
+export interface Tab {
     label: string;
     content: JSX.Element;
 }
 
-export default function TabsComponent(props: { tabs: Tab[] }) {
+export function TabsComponent(props: { tabs: Tab[] }) {
     return (
         <Tabs
             className="w-full"

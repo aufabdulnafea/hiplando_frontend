@@ -7231,7 +7231,32 @@ export type FindManyHorseQueryVariables = Exact<{
 }>;
 
 
-export type FindManyHorseQuery = { __typename?: 'Query', findManyHorse: Array<{ __typename?: 'Horse', id: string, name: string, status: string, age: number, height: number, price: number, location: string, user: { __typename?: 'User', name: string }, category: { __typename?: 'HorseCategory', name: string }, discipline: { __typename?: 'HorseDiscipline', name: string }, gender: { __typename?: 'HorseGender', name: string } }> };
+export type FindManyHorseQuery = { __typename?: 'Query', findManyHorse: Array<{ __typename?: 'Horse', id: string, name: string, status: string, age: number, height: number, price: number, location: string, createdAt: any, updatedAt: any, user: { __typename?: 'User', name: string }, category: { __typename?: 'HorseCategory', name: string }, discipline: { __typename?: 'HorseDiscipline', name: string }, gender: { __typename?: 'HorseGender', name: string } }> };
+
+export type FindManyHorseCountQueryVariables = Exact<{
+  where?: InputMaybe<HorseWhereInput>;
+}>;
+
+
+export type FindManyHorseCountQuery = { __typename?: 'Query', findManyHorseCount: number };
+
+export type FindManyUserQueryVariables = Exact<{
+  where?: InputMaybe<UserWhereInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type FindManyUserQuery = { __typename?: 'Query', findManyUser: Array<{ __typename?: 'User', uid: string, name: string, phoneNumber?: string | null, email?: string | null, whatsAppNumber?: string | null, verifiedSeller: boolean, role: string, createdAt: any, updatedAt: any, notifications: Array<{ __typename?: 'Notification', id: string }>, horses: Array<{ __typename?: 'Horse', id: string }>, reviews: Array<{ __typename?: 'UserReview', id: string }>, userFavoriteHorses: Array<{ __typename?: 'UserFavoriteHorses', id: string }> }> };
+
+export type FindManyUserCountQueryVariables = Exact<{
+  where?: InputMaybe<UserWhereInput>;
+}>;
+
+
+export type FindManyUserCountQuery = { __typename?: 'Query', findManyUserCount: number };
 
 
 export const FindManyHorseCategoryDocument = gql`
@@ -7341,7 +7366,52 @@ export const FindManyHorseDocument = gql`
     gender {
       name
     }
+    createdAt
+    updatedAt
   }
+}
+    `;
+export const FindManyHorseCountDocument = gql`
+    query findManyHorseCount($where: HorseWhereInput) {
+  findManyHorseCount(where: $where)
+}
+    `;
+export const FindManyUserDocument = gql`
+    query findManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+  ) {
+    uid
+    name
+    phoneNumber
+    email
+    whatsAppNumber
+    verifiedSeller
+    role
+    createdAt
+    updatedAt
+    notifications {
+      id
+    }
+    horses {
+      id
+    }
+    reviews {
+      id
+    }
+    userFavoriteHorses {
+      id
+    }
+  }
+}
+    `;
+export const FindManyUserCountDocument = gql`
+    query findManyUserCount($where: UserWhereInput) {
+  findManyUserCount(where: $where)
 }
     `;
 
@@ -7384,6 +7454,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     findManyHorse(variables?: FindManyHorseQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseQuery>({ document: FindManyHorseDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorse', 'query', variables);
+    },
+    findManyHorseCount(variables?: FindManyHorseCountQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseCountQuery>({ document: FindManyHorseCountDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseCount', 'query', variables);
+    },
+    findManyUser(variables?: FindManyUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyUserQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindManyUserQuery>({ document: FindManyUserDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyUser', 'query', variables);
+    },
+    findManyUserCount(variables?: FindManyUserCountQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyUserCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindManyUserCountQuery>({ document: FindManyUserCountDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyUserCount', 'query', variables);
     }
   };
 }
