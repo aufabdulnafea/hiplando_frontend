@@ -1,11 +1,10 @@
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import HorseCategoriesTable from "./HorseCategoriesTable";
 import HorseGendersTable from "./HorseGendersTable";
 import HorseDisciplineTable from "./HorseDisciplinesTables";
+import { HorsesTable } from './horses-table';
 
-import { HorsesTable } from './test'
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-// import { TabsTrigger } from "@radix-ui/react-tabs";
 
 export default function AdminHorsesDashboardPage() {
 

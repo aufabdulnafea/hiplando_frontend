@@ -1,69 +1,77 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Checkbox } from "@/components/ui/checkbox"
+// import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
-import { FindManyHorseQuery } from '@/graphql/sdk'
+import { FindManyUserQuery } from '@/graphql/sdk'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-export type HorseType = FindManyHorseQuery['findManyHorse'][number]
+export type UserType = FindManyUserQuery['findManyUser'][number]
 
-export const columns: ColumnDef<HorseType>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
+export const columns: ColumnDef<UserType>[] = [
+    // {
+    //     id: "select",
+    //     header: ({ table }) => (
+    //         <Checkbox
+    //             checked={
+    //                 table.getIsAllPageRowsSelected() ||
+    //                 (table.getIsSomePageRowsSelected() && "indeterminate")
+    //             }
+    //             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+    //             aria-label="Select all"
+    //         />
+    //     ),
+    //     cell: ({ row }) => (
+    //         <Checkbox
+    //             checked={row.getIsSelected()}
+    //             onCheckedChange={(value) => row.toggleSelected(!!value)}
+    //             aria-label="Select row"
+    //         />
+    //     ),
+    //     enableSorting: false,
+    //     enableHiding: false,
+    // },
     {
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
     },
     {
-        accessorKey: "status",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+        accessorKey: "email",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
     },
     {
-        accessorKey: "user.name",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Username" />,
+        accessorKey: "phoneNumber",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Phone number" />,
     },
-
     {
-        accessorKey: "price",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Price" />,
+        accessorKey: "whatsAppNumber",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="WhatsApp number" />,
+    },
+    {
+        accessorKey: "role",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
+    },
+    {
+        accessorKey: "verifiedSeller",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Verified Seller" />,
+    },
+    {
+        id: "listed-horses",
+        header: "Listed Horses",
         cell: ({ row }) => {
-            const amount = row.original.price
-            const formatted = new Intl.NumberFormat("de-DE", {
-                style: "currency",
-                currency: "EUR",
-            }).format(amount)
-
-            return <div className="font-medium">{formatted}</div>
-        },
+            const user = row.original
+            return (
+                <>{user.horses?.length}</>
+            )
+        }
     },
     {
         id: "actions",
         cell: ({ row }) => {
-            const horse = row.original
+            const user = row.original
             const router = useRouter()
 
             return (
@@ -78,9 +86,9 @@ export const columns: ColumnDef<HorseType>[] = [
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem
-                                onClick={() => navigator.clipboard.writeText(horse.id)}
+                                onClick={() => navigator.clipboard.writeText(user.uid)}
                             >
-                                Copy horse ID
+                                Copy user ID
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
@@ -88,11 +96,11 @@ export const columns: ColumnDef<HorseType>[] = [
                                     e.preventDefault() // prevent Radix from interfering
                                     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }))
                                     setTimeout(() => {
-                                        router.push(`/admin/horses/${horse.id}`)
+                                        router.push(`/admin/users/${user.uid}`)
                                     }, 50)
                                 }}
                             >
-                                View Horse
+                                View User
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

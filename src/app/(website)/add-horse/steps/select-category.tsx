@@ -27,7 +27,7 @@ import { getGraphQLClient } from '@/lib/graphql'
 export default function SelectCategory() {
   const [categories, setCategories] = useState<FindManyHorseCategoryQuery['findManyHorseCategory']>([])
   const { setValue, watch, register } = useFormContext()
-  const selected = watch("category")
+  const selected = watch("categoryId")
 
   useEffect(() => {
     // graphql.findManyHorseCategory().then(res => setCategories(res.findManyHorseCategory ?? []))
@@ -37,7 +37,7 @@ export default function SelectCategory() {
   return (
     <div className="w-full m-auto py-8">
       <RadioGroup
-        onValueChange={(value) => setValue("category", value, { shouldValidate: true })}
+        onValueChange={(value) => setValue("categoryId", value, { shouldValidate: true })}
         value={selected}
         className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 font-semibold"
       >
@@ -65,7 +65,7 @@ export default function SelectCategory() {
       </RadioGroup>
 
       {/* hidden input for react-hook-form sync */}
-      <input type="hidden" {...register("category")} />
+      <input type="hidden" {...register("categoryId")} />
     </div>
   )
 }

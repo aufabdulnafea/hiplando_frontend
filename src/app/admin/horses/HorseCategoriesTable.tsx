@@ -20,20 +20,11 @@ export default function HorseCategoriesTable() {
     getGraphQLClient().then(res => res.findManyHorseCategory()).then(res => setCategories(res.findManyHorseCategory))
   }, [])
 
-  const onSubmit = async (formData: Record<string, string>) => {
-    try {
-      const category = await (await getGraphQLClient()).createOneHorseCategory({ data: { name: formData.name, imageUrl: formData.imageUrl } })
-      if (category['createOneHorseCategory']) setCategories(prev => [...prev, category['createOneHorseCategory']])
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
 
   return (
     <div>
       <div className="py-1">
-        <TableControls type="category" onSubmit={onSubmit} />
+        <TableControls type="category" />
       </div>
       <Table>
         <TableHeader>

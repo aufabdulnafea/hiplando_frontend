@@ -8,34 +8,33 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Container from "@/components/container";
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import SelectCategory from "./steps/select-category";
 import HorseDetail from "./steps/horse-detail";
 import Files from "./steps/files";
-import { getGraphQLClient } from '@/lib/graphql'
-import { auth } from '@/lib/firebase'
-import { toast } from 'sonner'
+import { auth } from '@/lib/firebase';
+import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
-
-
+import { Spinner } from "@/components/ui/spinner"
+import { HorseAddedSuccessCard } from './added-success-card'
 
 const schema = z.object({
-    category: z.string().min(1, "Please select a category"),
+    categoryId: z.string().min(1, "Please select a category"),
     name: z.string().min(2, "Horse name is required"),
     pedigree: z.string().optional(),
     age: z.string().min(1, "Age is required"),
-    gender: z.string().min(1, "Gender is required"),
+    genderId: z.string().min(1, "Gender is required"),
     height: z.string().min(1, "Height is required"),
-    discipline: z.string().min(1, "Discipline is required"),
+    disciplineId: z.string().min(1, "Discipline is required"),
     location: z.string().min(1, "Location is required"),
     price: z.string().min(1, "Price range is required"),
     description: z.string().optional(),
     photos: z
-        .any()
-        .refine((files) => files?.length >= 1 && files?.length <= 3, "Upload 1–3 photos"),
-    video: z.string().optional(),
-    xray: z.any().optional(),
-    veterinary: z.any().optional()
+        .array(z.instanceof(File))
+        .refine((files) => files.length >= 1 && files.length <= 3, "Upload 1–3 photos"),
+    video: z.url().optional(),
+    xray: z.array(z.instanceof(File)).optional(),
+    veterinary: z.array(z.instanceof(File)).optional()
 });
 
 type FormData = z.infer<typeof schema>;
@@ -50,7 +49,6 @@ function StepTimeLine({ step }: { step: number }) {
                     </div>
                     {index !== 2 && (
                         <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > index ? "bg-primary" : "bg-neutral-200 dark:bg-neutral-700"}`} />
-
                     )}
                 </div>
             ))}
@@ -58,22 +56,22 @@ function StepTimeLine({ step }: { step: number }) {
     );
 }
 
-export interface StepControllerProps {
+interface StepControllerProps {
     step: number;
     previousStep: () => void;
     handleNext: () => void;
-    isLastStep: boolean
+    isLastStep: boolean;
+    isSubmitting: boolean
 }
 
-function StepController({ step, previousStep, handleNext, isLastStep }: StepControllerProps) {
+function StepController({ step, previousStep, handleNext, isLastStep, isSubmitting }: StepControllerProps) {
     return (
         <div className="flex justify-between mb-20 mt-10">
             <Button onClick={previousStep} type="button" variant='outline' size="lg" disabled={step === 1}>
-                <LuChevronLeft size={18} />
-                Back
+                <LuChevronLeft size={18} /> Back
             </Button>
-            <Button size="lg" onClick={handleNext}>
-                {isLastStep ? "Submit" : "Next"}
+            <Button size="lg" onClick={handleNext} disabled={isSubmitting}>
+                {isLastStep ? isSubmitting ? <Spinner /> : "Submit" : "Next"}
                 {!isLastStep && <LuChevronRight size={18} />}
             </Button>
         </div>
@@ -82,44 +80,46 @@ function StepController({ step, previousStep, handleNext, isLastStep }: StepCont
 
 export default function AddHorse() {
     const [currentStep, setCurrentStep] = useState(1);
-    const [loading, setLoading] = useState(true)
-    const direction = useRef<number>(0); // 1 = forward, -1 = back
+    const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submittedHorseId, setSubmittedHorseId] = useState("")
 
-    const router = useRouter()
+    const direction = useRef<number>(0);
+    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
-            if (!user) return router.replace('/auth')
-            setLoading(false)
-        })
-        return unsubscribe
-    }, [router])
+            if (!user) router.replace('/auth');
+            else setLoading(false);
+        });
+        return unsubscribe;
+    }, [router]);
 
     const methods = useForm<FormData>({
         resolver: zodResolver(schema),
         mode: "onTouched",
         defaultValues: {
-            category: "",
+            categoryId: "",
             name: "",
             pedigree: "",
             age: "",
-            gender: "",
+            genderId: "",
             height: "",
-            discipline: "",
+            disciplineId: "",
             location: "",
             price: "",
             description: "",
             photos: [],
-            video: "",
-            veterinary: null,
-            xray: null
+            video: undefined,
+            veterinary: [],
+            xray: []
         },
     });
 
     const stepFields: Record<number, (keyof FormData)[]> = {
-        1: ["category"],
-        2: ["name", "pedigree", "age", "gender", "height", "discipline", "location", "price", "description"],
-        3: ["photos", "video"], // final step might have optional requirements; adjust as needed
+        1: ["categoryId"],
+        2: ["name", "pedigree", "age", "genderId", "height", "disciplineId", "location", "price", "description"],
+        3: ["photos", "video"],
     };
 
     async function handleNext() {
@@ -133,12 +133,10 @@ export default function AddHorse() {
                 direction.current = 1;
                 setCurrentStep((s) => s + 1);
             } else {
-                // focus first invalid field
                 const firstErrorField = Object.keys(methods.formState.errors)[0];
-                console.log('first field', firstErrorField)
                 if (firstErrorField) {
                     const el = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement | null;
-                    if (el && typeof el.focus === "function") el.focus();
+                    if (el) el.focus();
                 }
             }
         } else {
@@ -155,45 +153,63 @@ export default function AddHorse() {
     }
 
     async function onSubmit(data: FormData) {
-        console.log("Form submitted:", data);
-        const user = auth.currentUser
-        console.log(user)
+        setIsSubmitting(true)
+        const user = auth.currentUser;
+        if (!user) {
+            toast.error("You must be logged in");
+            return;
+        }
+
+        const token = await user.getIdToken();
+        const formData = new FormData();
+
+        // Convert files to FormData
+        data.photos.forEach(file => formData.append('photos', file));
+        if (data.video) formData.append('video', data.video);
+        data.xray?.forEach(file => formData.append('xray', file));
+        data.veterinary?.forEach(file => formData.append('veterinary', file));
+
+        // Append other fields
+        Object.entries(data).forEach(([key, value]) => {
+            if (!['photos', 'video', 'xray', 'veterinary'].includes(key) && value !== undefined && value !== null) {
+                formData.append(key, value as string);
+            }
+        });
+
         try {
-            const client = await getGraphQLClient()
-            const horse = await client.createOneHorse({
-                data: {
-                    // ...data,
-                    user: {
-                        connect: {
-                            uid: user?.uid
-                        }
-                    },
-                    age: Number(data.age),
-                    description: data.description || "",
-                    height: Number(data.height),
-                    location: data.location,
-                    name: data.name,
-                    price: Number(data.price),
-                    // xrayResults: { connect: { id: "" } },
-                    category: { connect: { id: data.category } },
-                    gender: { connect: { id: data.gender } },
-                    discipline: { connect: { id: data.discipline } }
-                }
-            })
-            console.log(horse)
-        } catch (err: any) {
-            console.log(err)
-            console.log(err.response.extensions?.code)
-            toast.error("Error adding the horse", { duration: 5000 })
+            const res = await fetch("http://192.168.0.217:4000/api/v1/horses/create", {
+                method: "POST",
+                headers: { Authorization: `Bearer ${token}` },
+                body: formData
+            });
+
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(text || "Failed to create horse");
+            }
+
+            const result = await res.json();
+            setSubmittedHorseId(result.id)
+            toast.success("Horse created successfully!");
+            console.log("Horse created:", result);
+        } catch (err) {
+            console.error(err);
+            toast.error("Error adding the horse", { duration: 5000 });
+        } finally {
+            setIsSubmitting(false)
         }
     }
 
-    const stepTitle =
-        currentStep === 1 ? "Select Category" : currentStep === 2 ? "Horse Details" : "Upload Files";
+    if (loading) return <div className="w-full h-screen flex items-center justify-center"><Spinner className="size-10" /></div>;
 
-    if (loading) return <div className="flex-1 flex items-center justify-center">
-        Loading...
-    </div>
+    const stepTitle =
+        currentStep === 1 ? "Select Category" :
+            currentStep === 2 ? "Horse Details" :
+                "Upload Files";
+
+    if (submittedHorseId) return (
+        <HorseAddedSuccessCard />
+    )
 
     return (
         <Container>
@@ -202,7 +218,7 @@ export default function AddHorse() {
                     <StepTimeLine step={currentStep} />
 
                     <div className="text-center text-neutral-600">
-                        <h2 className="text-center text-2xl font-bold text-primary">
+                        <h2 className="text-2xl font-bold text-primary">
                             Step {currentStep} of 3 - {stepTitle}
                         </h2>
                         <p className="hidden md:block">
@@ -226,7 +242,13 @@ export default function AddHorse() {
                         </motion.div>
                     </AnimatePresence>
 
-                    <StepController previousStep={previousStep} handleNext={handleNext} step={currentStep} isLastStep={currentStep === 3} />
+                    <StepController
+                        previousStep={previousStep}
+                        handleNext={handleNext}
+                        step={currentStep}
+                        isLastStep={currentStep === 3}
+                        isSubmitting={isSubmitting}
+                    />
                 </form>
             </FormProvider>
         </Container>

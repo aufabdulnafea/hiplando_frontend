@@ -3864,472 +3864,6 @@ export type IntWithAggregatesFilter = {
   notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  createOneHorse: Horse;
-  createOneHorseCategory: HorseCategory;
-  createOneHorseDiscipline: HorseDiscipline;
-  createOneHorseGender: HorseGender;
-  createOneHorsePhoto: HorsePhoto;
-  createOneHorseVetReport: HorseVetReport;
-  createOneHorseXrayResults: HorseXrayResults;
-  createOneNotification: Notification;
-  createOneUser: User;
-  createOneUserFavoriteHorses: UserFavoriteHorses;
-  createOneUserReview: UserReview;
-  deleteManyHorse: BatchPayload;
-  deleteManyHorseCategory: BatchPayload;
-  deleteManyHorseDiscipline: BatchPayload;
-  deleteManyHorseGender: BatchPayload;
-  deleteManyHorsePhoto: BatchPayload;
-  deleteManyHorseVetReport: BatchPayload;
-  deleteManyHorseXrayResults: BatchPayload;
-  deleteManyNotification: BatchPayload;
-  deleteManyUser: BatchPayload;
-  deleteManyUserFavoriteHorses: BatchPayload;
-  deleteManyUserReview: BatchPayload;
-  deleteOneHorse?: Maybe<Horse>;
-  deleteOneHorseCategory?: Maybe<HorseCategory>;
-  deleteOneHorseDiscipline?: Maybe<HorseDiscipline>;
-  deleteOneHorseGender?: Maybe<HorseGender>;
-  deleteOneHorsePhoto?: Maybe<HorsePhoto>;
-  deleteOneHorseVetReport?: Maybe<HorseVetReport>;
-  deleteOneHorseXrayResults?: Maybe<HorseXrayResults>;
-  deleteOneNotification?: Maybe<Notification>;
-  deleteOneUser?: Maybe<User>;
-  deleteOneUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
-  deleteOneUserReview?: Maybe<UserReview>;
-  updateManyHorse: BatchPayload;
-  updateManyHorseCategory: BatchPayload;
-  updateManyHorseDiscipline: BatchPayload;
-  updateManyHorseGender: BatchPayload;
-  updateManyHorsePhoto: BatchPayload;
-  updateManyHorseVetReport: BatchPayload;
-  updateManyHorseXrayResults: BatchPayload;
-  updateManyNotification: BatchPayload;
-  updateManyUser: BatchPayload;
-  updateManyUserFavoriteHorses: BatchPayload;
-  updateManyUserReview: BatchPayload;
-  updateOneHorse: Horse;
-  updateOneHorseCategory: HorseCategory;
-  updateOneHorseDiscipline: HorseDiscipline;
-  updateOneHorseGender: HorseGender;
-  updateOneHorsePhoto: HorsePhoto;
-  updateOneHorseVetReport: HorseVetReport;
-  updateOneHorseXrayResults: HorseXrayResults;
-  updateOneNotification: Notification;
-  updateOneUser: User;
-  updateOneUserFavoriteHorses: UserFavoriteHorses;
-  updateOneUserReview: UserReview;
-  upsertOneHorse: Horse;
-  upsertOneHorseCategory: HorseCategory;
-  upsertOneHorseDiscipline: HorseDiscipline;
-  upsertOneHorseGender: HorseGender;
-  upsertOneHorsePhoto: HorsePhoto;
-  upsertOneHorseVetReport: HorseVetReport;
-  upsertOneHorseXrayResults: HorseXrayResults;
-  upsertOneNotification: Notification;
-  upsertOneUser: User;
-  upsertOneUserFavoriteHorses: UserFavoriteHorses;
-  upsertOneUserReview: UserReview;
-};
-
-
-export type MutationCreateOneHorseArgs = {
-  data: HorseCreateInput;
-};
-
-
-export type MutationCreateOneHorseCategoryArgs = {
-  data: HorseCategoryCreateInput;
-};
-
-
-export type MutationCreateOneHorseDisciplineArgs = {
-  data: HorseDisciplineCreateInput;
-};
-
-
-export type MutationCreateOneHorseGenderArgs = {
-  data: HorseGenderCreateInput;
-};
-
-
-export type MutationCreateOneHorsePhotoArgs = {
-  data: HorsePhotoCreateInput;
-};
-
-
-export type MutationCreateOneHorseVetReportArgs = {
-  data: HorseVetReportCreateInput;
-};
-
-
-export type MutationCreateOneHorseXrayResultsArgs = {
-  data: HorseXrayResultsCreateInput;
-};
-
-
-export type MutationCreateOneNotificationArgs = {
-  data: NotificationCreateInput;
-};
-
-
-export type MutationCreateOneUserArgs = {
-  data: UserCreateInput;
-};
-
-
-export type MutationCreateOneUserFavoriteHorsesArgs = {
-  data: UserFavoriteHorsesCreateInput;
-};
-
-
-export type MutationCreateOneUserReviewArgs = {
-  data: UserReviewCreateInput;
-};
-
-
-export type MutationDeleteManyHorseArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseWhereInput>;
-};
-
-
-export type MutationDeleteManyHorseCategoryArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseCategoryWhereInput>;
-};
-
-
-export type MutationDeleteManyHorseDisciplineArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseDisciplineWhereInput>;
-};
-
-
-export type MutationDeleteManyHorseGenderArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseGenderWhereInput>;
-};
-
-
-export type MutationDeleteManyHorsePhotoArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorsePhotoWhereInput>;
-};
-
-
-export type MutationDeleteManyHorseVetReportArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseVetReportWhereInput>;
-};
-
-
-export type MutationDeleteManyHorseXrayResultsArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseXrayResultsWhereInput>;
-};
-
-
-export type MutationDeleteManyNotificationArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<NotificationWhereInput>;
-};
-
-
-export type MutationDeleteManyUserArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<UserWhereInput>;
-};
-
-
-export type MutationDeleteManyUserFavoriteHorsesArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
-};
-
-
-export type MutationDeleteManyUserReviewArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<UserReviewWhereInput>;
-};
-
-
-export type MutationDeleteOneHorseArgs = {
-  where: HorseWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneHorseCategoryArgs = {
-  where: HorseCategoryWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneHorseDisciplineArgs = {
-  where: HorseDisciplineWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneHorseGenderArgs = {
-  where: HorseGenderWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneHorsePhotoArgs = {
-  where: HorsePhotoWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneHorseVetReportArgs = {
-  where: HorseVetReportWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneHorseXrayResultsArgs = {
-  where: HorseXrayResultsWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneNotificationArgs = {
-  where: NotificationWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneUserArgs = {
-  where: UserWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneUserFavoriteHorsesArgs = {
-  where: UserFavoriteHorsesWhereUniqueInput;
-};
-
-
-export type MutationDeleteOneUserReviewArgs = {
-  where: UserReviewWhereUniqueInput;
-};
-
-
-export type MutationUpdateManyHorseArgs = {
-  data: HorseUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseWhereInput>;
-};
-
-
-export type MutationUpdateManyHorseCategoryArgs = {
-  data: HorseCategoryUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseCategoryWhereInput>;
-};
-
-
-export type MutationUpdateManyHorseDisciplineArgs = {
-  data: HorseDisciplineUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseDisciplineWhereInput>;
-};
-
-
-export type MutationUpdateManyHorseGenderArgs = {
-  data: HorseGenderUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseGenderWhereInput>;
-};
-
-
-export type MutationUpdateManyHorsePhotoArgs = {
-  data: HorsePhotoUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorsePhotoWhereInput>;
-};
-
-
-export type MutationUpdateManyHorseVetReportArgs = {
-  data: HorseVetReportUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseVetReportWhereInput>;
-};
-
-
-export type MutationUpdateManyHorseXrayResultsArgs = {
-  data: HorseXrayResultsUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<HorseXrayResultsWhereInput>;
-};
-
-
-export type MutationUpdateManyNotificationArgs = {
-  data: NotificationUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<NotificationWhereInput>;
-};
-
-
-export type MutationUpdateManyUserArgs = {
-  data: UserUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<UserWhereInput>;
-};
-
-
-export type MutationUpdateManyUserFavoriteHorsesArgs = {
-  data: UserFavoriteHorsesUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<UserFavoriteHorsesWhereInput>;
-};
-
-
-export type MutationUpdateManyUserReviewArgs = {
-  data: UserReviewUpdateManyMutationInput;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<UserReviewWhereInput>;
-};
-
-
-export type MutationUpdateOneHorseArgs = {
-  data: HorseUpdateInput;
-  where: HorseWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneHorseCategoryArgs = {
-  data: HorseCategoryUpdateInput;
-  where: HorseCategoryWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneHorseDisciplineArgs = {
-  data: HorseDisciplineUpdateInput;
-  where: HorseDisciplineWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneHorseGenderArgs = {
-  data: HorseGenderUpdateInput;
-  where: HorseGenderWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneHorsePhotoArgs = {
-  data: HorsePhotoUpdateInput;
-  where: HorsePhotoWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneHorseVetReportArgs = {
-  data: HorseVetReportUpdateInput;
-  where: HorseVetReportWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneHorseXrayResultsArgs = {
-  data: HorseXrayResultsUpdateInput;
-  where: HorseXrayResultsWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneNotificationArgs = {
-  data: NotificationUpdateInput;
-  where: NotificationWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneUserArgs = {
-  data: UserUpdateInput;
-  where: UserWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneUserFavoriteHorsesArgs = {
-  data: UserFavoriteHorsesUpdateInput;
-  where: UserFavoriteHorsesWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneUserReviewArgs = {
-  data: UserReviewUpdateInput;
-  where: UserReviewWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorseArgs = {
-  create: HorseCreateInput;
-  update: HorseUpdateInput;
-  where: HorseWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorseCategoryArgs = {
-  create: HorseCategoryCreateInput;
-  update: HorseCategoryUpdateInput;
-  where: HorseCategoryWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorseDisciplineArgs = {
-  create: HorseDisciplineCreateInput;
-  update: HorseDisciplineUpdateInput;
-  where: HorseDisciplineWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorseGenderArgs = {
-  create: HorseGenderCreateInput;
-  update: HorseGenderUpdateInput;
-  where: HorseGenderWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorsePhotoArgs = {
-  create: HorsePhotoCreateInput;
-  update: HorsePhotoUpdateInput;
-  where: HorsePhotoWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorseVetReportArgs = {
-  create: HorseVetReportCreateInput;
-  update: HorseVetReportUpdateInput;
-  where: HorseVetReportWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneHorseXrayResultsArgs = {
-  create: HorseXrayResultsCreateInput;
-  update: HorseXrayResultsUpdateInput;
-  where: HorseXrayResultsWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneNotificationArgs = {
-  create: NotificationCreateInput;
-  update: NotificationUpdateInput;
-  where: NotificationWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneUserArgs = {
-  create: UserCreateInput;
-  update: UserUpdateInput;
-  where: UserWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneUserFavoriteHorsesArgs = {
-  create: UserFavoriteHorsesCreateInput;
-  update: UserFavoriteHorsesUpdateInput;
-  where: UserFavoriteHorsesWhereUniqueInput;
-};
-
-
-export type MutationUpsertOneUserReviewArgs = {
-  create: UserReviewCreateInput;
-  update: UserReviewUpdateInput;
-  where: UserReviewWhereUniqueInput;
-};
-
 export type NestedBoolFilter = {
   equals?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<NestedBoolFilter>;
@@ -7163,64 +6697,15 @@ export type FindManyHorseCategoryQueryVariables = Exact<{ [key: string]: never; 
 
 export type FindManyHorseCategoryQuery = { __typename?: 'Query', findManyHorseCategory: Array<{ __typename?: 'HorseCategory', id: string, name: string, imageUrl: string }> };
 
-export type CreateOneHorseCategoryMutationVariables = Exact<{
-  data: HorseCategoryCreateInput;
-}>;
-
-
-export type CreateOneHorseCategoryMutation = { __typename?: 'Mutation', createOneHorseCategory: { __typename?: 'HorseCategory', id: string, name: string, imageUrl: string } };
-
-export type DeleteOneHorseCategoryMutationVariables = Exact<{
-  where: HorseCategoryWhereUniqueInput;
-}>;
-
-
-export type DeleteOneHorseCategoryMutation = { __typename?: 'Mutation', deleteOneHorseCategory?: { __typename?: 'HorseCategory', id: string } | null };
-
 export type FindManyHorseGenderQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FindManyHorseGenderQuery = { __typename?: 'Query', findManyHorseGender: Array<{ __typename?: 'HorseGender', id: string, name: string }> };
 
-export type CreateOneHorseGenderMutationVariables = Exact<{
-  data: HorseGenderCreateInput;
-}>;
-
-
-export type CreateOneHorseGenderMutation = { __typename?: 'Mutation', createOneHorseGender: { __typename?: 'HorseGender', id: string, name: string } };
-
-export type DeleteOneHorseGenderMutationVariables = Exact<{
-  where: HorseGenderWhereUniqueInput;
-}>;
-
-
-export type DeleteOneHorseGenderMutation = { __typename?: 'Mutation', deleteOneHorseGender?: { __typename?: 'HorseGender', id: string } | null };
-
 export type FindManyHorseDisciplineQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FindManyHorseDisciplineQuery = { __typename?: 'Query', findManyHorseDiscipline: Array<{ __typename?: 'HorseDiscipline', id: string, name: string }> };
-
-export type CreateOneHorseDisciplineMutationVariables = Exact<{
-  data: HorseDisciplineCreateInput;
-}>;
-
-
-export type CreateOneHorseDisciplineMutation = { __typename?: 'Mutation', createOneHorseDiscipline: { __typename?: 'HorseDiscipline', id: string, name: string } };
-
-export type DeleteOneHorseDisciplineMutationVariables = Exact<{
-  where: HorseDisciplineWhereUniqueInput;
-}>;
-
-
-export type DeleteOneHorseDisciplineMutation = { __typename?: 'Mutation', deleteOneHorseDiscipline?: { __typename?: 'HorseDiscipline', id: string } | null };
-
-export type CreateOneHorseMutationVariables = Exact<{
-  data: HorseCreateInput;
-}>;
-
-
-export type CreateOneHorseMutation = { __typename?: 'Mutation', createOneHorse: { __typename?: 'Horse', id: string, name: string } };
 
 export type FindManyHorseQueryVariables = Exact<{
   where?: InputMaybe<HorseWhereInput>;
@@ -7232,6 +6717,13 @@ export type FindManyHorseQueryVariables = Exact<{
 
 
 export type FindManyHorseQuery = { __typename?: 'Query', findManyHorse: Array<{ __typename?: 'Horse', id: string, name: string, status: string, age: number, height: number, price: number, location: string, createdAt: any, updatedAt: any, user: { __typename?: 'User', name: string }, category: { __typename?: 'HorseCategory', name: string }, discipline: { __typename?: 'HorseDiscipline', name: string }, gender: { __typename?: 'HorseGender', name: string } }> };
+
+export type FindUniqueHorseQueryVariables = Exact<{
+  where: HorseWhereUniqueInput;
+}>;
+
+
+export type FindUniqueHorseQuery = { __typename?: 'Query', findUniqueHorse?: { __typename?: 'Horse', id: string, name: string, status: string, age: number, height: number, price: number, location: string, createdAt: any, updatedAt: any, user: { __typename?: 'User', name: string }, category: { __typename?: 'HorseCategory', name: string }, discipline: { __typename?: 'HorseDiscipline', name: string }, gender: { __typename?: 'HorseGender', name: string } } | null };
 
 export type FindManyHorseCountQueryVariables = Exact<{
   where?: InputMaybe<HorseWhereInput>;
@@ -7268,22 +6760,6 @@ export const FindManyHorseCategoryDocument = gql`
   }
 }
     `;
-export const CreateOneHorseCategoryDocument = gql`
-    mutation createOneHorseCategory($data: HorseCategoryCreateInput!) {
-  createOneHorseCategory(data: $data) {
-    id
-    name
-    imageUrl
-  }
-}
-    `;
-export const DeleteOneHorseCategoryDocument = gql`
-    mutation deleteOneHorseCategory($where: HorseCategoryWhereUniqueInput!) {
-  deleteOneHorseCategory(where: $where) {
-    id
-  }
-}
-    `;
 export const FindManyHorseGenderDocument = gql`
     query findManyHorseGender {
   findManyHorseGender {
@@ -7292,47 +6768,9 @@ export const FindManyHorseGenderDocument = gql`
   }
 }
     `;
-export const CreateOneHorseGenderDocument = gql`
-    mutation createOneHorseGender($data: HorseGenderCreateInput!) {
-  createOneHorseGender(data: $data) {
-    id
-    name
-  }
-}
-    `;
-export const DeleteOneHorseGenderDocument = gql`
-    mutation deleteOneHorseGender($where: HorseGenderWhereUniqueInput!) {
-  deleteOneHorseGender(where: $where) {
-    id
-  }
-}
-    `;
 export const FindManyHorseDisciplineDocument = gql`
     query findManyHorseDiscipline {
   findManyHorseDiscipline {
-    id
-    name
-  }
-}
-    `;
-export const CreateOneHorseDisciplineDocument = gql`
-    mutation createOneHorseDiscipline($data: HorseDisciplineCreateInput!) {
-  createOneHorseDiscipline(data: $data) {
-    id
-    name
-  }
-}
-    `;
-export const DeleteOneHorseDisciplineDocument = gql`
-    mutation deleteOneHorseDiscipline($where: HorseDisciplineWhereUniqueInput!) {
-  deleteOneHorseDiscipline(where: $where) {
-    id
-  }
-}
-    `;
-export const CreateOneHorseDocument = gql`
-    mutation createOneHorse($data: HorseCreateInput!) {
-  createOneHorse(data: $data) {
     id
     name
   }
@@ -7347,6 +6785,33 @@ export const FindManyHorseDocument = gql`
     take: $take
     skip: $skip
   ) {
+    id
+    name
+    status
+    age
+    height
+    price
+    location
+    user {
+      name
+    }
+    category {
+      name
+    }
+    discipline {
+      name
+    }
+    gender {
+      name
+    }
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export const FindUniqueHorseDocument = gql`
+    query findUniqueHorse($where: HorseWhereUniqueInput!) {
+  findUniqueHorse(where: $where) {
     id
     name
     status
@@ -7425,35 +6890,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     findManyHorseCategory(variables?: FindManyHorseCategoryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseCategoryQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseCategoryQuery>({ document: FindManyHorseCategoryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseCategory', 'query', variables);
     },
-    createOneHorseCategory(variables: CreateOneHorseCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseCategoryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseCategoryMutation>({ document: CreateOneHorseCategoryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorseCategory', 'mutation', variables);
-    },
-    deleteOneHorseCategory(variables: DeleteOneHorseCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<DeleteOneHorseCategoryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteOneHorseCategoryMutation>({ document: DeleteOneHorseCategoryDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'deleteOneHorseCategory', 'mutation', variables);
-    },
     findManyHorseGender(variables?: FindManyHorseGenderQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseGenderQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseGenderQuery>({ document: FindManyHorseGenderDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseGender', 'query', variables);
-    },
-    createOneHorseGender(variables: CreateOneHorseGenderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseGenderMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseGenderMutation>({ document: CreateOneHorseGenderDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorseGender', 'mutation', variables);
-    },
-    deleteOneHorseGender(variables: DeleteOneHorseGenderMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<DeleteOneHorseGenderMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteOneHorseGenderMutation>({ document: DeleteOneHorseGenderDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'deleteOneHorseGender', 'mutation', variables);
     },
     findManyHorseDiscipline(variables?: FindManyHorseDisciplineQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseDisciplineQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseDisciplineQuery>({ document: FindManyHorseDisciplineDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseDiscipline', 'query', variables);
     },
-    createOneHorseDiscipline(variables: CreateOneHorseDisciplineMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseDisciplineMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseDisciplineMutation>({ document: CreateOneHorseDisciplineDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorseDiscipline', 'mutation', variables);
-    },
-    deleteOneHorseDiscipline(variables: DeleteOneHorseDisciplineMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<DeleteOneHorseDisciplineMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteOneHorseDisciplineMutation>({ document: DeleteOneHorseDisciplineDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'deleteOneHorseDiscipline', 'mutation', variables);
-    },
-    createOneHorse(variables: CreateOneHorseMutationVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CreateOneHorseMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateOneHorseMutation>({ document: CreateOneHorseDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'createOneHorse', 'mutation', variables);
-    },
     findManyHorse(variables?: FindManyHorseQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseQuery>({ document: FindManyHorseDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorse', 'query', variables);
+    },
+    findUniqueHorse(variables: FindUniqueHorseQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindUniqueHorseQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<FindUniqueHorseQuery>({ document: FindUniqueHorseDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findUniqueHorse', 'query', variables);
     },
     findManyHorseCount(variables?: FindManyHorseCountQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<FindManyHorseCountQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindManyHorseCountQuery>({ document: FindManyHorseCountDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'findManyHorseCount', 'query', variables);

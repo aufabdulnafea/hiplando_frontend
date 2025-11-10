@@ -81,7 +81,7 @@ export default function Home() {
                     description="Discover exceptional horses from around the world"
                 />
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-10 pt-15">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 pt-15">
                     <HorseCard />
                     <HorseCard />
                     <HorseCard />

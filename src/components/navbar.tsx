@@ -12,7 +12,7 @@ export default function Navbar() {
     const { user } = useAuth()
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b shadow bg-background backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <header className="sticky top-0 z-50 w-full border-b shadow bg-background backdrop-blur supports-[backdrop-filter]:bg-background/85">
             <Container>
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}

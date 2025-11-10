@@ -6,19 +6,19 @@ query findManyHorseCategory {
   }
 }
 
-mutation createOneHorseCategory($data: HorseCategoryCreateInput!) {
-  createOneHorseCategory(data: $data) {
-    id
-    name
-    imageUrl
-  }
-}
+# mutation createOneHorseCategory($data: HorseCategoryCreateInput!) {
+#   createOneHorseCategory(data: $data) {
+#     id
+#     name
+#     imageUrl
+#   }
+# }
 
-mutation deleteOneHorseCategory($where: HorseCategoryWhereUniqueInput!) {
-  deleteOneHorseCategory(where: $where) {
-    id
-  }
-}
+# mutation deleteOneHorseCategory($where: HorseCategoryWhereUniqueInput!) {
+#   deleteOneHorseCategory(where: $where) {
+#     id
+#   }
+# }
 
 query findManyHorseGender {
   findManyHorseGender {
@@ -27,18 +27,18 @@ query findManyHorseGender {
   }
 }
 
-mutation createOneHorseGender($data: HorseGenderCreateInput!) {
-  createOneHorseGender(data: $data) {
-    id
-    name
-  }
-}
+# mutation createOneHorseGender($data: HorseGenderCreateInput!) {
+#   createOneHorseGender(data: $data) {
+#     id
+#     name
+#   }
+# }
 
-mutation deleteOneHorseGender($where: HorseGenderWhereUniqueInput!) {
-  deleteOneHorseGender(where: $where) {
-    id
-  }
-}
+# mutation deleteOneHorseGender($where: HorseGenderWhereUniqueInput!) {
+#   deleteOneHorseGender(where: $where) {
+#     id
+#   }
+# }
 
 query findManyHorseDiscipline {
   findManyHorseDiscipline {
@@ -47,25 +47,25 @@ query findManyHorseDiscipline {
   }
 }
 
-mutation createOneHorseDiscipline($data: HorseDisciplineCreateInput!) {
-  createOneHorseDiscipline(data: $data) {
-    id
-    name
-  }
-}
+# mutation createOneHorseDiscipline($data: HorseDisciplineCreateInput!) {
+#   createOneHorseDiscipline(data: $data) {
+#     id
+#     name
+#   }
+# }
 
-mutation deleteOneHorseDiscipline($where: HorseDisciplineWhereUniqueInput!) {
-  deleteOneHorseDiscipline(where: $where) {
-    id
-  }
-}
+# mutation deleteOneHorseDiscipline($where: HorseDisciplineWhereUniqueInput!) {
+#   deleteOneHorseDiscipline(where: $where) {
+#     id
+#   }
+# }
 
-mutation createOneHorse($data: HorseCreateInput!) {
-  createOneHorse(data: $data) {
-    id
-    name
-  }
-}
+# mutation createOneHorse($data: HorseCreateInput!) {
+#   createOneHorse(data: $data) {
+#     id
+#     name
+#   }
+# }
 
 query findManyHorse(
   $where: HorseWhereInput
@@ -80,6 +80,36 @@ query findManyHorse(
     cursor: $cursor
     take: $take
     skip: $skip
+  ) {
+    id
+    name
+    status
+    age
+    height
+    price
+    location
+    user {
+      name
+    }
+    category {
+      name
+    }
+    discipline {
+      name
+    }
+    gender {
+      name
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+query findUniqueHorse(
+  $where: HorseWhereUniqueInput!
+) {
+  findUniqueHorse(
+    where: $where
   ) {
     id
     name

@@ -17,8 +17,8 @@ export default function HorseDetail() {
     const { register, watch, setValue } = useFormContext();
     const name = watch("name");
     const age = watch("age");
-    const gender = watch("gender");
-    const discipline = watch('discipline')
+    const gender = watch("genderId");
+    const discipline = watch('disciplineId')
     const location = watch('location')
     const price = watch('price')
     const height = watch('height')
@@ -57,7 +57,7 @@ export default function HorseDetail() {
                         <div>
                             <Label htmlFor="gender" className="text-sm">Gender*</Label>
                             <Select
-                                onValueChange={(val) => setValue("gender", val)}
+                                onValueChange={(val) => setValue("genderId", val)}
                                 defaultValue={gender}
                             >
                                 <SelectTrigger className="w-full">
@@ -81,7 +81,7 @@ export default function HorseDetail() {
                     <div>
                         <Label htmlFor="discipline" className="text-sm">Discipline*</Label>
                         <Select
-                            onValueChange={(val) => setValue("discipline", val)}
+                            onValueChange={(val) => setValue("disciplineId", val)}
                             defaultValue={discipline}
                         >
                             <SelectTrigger className="w-full">

@@ -5,10 +5,11 @@ import { DataTable } from "@/components/data-table/data-table"
 import { columns } from "./columns"
 import { useHorses } from "@/hooks/use-horses"
 import { useDebounce } from "@/hooks/use-debounce"
+import { ColumnSort } from "@tanstack/react-table"
 
 export function HorsesTable() {
     const [search, setSearch] = React.useState("")
-    const [sorting, setSorting] = React.useState([])
+    const [sorting, setSorting] = React.useState<ColumnSort[]>([])
     const [pageIndex, setPageIndex] = React.useState(0)
     const [pageSize, setPageSize] = React.useState(50)
 
