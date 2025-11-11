@@ -15,40 +15,66 @@ import Files from "./steps/files";
 import { auth } from '@/lib/firebase';
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
-import { Spinner } from "@/components/ui/spinner"
-import { HorseAddedSuccessCard } from './added-success-card'
+import { Spinner } from "@/components/ui/spinner";
+import { HorseAddedSuccessCard } from './added-success-card';
 
 const schema = z.object({
     categoryId: z.string().min(1, "Please select a category"),
     name: z.string().min(2, "Horse name is required"),
-    pedigree: z.string().optional(),
-    age: z.string().min(1, "Age is required"),
+    pedigree: z.url().optional().or(z.literal("")),
+    age: z.number().positive("Age is required"),
     genderId: z.string().min(1, "Gender is required"),
-    height: z.string().min(1, "Height is required"),
+    height: z.number().positive("Height is required"),
     disciplineId: z.string().min(1, "Discipline is required"),
     location: z.string().min(1, "Location is required"),
-    price: z.string().min(1, "Price range is required"),
+    price: z.number().positive("Price is required"),
     description: z.string().optional(),
-    photos: z
-        .array(z.instanceof(File))
-        .refine((files) => files.length >= 1 && files.length <= 3, "Upload 1–3 photos"),
-    video: z.url().optional(),
+    photos: z.array(z.instanceof(File)).refine(f => f.length >= 1 && f.length <= 3, "Upload 1–3 photos"),
+    video: z.url().optional().or(z.literal("")),
     xray: z.array(z.instanceof(File)).optional(),
-    veterinary: z.array(z.instanceof(File)).optional()
+    veterinary: z.array(z.instanceof(File)).optional(),
 });
 
 type FormData = z.infer<typeof schema>;
 
+// --- UTILITY FUNCTIONS ---
+
+function focusFirstError(methods: any) {
+    const firstErrorField = Object.keys(methods.formState.errors)[0];
+    if (firstErrorField) {
+        const el = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement | null;
+        if (el) el.focus();
+    }
+}
+
+function convertToFormData(data: FormData) {
+    const formData = new FormData();
+    data.photos.forEach(file => formData.append('photos', file));
+    data.video && formData.append('video', data.video);
+    data.xray?.forEach(file => formData.append('xray', file));
+    data.veterinary?.forEach(file => formData.append('veterinary', file));
+
+    Object.entries(data).forEach(([key, value]) => {
+        if (!['photos', 'video', 'xray', 'veterinary'].includes(key) && value !== undefined && value !== null) {
+            formData.append(key, value as string);
+        }
+    });
+
+    return formData;
+}
+
+// --- COMPONENTS ---
+
 function StepTimeLine({ step }: { step: number }) {
     return (
         <div className="flex justify-center items-center gap-3 text-zinc-600 pt-10 pb-2">
-            {Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className="flex items-center gap-3">
-                    <div className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= index + 1 ? "font-bold bg-primary text-white" : "bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100"}`}>
-                        {index + 1}
+            {Array.from({ length: 3 }).map((_, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                    <div className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= idx + 1 ? "font-bold bg-primary text-white" : "bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100"}`}>
+                        {idx + 1}
                     </div>
-                    {index !== 2 && (
-                        <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > index ? "bg-primary" : "bg-neutral-200 dark:bg-neutral-700"}`} />
+                    {idx !== 2 && (
+                        <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > idx ? "bg-primary" : "bg-neutral-200 dark:bg-neutral-700"}`} />
                     )}
                 </div>
             ))}
@@ -61,7 +87,7 @@ interface StepControllerProps {
     previousStep: () => void;
     handleNext: () => void;
     isLastStep: boolean;
-    isSubmitting: boolean
+    isSubmitting: boolean;
 }
 
 function StepController({ step, previousStep, handleNext, isLastStep, isSubmitting }: StepControllerProps) {
@@ -78,22 +104,16 @@ function StepController({ step, previousStep, handleNext, isLastStep, isSubmitti
     );
 }
 
+// --- MAIN COMPONENT ---
+
 export default function AddHorse() {
     const [currentStep, setCurrentStep] = useState(1);
     const [loading, setLoading] = useState(true);
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submittedHorseId, setSubmittedHorseId] = useState("")
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submittedHorseId, setSubmittedHorseId] = useState("");
 
-    const direction = useRef<number>(0);
+    const direction = useRef(0);
     const router = useRouter();
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (!user) router.replace('/auth');
-            else setLoading(false);
-        });
-        return unsubscribe;
-    }, [router]);
 
     const methods = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -101,18 +121,18 @@ export default function AddHorse() {
         defaultValues: {
             categoryId: "",
             name: "",
-            pedigree: "",
-            age: "",
+            pedigree: undefined,
+            age: 0,
             genderId: "",
-            height: "",
+            height: 0,
             disciplineId: "",
             location: "",
-            price: "",
-            description: "",
+            price: 0,
+            description: undefined,
             photos: [],
             video: undefined,
-            veterinary: [],
-            xray: []
+            xray: [],
+            veterinary: []
         },
     });
 
@@ -122,22 +142,30 @@ export default function AddHorse() {
         3: ["photos", "video"],
     };
 
+    const stepTitles = ["Select Category", "Horse Details", "Upload Files"];
+    const stepDescriptions = [
+        "Choose the category that best describes your horse",
+        "Enter the details of your horse",
+        "Upload media files and finalize"
+    ];
+
+    // Auth check
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (!user) router.replace('/auth');
+            else setLoading(false);
+        });
+        return unsubscribe;
+    }, [router]);
+
     async function handleNext() {
         if (currentStep < 3) {
-            const fields = stepFields[currentStep] ?? [];
-            const valid = fields.length
-                ? await methods.trigger(fields as Parameters<typeof methods.trigger>[0])
-                : true;
-
+            const valid = await methods.trigger(stepFields[currentStep] || []);
             if (valid) {
                 direction.current = 1;
-                setCurrentStep((s) => s + 1);
+                setCurrentStep(s => s + 1);
             } else {
-                const firstErrorField = Object.keys(methods.formState.errors)[0];
-                if (firstErrorField) {
-                    const el = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement | null;
-                    if (el) el.focus();
-                }
+                focusFirstError(methods);
             }
         } else {
             direction.current = 1;
@@ -148,35 +176,23 @@ export default function AddHorse() {
     function previousStep() {
         if (currentStep > 1) {
             direction.current = -1;
-            setCurrentStep((s) => s - 1);
+            setCurrentStep(s => s - 1);
         }
     }
 
     async function onSubmit(data: FormData) {
-        setIsSubmitting(true)
+        setIsSubmitting(true);
         const user = auth.currentUser;
         if (!user) {
             toast.error("You must be logged in");
+            setIsSubmitting(false);
             return;
         }
 
-        const token = await user.getIdToken();
-        const formData = new FormData();
-
-        // Convert files to FormData
-        data.photos.forEach(file => formData.append('photos', file));
-        if (data.video) formData.append('video', data.video);
-        data.xray?.forEach(file => formData.append('xray', file));
-        data.veterinary?.forEach(file => formData.append('veterinary', file));
-
-        // Append other fields
-        Object.entries(data).forEach(([key, value]) => {
-            if (!['photos', 'video', 'xray', 'veterinary'].includes(key) && value !== undefined && value !== null) {
-                formData.append(key, value as string);
-            }
-        });
-
         try {
+            const token = await user.getIdToken();
+            const formData = convertToFormData(data);
+
             const res = await fetch("http://192.168.0.217:4000/api/v1/horses/create", {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
@@ -189,43 +205,31 @@ export default function AddHorse() {
             }
 
             const result = await res.json();
-            setSubmittedHorseId(result.id)
+            setSubmittedHorseId(result.id);
             toast.success("Horse created successfully!");
             console.log("Horse created:", result);
         } catch (err) {
             console.error(err);
             toast.error("Error adding the horse", { duration: 5000 });
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
     }
 
     if (loading) return <div className="w-full h-screen flex items-center justify-center"><Spinner className="size-10" /></div>;
-
-    const stepTitle =
-        currentStep === 1 ? "Select Category" :
-            currentStep === 2 ? "Horse Details" :
-                "Upload Files";
-
-    if (submittedHorseId) return (
-        <HorseAddedSuccessCard />
-    )
+    if (submittedHorseId) return <HorseAddedSuccessCard id={submittedHorseId} />;
 
     return (
         <Container>
             <FormProvider {...methods}>
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={e => e.preventDefault()}>
                     <StepTimeLine step={currentStep} />
 
                     <div className="text-center text-neutral-600">
                         <h2 className="text-2xl font-bold text-primary">
-                            Step {currentStep} of 3 - {stepTitle}
+                            Step {currentStep} of 3 - {stepTitles[currentStep - 1]}
                         </h2>
-                        <p className="hidden md:block">
-                            {currentStep === 1 && "Choose the category that best describes your horse"}
-                            {currentStep === 2 && "Enter the details of your horse"}
-                            {currentStep === 3 && "Upload media files and finalize"}
-                        </p>
+                        <p className="hidden md:block">{stepDescriptions[currentStep - 1]}</p>
                     </div>
 
                     <AnimatePresence mode="wait">

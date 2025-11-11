@@ -26,7 +26,7 @@ export default function HorseCard() {
             </div>
             <CardContent className='px-0'>
                 <img
-                    src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-2.png?height=280&format=auto'
+                    src='http://192.168.0.217:4000/f8855ce1-b401-4926-81a2-bc9ff6c19bcf.webp'
                     alt='Banner'
                     className='aspect-video h-70 rounded-t-xl object-cover'
                 />

@@ -1,60 +1,62 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { useAuth } from '@/context/AuthContext'
-import { Button } from '@/components/ui/button'
-import { ModeToggle } from '@/components/theme-mode-toggle'
-import UserDropDown from '@/components/user-dropdown'
-import NotificationsDropDown from '@/components/notifications-dropdown'
-import Container from '@/components/container'
+import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
+import { Button } from '@/components/ui/button';
+import { ModeToggle } from '@/components/theme-mode-toggle';
+import UserDropDown from '@/components/user-dropdown';
+import NotificationsDropDown from '@/components/notifications-dropdown';
+import Container from '@/components/container';
+import { usePathname } from 'next/navigation';
+import { motion } from 'motion/react';
 
 export default function Navbar() {
-    const { user } = useAuth()
+  const { user } = useAuth();
+  const pathname = usePathname();
 
-    return (
-        <header className="sticky top-0 z-50 w-full border-b shadow bg-background backdrop-blur supports-[backdrop-filter]:bg-background/85">
-            <Container>
-                <div className="flex h-16 items-center justify-between">
-                    {/* Logo */}
-                    <Link href="/" className="text-2xl font-extrabold text-primary">
-                        Hiplando
-                    </Link>
+  const navItems = [
+    { name: 'Horses', href: '/horses' },
+    { name: 'Transport', href: '/transport' },
+    { name: 'Competitions', href: '/competitions' },
+    { name: 'Services', href: '/services' },
+  ];
 
-                    {/* Navigation Menu */}
-                    {/* <NavigationMenu>
-                        <NavigationMenuList className="hidden md:flex space-x-2">
-                            {['Horses', 'Transport', 'Competitions', 'Services'].map((item) => (
-                                <NavigationMenuItem key={item}>
-                                    <Link href={`/${item.toLowerCase()}`} legacyBehavior passHref>
-                                        <NavigationMenuLink
-                                            className={cn(
-                                                'px-3 py-2 text-sm font-medium text-muted-foreground rounded-md transition-colors hover:text-foreground hover:bg-accent hover:text-accent-foreground'
-                                            )}
-                                        >
-                                            {item}
-                                        </NavigationMenuLink>
-                                    </Link>
-                                </NavigationMenuItem>
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu> */}
+  return (
+    <header
+      className="sticky shadow top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
+      role="banner"
+    >
+      <Container>
+        <nav
+          className="flex h-16 items-center justify-between"
+          aria-label="Main navigation"
+        >
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-2xl font-extrabold text-primary hover:opacity-90 transition-opacity"
+            aria-label="Go to homepage"
+          >
+            Hiplando
+          </Link>
 
-                    {/* Right side */}
-                    <div className="flex items-center gap-2">
-                        <ModeToggle />
-                        {user ? (
-                            <div className="flex items-center gap-2">
-                                <UserDropDown />
-                                <NotificationsDropDown />
-                            </div>
-                        ) : (
-                            <Button asChild>
-                                <Link href="/auth">Login</Link>
-                            </Button>
-                        )}
-                    </div>
-                </div>
-            </Container>
-        </header>
-    )
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-2">
+            <ModeToggle />
+            {user ? (
+              <div className="flex items-center gap-2">
+                <NotificationsDropDown />
+                <UserDropDown />
+              </div>
+            ) : (
+              <Button asChild size="sm" className="font-medium">
+                <Link href="/auth">Login</Link>
+              </Button>
+            )}
+          </div>
+        </nav>
+      </Container>
+    </header>
+  );
 }
