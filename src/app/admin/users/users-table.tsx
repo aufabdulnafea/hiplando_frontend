@@ -9,7 +9,7 @@ import { ColumnSort } from "@tanstack/react-table"
 
 export function UsersTable() {
     const [search, setSearch] = React.useState("")
-    const [sorting, setSorting] = React.useState<ColumnSort[]>([])
+    const [sort, setSort] = React.useState<ColumnSort[]>([])
     const [pageIndex, setPageIndex] = React.useState(0)
     const [pageSize, setPageSize] = React.useState(50)
 
@@ -18,7 +18,7 @@ export function UsersTable() {
     const { data, isLoading } = useUsers({
         pageIndex,
         pageSize,
-        sorting,
+        sorting: sort,
         search: debouncedSearch,
     })
 
@@ -33,7 +33,7 @@ export function UsersTable() {
             isLoading={isLoading}
             searchValue={search}
             onSearchChange={setSearch}
-            onSortingChange={setSorting}
+            onSortingChange={setSort}
             onPaginationChange={(page: number, size: number) => {
                 setPageIndex(page)
                 setPageSize(size)

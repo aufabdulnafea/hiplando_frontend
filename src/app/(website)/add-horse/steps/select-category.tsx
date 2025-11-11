@@ -9,21 +9,6 @@ import { useEffect, useState } from "react"
 import { FindManyHorseCategoryQuery } from "@/graphql/sdk"
 import { getGraphQLClient } from '@/lib/graphql'
 
-// const categories = [
-//   "Show Jumpers",
-//   "Dressage",
-//   "Hunters",
-//   "Ponies",
-//   "Youngsters",
-//   "Foals & Mares",
-//   "Arabians",
-//   "Warmbloods",
-//   "Eventing",
-//   "Western",
-//   "Driving",
-//   "Leisure",
-// ]
-
 export default function SelectCategory() {
   const [categories, setCategories] = useState<FindManyHorseCategoryQuery['findManyHorseCategory']>([])
   const { setValue, watch, register } = useFormContext()
@@ -39,7 +24,7 @@ export default function SelectCategory() {
       <RadioGroup
         onValueChange={(value) => setValue("categoryId", value, { shouldValidate: true })}
         value={selected}
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 font-semibold"
+        className="grid grid-cols-2 sm:grid md:grid-cols-4 lg:grid-cols-5 gap-3 font-semibold"
       >
         {categories.map((cat) => (
           <Label

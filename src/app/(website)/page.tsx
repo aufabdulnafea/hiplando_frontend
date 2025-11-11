@@ -79,19 +79,7 @@ export default function Home() {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-                    <HorseCard
-                        age={12}
-                        discipline="12"
-                        gender="11"
-                        image="http://localhost:4000/f8855ce1-b401-4926-81a2-bc9ff6c19bcf.webp"
-                        location="123"
-                        name="Test"
-                        price={200}
-                        id="124"
-                        isFavorite
-                        onFavoriteToggle={() => {}}
-                        verified
-                    />
+                    <HorseCard />
                     {/* <HorseCard /> */}
 
                 </div>

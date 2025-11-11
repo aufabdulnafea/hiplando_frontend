@@ -7,56 +7,46 @@ import { ModeToggle } from '@/components/theme-mode-toggle';
 import UserDropDown from '@/components/user-dropdown';
 import NotificationsDropDown from '@/components/notifications-dropdown';
 import Container from '@/components/container';
-import { usePathname } from 'next/navigation';
-import { motion } from 'motion/react';
 
 export default function Navbar() {
-  const { user } = useAuth();
-  const pathname = usePathname();
+    const { user } = useAuth();
 
-  const navItems = [
-    { name: 'Horses', href: '/horses' },
-    { name: 'Transport', href: '/transport' },
-    { name: 'Competitions', href: '/competitions' },
-    { name: 'Services', href: '/services' },
-  ];
 
-  return (
-    <header
-      className="sticky shadow top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
-      role="banner"
-    >
-      <Container>
-        <nav
-          className="flex h-16 items-center justify-between"
-          aria-label="Main navigation"
+
+    return (
+        <header
+            className="sticky shadow top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
+            role="banner"
         >
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-2xl font-extrabold text-primary hover:opacity-90 transition-opacity"
-            aria-label="Go to homepage"
-          >
-            Hiplando
-          </Link>
+            <Container>
+                <nav
+                    className="flex h-16 items-center justify-between"
+                    aria-label="Main navigation"
+                >
+                    <Link
+                        href="/"
+                        className="text-2xl font-extrabold text-primary hover:opacity-90 transition-opacity"
+                        aria-label="Go to homepage"
+                    >
+                        Hiplando
+                    </Link>
 
 
-          {/* Right side actions */}
-          <div className="flex items-center gap-2">
-            <ModeToggle />
-            {user ? (
-              <div className="flex items-center gap-2">
-                <NotificationsDropDown />
-                <UserDropDown />
-              </div>
-            ) : (
-              <Button asChild size="sm" className="font-medium">
-                <Link href="/auth">Login</Link>
-              </Button>
-            )}
-          </div>
-        </nav>
-      </Container>
-    </header>
-  );
+                    <div className="flex items-center gap-2">
+                        <ModeToggle />
+                        {user ? (
+                            <div className="flex items-center gap-2">
+                                <NotificationsDropDown />
+                                <UserDropDown />
+                            </div>
+                        ) : (
+                            <Button asChild size="sm" className="font-medium">
+                                <Link href="/auth">Login</Link>
+                            </Button>
+                        )}
+                    </div>
+                </nav>
+            </Container>
+        </header>
+    );
 }

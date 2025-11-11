@@ -10,14 +10,14 @@ export interface UseUsersProps {
     pageIndex: number;
     pageSize: number;
     search: string;
-    sorting: SortingState;
+    sorting: SortingState | null;
 }
 
 export function useUsers(params: UseUsersProps) {
 
     const skip = (params.pageIndex) * params.pageSize;
     const take = params.pageSize;
-    const orderBy = params.sorting[0] ? [spreadToNestedObject(params.sorting[0].id, params.sorting[0].desc ? "desc" : "asc")] : undefined;
+    const orderBy = (params.sorting && params.sorting[0]) ? [spreadToNestedObject(params.sorting[0].id, params.sorting[0].desc ? "desc" : "asc")] : undefined;
     const where = params.search ? { name: { contains: params.search } } : undefined
 
     console.log(orderBy)
