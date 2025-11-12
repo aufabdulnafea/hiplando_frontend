@@ -1,26 +1,46 @@
 "use client"
 
 import { signOut } from "firebase/auth"
-import { IconUser } from "@tabler/icons-react"
 import { auth } from "@/lib/firebase"
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
+import Link from "next/link"
+import { UserRound, List, Heart, Settings, LogOut } from 'lucide-react'
 
 export default function UserDropDown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="text-primary dark:text-neutral-400">
-          <IconUser />
+          <UserRound />
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuItem>Listings</DropdownMenuItem>
-        <DropdownMenuItem>Favorites</DropdownMenuItem>
-        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <Link href="/horses">
+          <DropdownMenuItem className="flex items-center gap-2">
+            <List />
+            Listings
+          </DropdownMenuItem>
+        </Link>
+        <Link href="/favorites">
+          <DropdownMenuItem className="flex items-center gap-2">
+            <Heart />
+            Favorites
+          </DropdownMenuItem>
+        </Link>
+        <Link href="/settings">
+          <DropdownMenuItem className="flex items-center gap-2">
+            <Settings />
+            Settings
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut(auth)}>Logout</DropdownMenuItem>
+
+        <DropdownMenuItem className="flex items-center gap-2" onClick={() => signOut(auth)}>
+          <LogOut />
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

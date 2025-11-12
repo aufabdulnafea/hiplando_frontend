@@ -1,23 +1,28 @@
-"use client"
+// "use client"
 
 import { useFormContext } from "react-hook-form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { LuTrophy } from "react-icons/lu"
 import { cn } from "@/lib/utils"
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 import { FindManyHorseCategoryQuery } from "@/graphql/sdk"
-import { getGraphQLClient } from '@/lib/graphql'
+// import { getGraphQLClient } from '@/lib/graphql'
 
-export default function SelectCategory() {
-  const [categories, setCategories] = useState<FindManyHorseCategoryQuery['findManyHorseCategory']>([])
+export interface SelectCategoryProps {
+  categories: FindManyHorseCategoryQuery['findManyHorseCategory'];
+}
+
+export default function SelectCategory(props: SelectCategoryProps) {
+  const { categories } = props;
+  // const [categories, setCategories] = useState<FindManyHorseCategoryQuery['findManyHorseCategory']>([])
   const { setValue, watch, register } = useFormContext()
   const selected = watch("categoryId")
 
-  useEffect(() => {
-    // graphql.findManyHorseCategory().then(res => setCategories(res.findManyHorseCategory ?? []))
-    getGraphQLClient().then(client => client.findManyHorseCategory()).then(res => setCategories(res.findManyHorseCategory))
-  }, [])
+  // useEffect(() => {
+  //   // graphql.findManyHorseCategory().then(res => setCategories(res.findManyHorseCategory ?? []))
+  //   getGraphQLClient().then(client => client.findManyHorseCategory()).then(res => setCategories(res.findManyHorseCategory))
+  // }, [])
 
   return (
     <div className="w-full m-auto py-8">

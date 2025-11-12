@@ -1,5 +1,5 @@
-'use client';
-import { useEffect, useState } from "react";
+// 'use client';
+// import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,15 +16,21 @@ import {
     FindManyHorseDisciplineQuery,
     FindManyHorseGenderQuery
 } from "@/graphql/sdk";
-import { getGraphQLClient } from "@/lib/graphql";
+// import { getGraphQLClient } from "@/lib/graphql";
 
-export default function HorseDetail() {
-    const [genders, setGenders] = useState<
-        FindManyHorseGenderQuery["findManyHorseGender"]
-    >([]);
-    const [disciplines, setDisciplines] = useState<
-        FindManyHorseDisciplineQuery["findManyHorseDiscipline"]
-    >([]);
+interface HorseDetailProps {
+    disciplines: FindManyHorseDisciplineQuery['findManyHorseDiscipline'];
+    genders: FindManyHorseGenderQuery['findManyHorseGender'];
+}
+
+export default function HorseDetail(props: HorseDetailProps) {
+    const { disciplines, genders } = props;
+    // const [genders, setGenders] = useState<
+    //     FindManyHorseGenderQuery["findManyHorseGender"]
+    // >([]);
+    // const [disciplines, setDisciplines] = useState<
+    //     FindManyHorseDisciplineQuery["findManyHorseDiscipline"]
+    // >([]);
 
     const { register, watch, setValue } = useFormContext();
 
@@ -37,16 +43,16 @@ export default function HorseDetail() {
     const price = watch("price");
     const height = watch("height");
 
-    useEffect(() => {
-        // Fetch genders & disciplines from GraphQL
-        getGraphQLClient()
-            .then((client) => client.findManyHorseGender())
-            .then((res) => setGenders(res.findManyHorseGender));
+    // useEffect(() => {
+    //     // Fetch genders & disciplines from GraphQL
+    //     getGraphQLClient()
+    //         .then((client) => client.findManyHorseGender())
+    //         .then((res) => setGenders(res.findManyHorseGender));
 
-        getGraphQLClient()
-            .then((client) => client.findManyHorseDiscipline())
-            .then((res) => setDisciplines(res.findManyHorseDiscipline));
-    }, []);
+    //     getGraphQLClient()
+    //         .then((client) => client.findManyHorseDiscipline())
+    //         .then((res) => setDisciplines(res.findManyHorseDiscipline));
+    // }, []);
 
     return (
         <div className="py-10">

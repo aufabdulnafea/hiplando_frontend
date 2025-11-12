@@ -15,7 +15,7 @@ export default function Navbar() {
 
     return (
         <header
-            className="sticky shadow top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75"
+            className="sticky shadow top-0 z-50 w-full border-b border-border/40 bg-background/90 backdrop-blur-md dark:bg-background/90 supports-[backdrop-filter]:bg-background/70  dark:supports-[backdrop-filter]:bg-background/90"
             role="banner"
         >
             <Container>

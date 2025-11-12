@@ -27,8 +27,13 @@ import {
     SheetOverlay
 } from "@/components/ui/sheet";
 
-export default function HorsesPage() {
+export interface HorsesGridProps {
+    initialHorses: any[];
+}
+
+export default function HorsesGrid({ initialHorses }: HorsesGridProps) {
     const [viewMode, setViewMode] = useState("grid");
+    const [horses, setHorses] = useState(initialHorses);
 
     return (
         <Container>
