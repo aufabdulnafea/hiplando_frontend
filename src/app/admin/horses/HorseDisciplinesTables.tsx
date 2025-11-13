@@ -9,15 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { getGraphQLClient } from '@/lib/graphql'
-import { FindManyHorseDisciplineQuery } from "@/graphql/sdk"
 import TableControls from "./TableControls"
 
 export default function HorseDisciplinesTable() {
-  const [disciplines, setDisciplines] = useState<FindManyHorseDisciplineQuery['findManyHorseDiscipline']>([])
+  const [disciplines, setDisciplines] = useState<any[]>([])
 
   useEffect(() => {
-    getGraphQLClient().then(client => client.findManyHorseDiscipline()).then(res => setDisciplines(res.findManyHorseDiscipline))
   }, [])
 
 

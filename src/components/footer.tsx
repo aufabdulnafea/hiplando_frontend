@@ -13,14 +13,14 @@ export default function Footer() {
     return (
         <footer className="bg-primary text-primary-foreground">
             <Container>
-                <Card className="bg-transparent border-none shadow-none">
-                    <CardContent className="p-0 flex flex-col gap-10 py-10">
+                <div className="bg-transparent border-none shadow-none">
+                    <div className="p-0 flex flex-col gap-5 py-10">
                         {/* === Top Section === */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                             {/* Brand / Description */}
                             <div>
                                 <h2 className="text-3xl font-extrabold mb-3 tracking-tight">HIPLANDO</h2>
-                                <p className="text-sm leading-relaxed text-primary-foreground/90 max-w-sm">
+                                <p className="text-sm leading-relaxed text-primary-foreground/90 w-full">
                                     Your premier destination for horse trading, transport services, and equestrian competitions worldwide.
                                 </p>
                             </div>
@@ -131,8 +131,8 @@ export default function Footer() {
                                 </ul>
                             </div>
                         </div>
-                    </CardContent>
-                </Card>
+                    </div>
+                </div>
             </Container>
         </footer>
     );

@@ -8,6 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { formatPrice } from "@/lib/format-price"
 
 export type HorseType = FindManyHorseQuery['findManyHorse'][number]
 
@@ -54,10 +55,7 @@ export const columns: ColumnDef<HorseType>[] = [
         header: ({ column }) => <DataTableColumnHeader column={column} title="Price" />,
         cell: ({ row }) => {
             const amount = row.original.price
-            const formatted = new Intl.NumberFormat("de-DE", {
-                style: "currency",
-                currency: "EUR",
-            }).format(amount)
+            const formatted = formatPrice(amount)
 
             return <div className="font-medium">{formatted}</div>
         },

@@ -40,7 +40,7 @@ export default function Navbar() {
                                 <UserDropDown />
                             </div>
                         ) : (
-                            <Button asChild size="sm" className="font-medium">
+                            <Button asChild className="font-medium">
                                 <Link href="/auth">Login</Link>
                             </Button>
                         )}

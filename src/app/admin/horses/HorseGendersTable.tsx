@@ -2,15 +2,12 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { getGraphQLClient } from '@/lib/graphql'
-import { FindManyHorseGenderQuery } from "@/graphql/sdk"
 import TableControls from "./TableControls"
 
 export default function HorseGendersTable() {
-    const [genders, setGenders] = useState<FindManyHorseGenderQuery['findManyHorseGender']>([])
+    const [genders, setGenders] = useState<any[]>([])
 
     useEffect(() => {
-        getGraphQLClient().then(client => client.findManyHorseGender()).then(res => setGenders(res.findManyHorseGender))
     }, [])
 
     return (

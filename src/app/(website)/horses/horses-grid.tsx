@@ -5,35 +5,27 @@ import Container from "@/components/container";
 import HorseCard from "@/components/horse-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import {
-    ToggleGroup,
-    ToggleGroupItem,
-} from "@/components/ui/toggle-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Grid3X3, List, Filter } from "lucide-react";
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-    SheetDescription,
-    SheetOverlay
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetDescription, SheetOverlay } from "@/components/ui/sheet";
+import { FindManyHorseQuery } from "@/graphql/sdk";
+import { useHorses } from "@/hooks/use-horses";
 
 export interface HorsesGridProps {
-    initialHorses: any[];
+    initialData: FindManyHorseQuery['findManyHorse'];
 }
 
-export default function HorsesGrid({ initialHorses }: HorsesGridProps) {
+export default function HorsesGrid({ initialData }: HorsesGridProps) {
     const [viewMode, setViewMode] = useState("grid");
-    const [horses, setHorses] = useState(initialHorses);
+    const { data } = useHorses({
+        pageIndex: 0,
+        pageSize: 6,
+        search: "",
+        sorting: [],
+        initialData
+    });
+
 
     return (
         <Container>
@@ -132,12 +124,11 @@ export default function HorsesGrid({ initialHorses }: HorsesGridProps) {
                         : "grid-cols-1"
                         }`}
                 >
-                    <HorseCard />
-                    <HorseCard />
-                    <HorseCard />
-                    <HorseCard />
-                    <HorseCard />
-                    <HorseCard />
+                    {
+                        data?.horses?.map((horse) => (
+                            <HorseCard key={horse.id} horse={horse} />
+                        ))
+                    }
                 </div>
             </div>
         </Container>

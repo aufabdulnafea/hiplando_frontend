@@ -1,3 +1,4 @@
+import { FindManyHorseQuery } from "@/graphql/sdk";
 import { getGraphQLClient } from "@/lib/graphql";
 import { useQuery } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
@@ -11,6 +12,7 @@ export interface UseHorsesProps {
     pageSize: number;
     search: string;
     sorting: SortingState;
+    initialData?: FindManyHorseQuery['findManyHorse']
 }
 
 export function useHorses(params: UseHorsesProps) {
@@ -19,8 +21,6 @@ export function useHorses(params: UseHorsesProps) {
     const take = params.pageSize;
     const orderBy = params.sorting[0] ? [spreadToNestedObject(params.sorting[0].id, params.sorting[0].desc ? "desc" : "asc")] : undefined;
     const where = params.search ? { name: { contains: params.search } } : undefined
-
-    console.log(orderBy)
 
     return useQuery({
         queryKey: ["horses", params],
@@ -31,6 +31,7 @@ export function useHorses(params: UseHorsesProps) {
                 client.findManyHorseCount({}),
             ]);
             return { horses: horses.findManyHorse, count: countResult.findManyHorseCount };
-        }
+        },
+        initialData: { horses: params.initialData, count: params.initialData?.length || 0 }
     });
 }

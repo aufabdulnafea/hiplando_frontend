@@ -9,15 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { getGraphQLClient } from '@/lib/graphql'
-import { FindManyHorseCategoryQuery } from "@/graphql/sdk"
 import TableControls from "./TableControls"
 
 export default function HorseCategoriesTable() {
-  const [categories, setCategories] = useState<FindManyHorseCategoryQuery['findManyHorseCategory']>([])
+  const [categories, setCategories] = useState<any[]>([])
 
   useEffect(() => {
-    getGraphQLClient().then(res => res.findManyHorseCategory()).then(res => setCategories(res.findManyHorseCategory))
   }, [])
 
 

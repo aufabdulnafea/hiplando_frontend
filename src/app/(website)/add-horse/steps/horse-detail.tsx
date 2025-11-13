@@ -12,15 +12,15 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-import {
-    FindManyHorseDisciplineQuery,
-    FindManyHorseGenderQuery
-} from "@/graphql/sdk";
-// import { getGraphQLClient } from "@/lib/graphql";
+
+// POST
+// https://www.horsetelex.com/search/search/search-horses
+// {"name":"Test","father":null,"mother":null,"fatherOfMother":null,"year":null,"studbook":null,"reg":null,"fei":null,"chipnumber":null,"page":1}
+
 
 interface HorseDetailProps {
-    disciplines: FindManyHorseDisciplineQuery['findManyHorseDiscipline'];
-    genders: FindManyHorseGenderQuery['findManyHorseGender'];
+    disciplines: any[];
+    genders: any[];
 }
 
 export default function HorseDetail(props: HorseDetailProps) {

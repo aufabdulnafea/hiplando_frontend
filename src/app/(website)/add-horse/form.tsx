@@ -17,7 +17,6 @@ import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
 import { HorseAddedSuccessCard } from './added-success-card';
-import { FindManyHorseCategoryQuery, FindManyHorseDisciplineQuery, FindManyHorseGenderQuery } from "@/graphql/sdk";
 
 const schema = z.object({
     categoryId: z.string().min(1, "Please select a category"),
@@ -104,9 +103,9 @@ function StepController({ step, previousStep, handleNext, isLastStep, isSubmitti
 
 
 interface AddHorseFormProps {
-    categories: FindManyHorseCategoryQuery['findManyHorseCategory'];
-    disciplines: FindManyHorseDisciplineQuery['findManyHorseDiscipline'];
-    genders: FindManyHorseGenderQuery['findManyHorseGender'];
+    categories: any[];
+    disciplines: any[];
+    genders: any[];
 }
 
 export default function AddHorseForm(props: AddHorseFormProps) {
