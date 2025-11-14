@@ -1,14 +1,15 @@
-'use client';
+// 'use client';
 
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import Container from '@/components/container';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import LanguageSwitcher from './language-switcher';
+import { getLocale } from 'next-intl/server';
 
-export default function Footer() {
+export default async function Footer() {
     const year = new Date().getFullYear();
+    const locale = await getLocale();
 
     return (
         <footer className="bg-primary text-primary-foreground">
@@ -82,15 +83,7 @@ export default function Footer() {
                                 {/* Language Selector */}
                                 <div className="flex items-center gap-2">
                                     <span>Language:</span>
-                                    <Select defaultValue="en">
-                                        <SelectTrigger className="w-[100px] border-none focus:ring-0 bg-primary text-primary-foreground">
-                                            <SelectValue placeholder="EN" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="en">English</SelectItem>
-                                            <SelectItem value="ar">العربية</SelectItem>
-                                        </SelectContent>
-                                    </Select>
+                                    <LanguageSwitcher currentLocale={locale} />
                                 </div>
 
                                 {/* Social Icons */}

@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import dynamic from "next/dynamic";
 import { GoPulse } from "react-icons/go";
@@ -14,12 +14,12 @@ import PrimarySection from "@/components/sections/primary-section";
 import SectionHeader from "@/components/sections/section-header";
 
 // Lazy load heavy components like HorseCard for better performance
-const HorseCard = dynamic(() => import("@/components/horse-card"), {
-    loading: () => <div className="h-64 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-2xl" />,
-    ssr: false,
-});
+// const HorseCard = dynamic(() => import("@/components/horse-card"), {
+//     loading: () => <div className="h-64 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-2xl" />,
+//     ssr: false,
+// });
 
-export default function Home() {
+export default async function Home() {
     return (
         <main className="flex flex-col">
             {/* ========== HERO SECTION ========== */}

@@ -1,14 +1,14 @@
-
-// hero-buttons.tsx
 'use client'
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function HeroButtons() {
     const [loggedIn, setLoggedIn] = useState(false);
+    const t = useTranslations('HomePage');
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => setLoggedIn(!!user));
@@ -22,7 +22,7 @@ export default function HeroButtons() {
                     size="lg"
                     className="px-8 py-6 bg-yellow-500 hover:bg-yellow-400 text-primary font-semibold transition-transform focus-visible:ring-2 focus-visible:ring-yellow-400"
                 >
-                    Browse Horses
+                    {t('heroButton1')}
                 </Button>
             </Link>
 
@@ -32,7 +32,7 @@ export default function HeroButtons() {
                     size="lg"
                     className="px-8 py-6 font-semibold transition-transform focus-visible:ring-2 focus-visible:ring-white"
                 >
-                    Post a Horse
+                    {t('heroButton2')}
                 </Button>
             </Link>
         </div>
