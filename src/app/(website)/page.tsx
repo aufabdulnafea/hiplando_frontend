@@ -1,6 +1,3 @@
-// 'use client';
-
-import dynamic from "next/dynamic";
 import { GoPulse } from "react-icons/go";
 import { FiTruck } from "react-icons/fi";
 import { LuCalendar } from "react-icons/lu";
@@ -12,12 +9,7 @@ import LightSection from "@/components/sections/light-section";
 import WhiteSection from "@/components/sections/white-section";
 import PrimarySection from "@/components/sections/primary-section";
 import SectionHeader from "@/components/sections/section-header";
-
-// Lazy load heavy components like HorseCard for better performance
-// const HorseCard = dynamic(() => import("@/components/horse-card"), {
-//     loading: () => <div className="h-64 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-2xl" />,
-//     ssr: false,
-// });
+import FeaturedHorsesSection from "@/components/featured-horses-section";
 
 export default async function Home() {
     return (
@@ -78,17 +70,8 @@ export default async function Home() {
                     description="Discover exceptional horses from around the world"
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-                    {/* <HorseCard /> */}
-                    {/* <HorseCard /> */}
+                <FeaturedHorsesSection />
 
-                </div>
-
-                <div className="flex justify-center mt-10">
-                    <Button size="lg" className="px-8">
-                        View All Horses
-                    </Button>
-                </div>
             </WhiteSection>
 
             {/* ========== CTA SECTION ========== */}

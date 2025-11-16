@@ -6,10 +6,12 @@ import Container from '@/components/container';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import LanguageSwitcher from './language-switcher';
 import { getLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 export default async function Footer() {
     const year = new Date().getFullYear();
     const locale = await getLocale();
+    const t = await getTranslations();
 
     return (
         <footer className="bg-primary text-primary-foreground">
@@ -20,9 +22,11 @@ export default async function Footer() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                             {/* Brand / Description */}
                             <div>
-                                <h2 className="text-3xl font-extrabold mb-3 tracking-tight">HIPLANDO</h2>
+                                <h2 className="text-3xl font-extrabold mb-3 tracking-tight uppercase">
+                                    {t("name")}
+                                </h2>
                                 <p className="text-sm leading-relaxed text-primary-foreground/90 w-full">
-                                    Your premier destination for horse trading, transport services, and equestrian competitions worldwide.
+                                    {t("Footer.description")}
                                 </p>
                             </div>
 

@@ -33,6 +33,14 @@ input[type=password]::-webkit-credentials-auto-fill-button {
   body {
     @apply bg-background text-foreground;
   }
+
+  :root {
+    --font-arabic: var(--font-arabic);
+  }
+
+  .font-arabic {
+    font-family: var(--font-arabic);
+  }
 }
 
 

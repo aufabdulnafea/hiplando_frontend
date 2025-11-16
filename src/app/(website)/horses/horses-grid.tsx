@@ -1,136 +1,233 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "@/components/container";
-import HorseCard from "@/components/horse-card";
+import HorseCard, { HorseCardSkeleton } from "@/components/horse-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Grid3X3, List, Filter } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetDescription, SheetOverlay } from "@/components/ui/sheet";
-import { FindManyHorseQuery } from "@/graphql/sdk";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetOverlay } from "@/components/ui/sheet";
+
+import { FindManyHorseQuery, HorseWhereInput, InputMaybe } from "@/graphql/sdk";
 import { useHorses } from "@/hooks/use-horses";
+import { SortingState } from "@tanstack/react-table";
+
+import { HorsesFilterForm } from "./horses-filter-form";
+import { buildHorseWhere } from './build-horse-where'
+
+export const PAGE_SIZE = 6;
 
 export interface HorsesGridProps {
-    initialData: FindManyHorseQuery['findManyHorse'];
+    initialData: FindManyHorseQuery["findManyHorse"];
+    disciplines: { id: string; name: string }[];
 }
 
-export default function HorsesGrid({ initialData }: HorsesGridProps) {
-    const [viewMode, setViewMode] = useState("grid");
-    const { data } = useHorses({
-        pageIndex: 0,
-        pageSize: 6,
-        search: "",
-        sorting: [],
-        initialData
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+
+export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps) {
+    const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+    const [sorting, setSorting] = useState<SortingState>([]);
+    const [pageIndex, setPageIndex] = useState<number>(0);
+
+    const [search, setSearch] = useState("");
+    const [appliedFilters, setAppliedFilters] = useState<{
+        disciplines: string[];
+        ageMin?: number;
+        ageMax?: number;
+        priceMin?: number;
+        priceMax?: number;
+        heightMin?: number;
+        heightMax?: number;
+    }>({ disciplines: [] });
+
+    const [where, setWhere] = useState<InputMaybe<HorseWhereInput> | undefined>(undefined);
+
+    // Build `where` only when applied filters change
+    useEffect(() => {
+        const newWhere = buildHorseWhere({
+            search,
+            disciplines: appliedFilters.disciplines,
+            ageMin: appliedFilters.ageMin,
+            ageMax: appliedFilters.ageMax,
+            priceMin: appliedFilters.priceMin,
+            priceMax: appliedFilters.priceMax,
+            heightMin: appliedFilters.heightMin,
+            heightMax: appliedFilters.heightMax,
+        });
+        setWhere(newWhere);
+    }, [appliedFilters, search]);
+
+
+
+    const applyFilters = (filtersFromForm: {
+        disciplines: string[];
+        ageMin?: number;
+        ageMax?: number;
+        priceMin?: number;
+        priceMax?: number;
+        heightMin?: number;
+        heightMax?: number;
+    }) => setAppliedFilters(filtersFromForm);
+
+    const { data, isFetching, isLoading } = useHorses({
+        pageIndex,
+        pageSize: PAGE_SIZE,
+        where,
+        sorting,
+        initialData,
     });
 
+    useEffect(() => {
+        console.log("loading ----")
+    }, [isLoading, isFetching])
 
     return (
-        <Container>
-            {/* Header */}
-            <div className="flex flex-col py-10 gap-4 border-b">
-                <h2 className="text-3xl text-primary font-extrabold">Horses for Sale</h2>
+        <div className="mb-30">
+            <Container>
+                {/* Header */}
+                <div className="flex flex-col py-10 gap-4 border-b">
+                    <h2 className="text-3xl text-primary font-extrabold">Horses for Sale</h2>
 
-                <div className="flex flex-col md:flex-row gap-3">
-                    {/* Search */}
-                    <div className="flex-1">
-                        <Input placeholder="Search horses by name or breed" className="w-full" />
-                    </div>
+                    <div className="flex flex-col md:flex-row gap-3">
+                        {/* Search */}
+                        <div className="flex-1">
+                            <Input
+                                placeholder="Search horses by name or breed"
+                                className="w-full"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
 
-                    {/* Filters & View Controls */}
-                    <div className="flex gap-2 items-center">
-                        <Select>
-                            <SelectTrigger className="flex-1 md:w-[180px]">
-                                <SelectValue placeholder="Sort by" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="price">Price</SelectItem>
-                                <SelectItem value="age">Age</SelectItem>
-                                <SelectItem value="breed">Breed</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        <div className="flex gap-2 items-center">
+                            {/* Sorting */}
+                            <Select>
+                                <SelectTrigger className="md:w-[180px]">
+                                    <SelectValue placeholder="Sort by" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="price">Price</SelectItem>
+                                    <SelectItem value="age">Age</SelectItem>
+                                    <SelectItem value="breed">Breed</SelectItem>
+                                </SelectContent>
+                            </Select>
 
-                        <ToggleGroup
-                            type="single"
-                            value={viewMode}
-                            onValueChange={(value) => value && setViewMode(value)}
-                        // className=""
-                        >
-                            <ToggleGroupItem
-                                value="grid"
-                                aria-label="Grid view"
-                                className="border-l border-t border-b data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
+                            {/* View mode */}
+                            <ToggleGroup
+                                type="single"
+                                value={viewMode}
+                                onValueChange={(val) => val && setViewMode(val as "grid" | "list")}
                             >
-                                <Grid3X3 className="h-4 w-4" />
-                            </ToggleGroupItem>
-                            <ToggleGroupItem
-                                value="list"
-                                aria-label="List view"
-                                className="border-r border-t border-b data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
-                            >
-                                <List className="h-4 w-4" />
-                            </ToggleGroupItem>
-                        </ToggleGroup>
+                                <ToggleGroupItem
+                                    value="grid"
+                                    aria-label="Grid view"
+                                    className="border data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
+                                >
+                                    <Grid3X3 className="h-4 w-4" />
+                                </ToggleGroupItem>
+                                <ToggleGroupItem
+                                    value="list"
+                                    aria-label="List view"
+                                    className="border data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
+                                >
+                                    <List className="h-4 w-4" />
+                                </ToggleGroupItem>
+                            </ToggleGroup>
 
-                        {/* Mobile Filter Toggle */}
-                        <Sheet>
-                            <SheetOverlay className="backdrop-blur-xs" />
-                            <SheetTrigger asChild>
-                                <Button variant="outline" size="icon" className="lg:hidden">
-                                    <Filter className="h-5 w-5" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side="left">
-                                <SheetHeader>
-                                    <SheetTitle>Filters</SheetTitle>
-                                    <SheetDescription>
-                                        Select your preferred filters
-                                    </SheetDescription>
-                                </SheetHeader>
-                                <div className="flex flex-col gap-4 px-4">
-                                    <div className="flex justify-between items-start">
-                                        <h4 className="text-primary font-bold text-lg">Filters</h4>
-                                        <Button variant="link" size="sm" className="text-foreground p-0">
-                                            Clear all
-                                        </Button>
+                            {/* Mobile Filters */}
+                            <Sheet>
+                                <SheetOverlay className="backdrop-blur-xs" />
+                                <SheetTrigger asChild>
+                                    <Button variant="outline" size="icon" className="lg:hidden">
+                                        <Filter className="h-5 w-5" />
+                                    </Button>
+                                </SheetTrigger>
+
+                                <SheetContent side="left">
+                                    <SheetHeader>
+                                        <SheetTitle>Filters</SheetTitle>
+                                    </SheetHeader>
+
+                                    <div className="px-4">
+                                        <HorsesFilterForm
+                                            disciplines={disciplines}
+                                            applyFilters={applyFilters}
+                                        />
                                     </div>
-                                    {/* Add your filter controls here */}
-                                </div>
-                            </SheetContent>
-                        </Sheet>
+                                </SheetContent>
+                            </Sheet>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Main Area */}
-            <div className="w-full flex flex-col md:flex-row py-6 gap-5">
-                {/* Sidebar (hidden on small screens) */}
-                <div className="hidden lg:block w-2xs pr-5">
-                    <div className="flex justify-between items-start">
-                        <h4 className="text-primary font-bold text-lg">Filters</h4>
-                        <Button variant="link" size="sm" className="text-foreground p-0">
-                            Clear all
-                        </Button>
+                {/* Content */}
+                <div className="w-full flex flex-col md:flex-row py-6 gap-5">
+                    {/* Desktop Filters */}
+                    <aside className="hidden lg:block w-64 pr-5">
+                        <HorsesFilterForm
+                            disciplines={disciplines}
+                            applyFilters={applyFilters}
+                        />
+                    </aside>
+
+                    <div className="flex flex-1 flex-col">
+                        <div className="flex-1 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                            {isLoading || isFetching ? (
+                                Array.from({ length: PAGE_SIZE }).map((_, idx) => <HorseCardSkeleton key={idx} />)
+                            ) : (
+                                data?.horses?.map((horse) => <HorseCard key={horse.id} horse={horse} />)
+                            )}
+                        </div>
+                        <div className="flex justify-center mt-5">
+                            <Pagination>
+                                <PaginationContent>
+
+                                    <PaginationItem>
+                                        <PaginationPrevious
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                if (pageIndex > 0) setPageIndex(pageIndex - 1);
+                                            }}
+                                            className={pageIndex === 0 ? "pointer-events-none opacity-50" : ""}
+                                        />
+                                    </PaginationItem>
+
+                                    {/* PAGE BUTTONS */}
+                                    {[...Array(Math.ceil((data?.count + 1) / PAGE_SIZE))].map((_, i) => (
+                                        <PaginationItem key={i}>
+                                            <PaginationLink
+                                                href="#"
+                                                isActive={i === pageIndex}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setPageIndex(i);
+                                                }}
+                                            >
+                                                {i + 1}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    ))}
+
+                                    <PaginationItem>
+                                        <PaginationNext
+                                            href="#"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                if ((data?.count + 1) / PAGE_SIZE > pageIndex + 1) setPageIndex(pageIndex + 1);
+                                            }}
+                                            className={pageIndex >= (data?.count + 1) / PAGE_SIZE ? "pointer-events-none opacity-50" : ""}
+                                        />
+                                    </PaginationItem>
+
+                                </PaginationContent>
+                            </Pagination>
+                        </div>
                     </div>
-                    {/* Add filter options here */}
                 </div>
-
-                {/* Horses grid */}
-                <div
-                    className={`flex-1 grid gap-4 ${viewMode === "grid"
-                        ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3"
-                        : "grid-cols-1"
-                        }`}
-                >
-                    {
-                        data?.horses?.map((horse) => (
-                            <HorseCard key={horse.id} horse={horse} />
-                        ))
-                    }
-                </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 }

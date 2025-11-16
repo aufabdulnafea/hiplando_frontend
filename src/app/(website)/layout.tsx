@@ -9,14 +9,16 @@ import { Tajawal, } from "next/font/google";
 const arabicFont = Tajawal({ subsets: ["arabic"], weight: ["400", "500", "700"], variable: "--font-arabic" });
 
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = useLocale();
   const isArabic = locale === "ar";
 
   return (
-    <div lang={locale} dir={isArabic ? 'rtl' : 'ltr'} className={
-      isArabic ? arabicFont.variable : 'antialiased font-sans max-w-screen'
-    }>
+    <div
+      lang={locale}
+      dir={isArabic ? "rtl" : "ltr"}
+      className={`${isArabic ? arabicFont.variable + " font-arabic" : "font-sans"} antialiased max-w-screen`}
+    >
       <NextIntlClientProvider>
         <AuthProvider>
           <Navbar />

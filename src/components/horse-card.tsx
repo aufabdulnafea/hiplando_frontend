@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/format-price';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface HorseCardProps {
     horse: FindManyHorseQuery['findManyHorse'][number]
@@ -14,9 +15,10 @@ interface HorseCardProps {
 
 function ImageSkeleton() {
     return (
-        <div className="w-full h-50 bg-gray-200 animate-pulse rounded-t-lg flex items-center justify-center text-gray-400 text-sm">
-            Loading image...
-        </div>
+        // <div className="w-full h-50 bg-gray-200 animate-pulse rounded-t-lg flex items-center justify-center text-gray-400 text-sm">
+        //     Loading image...
+        // </div>
+        <Skeleton className='w-full h-52' />
     )
 }
 
@@ -26,6 +28,28 @@ export function VerifiedHorseCardBadge() {
             <span><FiCheckCircle /></span>
             verified
         </div>
+    )
+}
+
+export function HorseCardSkeleton() {
+    return (
+        <Card className='max-w-md pt-0 relative overflow-hidden'>
+
+            <CardContent className='px-0'>
+                <ImageSkeleton />
+            </CardContent>
+            <CardHeader>
+                <CardTitle>
+                    <Skeleton className='w-52 h-6' />
+                </CardTitle>
+                <CardDescription className='flex flex-col gap-1'>
+                    <Skeleton className='w-full p-2 h-10' />
+                </CardDescription>
+            </CardHeader>
+            <CardFooter>
+                <Skeleton className='w-full p-2 h-7' />
+            </CardFooter>
+        </Card>
     )
 }
 
@@ -59,9 +83,9 @@ export default function HorseCard({ horse }: HorseCardProps) {
             <CardHeader>
                 <CardTitle className='text-primary font-bold'>{horse.name}</CardTitle>
                 <CardDescription className='flex flex-col gap-1'>
-                    <div>{horse.gender.name}</div>
+                    <div className='capitalize'>{horse.gender.name}</div>
                     <div className='text-2xl font-extrabold text-yellow-600'>{formatPrice(horse.price)}</div>
-                    <div className='flex items-center gap-1'>
+                    <div className='flex items-center gap-1 capitalize'>
                         <MapPin className='size-4' />
                         {horse.location}
                     </div>

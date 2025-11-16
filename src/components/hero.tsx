@@ -1,9 +1,7 @@
-// Hero.tsx  (Server Component — no "use client")
 import Image from "next/image";
 import Container from "@/components/container";
 import HeroButtons from "./hero-buttons";
 import { getTranslations } from 'next-intl/server';
-
 
 export default async function Hero() {
 

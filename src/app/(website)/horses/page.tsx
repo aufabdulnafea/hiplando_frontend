@@ -10,10 +10,17 @@ const getHorsesGridInitialData = unstable_cache(async () => {
 }, ['horses-grid'], { tags: ['horses-grid'] })
 
 export default async function HorsesPage() {
+
     const initialData = await getHorsesGridInitialData()
-    
+    const disciplinesResponse = await fetch("http://192.168.0.217:4000/api/v1/disciplines", {
+        next: {
+            tags: ['disciplines'],
+            revalidate: false
+        }
+    })
+    const disciplines = await disciplinesResponse.json();
 
     return (
-        <HorsesGrid initialData={initialData} />
+        <HorsesGrid initialData={initialData} disciplines={disciplines} />
     )
 }

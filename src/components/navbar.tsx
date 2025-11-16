@@ -7,11 +7,11 @@ import { ModeToggle } from '@/components/theme-mode-toggle';
 import UserDropDown from '@/components/user-dropdown';
 import NotificationsDropDown from '@/components/notifications-dropdown';
 import Container from '@/components/container';
+import { useTranslations } from 'next-intl';
 
 export default function Navbar() {
     const { user } = useAuth();
-
-
+    const t = useTranslations();
 
     return (
         <header
@@ -28,7 +28,7 @@ export default function Navbar() {
                         className="text-2xl font-extrabold text-primary hover:opacity-90 transition-opacity"
                         aria-label="Go to homepage"
                     >
-                        Hiplando
+                        {t("name")}
                     </Link>
 
 
