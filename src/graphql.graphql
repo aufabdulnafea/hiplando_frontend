@@ -4,6 +4,7 @@ query findManyHorse(
   $cursor: HorseWhereUniqueInput
   $take: Int
   $skip: Int
+  $uid: String
 ) {
   findManyHorse(
     where: $where
@@ -15,7 +16,7 @@ query findManyHorse(
     id
     name
     status
-    age
+    yearOfBirth
     height
     price
     location
@@ -43,19 +44,19 @@ query findManyHorse(
     }
     createdAt
     updatedAt
+
+    favoriteByUsers(where: { userUid: { equals: $uid } }) {
+      id
+    }
   }
 }
 
-query findUniqueHorse(
-  $where: HorseWhereUniqueInput!
-) {
-  findUniqueHorse(
-    where: $where
-  ) {
+query findUniqueHorse($where: HorseWhereUniqueInput!) {
+  findUniqueHorse(where: $where) {
     id
     name
     status
-    age
+    yearOfBirth
     height
     price
     location

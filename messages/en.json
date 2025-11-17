@@ -4,7 +4,51 @@
         "heroTitle": "Global Equine Sales & Services",
         "heroDescription": "Buy, sell, and manage horses and equestrian services worldwide.",
         "heroButton1": "Browse Horses",
-        "heroButton2": "Post a Horse"
+        "heroButton2": "Post a Horse",
+        "sections": {
+            "why-choose-hiplando": {
+                "title": "Why Choose Hiplando?",
+                "description": "Your complete equestrian platform for buying, selling, and managing horses worldwide.",
+                "cards": [
+                    {
+                        "title": "Marketplace",
+                        "emoji": "🐎",
+                        "text": "Thousands of listings worldwide. Find your perfect horse or reach global buyers."
+                    },
+                    {
+                        "title": "Transport",
+                        "emoji": "🚚",
+                        "text": "Book ground & air logistics. Professional horse transport services worldwide."
+                    },
+                    {
+                        "title": "Competitions",
+                        "emoji": "📅",
+                        "text": "Track international events and stay updated with the global equestrian calendar."
+                    }
+                ]
+            },
+            "featured-horses": {
+                "title": "Featured Horses",
+                "description": "Discover exceptional horses from around the world"
+            },
+            "cta-section": {
+                "title": "Need transport to Paris Masters?",
+                "description": "Professional horse transport services worldwide.",
+                "button": "Book Now"
+            },
+            "upcoming-competitions": {
+                "title": "Upcoming Competitions",
+                "description": "Stay updated with international equestrian events"
+            },
+            "trusted-partners": {
+                "title": "Trusted by Industry Leaders",
+                "description": "Partnering with the world's most prestigious equestrian organizations"
+            },
+            "final-cta": {
+                "title": "Join the global Hiplando community today",
+                "button": "Get Started"
+            }
+        }
     },
     "Footer": {
         "description": "Your premier destination for horse trading, transport services, and equestrian competitions worldwide."

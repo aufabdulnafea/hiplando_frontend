@@ -9,40 +9,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle } from "@/components/ui/dialog";
+import { addCategory, AddCategoryFormData, addCategorySchema, addDiscipline, AddDisciplineFormData, addDisciplineSchema, addGender, AddGenderFormData, addGenderSchema } from "@/lib/api";
+import { toast } from "sonner";
 
 export function AddCategoryForm() {
-    const schema = z.object({
-        name: z.string().min(1, "Name is required"),
-        image: z
-            .any()
-            .refine((files) => files?.length === 1, "File is required"), // make sure one file is selected
-    });
-
-    type FormData = z.infer<typeof schema>;
-
-    const form = useForm<FormData>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            name: "",
-            image: null,
-        },
+    const form = useForm<AddCategoryFormData>({
+        resolver: zodResolver(addCategorySchema),
+        defaultValues: { name: "", image: null },
     });
 
 
-    const onSubmit = async (data: FormData) => {
-        console.log("submitting")
+    const onSubmit = async (data: AddCategoryFormData) => {
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("image", data.image[0]); // data.file is a FileList
 
         try {
-            const res = await fetch("http://localhost:4000/api/v1/admin/horses/category", {
-                method: "POST",
-                body: formData,
-            });
-            console.log(await res.json());
+            await addCategory(formData)
         } catch (err) {
-            console.error(err);
+            console.error(err)
+            toast.error("Failed to add category")
         }
     };
 
@@ -89,88 +75,54 @@ export function AddCategoryForm() {
 }
 
 export function AddDisciplineForm() {
-
-    const schema = z.object({
-        name: z.string().min(1, "Name is required"),
+    const form = useForm<AddDisciplineFormData>({
+        resolver: zodResolver(addDisciplineSchema),
+        defaultValues: { name: "" }
     });
 
-    type FormData = z.infer<typeof schema>;
-
-    const form = useForm<FormData>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            name: "",
-        },
-    });
-
-
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (data: AddDisciplineFormData) => {
         try {
-            const res = await fetch("http://localhost:4000/api/v1/admin/horses/discipline", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: data.name }),
-            });
-            console.log(await res.json());
+            await addDiscipline(data)
         } catch (err) {
-            console.error(err);
+            console.error(err)
+            toast.error("Failed to add discipline")
         }
     };
-
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" id="add-item-form">
-                {/* Name field */}
                 <FormField
                     control={form.control}
                     name="name"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Name</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Enter name" {...field} />
-                            </FormControl>
+                            <FormControl><Input placeholder="Enter name" {...field} /></FormControl>
                         </FormItem>
                     )}
                 />
             </form>
         </Form>
-
     )
-
-
 }
 
 export function AddGenderForm() {
 
-    const schema = z.object({
-        name: z.string().min(1, "Name is required"),
-    });
-
-    type FormData = z.infer<typeof schema>;
-
-    const form = useForm<FormData>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            name: "",
-        },
+    const form = useForm<AddGenderFormData>({
+        resolver: zodResolver(addGenderSchema),
+        defaultValues: { name: "" }
     });
 
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = async (data: AddGenderFormData) => {
         try {
-            const res = await fetch("http://localhost:4000/api/v1/admin/horses/gender", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: data.name }),
-            });
-            console.log(await res.json());
+            await addGender(data)
         } catch (err) {
-            console.error(err);
+            console.error(err)
+            toast.error("Failed to add gender")
         }
     };
-
 
     return (
         <Form {...form}>

@@ -16,5 +16,8 @@ export async function POST(req: Request) {
 // TODO: remove this
 export async function GET() {
     revalidateTag("horses-grid", "max");
+    revalidateTag("disciplines", "max");
+    revalidateTag("genders", "max");
+    revalidateTag("categories", "max");
     return NextResponse.json({ revalidated: true });
 }

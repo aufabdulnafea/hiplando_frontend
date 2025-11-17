@@ -4,25 +4,66 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export function HorsePhotosSlider({ photos, name }: { photos: string[]; name: string }) {
+interface HorsePhotosSliderProps {
+    photos: string[];
+    video?: string; // YouTube video URL
+    name: string;
+}
+
+export function HorsePhotosSlider({ photos, video, name }: HorsePhotosSliderProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const next = () =>
-        setCurrentIndex((prev) => (prev + 1) % photos.length);
+        setCurrentIndex((prev) => (prev + 1) % (photos.length + (video ? 1 : 0)));
     const prev = () =>
-        setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
+        setCurrentIndex((prev) => (prev - 1 + photos.length + (video ? 1 : 0)) % (photos.length + (video ? 1 : 0)));
+
+    const isVideoSlide = video && currentIndex === photos.length;
+
+    // Convert YouTube URL to embed URL
+    const getYoutubeEmbedUrl = (url: string) => {
+        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        const id = match?.[2];
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : url;
+    };
+
+
+    const getYoutubeId = (url: string) => {
+        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return match?.[2] || null;
+    };
+
+    const getYoutubeThumbnail = (url: string) => {
+        const id = getYoutubeId(url);
+        return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : "";
+    };
 
     return (
         <div className="relative">
-            {/* Main Image */}
-            <div className="relative w-full h-96 overflow-hidden rounded-lg">
-                <Image
-                    src={photos[currentIndex]}
-                    alt={`${name} photo ${currentIndex + 1}`}
-                    fill
-                    unoptimized
-                    className="object-cover rounded-lg"
-                />
+            {/* Main Display */}
+            <div className="relative w-full h-96 overflow-hidden rounded-lg bg-black">
+                {isVideoSlide ? (
+                    <iframe
+                        width="100%"
+                        height="100%"
+                        src={getYoutubeEmbedUrl(video!)}
+                        title={name}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-lg"
+                    />
+                ) : (
+                    <Image
+                        src={photos[currentIndex]}
+                        alt={`${name} photo ${currentIndex + 1}`}
+                        fill
+                        unoptimized
+                        className="object-cover rounded-lg"
+                    />
+                )}
+
                 {/* Arrows */}
                 <button
                     onClick={prev}
@@ -39,7 +80,7 @@ export function HorsePhotosSlider({ photos, name }: { photos: string[]; name: st
             </div>
 
             {/* Thumbnail List */}
-            <div className="flex gap-2 mt-4 overflow-x-auto pb-2 px-4">
+            <div className="flex gap-2 overflow-x-auto p-5">
                 {photos.map((photo, i) => (
                     <button
                         key={i}
@@ -56,6 +97,23 @@ export function HorsePhotosSlider({ photos, name }: { photos: string[]; name: st
                         />
                     </button>
                 ))}
+
+                {video && (
+                    <button
+                        onClick={() => setCurrentIndex(photos.length)}
+                        className={`relative w-20 h-20 rounded-md overflow-hidden border-2 ${isVideoSlide ? "border-primary" : "border-transparent"}`}
+                    >
+                        <Image
+                            src={getYoutubeThumbnail(video)}
+                            alt="Video thumbnail"
+                            fill
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center text-white text-lg font-bold bg-black/30">
+                            ▶
+                        </div>
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -1,18 +1,12 @@
-// 'use client';
-// import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+// horsetelex
+// my show advisor
 // POST
 // https://www.horsetelex.com/search/search/search-horses
 // {"name":"Test","father":null,"mother":null,"fatherOfMother":null,"year":null,"studbook":null,"reg":null,"fei":null,"chipnumber":null,"page":1}
@@ -25,34 +19,16 @@ interface HorseDetailProps {
 
 export default function HorseDetail(props: HorseDetailProps) {
     const { disciplines, genders } = props;
-    // const [genders, setGenders] = useState<
-    //     FindManyHorseGenderQuery["findManyHorseGender"]
-    // >([]);
-    // const [disciplines, setDisciplines] = useState<
-    //     FindManyHorseDisciplineQuery["findManyHorseDiscipline"]
-    // >([]);
 
     const { register, watch, setValue } = useFormContext();
 
-    // Watch values for live preview
     const name = watch("name");
-    const age = watch("age");
+    const yearOfBirth = watch("yearOfBirth");
     const gender = watch("genderId");
     const discipline = watch("disciplineId");
     const location = watch("location");
     const price = watch("price");
     const height = watch("height");
-
-    // useEffect(() => {
-    //     // Fetch genders & disciplines from GraphQL
-    //     getGraphQLClient()
-    //         .then((client) => client.findManyHorseGender())
-    //         .then((res) => setGenders(res.findManyHorseGender));
-
-    //     getGraphQLClient()
-    //         .then((client) => client.findManyHorseDiscipline())
-    //         .then((res) => setDisciplines(res.findManyHorseDiscipline));
-    // }, []);
 
     return (
         <div className="py-10">
@@ -82,13 +58,13 @@ export default function HorseDetail(props: HorseDetailProps) {
                     {/* Age & Gender */}
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <Label htmlFor="age" className="text-sm">
-                                Age*
+                            <Label htmlFor="year-of-birth" className="text-sm">
+                                Year of Birth*
                             </Label>
                             <Input
                                 type="number"
-                                id="age"
-                                {...register("age", { valueAsNumber: true })}
+                                id="year-of-birth"
+                                {...register("yearOfBirth", { valueAsNumber: true })}
                             />
                         </div>
 
@@ -102,12 +78,12 @@ export default function HorseDetail(props: HorseDetailProps) {
                                 }
                                 value={gender}
                             >
-                                <SelectTrigger className="w-full">
+                                <SelectTrigger className="w-full capitalize">
                                     <SelectValue placeholder="Select gender" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     {genders.map((el) => (
-                                        <SelectItem value={el.id} key={el.id}>
+                                        <SelectItem className="capitalize" value={el.id} key={el.id}>
                                             {el.name}
                                         </SelectItem>
                                     ))}
@@ -139,12 +115,12 @@ export default function HorseDetail(props: HorseDetailProps) {
                             }
                             value={discipline}
                         >
-                            <SelectTrigger className="w-full">
+                            <SelectTrigger className="w-full capitalize">
                                 <SelectValue placeholder="Select discipline" />
                             </SelectTrigger>
                             <SelectContent>
                                 {disciplines.map((el) => (
-                                    <SelectItem value={el.id} key={el.id}>
+                                    <SelectItem className="capitalize" value={el.id} key={el.id}>
                                         {el.name}
                                     </SelectItem>
                                 ))}
@@ -195,7 +171,7 @@ export default function HorseDetail(props: HorseDetailProps) {
                             <div className="flex justify-between">
                                 <h4>Age & Sex:</h4>
                                 <h4>
-                                    {(age || "-") +
+                                    {(yearOfBirth || "-") +
                                         (gender
                                             ? " / " + genders.find((el) => el.id === gender)?.name
                                             : "")}

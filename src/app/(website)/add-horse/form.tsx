@@ -22,7 +22,7 @@ const schema = z.object({
     categoryId: z.string().min(1, "Please select a category"),
     name: z.string().min(2, "Horse name is required"),
     pedigree: z.url().optional().or(z.literal("")),
-    age: z.number().positive("Age is required"),
+    yearOfBirth: z.number().positive("Year of birth is required"),
     genderId: z.string().min(1, "Gender is required"),
     height: z.number().positive("Height is required"),
     disciplineId: z.string().min(1, "Discipline is required"),
@@ -125,12 +125,12 @@ export default function AddHorseForm(props: AddHorseFormProps) {
             categoryId: "",
             name: "",
             pedigree: undefined,
-            age: 0,
+            yearOfBirth: undefined,
             genderId: "",
-            height: 0,
+            height: undefined,
             disciplineId: "",
             location: "",
-            price: 0,
+            price: undefined,
             description: undefined,
             photos: [],
             video: undefined,
@@ -141,7 +141,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
 
     const stepFields: Record<number, (keyof FormData)[]> = {
         1: ["categoryId"],
-        2: ["name", "pedigree", "age", "genderId", "height", "disciplineId", "location", "price", "description"],
+        2: ["name", "pedigree", "yearOfBirth", "genderId", "height", "disciplineId", "location", "price", "description"],
         3: ["photos", "video"],
     };
 
@@ -185,6 +185,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
 
     async function onSubmit(data: FormData) {
         setIsSubmitting(true);
+        console.log(data)
         const user = auth.currentUser;
         if (!user) {
             toast.error("You must be logged in");

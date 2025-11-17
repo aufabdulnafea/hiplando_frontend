@@ -9,40 +9,41 @@ import LightSection from "@/components/sections/light-section";
 import WhiteSection from "@/components/sections/white-section";
 import PrimarySection from "@/components/sections/primary-section";
 import SectionHeader from "@/components/sections/section-header";
-import FeaturedHorsesSection from "@/components/featured-horses-section";
+import FeaturedHorsesSection from "@/components/sections/featured-horses-section";
+import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
+    const messages = await getTranslations("HomePage");
+
     return (
         <main className="flex flex-col">
-            {/* ========== HERO SECTION ========== */}
             <Hero />
 
-            {/* ========== WHY CHOOSE US ========== */}
             <LightSection>
                 <SectionHeader
-                    title="Why Choose Hiplando?"
-                    description="Your complete equestrian platform for buying, selling, and managing horses worldwide."
+                    title={messages("sections.why-choose-hiplando.title")}
+                    description={messages("sections.why-choose-hiplando.description")}
                 />
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10">
                     {[
                         {
                             icon: <GoPulse aria-hidden="true" className="text-primary size-14" />,
-                            title: "Marketplace",
-                            emoji: "🐎",
-                            text: "Thousands of listings worldwide. Find your perfect horse or reach global buyers.",
+                            title: messages("sections.why-choose-hiplando.cards.0.title"),
+                            emoji: messages("sections.why-choose-hiplando.cards.0.emoji"),
+                            text: messages("sections.why-choose-hiplando.cards.0.text"),
                         },
                         {
                             icon: <FiTruck aria-hidden="true" className="text-primary size-14" />,
-                            title: "Transport",
-                            emoji: "🚚",
-                            text: "Book ground & air logistics. Professional horse transport services worldwide.",
+                            title: messages("sections.why-choose-hiplando.cards.1.title"),
+                            emoji: messages("sections.why-choose-hiplando.cards.1.emoji"),
+                            text: messages("sections.why-choose-hiplando.cards.1.text"),
                         },
                         {
                             icon: <LuCalendar aria-hidden="true" className="text-primary size-14" />,
-                            title: "Competitions",
-                            emoji: "📅",
-                            text: "Track international events and stay updated with the global equestrian calendar.",
+                            title: messages("sections.why-choose-hiplando.cards.2.title"),
+                            emoji: messages("sections.why-choose-hiplando.cards.2.emoji"),
+                            text: messages("sections.why-choose-hiplando.cards.2.text"),
                         },
                     ].map((item, i) => (
                         <Card
@@ -66,8 +67,8 @@ export default async function Home() {
             {/* ========== FEATURED HORSES ========== */}
             <WhiteSection>
                 <SectionHeader
-                    title="Featured Horses"
-                    description="Discover exceptional horses from around the world"
+                    title={messages("sections.featured-horses.title")}
+                    description={messages("sections.featured-horses.description")}
                 />
 
                 <FeaturedHorsesSection />
@@ -79,10 +80,10 @@ export default async function Home() {
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
                     <div>
                         <h4 className="text-3xl font-bold text-white mb-2">
-                            Need transport to Paris Masters?
+                            {messages("sections.cta-section.title")}
                         </h4>
                         <p className="text-lg text-neutral-100">
-                            Professional horse transport services worldwide.
+                            {messages("sections.cta-section.description")}
                         </p>
                     </div>
 
@@ -91,7 +92,7 @@ export default async function Home() {
                         className="rounded-md h-12 bg-yellow-500 hover:bg-yellow-400 text-primary font-semibold"
                         size="lg"
                     >
-                        Book Now →
+                        {messages("sections.cta-section.button")}
                     </Button>
                 </div>
             </PrimarySection>
@@ -99,8 +100,8 @@ export default async function Home() {
             {/* ========== UPCOMING COMPETITIONS ========== */}
             <LightSection>
                 <SectionHeader
-                    title="Upcoming Competitions"
-                    description="Stay updated with international equestrian events"
+                    title={messages("sections.upcoming-competitions.title")}
+                    description={messages("sections.upcoming-competitions.description")}
                 />
                 {/* TODO: Add dynamic event cards here */}
             </LightSection>
@@ -108,8 +109,8 @@ export default async function Home() {
             {/* ========== TRUSTED PARTNERS ========== */}
             <WhiteSection>
                 <SectionHeader
-                    title="Trusted by Industry Leaders"
-                    description="Partnering with the world's most prestigious equestrian organizations"
+                    title={messages("sections.trusted-partners.title")}
+                    description={messages("sections.trusted-partners.description")}
                 />
                 {/* TODO: Add logo grid / carousel here */}
             </WhiteSection>
@@ -118,14 +119,14 @@ export default async function Home() {
             <PrimarySection>
                 <div className="text-center text-white py-10">
                     <h4 className="text-xl font-semibold">
-                        Join the global Hiplando community today
+                        {messages("sections.final-cta.title")}
                     </h4>
                     <Button
                         variant="secondary"
                         className="mt-4 bg-white text-primary font-semibold hover:bg-neutral-100"
                         size="lg"
                     >
-                        Get Started
+                        {messages("sections.final-cta.button")}
                     </Button>
                 </div>
             </PrimarySection>

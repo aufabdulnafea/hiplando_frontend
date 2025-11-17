@@ -10,7 +10,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Grid3X3, List, Filter } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetOverlay } from "@/components/ui/sheet";
 
-import { FindManyHorseQuery, HorseWhereInput, InputMaybe } from "@/graphql/sdk";
+import { HorseWhereInput, InputMaybe } from "@/graphql/sdk";
 import { useHorses } from "@/hooks/use-horses";
 import { SortingState } from "@tanstack/react-table";
 
@@ -20,13 +20,12 @@ import { buildHorseWhere } from './build-horse-where'
 export const PAGE_SIZE = 6;
 
 export interface HorsesGridProps {
-    initialData: FindManyHorseQuery["findManyHorse"];
     disciplines: { id: string; name: string }[];
 }
 
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
-export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps) {
+export default function HorsesGrid({ disciplines }: HorsesGridProps) {
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pageIndex, setPageIndex] = useState<number>(0);
@@ -44,7 +43,6 @@ export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps
 
     const [where, setWhere] = useState<InputMaybe<HorseWhereInput> | undefined>(undefined);
 
-    // Build `where` only when applied filters change
     useEffect(() => {
         const newWhere = buildHorseWhere({
             search,
@@ -76,7 +74,6 @@ export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps
         pageSize: PAGE_SIZE,
         where,
         sorting,
-        initialData,
     });
 
     useEffect(() => {
@@ -103,16 +100,18 @@ export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps
 
                         <div className="flex gap-2 items-center">
                             {/* Sorting */}
-                            <Select>
-                                <SelectTrigger className="md:w-[180px]">
-                                    <SelectValue placeholder="Sort by" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="price">Price</SelectItem>
-                                    <SelectItem value="age">Age</SelectItem>
-                                    <SelectItem value="breed">Breed</SelectItem>
-                                </SelectContent>
-                            </Select>
+                            <div className="flex-1">
+                                <Select>
+                                    <SelectTrigger className="w-full min-w-[120px]">
+                                        <SelectValue placeholder="Sort by" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="price">Price</SelectItem>
+                                        <SelectItem value="age">Age</SelectItem>
+                                        <SelectItem value="breed">Breed</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
 
                             {/* View mode */}
                             <ToggleGroup
@@ -196,7 +195,7 @@ export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps
                                     </PaginationItem>
 
                                     {/* PAGE BUTTONS */}
-                                    {[...Array(Math.ceil((data?.count + 1) / PAGE_SIZE))].map((_, i) => (
+                                    {[...Array(Math.ceil((data?.count ?? 0 + 1) / PAGE_SIZE))].map((_, i) => (
                                         <PaginationItem key={i}>
                                             <PaginationLink
                                                 href="#"
@@ -216,9 +215,9 @@ export default function HorsesGrid({ initialData, disciplines }: HorsesGridProps
                                             href="#"
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                if ((data?.count + 1) / PAGE_SIZE > pageIndex + 1) setPageIndex(pageIndex + 1);
+                                                if ((data?.count ?? 0 + 1) / PAGE_SIZE > pageIndex + 1) setPageIndex(pageIndex + 1);
                                             }}
-                                            className={pageIndex >= (data?.count + 1) / PAGE_SIZE ? "pointer-events-none opacity-50" : ""}
+                                            className={pageIndex >= (data?.count ?? 0 + 1) / PAGE_SIZE ? "pointer-events-none opacity-50" : ""}
                                         />
                                     </PaginationItem>
 

@@ -4,7 +4,51 @@
         "heroTitle": "Globale Pferdeverkäufe & Dienstleistungen",
         "heroDescription": "Kaufen, verkaufen und verwalten Sie Pferde und Reitservices weltweit.",
         "heroButton1": "Pferde durchsuchen",
-        "heroButton2": "Pferd hinzufügen"
+        "heroButton2": "Pferd hinzufügen",
+        "sections": {
+            "why-choose-hiplando": {
+                "title": "Warum wählen Sie Hiplando?",
+                "description": "Ihr vollständiger Reitpferd-Plattform für das Kaufen, Verkaufen und Verwalten von Pferden weltweit.",
+                "cards": [
+                    {
+                        "title": "Markt",
+                        "emoji": "🐎",
+                        "text": "tausende von Anzeigen weltweit. Finden Sie Ihr perfektes Pferd oder erreichen Sie globale Käufer."
+                    },
+                    {
+                        "title": "Transport",
+                        "emoji": "🚚",
+                        "text": "Buchung von Boden- und Luftlogistik. Professional horse transport services worldwide."
+                    },
+                    {
+                        "title": "Wettbewerbe",
+                        "emoji": "📅",
+                        "text": "Verfolgen Sie internationale Veranstaltungen und bleiben Sie auf dem Laufenden mit dem globalen Reitkalender."
+                    }
+                ]
+            },
+            "featured-horses": {
+                "title": "Fettpferde",
+                "description": "Entdecken Sie herausragende Pferde aus der ganzen Welt"
+            },
+            "cta-section": {
+                "title": "Müssen Sie Transport nach den Paris Masters?",
+                "description": "Professionelle Pferdenahverkehrsdienste weltweit.",
+                "button": "Buchung"
+            },
+            "upcoming-competitions": {
+                "title": "Kommende Wettbewerbe",
+                "description": "Bleiben Sie auf dem Laufenden mit internationalen Reitveranstaltungen"
+            },
+            "trusted-partners": {
+                "title": "Vertrauenswürdige Partner",
+                "description": "Partner mit den führenden equestrian organizations"
+            },
+            "final-cta": {
+                "title": "Bleiben Sie auf dem Laufenden mit internationalen Reitveranstaltungen",
+                "button": "Los geht es"
+            }
+        }
     },
     "Footer": {
         "description": "Ihr erstes Ziel für Pferdhandel, Transportdienstleistungen und Reitwettbewerbe weltweit."

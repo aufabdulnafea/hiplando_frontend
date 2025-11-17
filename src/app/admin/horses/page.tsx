@@ -6,7 +6,7 @@ import HorseDisciplineTable from "./HorseDisciplinesTables";
 import { HorsesTable } from './horses-table';
 
 
-export default function AdminHorsesDashboardPage() {
+export default async function AdminHorsesDashboardPage() {
 
   return (
     <div className="max-w-screen overflow-hidden px-4 flex-1">
@@ -17,30 +17,11 @@ export default function AdminHorsesDashboardPage() {
           <TabsTrigger value="genders">Genders</TabsTrigger>
           <TabsTrigger value="disciplines">Disciplines</TabsTrigger>
         </TabsList>
-        <TabsContent value="horses">
-          <HorsesTable />
-        </TabsContent>
-        <TabsContent value="categories">
-          <HorseCategoriesTable />
-        </TabsContent>
-        <TabsContent value="genders">
-          <HorseGendersTable />
-        </TabsContent>
-        <TabsContent value="disciplines">
-          <HorseDisciplineTable />
-        </TabsContent>
+        <TabsContent value="horses"><HorsesTable /></TabsContent>
+        <TabsContent value="categories"><HorseCategoriesTable /></TabsContent>
+        <TabsContent value="genders"><HorseGendersTable /></TabsContent>
+        <TabsContent value="disciplines"><HorseDisciplineTable /></TabsContent>
       </Tabs>
-
-
-      {/* <HorsesTable />
-
-      <HorseCategoriesTable />
-      <HorseGendersTable />
-      <HorseDisciplineTable /> */}
     </div>
-
-
-
-
   );
 }

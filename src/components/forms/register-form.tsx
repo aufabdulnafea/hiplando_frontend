@@ -18,7 +18,6 @@ export default function RegisterForm() {
     async function register(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
         try {
-            // await createUserWithEmailAndPassword(auth, email, password)
 
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
@@ -35,9 +34,6 @@ export default function RegisterForm() {
                 },
                 body: JSON.stringify({ full_name: fullName }),
             });
-
-            console.log(response)
-
         } catch (err) {
             console.log(err)
         }

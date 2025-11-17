@@ -18,11 +18,9 @@ export interface UseHorsesProps {
 export function useHorses(params: UseHorsesProps) {
 
     const shouldFetch =
-        (params.where && Object.keys(params.where).length > 0) ||
-        (params.sorting && params.sorting.length > 0) ||
-        params.pageIndex > 0;
-
-    console.log(shouldFetch, params.where)
+        ((params.where && Object.keys(params.where).length > 0) ||
+            (params.sorting && params.sorting.length > 0) ||
+            params.pageIndex > 0) && params.initialData !== undefined;
 
     const skip = params.pageIndex * params.pageSize;
     const take = params.pageSize;
@@ -43,8 +41,10 @@ export function useHorses(params: UseHorsesProps) {
                 count: countResult.findManyHorseCount,
             };
         },
-        initialData: { horses: params.initialData, count: params.initialData?.length || 0 },
-        enabled: shouldFetch,
-
+        // initialData: { horses: params.initialData, count: params.initialData?.length || 0 },
+        // enabled: shouldFetch,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
     });
 }

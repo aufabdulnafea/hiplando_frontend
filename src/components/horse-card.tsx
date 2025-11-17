@@ -1,25 +1,24 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { Heart, MapPin } from 'lucide-react'
 import { FiCheckCircle } from "react-icons/fi";
 import { FindManyHorseQuery } from "@/graphql/sdk";
 import Image from 'next/image'
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { formatPrice } from '@/lib/format-price';
 import { Skeleton } from '@/components/ui/skeleton';
+import { addToFavorite, removeFromFavorite } from '@/lib/api';
+import { toast } from 'sonner'
 
 interface HorseCardProps {
     horse: FindManyHorseQuery['findManyHorse'][number]
 }
 
 function ImageSkeleton() {
-    return (
-        // <div className="w-full h-50 bg-gray-200 animate-pulse rounded-t-lg flex items-center justify-center text-gray-400 text-sm">
-        //     Loading image...
-        // </div>
-        <Skeleton className='w-full h-52' />
-    )
+    return <Skeleton className='w-full h-64' />
 }
 
 export function VerifiedHorseCardBadge() {
@@ -34,7 +33,6 @@ export function VerifiedHorseCardBadge() {
 export function HorseCardSkeleton() {
     return (
         <Card className='max-w-md pt-0 relative overflow-hidden'>
-
             <CardContent className='px-0'>
                 <ImageSkeleton />
             </CardContent>
@@ -54,14 +52,50 @@ export function HorseCardSkeleton() {
 }
 
 export default function HorseCard({ horse }: HorseCardProps) {
+    const [changingFavorite, setChangingFavorite] = useState(false)
+    const [favoriteByUsers, setFavoriteByUsers] = useState(!!horse.favoriteByUsers.length);
+
+    const addHorseToFavorite = async (id: string) => {
+        try {
+            if (changingFavorite) return
+            setChangingFavorite(true)
+            await addToFavorite(id)
+            setFavoriteByUsers(true)
+            setChangingFavorite(false)
+        } catch (e) {
+            toast.error("Failed to add horse to favorite")
+            setChangingFavorite(false)
+        }
+    }
+
+    const removeHorseFromFavorite = async (id: string) => {
+        try {
+            if (changingFavorite) return
+            setChangingFavorite(true)
+            await removeFromFavorite(id)
+            setFavoriteByUsers(false)
+            setChangingFavorite(false)
+        } catch (e) {
+            toast.error("Failed to remove horse from favorite")
+            setChangingFavorite(false)
+        }
+    }
+
     return (
         <Card className='max-w-md pt-0 relative overflow-hidden'>
             <div className='absolute top-0 z-10 w-full p-2 flex justify-between'>
                 <div>
                     <VerifiedHorseCardBadge />
                 </div>
-                <Button variant='secondary' size='icon-lg' className='rounded-full'>
-                    <Heart className='text-red-500 fill-red-500' />
+                <Button
+                    onClick={() => {
+                        if (favoriteByUsers) removeHorseFromFavorite(horse.id)
+                        else addHorseToFavorite(horse.id)
+                    }}
+                    variant='secondary' size='icon-lg' className='rounded-full'>
+                    <Heart className={
+                        `${favoriteByUsers ? 'text-transparent fill-red-500' : 'text-transparent fill-neutral-400'} size-5 transition-colors ease-in-out duration-200`}
+                    />
                 </Button>
             </div>
             <CardContent className='px-0'>
@@ -74,7 +108,7 @@ export default function HorseCard({ horse }: HorseCardProps) {
                                 width={500}
                                 height={500}
                                 unoptimized
-                                className="w-full h-50 object-cover rounded-t-lg"
+                                className="w-full h-64 object-cover rounded-t-lg"
                             />
                         </Suspense>
                     )

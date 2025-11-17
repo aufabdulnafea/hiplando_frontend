@@ -1,29 +1,10 @@
 import AddHorseForm from "./form";
+import { getHorseCategories, getHorseDisciplines, getHorseGenders } from "@/lib/api";
 
 export default async function AddHorsePage() {
-    const gendersResponse = await fetch("http://192.168.0.217:4000/api/v1/genders", {
-        next: {
-            tags: ['genders'],
-            revalidate: false
-        }
-    })
-    const genders = await gendersResponse.json();
-
-    const disciplinesResponse = await fetch("http://192.168.0.217:4000/api/v1/disciplines", {
-        next: {
-            tags: ['disciplines'],
-            revalidate: false
-        }
-    })
-    const disciplines = await disciplinesResponse.json();
-
-    const categoriesResponse = await fetch("http://192.168.0.217:4000/api/v1/categories", {
-        next: {
-            tags: ['categories'],
-            revalidate: false
-        }
-    })
-    const categories = await categoriesResponse.json();
+    const genders = await getHorseGenders()
+    const disciplines = await getHorseDisciplines()
+    const categories = await getHorseCategories()
 
     return <AddHorseForm
         categories={categories}

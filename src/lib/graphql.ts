@@ -7,6 +7,7 @@ export async function getGraphQLClient() {
     const token = await auth.currentUser?.getIdToken()
 
     const client = new GraphQLClient("http://192.168.0.217:4000/graphql", {
+
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -14,3 +15,11 @@ export async function getGraphQLClient() {
 
     return getSdk(client)
 }
+
+
+// export function getGraphQLClient() {
+
+//     const client = new GraphQLClient("http://192.168.0.217:4000/graphql")
+
+//     return getSdk(client)
+// }
