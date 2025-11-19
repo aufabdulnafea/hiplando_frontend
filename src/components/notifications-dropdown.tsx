@@ -3,6 +3,7 @@
 import { IconBell } from "@tabler/icons-react"
 import { DropdownMenu, DropdownMenuLabel, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import { useLocale } from "next-intl";
 
 function Notification() {
     return (
@@ -13,6 +14,9 @@ function Notification() {
 }
 
 export function NotificationsDropDown() {
+    const locale = useLocale();
+    const isArabic = locale === "ar";
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -21,7 +25,7 @@ export function NotificationsDropDown() {
                 </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="mt-1" align="end">
+            <DropdownMenuContent className="mt-1" align={isArabic ? "start" : "end"}>
                 <DropdownMenuLabel>Notifications</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild><Notification /></DropdownMenuItem>

@@ -7,6 +7,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme()
+  const isArabic = typeof window !== "undefined" &&
+        document.documentElement.dir === "rtl";
 
   return (
     <DropdownMenu>
@@ -18,7 +20,7 @@ export function ModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mt-1" align="end">
+      <DropdownMenuContent className="mt-1" align={isArabic ? "start" : "end"}>
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun className="h-[1.2rem] w-[1.2rem]" />
           Light

@@ -9,7 +9,6 @@ import { Navbar } from "@/components/navbar";
 
 const arabicFont = Tajawal({ subsets: ["arabic"], weight: ["400", "500", "700"], variable: "--font-arabic" });
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = useLocale();
   const isArabic = locale === "ar";

@@ -6,8 +6,12 @@ import { auth } from "@/lib/firebase"
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
 import { UserRound, List, Heart, Settings, LogOut } from 'lucide-react'
+import { useLocale } from "next-intl"
 
 export function UserDropDown() {
+  const locale = useLocale();
+  const isArabic = locale === "ar";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -16,7 +20,7 @@ export function UserDropDown() {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="mt-1">
+      <DropdownMenuContent align={isArabic ? "start" : "end"} className="mt-1">
         <Link href="/horses">
           <DropdownMenuItem className="flex items-center gap-2">
             <List />

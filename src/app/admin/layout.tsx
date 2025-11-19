@@ -3,15 +3,11 @@ import { AppSidebar } from "@/components/admin/navbar/side-bar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { SiteHeader } from '@/components/admin/site-header'
 
-
 export const metadata: Metadata = { title: "Hiplando", description: "Hiplando admin dashboard" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-
-
     <SidebarProvider style={{ "--sidebar-width": "calc(var(--spacing) * 72)", "--header-height": "calc(var(--spacing) * 12)" } as React.CSSProperties}>
-
       <div className="w-screen h-screen text-foreground flex">
         <AppSidebar />
         <SidebarInset>
