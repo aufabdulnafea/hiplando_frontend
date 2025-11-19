@@ -7,7 +7,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import Container from "@/components/container";
+import { Container } from "@/components/container";
 import { Button } from '@/components/ui/button';
 import SelectCategory from "./steps/select-category";
 import HorseDetail from "./steps/horse-detail";

@@ -19,5 +19,7 @@ export async function GET() {
     revalidateTag("disciplines", "max");
     revalidateTag("genders", "max");
     revalidateTag("categories", "max");
+    revalidateTag("0d702b6f-27ad-4447-9b68-5f29b7f32bee", "max");
+    // revalidateTag(, "max");
     return NextResponse.json({ revalidated: true });
 }

@@ -1,34 +1,27 @@
-import Container from "@/components/container"
-import { getGraphQLClient } from "@/lib/graphql"
-import { FindUniqueHorseQuery } from "@/graphql/sdk"
+import { getHorseData } from "@/lib/api"
+import { EditHorseForm } from "./edit-horse-form"
 
 interface HorsePageProps {
-    params: Promise<{ id: string }> | { id: string }  // allows async params
+    params: Promise<{ id: string }> | { id: string }
 }
 
 export default async function HorsePage({ params }: HorsePageProps) {
-    // ✅ Ensure we await params if it's a Promise
     const resolvedParams = await params
     const { id } = resolvedParams
 
-    // 🧠 Fetch data server-side
-    const client = await getGraphQLClient()
-    const res: FindUniqueHorseQuery = await client.findUniqueHorse({ where: { id } })
-    const horse = res.findUniqueHorse
+    const horse = await getHorseData(id)()
+
+    if (!horse) {
+        return (
+            <div className="p-5">
+                <div className="text-center text-muted-foreground">
+                    Horse not found
+                </div>
+            </div>
+        )
+    }
 
     return (
-        <Container>
-            <div className="py-40">
-                {horse ? (
-                    <>
-                        <h1 className="text-3xl font-bold mb-4">{horse.name}</h1>
-                        <p>ID: {horse.id}</p>
-                        <p>Breed: {horse.age}</p>
-                    </>
-                ) : (
-                    <div>No horse found with ID: {id}</div>
-                )}
-            </div>
-        </Container>
+        <EditHorseForm horse={horse} />
     )
 }

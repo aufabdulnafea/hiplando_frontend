@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button"
 
 function Notification() {
     return (
-        <div className="border-xl text-zinc-300 text-sm bg-white dark:bg-zinc-900 border border-primary/20 dark:border-zinc-800 p-2 rounded-lg">
+        <div className="border-xl text-zinc-300 text-sm bg-white dark:bg-neutral-900 border border-primary/20 dark:border-neutral-800 p-2 rounded-lg">
             Test
         </div>
     )
 }
 
-export default function NotificationsDropDown() {
+export function NotificationsDropDown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -21,7 +21,7 @@ export default function NotificationsDropDown() {
                 </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent className="mt-1" align="end">
                 <DropdownMenuLabel>Notifications</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild><Notification /></DropdownMenuItem>

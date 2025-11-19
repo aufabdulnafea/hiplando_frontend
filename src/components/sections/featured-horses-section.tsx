@@ -3,16 +3,12 @@
 import HorseCard, { HorseCardSkeleton } from "../horse-card";
 import { Button } from "@/components/ui/button";
 import { getGraphQLClient } from "@/lib/graphql";
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { FindManyHorseQuery, Horse } from "@/graphql/sdk";
-// import { getHorsesGridInitialData, getUid } from "@/lib/server-api";
+import { FindManyHorseQuery } from "@/graphql/sdk";
+import Link from "next/link";
 
 
-export default function FeaturedHorsesSection() {
-    // const uid = await getUid();
-    // const horses = await getHorsesGridInitialData(uid);
-
+export function FeaturedHorsesSection() {
     const [loading, setLoading] = useState(true)
     const [horses, setHorses] = useState<FindManyHorseQuery['findManyHorse']>([])
 

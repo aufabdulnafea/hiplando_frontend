@@ -21,10 +21,11 @@ query findManyHorse(
     price
     location
     photos
-    videoUrl
+    videoURL
     description
     vetReport
     xrayResults
+    pedigreeURL
     pedigree
     user {
       uid
@@ -61,10 +62,11 @@ query findUniqueHorse($where: HorseWhereUniqueInput!) {
     price
     location
     photos
-    videoUrl
+    videoURL
     description
     vetReport
     xrayResults
+    pedigreeURL
     pedigree
     user {
       uid

@@ -1,13 +1,13 @@
 "use client"
 
+import Link from "next/link"
 import { signOut } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"
-import Link from "next/link"
 import { UserRound, List, Heart, Settings, LogOut } from 'lucide-react'
 
-export default function UserDropDown() {
+export function UserDropDown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -16,7 +16,7 @@ export default function UserDropDown() {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-[150px]">
+      <DropdownMenuContent align="end" className="mt-1">
         <Link href="/horses">
           <DropdownMenuItem className="flex items-center gap-2">
             <List />

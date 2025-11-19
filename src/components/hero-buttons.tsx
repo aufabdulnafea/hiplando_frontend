@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
-export default function HeroButtons() {
+export function HeroButtons() {
     const [loggedIn, setLoggedIn] = useState(false);
     const t = useTranslations('HomePage');
 

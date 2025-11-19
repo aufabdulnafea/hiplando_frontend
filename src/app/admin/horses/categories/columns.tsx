@@ -2,53 +2,30 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
-import { FindManyUserQuery } from '@/graphql/sdk'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-export type UserType = FindManyUserQuery['findManyUser'][number]
+export type CategoryType = {
+    id: string,
+    name: string,
+    imageUrl: string,
+}
 
-export const columns: ColumnDef<UserType>[] = [
+export const columns: ColumnDef<CategoryType>[] = [
     {
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
     },
     {
-        accessorKey: "email",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
-    },
-    {
-        accessorKey: "phoneNumber",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Phone number" />,
-    },
-    {
-        accessorKey: "whatsAppNumber",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="WhatsApp number" />,
-    },
-    {
-        accessorKey: "role",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
-    },
-    {
-        accessorKey: "verifiedSeller",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Verified Seller" />,
-    },
-    {
-        id: "listed-horses",
-        header: "Listed Horses",
-        cell: ({ row }) => {
-            const user = row.original
-            return (
-                <>{user.horses?.length}</>
-            )
-        }
+        accessorKey: "imageUrl",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Image" />,
     },
     {
         id: "actions",
         cell: ({ row }) => {
-            const user = row.original
+            const category = row.original
             const router = useRouter()
 
             return (
@@ -63,9 +40,9 @@ export const columns: ColumnDef<UserType>[] = [
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem
-                                onClick={() => navigator.clipboard.writeText(user.uid)}
+                                onClick={() => navigator.clipboard.writeText(category.id)}
                             >
-                                Copy user ID
+                                Copy category ID
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
@@ -73,11 +50,11 @@ export const columns: ColumnDef<UserType>[] = [
                                     e.preventDefault() // prevent Radix from interfering
                                     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }))
                                     setTimeout(() => {
-                                        router.push(`/admin/users/${user.uid}`)
+                                        router.push(`/admin/horses/categories/${category.id}`)
                                     }, 50)
                                 }}
                             >
-                                View User
+                                View Category
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

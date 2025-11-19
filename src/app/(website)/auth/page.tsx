@@ -1,14 +1,12 @@
 'use client';
 
-import Container from "@/components/container";
-import LoginForm from "@/components/forms/login-form";
-import RegisterForm from "@/components/forms/register-form";
+import { Container } from "@/components/container";
+import { LoginForm } from "@/components/forms/login-form";
+import { RegisterForm } from "@/components/forms/register-form";
 import { TabsComponent } from "@/components/tabs";
-// import { motion } from "motion/react";
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
 import { auth } from '@/lib/firebase'
-
 
 
 export default function Login() {

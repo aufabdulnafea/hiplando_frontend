@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
-import Container from '@/components/container';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
-import LanguageSwitcher from './language-switcher';
+import { LanguageSwitcher } from './language-switcher';
 import { getLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
+import { Container } from '@/components/container';
 
-export default async function Footer() {
+export async function Footer() {
     const year = new Date().getFullYear();
     const locale = await getLocale();
     const t = await getTranslations();

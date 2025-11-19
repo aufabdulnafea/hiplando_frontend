@@ -1,13 +1,13 @@
 'use client'
 
+import Link from 'next/link';
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { Heart, MapPin } from 'lucide-react'
 import { FiCheckCircle } from "react-icons/fi";
 import { FindManyHorseQuery } from "@/graphql/sdk";
-import Image from 'next/image'
 import { Suspense, useState } from 'react';
-import Link from 'next/link';
 import { formatPrice } from '@/lib/format-price';
 import { Skeleton } from '@/components/ui/skeleton';
 import { addToFavorite, removeFromFavorite } from '@/lib/api';

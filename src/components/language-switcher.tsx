@@ -3,7 +3,7 @@
 import { useTransition } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export default function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
+export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
     const [isPending, startTransition] = useTransition();
 
     const changeLocale = (locale: string) => {

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-
 import { AppSidebar } from "@/components/admin/navbar/side-bar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { SiteHeader } from '@/components/admin/site-header'

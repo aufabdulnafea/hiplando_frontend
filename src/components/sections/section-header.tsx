@@ -5,7 +5,7 @@ export interface SectionHeaderProps {
     description: string
 }
 
-export default function SectionHeader(props: SectionHeaderProps) {
+export function SectionHeader(props: SectionHeaderProps) {
     return (
         <div className="text-center max-w-xl m-auto">
             <h3 className="text-primary text-3xl font-bold lg:font-extrabold pb-3">{props.title}</h3>

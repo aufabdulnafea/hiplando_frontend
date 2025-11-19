@@ -1,7 +1,7 @@
-import Container from "@/components/container";
+import { Container } from "@/components/container";
 import { PropsWithChildren } from "react";
 
-export default function LightSection(props: PropsWithChildren) {
+export function WhiteSection(props: PropsWithChildren) {
     return (
         <div className="bg-white dark:bg-neutral-900 py-35">
             <Container>

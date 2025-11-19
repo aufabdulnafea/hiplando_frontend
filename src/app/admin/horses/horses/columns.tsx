@@ -1,54 +1,69 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
-import { FindManyUserQuery } from '@/graphql/sdk'
+import { FindManyHorseQuery } from '@/graphql/sdk'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { formatPrice } from "@/lib/format-price"
 
-export type UserType = FindManyUserQuery['findManyUser'][number]
+export type HorseType = FindManyHorseQuery['findManyHorse'][number]
 
-export const columns: ColumnDef<UserType>[] = [
+export const columns: ColumnDef<HorseType>[] = [
+    {
+        id: "select",
+        header: ({ table }) => (
+            <div className="px-2">
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Select all"
+                />
+            </div>
+        ),
+        cell: ({ row }) => (
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
     {
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
     },
     {
-        accessorKey: "email",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
+        accessorKey: "status",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     },
     {
-        accessorKey: "phoneNumber",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Phone number" />,
+        accessorKey: "user.name",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Username" />,
     },
+
     {
-        accessorKey: "whatsAppNumber",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="WhatsApp number" />,
-    },
-    {
-        accessorKey: "role",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
-    },
-    {
-        accessorKey: "verifiedSeller",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Verified Seller" />,
-    },
-    {
-        id: "listed-horses",
-        header: "Listed Horses",
+        accessorKey: "price",
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Price" />,
         cell: ({ row }) => {
-            const user = row.original
-            return (
-                <>{user.horses?.length}</>
-            )
-        }
+            const amount = row.original.price
+            const formatted = formatPrice(amount)
+
+            return <div className="font-medium">{formatted}</div>
+        },
     },
     {
         id: "actions",
         cell: ({ row }) => {
-            const user = row.original
+            const horse = row.original
             const router = useRouter()
 
             return (
@@ -63,9 +78,9 @@ export const columns: ColumnDef<UserType>[] = [
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem
-                                onClick={() => navigator.clipboard.writeText(user.uid)}
+                                onClick={() => navigator.clipboard.writeText(horse.id)}
                             >
-                                Copy user ID
+                                Copy horse ID
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
@@ -73,11 +88,11 @@ export const columns: ColumnDef<UserType>[] = [
                                     e.preventDefault() // prevent Radix from interfering
                                     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }))
                                     setTimeout(() => {
-                                        router.push(`/admin/users/${user.uid}`)
-                                    }, 50)
+                                        router.push(`/admin/horses/${horse.id}`)
+                                    }, 100)
                                 }}
                             >
-                                View User
+                                View Horse
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

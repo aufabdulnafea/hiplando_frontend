@@ -4,11 +4,11 @@ import { FormEvent, useState } from "react"
 import { auth } from "@/lib/firebase";
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Button } from "@/components/ui/button";
+import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import PasswordInput from '@/components/shadcn-studio/input/input-26'
 import InputWithIcon from '@/components/shadcn-studio/input/input-14'
-import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 
-export default function LoginForm() {
+export function LoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 

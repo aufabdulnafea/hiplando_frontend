@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
 
 export function ReactQueryProvider({ children }: { children: React.ReactNode }) {
-    // ✅ ensure a single instance across renders
     const [client] = useState(() => new QueryClient());
 
     return (

@@ -1,9 +1,9 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import HorseCategoriesTable from "./HorseCategoriesTable";
-import HorseGendersTable from "./HorseGendersTable";
-import HorseDisciplineTable from "./HorseDisciplinesTables";
-import { HorsesTable } from './horses-table';
+import { HorseCategoriesTable } from "./categories/table";
+import { HorseGendersTable } from "./genders/table";
+import { HorseDisciplinesTable } from "./disciplines/table";
+import { HorsesTable } from './horses/table';
 
 
 export default async function AdminHorsesDashboardPage() {
@@ -20,7 +20,7 @@ export default async function AdminHorsesDashboardPage() {
         <TabsContent value="horses"><HorsesTable /></TabsContent>
         <TabsContent value="categories"><HorseCategoriesTable /></TabsContent>
         <TabsContent value="genders"><HorseGendersTable /></TabsContent>
-        <TabsContent value="disciplines"><HorseDisciplineTable /></TabsContent>
+        <TabsContent value="disciplines"><HorseDisciplinesTable /></TabsContent>
       </Tabs>
     </div>
   );

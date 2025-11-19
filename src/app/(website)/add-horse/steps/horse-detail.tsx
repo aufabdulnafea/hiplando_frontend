@@ -33,39 +33,27 @@ export default function HorseDetail(props: HorseDetailProps) {
     return (
         <div className="py-10">
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* FORM SIDE */}
                 <div className="flex flex-col gap-5">
-                    {/* Name */}
                     <div>
                         <Label htmlFor="name" className="text-sm">
                             Horse Name*
                         </Label>
-                        <Input id="name" {...register("name")} />
+                        <Input id="name" {...register("name")} autoComplete="off" required />
                     </div>
 
-                    {/* Pedigree */}
                     <div>
                         <Label htmlFor="pedigree" className="text-sm">
-                            Pedigree
+                            HorseTelex Link
                         </Label>
-                        <Input
-                            placeholder="HorseTelex link"
-                            id="pedigree"
-                            {...register("pedigree")}
-                        />
+                        <Input id="pedigree" {...register("pedigree")} autoComplete="off" required />
                     </div>
 
-                    {/* Age & Gender */}
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <Label htmlFor="year-of-birth" className="text-sm">
                                 Year of Birth*
                             </Label>
-                            <Input
-                                type="number"
-                                id="year-of-birth"
-                                {...register("yearOfBirth", { valueAsNumber: true })}
-                            />
+                            <Input id="year-of-birth" type="number" {...register("yearOfBirth", { valueAsNumber: true })} required />
                         </div>
 
                         <div>
@@ -73,9 +61,7 @@ export default function HorseDetail(props: HorseDetailProps) {
                                 Gender*
                             </Label>
                             <Select
-                                onValueChange={(val) =>
-                                    setValue("genderId", val, { shouldValidate: true })
-                                }
+                                onValueChange={(val) => setValue("genderId", val, { shouldValidate: true })}
                                 value={gender}
                             >
                                 <SelectTrigger className="w-full capitalize">
@@ -92,29 +78,18 @@ export default function HorseDetail(props: HorseDetailProps) {
                         </div>
                     </div>
 
-                    {/* Height */}
                     <div>
                         <Label htmlFor="height" className="text-sm">
                             Height (cm)*
                         </Label>
-                        <Input
-                            type="number"
-                            id="height"
-                            {...register("height", { valueAsNumber: true })}
-                        />
+                        <Input id="height" type="number" {...register("height", { valueAsNumber: true })} required />
                     </div>
 
-                    {/* Discipline */}
                     <div>
                         <Label htmlFor="discipline" className="text-sm">
                             Discipline*
                         </Label>
-                        <Select
-                            onValueChange={(val) =>
-                                setValue("disciplineId", val, { shouldValidate: true })
-                            }
-                            value={discipline}
-                        >
+                        <Select onValueChange={(val) => setValue("disciplineId", val, { shouldValidate: true })} value={discipline}>
                             <SelectTrigger className="w-full capitalize">
                                 <SelectValue placeholder="Select discipline" />
                             </SelectTrigger>
@@ -128,36 +103,28 @@ export default function HorseDetail(props: HorseDetailProps) {
                         </Select>
                     </div>
 
-                    {/* Location */}
                     <div>
                         <Label htmlFor="location" className="text-sm">
                             Location*
                         </Label>
-                        <Input id="location" {...register("location")} />
+                        <Input id="location" {...register("location")} autoComplete="off" required />
                     </div>
 
-                    {/* Price */}
                     <div>
                         <Label htmlFor="price" className="text-sm">
                             Price*
                         </Label>
-                        <Input
-                            id="price"
-                            type="number"
-                            {...register("price", { valueAsNumber: true })}
-                        />
+                        <Input id="price" type="number" {...register("price", { valueAsNumber: true })} autoComplete="off" required />
                     </div>
 
-                    {/* Description */}
                     <div>
                         <Label htmlFor="description" className="text-sm">
                             Description
                         </Label>
-                        <Textarea id="description" {...register("description")} />
+                        <Textarea id="description" {...register("description")} autoComplete="off" />
                     </div>
                 </div>
 
-                {/* PREVIEW SIDE */}
                 <div>
                     <Card>
                         <CardHeader>

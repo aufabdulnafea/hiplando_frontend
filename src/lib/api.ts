@@ -1,5 +1,7 @@
 import z from "zod"
 import { auth } from "./firebase"
+import { unstable_cache } from "next/cache"
+import { getGraphQLClient } from "./graphql"
 
 export async function getHorseDisciplines() {
     const disciplinesResponse = await fetch("http://192.168.0.217:4000/api/v1/disciplines", {
@@ -129,3 +131,11 @@ export async function addGender(data: AddGenderFormData) {
 }
 
 
+export const getHorseData = (id: string) => unstable_cache(
+    async () => {
+        const sdk = await getGraphQLClient();
+        const { findUniqueHorse } = await sdk.findUniqueHorse({ where: { id } });
+        console.log(findUniqueHorse)
+        return findUniqueHorse;
+    }, ["horses", id], { tags: ["horses", id] }
+);

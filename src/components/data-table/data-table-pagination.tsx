@@ -1,42 +1,25 @@
 import { Table } from "@tanstack/react-table"
-import {
-    ChevronLeft,
-    ChevronRight,
-    ChevronsLeft,
-    ChevronsRight,
-} from "lucide-react"
-
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface DataTablePaginationProps<TData> {
     table: Table<TData>
 }
 
-export function DataTablePagination<TData>({
-    table,
-}: DataTablePaginationProps<TData>) {
+export function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
     const pageCount = table.getPageCount()
     const currentPage = table.getState().pagination.pageIndex
     const visiblePages = getVisiblePages(currentPage, pageCount)
 
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 bg-background">
-            {/* Selection info */}
             <div className="text-muted-foreground text-sm hidden lg:block">
                 {table.getFilteredSelectedRowModel().rows.length} of{" "}
                 {table.getFilteredRowModel().rows.length} row(s) selected.
             </div>
 
-            {/* Pagination Controls */}
             <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 w-full sm:w-auto">
-                {/* Rows per page */}
                 <div className="flex items-center space-x-2">
                     <p className="text-sm font-medium hidden sm:block">Rows per page</p>
                     <Select
@@ -58,7 +41,6 @@ export function DataTablePagination<TData>({
                     </Select>
                 </div>
 
-                {/* Page controls */}
                 <div className="flex items-center space-x-1">
                     <Button
                         variant="outline"
@@ -82,7 +64,6 @@ export function DataTablePagination<TData>({
                         <span className="sr-only">Previous</span>
                     </Button>
 
-                    {/* Page number buttons (shown only on large screens) */}
                     <div className="hidden lg:flex items-center space-x-1">
                         {visiblePages.map((pageNumber, i) =>
                             pageNumber === "..." ? (
@@ -128,7 +109,6 @@ export function DataTablePagination<TData>({
                     </Button>
                 </div>
 
-                {/* Current page indicator for mobile */}
                 <div className="text-sm font-medium lg:hidden">
                     Page {currentPage + 1} of {pageCount}
                 </div>
@@ -137,9 +117,6 @@ export function DataTablePagination<TData>({
     )
 }
 
-/**
- * Helper: Get visible page numbers with ellipses
- */
 function getVisiblePages(current: number, total: number): (number | "...")[] {
     const delta = 2
     const range: (number | "...")[] = []

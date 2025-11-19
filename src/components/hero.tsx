@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Container from "@/components/container";
-import HeroButtons from "./hero-buttons";
+import { Container } from "@/components/container";
+import { HeroButtons } from "./hero-buttons";
 import { getTranslations } from 'next-intl/server';
 
-export default async function Hero() {
+export async function Hero() {
 
     const t = await getTranslations('HomePage');
 

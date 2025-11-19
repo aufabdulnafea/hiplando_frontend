@@ -1,15 +1,15 @@
 'use client';
+
 import { FormEvent, useState } from "react";
-// import { UserIcon } from "@heroicons/react/24/outline";
 import { User } from 'lucide-react'
-import PasswordInput from '@/components/shadcn-studio/input/input-26'
-import InputWithIcon from '@/components/shadcn-studio/input/input-14'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Button } from '@/components/ui/button'
+import PasswordInput from '@/components/shadcn-studio/input/input-26'
+import InputWithIcon from '@/components/shadcn-studio/input/input-14'
 
-export default function RegisterForm() {
+export function RegisterForm() {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

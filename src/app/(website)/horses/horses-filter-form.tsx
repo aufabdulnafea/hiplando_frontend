@@ -7,9 +7,6 @@ import { Label } from "@/components/ui/label";
 import { useCallback, useState } from "react";
 import { z } from "zod";
 
-// -----------------------
-// Zod schema for numeric filters
-// -----------------------
 const numericStringToNumber = z
     .string()
     .optional()
@@ -27,7 +24,6 @@ const filtersSchema = z.object({
 interface FilterFormProps {
     disciplines: { id: string; name: string }[];
 
-    // callback when user clicks Apply
     applyFilters: (filters: {
         disciplines: string[];
         ageMin?: number;
@@ -44,9 +40,6 @@ export function HorsesFilterForm({
     applyFilters,
 }: FilterFormProps) {
 
-    // -----------------------
-    // Local form state (draft values)
-    // -----------------------
     const [selectedDisciplines, setSelectedDisciplines] = useState<string[]>([]);
     const [ageMin, setAgeMin] = useState<string>("");
     const [ageMax, setAgeMax] = useState<string>("");
@@ -70,9 +63,6 @@ export function HorsesFilterForm({
         setHeightMin(""); setHeightMax("");
     };
 
-    // -----------------------
-    // Apply filters
-    // -----------------------
     const handleApplyFilters = () => {
         const parsed = filtersSchema.safeParse({
             ageMin, ageMax, priceMin, priceMax, heightMin, heightMax
@@ -98,14 +88,13 @@ export function HorsesFilterForm({
                 </Button>
             </div>
 
-            {/* Disciplines */}
             <div className="mt-6">
                 <Label className="font-semibold">Disciplines</Label>
                 <div className="flex flex-col gap-2 mt-2">
                     {disciplines.map((discipline) => {
                         const checked = selectedDisciplines.includes(discipline.id);
                         return (
-                            <div key={discipline.id} className="flex items-center gap-2 capitalize">
+                            <div key={discipline.id} className="flex items-center capitalize">
                                 <Checkbox
                                     checked={checked}
                                     onCheckedChange={(checked) =>
@@ -113,14 +102,13 @@ export function HorsesFilterForm({
                                     }
                                     id={discipline.id}
                                 />
-                                <Label htmlFor={discipline.id}>{discipline.name}</Label>
+                                <Label className="px-2" htmlFor={discipline.id}>{discipline.name}</Label>
                             </div>
                         );
                     })}
                 </div>
             </div>
 
-            {/* Age */}
             <div className="mt-6">
                 <Label className="font-semibold">Age Range</Label>
                 <div className="flex gap-2 mt-1">
@@ -129,7 +117,6 @@ export function HorsesFilterForm({
                 </div>
             </div>
 
-            {/* Price */}
             <div className="mt-6">
                 <Label className="font-semibold">Price Range</Label>
                 <div className="flex gap-2 mt-1">
@@ -138,7 +125,6 @@ export function HorsesFilterForm({
                 </div>
             </div>
 
-            {/* Height */}
             <div className="mt-6">
                 <Label className="font-semibold">Height (cm)</Label>
                 <div className="flex gap-2 mt-1">

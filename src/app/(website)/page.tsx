@@ -4,12 +4,12 @@ import { LuCalendar } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-import Hero from "@/components/hero";
-import LightSection from "@/components/sections/light-section";
-import WhiteSection from "@/components/sections/white-section";
-import PrimarySection from "@/components/sections/primary-section";
-import SectionHeader from "@/components/sections/section-header";
-import FeaturedHorsesSection from "@/components/sections/featured-horses-section";
+import { Hero } from "@/components/hero";
+import { LightSection } from "@/components/sections/light-section";
+import { WhiteSection } from "@/components/sections/white-section";
+import { PrimarySection } from "@/components/sections/primary-section";
+import { SectionHeader } from "@/components/sections/section-header";
+import { FeaturedHorsesSection } from "@/components/sections/featured-horses-section";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home() {

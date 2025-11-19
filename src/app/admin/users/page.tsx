@@ -1,6 +1,3 @@
-// import { DataTableDemo } from '@/components/data-table'
-// import { UsersTable } from '@/components/users-table'
-
 import { UsersTable } from "./users-table";
 
 export default function AdminUsersPage() {

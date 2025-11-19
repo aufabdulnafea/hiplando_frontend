@@ -1,56 +1,28 @@
 "use client"
 
 import { useState } from "react"
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from "@tanstack/react-table"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Input } from "@/components/ui/input"
 import { DataTablePagination } from "@/components/data-table/data-table-pagination"
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export interface DataTableProps<TData, TValue> {
-    /** Table columns */
     columns: ColumnDef<TData, TValue>[]
-    /** Table data */
     data: TData[]
-    /** Total number of items (for pagination) */
     totalCount: number
-    /** Loading state */
     isLoading?: boolean
-    /** Called when pagination changes */
     onPaginationChange?: (pageIndex: number, pageSize: number) => void
-    /** Called when sorting changes */
     onSortingChange?: (sorting: SortingState) => void
-    /** Optional: label for search input */
     searchPlaceholder?: string
-    /** Optional: controlled search value */
     searchValue?: string
-    /** Optional: search setter (for controlled search) */
+    withSearch?: boolean
     onSearchChange?: (value: string) => void
+    onSearchKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    extraControllers?: React.ReactNode
 }
 
-/**
- * 🌐 Generic Reusable Data Table
- * Handles sorting, pagination, search, and visibility — UI identical to original.
- */
 export function DataTable<TData, TValue>({
     columns,
     data,
@@ -60,7 +32,10 @@ export function DataTable<TData, TValue>({
     onSortingChange,
     searchPlaceholder = "Search...",
     searchValue,
+    withSearch = true,
     onSearchChange,
+    onSearchKeyDown,
+    extraControllers,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -117,18 +92,22 @@ export function DataTable<TData, TValue>({
 
     return (
         <div className="space-y-2">
-            {/* Toolbar */}
-            <div className="flex gap-2">
-                <Input
-                    placeholder={searchPlaceholder}
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="max-w-md"
-                />
-                <DataTableViewOptions table={table} />
+            <div className="flex justify-between gap-2">
+                {withSearch ? (
+                    <Input
+                        placeholder={searchPlaceholder}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        onKeyDown={onSearchKeyDown}
+                        className="max-w-md"
+                    />
+                ) : <div></div>}
+                <div className="flex gap-2">
+                    {extraControllers}
+                    <DataTableViewOptions table={table} />
+                </div>
             </div>
 
-            {/* Table */}
             <div className="w-full overflow-x-auto rounded-md border">
                 <Table className="min-w-[600px]">
                     <TableHeader>

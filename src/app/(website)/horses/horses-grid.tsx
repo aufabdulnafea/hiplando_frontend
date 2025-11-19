@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Container from "@/components/container";
+import { Container } from "@/components/container";
 import HorseCard, { HorseCardSkeleton } from "@/components/horse-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +25,7 @@ export interface HorsesGridProps {
 
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
-export default function HorsesGrid({ disciplines }: HorsesGridProps) {
+export function HorsesGrid({ disciplines }: HorsesGridProps) {
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pageIndex, setPageIndex] = useState<number>(0);
@@ -83,12 +83,10 @@ export default function HorsesGrid({ disciplines }: HorsesGridProps) {
     return (
         <div className="mb-30">
             <Container>
-                {/* Header */}
                 <div className="flex flex-col py-10 gap-4 border-b">
                     <h2 className="text-3xl text-primary font-extrabold">Horses for Sale</h2>
 
                     <div className="flex flex-col md:flex-row gap-3">
-                        {/* Search */}
                         <div className="flex-1">
                             <Input
                                 placeholder="Search horses by name or breed"
@@ -99,7 +97,6 @@ export default function HorsesGrid({ disciplines }: HorsesGridProps) {
                         </div>
 
                         <div className="flex gap-2 items-center">
-                            {/* Sorting */}
                             <div className="flex-1">
                                 <Select>
                                     <SelectTrigger className="w-full min-w-[120px]">
@@ -113,7 +110,6 @@ export default function HorsesGrid({ disciplines }: HorsesGridProps) {
                                 </Select>
                             </div>
 
-                            {/* View mode */}
                             <ToggleGroup
                                 type="single"
                                 value={viewMode}
@@ -135,7 +131,6 @@ export default function HorsesGrid({ disciplines }: HorsesGridProps) {
                                 </ToggleGroupItem>
                             </ToggleGroup>
 
-                            {/* Mobile Filters */}
                             <Sheet>
                                 <SheetOverlay className="backdrop-blur-xs" />
                                 <SheetTrigger asChild>
@@ -161,9 +156,7 @@ export default function HorsesGrid({ disciplines }: HorsesGridProps) {
                     </div>
                 </div>
 
-                {/* Content */}
                 <div className="w-full flex flex-col md:flex-row py-6 gap-5">
-                    {/* Desktop Filters */}
                     <aside className="hidden lg:block w-64 pr-5">
                         <HorsesFilterForm
                             disciplines={disciplines}
@@ -194,7 +187,6 @@ export default function HorsesGrid({ disciplines }: HorsesGridProps) {
                                         />
                                     </PaginationItem>
 
-                                    {/* PAGE BUTTONS */}
                                     {[...Array(Math.ceil((data?.count ?? 0 + 1) / PAGE_SIZE))].map((_, i) => (
                                         <PaginationItem key={i}>
                                             <PaginationLink

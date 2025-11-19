@@ -1,5 +1,5 @@
 
-import Container from '@/components/container'
+import { Container } from '@/components/container'
 import { Button } from '@/components/ui/button'
 import { EyeIcon } from 'lucide-react'
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'

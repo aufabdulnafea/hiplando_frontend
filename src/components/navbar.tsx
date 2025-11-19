@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { ModeToggle } from '@/components/theme-mode-toggle';
-import UserDropDown from '@/components/user-dropdown';
-import NotificationsDropDown from '@/components/notifications-dropdown';
-import Container from '@/components/container';
+import { ModeToggle } from '@/components/theme-mode-toggle-dropdown';
+import { UserDropDown } from '@/components/user-dropdown';
+import { NotificationsDropDown } from '@/components/notifications-dropdown';
 import { useTranslations } from 'next-intl';
+import { Container } from '@/components/container';
 
-export default function Navbar() {
+export function Navbar() {
     const { user } = useAuth();
     const t = useTranslations();
 

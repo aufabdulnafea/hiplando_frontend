@@ -1,10 +1,11 @@
 
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+
+import { Footer } from "@/components/footer";
 import { AuthProvider } from "@/context/AuthContext";
 import { NextIntlClientProvider } from 'next-intl';
 import { useLocale } from 'next-intl';
-import { Tajawal, } from "next/font/google";
+import { Tajawal } from "next/font/google";
+import { Navbar } from "@/components/navbar";
 
 const arabicFont = Tajawal({ subsets: ["arabic"], weight: ["400", "500", "700"], variable: "--font-arabic" });
 
