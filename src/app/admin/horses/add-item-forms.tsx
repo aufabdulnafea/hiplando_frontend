@@ -41,7 +41,7 @@ export function AddCategoryForm() {
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter name" {...field} />
+                                <Input placeholder="Enter name" {...field} autoComplete="off" />
                             </FormControl>
                         </FormItem>
                     )}

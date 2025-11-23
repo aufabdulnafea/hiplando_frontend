@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
     const { tag, secret } = await req.json();
+    console.log(tag, secret);
 
     if (secret !== process.env.REVALIDATE_SECRET) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -20,6 +21,6 @@ export async function GET() {
     revalidateTag("genders", "max");
     revalidateTag("categories", "max");
     revalidateTag("0d702b6f-27ad-4447-9b68-5f29b7f32bee", "max");
-    // revalidateTag(, "max");
+    revalidateTag("3257dbb6-0c89-4353-86ab-640b88f2d51c", "max");
     return NextResponse.json({ revalidated: true });
 }

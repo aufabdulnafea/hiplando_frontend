@@ -16,6 +16,7 @@ import { SortingState } from "@tanstack/react-table";
 
 import { HorsesFilterForm } from "./horses-filter-form";
 import { buildHorseWhere } from './build-horse-where'
+import { HorseStatus } from "@/graphql/sdk";
 
 export const PAGE_SIZE = 6;
 
@@ -54,9 +55,16 @@ export function HorsesGrid({ disciplines }: HorsesGridProps) {
             heightMin: appliedFilters.heightMin,
             heightMax: appliedFilters.heightMax,
         });
+
+        console.log(newWhere);
+
         setWhere(newWhere);
     }, [appliedFilters, search]);
 
+
+    useEffect(() => {
+        console.log(where)
+    }, [where])
 
 
     const applyFilters = (filtersFromForm: {
@@ -118,14 +126,14 @@ export function HorsesGrid({ disciplines }: HorsesGridProps) {
                                 <ToggleGroupItem
                                     value="grid"
                                     aria-label="Grid view"
-                                    className="border data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
+                                    className="border border-r-0 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
                                 >
                                     <Grid3X3 className="h-4 w-4" />
                                 </ToggleGroupItem>
                                 <ToggleGroupItem
                                     value="list"
                                     aria-label="List view"
-                                    className="border data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
+                                    className="border border-l-0 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground"
                                 >
                                     <List className="h-4 w-4" />
                                 </ToggleGroupItem>

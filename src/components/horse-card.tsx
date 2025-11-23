@@ -7,11 +7,12 @@ import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter }
 import { Heart, MapPin } from 'lucide-react'
 import { FiCheckCircle } from "react-icons/fi";
 import { FindManyHorseQuery } from "@/graphql/sdk";
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { formatPrice } from '@/lib/format-price';
 import { Skeleton } from '@/components/ui/skeleton';
 import { addToFavorite, removeFromFavorite } from '@/lib/api';
 import { toast } from 'sonner'
+import { getAuth } from 'firebase/auth';
 
 interface HorseCardProps {
     horse: FindManyHorseQuery['findManyHorse'][number]
@@ -54,6 +55,26 @@ export function HorseCardSkeleton() {
 export default function HorseCard({ horse }: HorseCardProps) {
     const [changingFavorite, setChangingFavorite] = useState(false)
     const [favoriteByUsers, setFavoriteByUsers] = useState(!!horse.favoriteByUsers.length);
+    const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function loadPhoto() {
+            if (!horse.photos.length) return;
+
+            const auth = getAuth();
+            const token = await auth.currentUser?.getIdToken();
+
+            const res = await fetch(horse.photos[0], {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            const blob = await res.blob();
+            const objectUrl = URL.createObjectURL(blob);
+            setPhotoUrl(objectUrl);
+        }
+
+        loadPhoto();
+    }, [horse.photos]);
 
     const addHorseToFavorite = async (id: string) => {
         try {
@@ -100,10 +121,10 @@ export default function HorseCard({ horse }: HorseCardProps) {
             </div>
             <CardContent className='px-0'>
                 {
-                    horse.photos.length > 0 && (
+                    photoUrl && (
                         <Suspense fallback={<ImageSkeleton />}>
                             <Image
-                                src={horse.photos[0]}
+                                src={photoUrl}
                                 alt={horse.name}
                                 width={500}
                                 height={500}

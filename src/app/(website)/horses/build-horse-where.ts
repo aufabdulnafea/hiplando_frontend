@@ -1,4 +1,4 @@
-import { HorseWhereInput, QueryMode } from "@/graphql/sdk";
+import { HorseStatus, HorseWhereInput, QueryMode } from "@/graphql/sdk";
 
 interface BuildWhereParams {
     search?: string;
@@ -50,5 +50,5 @@ export function buildHorseWhere(filters: BuildWhereParams): HorseWhereInput {
 
     if (filters.location) where.location = { equals: filters.location, mode: QueryMode.Insensitive };
 
-    return where;
+    return { ...where, status: { equals: HorseStatus.Approved } };
 }

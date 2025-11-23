@@ -3,11 +3,13 @@
 import { FormEvent, useState } from "react";
 import { User } from 'lucide-react'
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { auth } from "@/lib/firebase";
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Button } from '@/components/ui/button'
 import PasswordInput from '@/components/shadcn-studio/input/input-26'
 import InputWithIcon from '@/components/shadcn-studio/input/input-14'
+import { toast } from "sonner";
 
 export function RegisterForm() {
     const [fullName, setFullName] = useState('')
@@ -34,8 +36,39 @@ export function RegisterForm() {
                 },
                 body: JSON.stringify({ full_name: fullName }),
             });
-        } catch (err) {
-            console.log(err)
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                toast.error(errorData.message || "Something went wrong on our server.");
+                return;
+            }
+
+        } catch (err: FirebaseError | unknown) {
+            if (err instanceof FirebaseError) {
+                switch (err.code) {
+                    case "auth/email-already-in-use":
+                        toast.error("This email is already registered.");
+                        break;
+
+                    case "auth/invalid-email":
+                        toast.error("Please enter a valid email address.");
+                        break;
+
+                    case "auth/weak-password":
+                        toast.error("Password must be at least 6 characters.");
+                        break;
+
+                    case "auth/missing-email":
+                        toast.error("Email field cannot be empty.");
+                        break;
+
+                    default:
+                        toast.error("Authentication error: " + err.message);
+                }
+            } else {
+                toast.error("Unexpected error occurred. Please try again.");
+                console.error("Unexpected error:", err);
+            }
         }
     }
 

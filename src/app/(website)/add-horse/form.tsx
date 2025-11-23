@@ -31,8 +31,8 @@ const schema = z.object({
     description: z.string().optional(),
     photos: z.array(z.instanceof(File)).refine(f => f.length >= 1 && f.length <= 3, "Upload 1–3 photos"),
     video: z.url().optional().or(z.literal("")),
-    xray: z.array(z.instanceof(File)).optional(),
-    veterinary: z.array(z.instanceof(File)).optional(),
+    xrayResults: z.array(z.instanceof(File)).optional(),
+    vetReport: z.array(z.instanceof(File)).optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -50,11 +50,11 @@ function convertToFormData(data: FormData) {
     const formData = new FormData();
     data.photos.forEach(file => formData.append('photos', file));
     data.video && formData.append('video', data.video);
-    data.xray?.forEach(file => formData.append('xray', file));
-    data.veterinary?.forEach(file => formData.append('veterinary', file));
+    data.xrayResults?.forEach(file => formData.append('xrayResults', file));
+    data.vetReport?.forEach(file => formData.append('vetReport', file));
 
     Object.entries(data).forEach(([key, value]) => {
-        if (!['photos', 'video', 'xray', 'veterinary'].includes(key) && value !== undefined && value !== null) {
+        if (!['photos', 'video', 'xrayResults', 'vetReport'].includes(key) && value !== undefined && value !== null) {
             formData.append(key, value as string);
         }
     });
@@ -134,8 +134,8 @@ export default function AddHorseForm(props: AddHorseFormProps) {
             description: undefined,
             photos: [],
             video: undefined,
-            xray: [],
-            veterinary: []
+            xrayResults: [],
+            vetReport: []
         },
     });
 
@@ -172,6 +172,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
             }
         } else {
             direction.current = 1;
+            console.log("here////")
             methods.handleSubmit(onSubmit)();
         }
     }
@@ -184,6 +185,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
     }
 
     async function onSubmit(data: FormData) {
+        console.log("here 2")
         setIsSubmitting(true);
         console.log(data)
         const user = auth.currentUser;

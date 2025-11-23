@@ -1,4 +1,4 @@
-import { getHorseData } from "@/lib/api"
+import { getHorseData, getHorseCategories, getHorseDisciplines, getHorseGenders } from "@/lib/api"
 import { EditHorseForm } from "./edit-horse-form"
 
 interface HorsePageProps {
@@ -9,7 +9,12 @@ export default async function HorsePage({ params }: HorsePageProps) {
     const resolvedParams = await params
     const { id } = resolvedParams
 
+    const categories = await getHorseCategories()
+    const genders = await getHorseGenders()
+    const disciplines = await getHorseDisciplines()
+
     const horse = await getHorseData(id)()
+
 
     if (!horse) {
         return (
@@ -22,6 +27,6 @@ export default async function HorsePage({ params }: HorsePageProps) {
     }
 
     return (
-        <EditHorseForm horse={horse} />
+        <EditHorseForm horse={horse} categories={categories} genders={genders} disciplines={disciplines} />
     )
 }

@@ -102,7 +102,10 @@ export default function Files() {
             type="file"
             multiple={false}
             accept=".pdf,image/*"
-            onChange={el => setValue("xray", el)}
+            onChange={e => {
+              const files = e.target.files ? Array.from(e.target.files) : [];
+              setValue("xrayResults", files);           // <-- correct
+            }}
           />
         </div>
       </div>
@@ -119,7 +122,10 @@ export default function Files() {
             type="file"
             multiple={false}
             accept=".pdf,image/*"
-            onChange={el => setValue("veterinary", el)}
+            onChange={e => {
+              const files = e.target.files ? Array.from(e.target.files) : [];
+              setValue("vetReport", files);     // <-- correct
+            }}
           />
         </div>
       </div>
