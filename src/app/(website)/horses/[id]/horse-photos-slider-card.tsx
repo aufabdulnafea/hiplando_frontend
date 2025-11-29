@@ -15,8 +15,8 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [photoUrls, setPhotoUrls] = useState<string[]>([]);
 
-    const totalSlides = horse.photos.length + (horse.videoURL ? 1 : 0);
-    const isVideo = horse.videoURL && currentIndex === horse.photos.length;
+    const totalSlides = horse.photos.length + (horse.youtubeVideoId ? 1 : 0);
+    const isVideo = horse.youtubeVideoId && currentIndex === horse.photos.length;
 
     useEffect(() => {
         const loadPhotos = async () => {
@@ -66,7 +66,7 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
                             <iframe
                                 width="100%"
                                 height="100%"
-                                src={getYoutubeEmbed(horse.videoURL!)}
+                                src={getYoutubeEmbed(horse.youtubeVideoId!)}
                                 allow="accelerometer; autoplay; encrypted-media;"
                                 allowFullScreen
                             />
@@ -116,14 +116,14 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
                             </button>
                         ))}
 
-                        {horse.videoURL && (
+                        {horse.youtubeVideoId && (
                             <button
                                 onClick={() => setCurrentIndex(horse.photos.length)}
                                 className={`relative w-20 h-20 rounded-md overflow-hidden border-2 ${isVideo ? "border-primary" : "border-transparent"
                                     }`}
                             >
                                 <Image
-                                    src={getYoutubeThumb(horse.videoURL)}
+                                    src={getYoutubeThumb(horse.youtubeVideoId!)}
                                     alt="Video"
                                     fill
                                     unoptimized

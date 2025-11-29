@@ -16,7 +16,6 @@ import { SortingState } from "@tanstack/react-table";
 
 import { HorsesFilterForm } from "./horses-filter-form";
 import { buildHorseWhere } from './build-horse-where'
-import { HorseStatus } from "@/graphql/sdk";
 
 export const PAGE_SIZE = 6;
 
@@ -55,17 +54,8 @@ export function HorsesGrid({ disciplines }: HorsesGridProps) {
             heightMin: appliedFilters.heightMin,
             heightMax: appliedFilters.heightMax,
         });
-
-        console.log(newWhere);
-
         setWhere(newWhere);
     }, [appliedFilters, search]);
-
-
-    useEffect(() => {
-        console.log(where)
-    }, [where])
-
 
     const applyFilters = (filtersFromForm: {
         disciplines: string[];
@@ -83,10 +73,6 @@ export function HorsesGrid({ disciplines }: HorsesGridProps) {
         where,
         sorting,
     });
-
-    useEffect(() => {
-        console.log("loading ----")
-    }, [isLoading, isFetching])
 
     return (
         <div className="mb-30">

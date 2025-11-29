@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Upload, X } from "lucide-react";
 import { FileUpload, FileUploadDropzone, FileUploadList } from "@/components/ui/file-upload";
+import { getProtectedFile } from "@/lib/api";
 
 // Sortable Item Component
 function SortablePhoto({ id, src, onDelete }: { id: string; src: string; onDelete: (id: string) => void }) {
@@ -46,7 +47,7 @@ function SortablePhoto({ id, src, onDelete }: { id: string; src: string; onDelet
 
 // Main Component
 export function PhotoManager({ initialPhotos }: { initialPhotos: string[] }) {
-    const [photos, setPhotos] = useState(initialPhotos);
+    const [photos, setPhotos] = useState<string[]>([]);
 
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 6 } })
@@ -55,6 +56,17 @@ export function PhotoManager({ initialPhotos }: { initialPhotos: string[] }) {
     const handleDelete = (id: string) => {
         setPhotos((prev) => prev.filter((p) => p !== id));
     };
+
+    useEffect(() => {
+        async function fetchPhotos() {
+            const urls = await Promise.all(
+                initialPhotos.map(id => getProtectedFile(id))
+            );
+            setPhotos(urls);
+        }
+
+        fetchPhotos();
+    }, [initialPhotos]);
 
     const handleDragEnd = (event: any) => {
         const { active, over } = event;

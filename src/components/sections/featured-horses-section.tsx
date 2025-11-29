@@ -4,7 +4,7 @@ import HorseCard, { HorseCardSkeleton } from "../horse-card";
 import { Button } from "@/components/ui/button";
 import { getGraphQLClient } from "@/lib/graphql";
 import { useState, useEffect } from "react";
-import { FindManyHorseQuery } from "@/graphql/sdk";
+import { FindManyHorseQuery, HorseStatus } from "@/graphql/sdk";
 import Link from "next/link";
 
 
@@ -15,7 +15,11 @@ export function FeaturedHorsesSection() {
     useEffect(() => {
         const fetchHorses = async () => {
             const client = await getGraphQLClient()
-            const { findManyHorse } = await client.findManyHorse({ take: 3 })
+            const { findManyHorse } = await client.findManyHorse({
+                take: 3, where: {
+                    status: { equals: HorseStatus.Approved }
+                }
+            })
             setHorses(findManyHorse)
             setLoading(false)
         }

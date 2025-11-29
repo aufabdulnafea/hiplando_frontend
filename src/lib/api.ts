@@ -136,3 +136,18 @@ export const getHorseData = (id: string) => unstable_cache(
         return findUniqueHorse;
     }, ["horses", id], { tags: ["horses", id] }
 );
+
+export async function getProtectedFile(url: string) {
+    console.log("---", url)
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(url, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    if (!response.ok) throw new Error(`API Error: ${response.status} ${response.statusText}`)
+
+    const blob = await response.blob()
+    return URL.createObjectURL(blob)
+}

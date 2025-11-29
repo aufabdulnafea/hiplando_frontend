@@ -22,6 +22,13 @@ export type Scalars = {
   Json: { input: any; output: any; }
 };
 
+export type AggregateCountry = {
+  __typename?: 'AggregateCountry';
+  _count?: Maybe<CountryCountAggregateOutputType>;
+  _max?: Maybe<CountryMaxAggregateOutputType>;
+  _min?: Maybe<CountryMinAggregateOutputType>;
+};
+
 export type AggregateHorse = {
   __typename?: 'AggregateHorse';
   _avg?: Maybe<HorseAvgAggregateOutputType>;
@@ -104,10 +111,253 @@ export type BoolWithAggregatesFilter = {
   not?: InputMaybe<NestedBoolWithAggregatesFilter>;
 };
 
+export type Country = {
+  __typename?: 'Country';
+  code: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  isAllowed: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  number?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CountryCountAggregateOutputType = {
+  __typename?: 'CountryCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  code: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  isAllowed: Scalars['Int']['output'];
+  name: Scalars['Int']['output'];
+  number: Scalars['Int']['output'];
+  updatedAt: Scalars['Int']['output'];
+};
+
+export type CountryCountOrderByAggregateInput = {
+  code?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  isAllowed?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  number?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type CountryCreateInput = {
+  code: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  isAllowed?: InputMaybe<Scalars['Boolean']['input']>;
+  name: Scalars['String']['input'];
+  number?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type CountryCreateManyInput = {
+  code: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  isAllowed?: InputMaybe<Scalars['Boolean']['input']>;
+  name: Scalars['String']['input'];
+  number?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type CountryGroupByOutputType = {
+  __typename?: 'CountryGroupByOutputType';
+  _count?: Maybe<CountryCountAggregateOutputType>;
+  _max?: Maybe<CountryMaxAggregateOutputType>;
+  _min?: Maybe<CountryMinAggregateOutputType>;
+  code: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  isAllowed: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  number?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CountryMaxAggregateOutputType = {
+  __typename?: 'CountryMaxAggregateOutputType';
+  code?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  isAllowed?: Maybe<Scalars['Boolean']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  number?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CountryMaxOrderByAggregateInput = {
+  code?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  isAllowed?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  number?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type CountryMinAggregateOutputType = {
+  __typename?: 'CountryMinAggregateOutputType';
+  code?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  isAllowed?: Maybe<Scalars['Boolean']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  number?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type CountryMinOrderByAggregateInput = {
+  code?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  isAllowed?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  number?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type CountryOrderByWithAggregationInput = {
+  _count?: InputMaybe<CountryCountOrderByAggregateInput>;
+  _max?: InputMaybe<CountryMaxOrderByAggregateInput>;
+  _min?: InputMaybe<CountryMinOrderByAggregateInput>;
+  code?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  isAllowed?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  number?: InputMaybe<SortOrderInput>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type CountryOrderByWithRelationInput = {
+  code?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  isAllowed?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  number?: InputMaybe<SortOrderInput>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
+export enum CountryScalarFieldEnum {
+  Code = 'code',
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  IsAllowed = 'isAllowed',
+  Name = 'name',
+  Number = 'number',
+  UpdatedAt = 'updatedAt'
+}
+
+export type CountryScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<CountryScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<CountryScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<CountryScalarWhereWithAggregatesInput>>>;
+  code?: InputMaybe<StringWithAggregatesFilter>;
+  createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  isAllowed?: InputMaybe<BoolWithAggregatesFilter>;
+  name?: InputMaybe<StringWithAggregatesFilter>;
+  number?: InputMaybe<StringNullableWithAggregatesFilter>;
+  updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+};
+
+export type CountryUncheckedCreateInput = {
+  code: Scalars['String']['input'];
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  isAllowed?: InputMaybe<Scalars['Boolean']['input']>;
+  name: Scalars['String']['input'];
+  number?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type CountryUncheckedUpdateInput = {
+  code?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isAllowed?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CountryUncheckedUpdateManyInput = {
+  code?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isAllowed?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CountryUpdateInput = {
+  code?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isAllowed?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CountryUpdateManyMutationInput = {
+  code?: InputMaybe<StringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isAllowed?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CountryWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<CountryWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<CountryWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<CountryWhereInput>>>;
+  code?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  isAllowed?: InputMaybe<BoolFilter>;
+  name?: InputMaybe<StringFilter>;
+  number?: InputMaybe<StringNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CountryWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<CountryWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<CountryWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<CountryWhereInput>>>;
+  code?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  isAllowed?: InputMaybe<BoolFilter>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  number?: InputMaybe<StringNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CreateManyCountryAndReturnOutputType = {
+  __typename?: 'CreateManyCountryAndReturnOutputType';
+  code: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  isAllowed: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  number?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type CreateManyHorseAndReturnOutputType = {
   __typename?: 'CreateManyHorseAndReturnOutputType';
   category: HorseCategory;
   categoryId: Scalars['String']['output'];
+  contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   description: Scalars['String']['output'];
   discipline: HorseDiscipline;
@@ -127,9 +377,9 @@ export type CreateManyHorseAndReturnOutputType = {
   user: User;
   userUid: Scalars['String']['output'];
   vetReport?: Maybe<Scalars['String']['output']>;
-  videoURL?: Maybe<Scalars['String']['output']>;
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth: Scalars['Int']['output'];
+  youtubeVideoId?: Maybe<Scalars['String']['output']>;
 };
 
 export type CreateManyHorseCategoryAndReturnOutputType = {
@@ -315,6 +565,7 @@ export type Horse = {
   _count: HorseCountOutputType;
   category: HorseCategory;
   categoryId: Scalars['String']['output'];
+  contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   description: Scalars['String']['output'];
   discipline: HorseDiscipline;
@@ -335,9 +586,9 @@ export type Horse = {
   user: User;
   userUid: Scalars['String']['output'];
   vetReport?: Maybe<Scalars['String']['output']>;
-  videoURL?: Maybe<Scalars['String']['output']>;
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth: Scalars['Int']['output'];
+  youtubeVideoId?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -647,6 +898,7 @@ export type HorseCountAggregateOutputType = {
   __typename?: 'HorseCountAggregateOutputType';
   _all: Scalars['Int']['output'];
   categoryId: Scalars['Int']['output'];
+  contactPerson: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
   description: Scalars['Int']['output'];
   disciplineId: Scalars['Int']['output'];
@@ -663,13 +915,14 @@ export type HorseCountAggregateOutputType = {
   updatedAt: Scalars['Int']['output'];
   userUid: Scalars['Int']['output'];
   vetReport: Scalars['Int']['output'];
-  videoURL: Scalars['Int']['output'];
   xrayResults: Scalars['Int']['output'];
   yearOfBirth: Scalars['Int']['output'];
+  youtubeVideoId: Scalars['Int']['output'];
 };
 
 export type HorseCountOrderByAggregateInput = {
   categoryId?: InputMaybe<SortOrder>;
+  contactPerson?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   disciplineId?: InputMaybe<SortOrder>;
@@ -686,9 +939,9 @@ export type HorseCountOrderByAggregateInput = {
   updatedAt?: InputMaybe<SortOrder>;
   userUid?: InputMaybe<SortOrder>;
   vetReport?: InputMaybe<SortOrder>;
-  videoURL?: InputMaybe<SortOrder>;
   xrayResults?: InputMaybe<SortOrder>;
   yearOfBirth?: InputMaybe<SortOrder>;
+  youtubeVideoId?: InputMaybe<SortOrder>;
 };
 
 export type HorseCountOutputType = {
@@ -698,6 +951,7 @@ export type HorseCountOutputType = {
 
 export type HorseCreateInput = {
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
@@ -715,12 +969,13 @@ export type HorseCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutHorsesInput;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateManyCategoryInput = {
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -737,9 +992,9 @@ export type HorseCreateManyCategoryInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateManyCategoryInputEnvelope = {
@@ -749,6 +1004,7 @@ export type HorseCreateManyCategoryInputEnvelope = {
 
 export type HorseCreateManyDisciplineInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   genderId: Scalars['String']['input'];
@@ -764,9 +1020,9 @@ export type HorseCreateManyDisciplineInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateManyDisciplineInputEnvelope = {
@@ -776,6 +1032,7 @@ export type HorseCreateManyDisciplineInputEnvelope = {
 
 export type HorseCreateManyGenderInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -791,9 +1048,9 @@ export type HorseCreateManyGenderInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateManyGenderInputEnvelope = {
@@ -803,6 +1060,7 @@ export type HorseCreateManyGenderInputEnvelope = {
 
 export type HorseCreateManyInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -819,13 +1077,14 @@ export type HorseCreateManyInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateManyUserInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -841,9 +1100,9 @@ export type HorseCreateManyUserInput = {
   status?: InputMaybe<HorseStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateManyUserInputEnvelope = {
@@ -911,6 +1170,7 @@ export type HorseCreateOrConnectWithoutUserInput = {
 };
 
 export type HorseCreateWithoutCategoryInput = {
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
@@ -928,13 +1188,14 @@ export type HorseCreateWithoutCategoryInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutHorsesInput;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateWithoutDisciplineInput = {
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
@@ -951,13 +1212,14 @@ export type HorseCreateWithoutDisciplineInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutHorsesInput;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateWithoutFavoriteByUsersInput = {
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
@@ -974,13 +1236,14 @@ export type HorseCreateWithoutFavoriteByUsersInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutHorsesInput;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateWithoutGenderInput = {
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
@@ -997,13 +1260,14 @@ export type HorseCreateWithoutGenderInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutHorsesInput;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreateWithoutUserInput = {
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
@@ -1020,9 +1284,9 @@ export type HorseCreateWithoutUserInput = {
   status?: InputMaybe<HorseStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseCreatephotosInput = {
@@ -1547,6 +1811,7 @@ export type HorseGroupByOutputType = {
   _min?: Maybe<HorseMinAggregateOutputType>;
   _sum?: Maybe<HorseSumAggregateOutputType>;
   categoryId: Scalars['String']['output'];
+  contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   description: Scalars['String']['output'];
   disciplineId: Scalars['String']['output'];
@@ -1563,9 +1828,9 @@ export type HorseGroupByOutputType = {
   updatedAt: Scalars['DateTime']['output'];
   userUid: Scalars['String']['output'];
   vetReport?: Maybe<Scalars['String']['output']>;
-  videoURL?: Maybe<Scalars['String']['output']>;
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth: Scalars['Int']['output'];
+  youtubeVideoId?: Maybe<Scalars['String']['output']>;
 };
 
 export type HorseListRelationFilter = {
@@ -1577,6 +1842,7 @@ export type HorseListRelationFilter = {
 export type HorseMaxAggregateOutputType = {
   __typename?: 'HorseMaxAggregateOutputType';
   categoryId?: Maybe<Scalars['String']['output']>;
+  contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   disciplineId?: Maybe<Scalars['String']['output']>;
@@ -1591,13 +1857,14 @@ export type HorseMaxAggregateOutputType = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userUid?: Maybe<Scalars['String']['output']>;
   vetReport?: Maybe<Scalars['String']['output']>;
-  videoURL?: Maybe<Scalars['String']['output']>;
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth?: Maybe<Scalars['Int']['output']>;
+  youtubeVideoId?: Maybe<Scalars['String']['output']>;
 };
 
 export type HorseMaxOrderByAggregateInput = {
   categoryId?: InputMaybe<SortOrder>;
+  contactPerson?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   disciplineId?: InputMaybe<SortOrder>;
@@ -1612,14 +1879,15 @@ export type HorseMaxOrderByAggregateInput = {
   updatedAt?: InputMaybe<SortOrder>;
   userUid?: InputMaybe<SortOrder>;
   vetReport?: InputMaybe<SortOrder>;
-  videoURL?: InputMaybe<SortOrder>;
   xrayResults?: InputMaybe<SortOrder>;
   yearOfBirth?: InputMaybe<SortOrder>;
+  youtubeVideoId?: InputMaybe<SortOrder>;
 };
 
 export type HorseMinAggregateOutputType = {
   __typename?: 'HorseMinAggregateOutputType';
   categoryId?: Maybe<Scalars['String']['output']>;
+  contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   disciplineId?: Maybe<Scalars['String']['output']>;
@@ -1634,13 +1902,14 @@ export type HorseMinAggregateOutputType = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userUid?: Maybe<Scalars['String']['output']>;
   vetReport?: Maybe<Scalars['String']['output']>;
-  videoURL?: Maybe<Scalars['String']['output']>;
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth?: Maybe<Scalars['Int']['output']>;
+  youtubeVideoId?: Maybe<Scalars['String']['output']>;
 };
 
 export type HorseMinOrderByAggregateInput = {
   categoryId?: InputMaybe<SortOrder>;
+  contactPerson?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   disciplineId?: InputMaybe<SortOrder>;
@@ -1655,9 +1924,9 @@ export type HorseMinOrderByAggregateInput = {
   updatedAt?: InputMaybe<SortOrder>;
   userUid?: InputMaybe<SortOrder>;
   vetReport?: InputMaybe<SortOrder>;
-  videoURL?: InputMaybe<SortOrder>;
   xrayResults?: InputMaybe<SortOrder>;
   yearOfBirth?: InputMaybe<SortOrder>;
+  youtubeVideoId?: InputMaybe<SortOrder>;
 };
 
 export type HorseOrderByRelationAggregateInput = {
@@ -1671,6 +1940,7 @@ export type HorseOrderByWithAggregationInput = {
   _min?: InputMaybe<HorseMinOrderByAggregateInput>;
   _sum?: InputMaybe<HorseSumOrderByAggregateInput>;
   categoryId?: InputMaybe<SortOrder>;
+  contactPerson?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   disciplineId?: InputMaybe<SortOrder>;
@@ -1687,14 +1957,15 @@ export type HorseOrderByWithAggregationInput = {
   updatedAt?: InputMaybe<SortOrder>;
   userUid?: InputMaybe<SortOrder>;
   vetReport?: InputMaybe<SortOrderInput>;
-  videoURL?: InputMaybe<SortOrderInput>;
   xrayResults?: InputMaybe<SortOrderInput>;
   yearOfBirth?: InputMaybe<SortOrder>;
+  youtubeVideoId?: InputMaybe<SortOrderInput>;
 };
 
 export type HorseOrderByWithRelationInput = {
   category?: InputMaybe<HorseCategoryOrderByWithRelationInput>;
   categoryId?: InputMaybe<SortOrder>;
+  contactPerson?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   discipline?: InputMaybe<HorseDisciplineOrderByWithRelationInput>;
@@ -1715,13 +1986,14 @@ export type HorseOrderByWithRelationInput = {
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userUid?: InputMaybe<SortOrder>;
   vetReport?: InputMaybe<SortOrderInput>;
-  videoURL?: InputMaybe<SortOrderInput>;
   xrayResults?: InputMaybe<SortOrderInput>;
   yearOfBirth?: InputMaybe<SortOrder>;
+  youtubeVideoId?: InputMaybe<SortOrderInput>;
 };
 
 export enum HorseScalarFieldEnum {
   CategoryId = 'categoryId',
+  ContactPerson = 'contactPerson',
   CreatedAt = 'createdAt',
   Description = 'description',
   DisciplineId = 'disciplineId',
@@ -1738,9 +2010,9 @@ export enum HorseScalarFieldEnum {
   UpdatedAt = 'updatedAt',
   UserUid = 'userUid',
   VetReport = 'vetReport',
-  VideoUrl = 'videoURL',
   XrayResults = 'xrayResults',
-  YearOfBirth = 'yearOfBirth'
+  YearOfBirth = 'yearOfBirth',
+  YoutubeVideoId = 'youtubeVideoId'
 }
 
 export type HorseScalarRelationFilter = {
@@ -1753,6 +2025,7 @@ export type HorseScalarWhereInput = {
   NOT?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
   OR?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
   categoryId?: InputMaybe<StringFilter>;
+  contactPerson?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   disciplineId?: InputMaybe<StringFilter>;
@@ -1769,9 +2042,9 @@ export type HorseScalarWhereInput = {
   updatedAt?: InputMaybe<DateTimeFilter>;
   userUid?: InputMaybe<StringFilter>;
   vetReport?: InputMaybe<StringNullableFilter>;
-  videoURL?: InputMaybe<StringNullableFilter>;
   xrayResults?: InputMaybe<StringNullableFilter>;
   yearOfBirth?: InputMaybe<IntFilter>;
+  youtubeVideoId?: InputMaybe<StringNullableFilter>;
 };
 
 export type HorseScalarWhereWithAggregatesInput = {
@@ -1779,6 +2052,7 @@ export type HorseScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
   OR?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
   categoryId?: InputMaybe<StringWithAggregatesFilter>;
+  contactPerson?: InputMaybe<StringNullableWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   description?: InputMaybe<StringWithAggregatesFilter>;
   disciplineId?: InputMaybe<StringWithAggregatesFilter>;
@@ -1795,9 +2069,9 @@ export type HorseScalarWhereWithAggregatesInput = {
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   userUid?: InputMaybe<StringWithAggregatesFilter>;
   vetReport?: InputMaybe<StringNullableWithAggregatesFilter>;
-  videoURL?: InputMaybe<StringNullableWithAggregatesFilter>;
   xrayResults?: InputMaybe<StringNullableWithAggregatesFilter>;
   yearOfBirth?: InputMaybe<IntWithAggregatesFilter>;
+  youtubeVideoId?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export enum HorseStatus {
@@ -1822,6 +2096,7 @@ export type HorseSumOrderByAggregateInput = {
 
 export type HorseUncheckedCreateInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -1839,9 +2114,9 @@ export type HorseUncheckedCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseUncheckedCreateNestedManyWithoutCategoryInput = {
@@ -1873,6 +2148,7 @@ export type HorseUncheckedCreateNestedManyWithoutUserInput = {
 };
 
 export type HorseUncheckedCreateWithoutCategoryInput = {
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -1890,13 +2166,14 @@ export type HorseUncheckedCreateWithoutCategoryInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseUncheckedCreateWithoutDisciplineInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
@@ -1913,13 +2190,14 @@ export type HorseUncheckedCreateWithoutDisciplineInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseUncheckedCreateWithoutFavoriteByUsersInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -1936,13 +2214,14 @@ export type HorseUncheckedCreateWithoutFavoriteByUsersInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseUncheckedCreateWithoutGenderInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -1959,13 +2238,14 @@ export type HorseUncheckedCreateWithoutGenderInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userUid: Scalars['String']['input'];
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseUncheckedCreateWithoutUserInput = {
   categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
   disciplineId: Scalars['String']['input'];
@@ -1982,13 +2262,14 @@ export type HorseUncheckedCreateWithoutUserInput = {
   status?: InputMaybe<HorseStatus>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   vetReport?: InputMaybe<Scalars['String']['input']>;
-  videoURL?: InputMaybe<Scalars['String']['input']>;
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HorseUncheckedUpdateInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2006,13 +2287,14 @@ export type HorseUncheckedUpdateInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateManyInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2029,12 +2311,13 @@ export type HorseUncheckedUpdateManyInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateManyWithoutCategoryInput = {
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2051,9 +2334,9 @@ export type HorseUncheckedUpdateManyWithoutCategoryInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateManyWithoutCategoryNestedInput = {
@@ -2072,6 +2355,7 @@ export type HorseUncheckedUpdateManyWithoutCategoryNestedInput = {
 
 export type HorseUncheckedUpdateManyWithoutDisciplineInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2087,9 +2371,9 @@ export type HorseUncheckedUpdateManyWithoutDisciplineInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateManyWithoutDisciplineNestedInput = {
@@ -2108,6 +2392,7 @@ export type HorseUncheckedUpdateManyWithoutDisciplineNestedInput = {
 
 export type HorseUncheckedUpdateManyWithoutGenderInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2123,9 +2408,9 @@ export type HorseUncheckedUpdateManyWithoutGenderInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateManyWithoutGenderNestedInput = {
@@ -2144,6 +2429,7 @@ export type HorseUncheckedUpdateManyWithoutGenderNestedInput = {
 
 export type HorseUncheckedUpdateManyWithoutUserInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2159,9 +2445,9 @@ export type HorseUncheckedUpdateManyWithoutUserInput = {
   status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateManyWithoutUserNestedInput = {
@@ -2179,6 +2465,7 @@ export type HorseUncheckedUpdateManyWithoutUserNestedInput = {
 };
 
 export type HorseUncheckedUpdateWithoutCategoryInput = {
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2196,13 +2483,14 @@ export type HorseUncheckedUpdateWithoutCategoryInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateWithoutDisciplineInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
@@ -2219,13 +2507,14 @@ export type HorseUncheckedUpdateWithoutDisciplineInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateWithoutFavoriteByUsersInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2242,13 +2531,14 @@ export type HorseUncheckedUpdateWithoutFavoriteByUsersInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateWithoutGenderInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2265,13 +2555,14 @@ export type HorseUncheckedUpdateWithoutGenderInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUncheckedUpdateWithoutUserInput = {
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2288,13 +2579,14 @@ export type HorseUncheckedUpdateWithoutUserInput = {
   status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateInput = {
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
@@ -2312,12 +2604,13 @@ export type HorseUpdateInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateManyMutationInput = {
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   height?: InputMaybe<IntFieldUpdateOperationsInput>;
@@ -2331,9 +2624,9 @@ export type HorseUpdateManyMutationInput = {
   status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateManyWithWhereWithoutCategoryInput = {
@@ -2446,6 +2739,7 @@ export type HorseUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type HorseUpdateWithoutCategoryInput = {
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
@@ -2463,13 +2757,14 @@ export type HorseUpdateWithoutCategoryInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateWithoutDisciplineInput = {
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
@@ -2486,13 +2781,14 @@ export type HorseUpdateWithoutDisciplineInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateWithoutFavoriteByUsersInput = {
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
@@ -2509,13 +2805,14 @@ export type HorseUpdateWithoutFavoriteByUsersInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateWithoutGenderInput = {
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
@@ -2532,13 +2829,14 @@ export type HorseUpdateWithoutGenderInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdateWithoutUserInput = {
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
@@ -2555,9 +2853,9 @@ export type HorseUpdateWithoutUserInput = {
   status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  videoURL?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type HorseUpdatephotosInput = {
@@ -2601,6 +2899,7 @@ export type HorseWhereInput = {
   OR?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
   category?: InputMaybe<HorseCategoryScalarRelationFilter>;
   categoryId?: InputMaybe<StringFilter>;
+  contactPerson?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   discipline?: InputMaybe<HorseDisciplineScalarRelationFilter>;
@@ -2621,9 +2920,9 @@ export type HorseWhereInput = {
   user?: InputMaybe<UserScalarRelationFilter>;
   userUid?: InputMaybe<StringFilter>;
   vetReport?: InputMaybe<StringNullableFilter>;
-  videoURL?: InputMaybe<StringNullableFilter>;
   xrayResults?: InputMaybe<StringNullableFilter>;
   yearOfBirth?: InputMaybe<IntFilter>;
+  youtubeVideoId?: InputMaybe<StringNullableFilter>;
 };
 
 export type HorseWhereUniqueInput = {
@@ -2632,6 +2931,7 @@ export type HorseWhereUniqueInput = {
   OR?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
   category?: InputMaybe<HorseCategoryScalarRelationFilter>;
   categoryId?: InputMaybe<StringFilter>;
+  contactPerson?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   discipline?: InputMaybe<HorseDisciplineScalarRelationFilter>;
@@ -2652,9 +2952,9 @@ export type HorseWhereUniqueInput = {
   user?: InputMaybe<UserScalarRelationFilter>;
   userUid?: InputMaybe<StringFilter>;
   vetReport?: InputMaybe<StringNullableFilter>;
-  videoURL?: InputMaybe<StringNullableFilter>;
   xrayResults?: InputMaybe<StringNullableFilter>;
   yearOfBirth?: InputMaybe<IntFilter>;
+  youtubeVideoId?: InputMaybe<StringNullableFilter>;
 };
 
 export type IntFieldUpdateOperationsInput = {
@@ -3346,16 +3646,20 @@ export enum NullsOrder {
 
 export type Query = {
   __typename?: 'Query';
+  aggregateCountry?: Maybe<AggregateCountry>;
   aggregateHorse?: Maybe<AggregateHorse>;
   aggregateNotification?: Maybe<AggregateNotification>;
   aggregateUser?: Maybe<AggregateUser>;
   aggregateUserFavoriteHorses?: Maybe<AggregateUserFavoriteHorses>;
   aggregateUserReview?: Maybe<AggregateUserReview>;
+  findFirstCountry?: Maybe<Country>;
   findFirstHorse?: Maybe<Horse>;
   findFirstNotification?: Maybe<Notification>;
   findFirstUser?: Maybe<User>;
   findFirstUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
   findFirstUserReview?: Maybe<UserReview>;
+  findManyCountry: Array<Country>;
+  findManyCountryCount: Scalars['Int']['output'];
   findManyHorse: Array<Horse>;
   findManyHorseCount: Scalars['Int']['output'];
   findManyNotification: Array<Notification>;
@@ -3366,11 +3670,21 @@ export type Query = {
   findManyUserFavoriteHorsesCount: Scalars['Int']['output'];
   findManyUserReview: Array<UserReview>;
   findManyUserReviewCount: Scalars['Int']['output'];
+  findUniqueCountry?: Maybe<Country>;
   findUniqueHorse?: Maybe<Horse>;
   findUniqueNotification?: Maybe<Notification>;
   findUniqueUser?: Maybe<User>;
   findUniqueUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
   findUniqueUserReview?: Maybe<UserReview>;
+};
+
+
+export type QueryAggregateCountryArgs = {
+  cursor?: InputMaybe<CountryWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<CountryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CountryWhereInput>;
 };
 
 
@@ -3416,6 +3730,16 @@ export type QueryAggregateUserReviewArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindFirstCountryArgs = {
+  cursor?: InputMaybe<CountryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<CountryScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<CountryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CountryWhereInput>;
 };
 
 
@@ -3466,6 +3790,26 @@ export type QueryFindFirstUserReviewArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindManyCountryArgs = {
+  cursor?: InputMaybe<CountryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<CountryScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<CountryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CountryWhereInput>;
+};
+
+
+export type QueryFindManyCountryCountArgs = {
+  cursor?: InputMaybe<CountryWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<CountryScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<CountryOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CountryWhereInput>;
 };
 
 
@@ -3566,6 +3910,11 @@ export type QueryFindManyUserReviewCountArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindUniqueCountryArgs = {
+  where: CountryWhereUniqueInput;
 };
 
 
@@ -3693,10 +4042,22 @@ export enum TransactionIsolationLevel {
   Serializable = 'Serializable'
 }
 
+export type UpdateManyCountryAndReturnOutputType = {
+  __typename?: 'UpdateManyCountryAndReturnOutputType';
+  code: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['String']['output'];
+  isAllowed: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  number?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type UpdateManyHorseAndReturnOutputType = {
   __typename?: 'UpdateManyHorseAndReturnOutputType';
   category: HorseCategory;
   categoryId: Scalars['String']['output'];
+  contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   description: Scalars['String']['output'];
   discipline: HorseDiscipline;
@@ -3716,9 +4077,9 @@ export type UpdateManyHorseAndReturnOutputType = {
   user: User;
   userUid: Scalars['String']['output'];
   vetReport?: Maybe<Scalars['String']['output']>;
-  videoURL?: Maybe<Scalars['String']['output']>;
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth: Scalars['Int']['output'];
+  youtubeVideoId?: Maybe<Scalars['String']['output']>;
 };
 
 export type UpdateManyHorseCategoryAndReturnOutputType = {
@@ -5336,14 +5697,14 @@ export type FindManyHorseQueryVariables = Exact<{
 }>;
 
 
-export type FindManyHorseQuery = { __typename?: 'Query', findManyHorse: Array<{ __typename?: 'Horse', id: string, name: string, status: HorseStatus, yearOfBirth: number, height: number, price: number, location: string, photos: Array<string>, videoURL?: string | null, description: string, vetReport?: string | null, xrayResults?: string | null, pedigreeURL?: string | null, pedigree?: any | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', uid: string, name: string }, category: { __typename?: 'HorseCategory', id: string, name: string }, discipline: { __typename?: 'HorseDiscipline', id: string, name: string }, gender: { __typename?: 'HorseGender', id: string, name: string }, favoriteByUsers: Array<{ __typename?: 'UserFavoriteHorses', id: string }> }> };
+export type FindManyHorseQuery = { __typename?: 'Query', findManyHorse: Array<{ __typename?: 'Horse', id: string, name: string, status: HorseStatus, yearOfBirth: number, height: number, price: number, location: string, photos: Array<string>, youtubeVideoId?: string | null, description: string, vetReport?: string | null, xrayResults?: string | null, pedigreeURL?: string | null, pedigree?: any | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', uid: string, name: string }, category: { __typename?: 'HorseCategory', id: string, name: string }, discipline: { __typename?: 'HorseDiscipline', id: string, name: string }, gender: { __typename?: 'HorseGender', id: string, name: string }, favoriteByUsers: Array<{ __typename?: 'UserFavoriteHorses', id: string }> }> };
 
 export type FindUniqueHorseQueryVariables = Exact<{
   where: HorseWhereUniqueInput;
 }>;
 
 
-export type FindUniqueHorseQuery = { __typename?: 'Query', findUniqueHorse?: { __typename?: 'Horse', id: string, name: string, status: HorseStatus, yearOfBirth: number, height: number, price: number, location: string, photos: Array<string>, videoURL?: string | null, description: string, vetReport?: string | null, xrayResults?: string | null, pedigreeURL?: string | null, pedigree?: any | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', uid: string, name: string }, category: { __typename?: 'HorseCategory', id: string, name: string }, discipline: { __typename?: 'HorseDiscipline', id: string, name: string }, gender: { __typename?: 'HorseGender', id: string, name: string } } | null };
+export type FindUniqueHorseQuery = { __typename?: 'Query', findUniqueHorse?: { __typename?: 'Horse', id: string, name: string, status: HorseStatus, yearOfBirth: number, height: number, price: number, location: string, photos: Array<string>, youtubeVideoId?: string | null, description: string, vetReport?: string | null, xrayResults?: string | null, pedigreeURL?: string | null, pedigree?: any | null, createdAt: any, updatedAt: any, user: { __typename?: 'User', uid: string, name: string }, category: { __typename?: 'HorseCategory', id: string, name: string }, discipline: { __typename?: 'HorseDiscipline', id: string, name: string }, gender: { __typename?: 'HorseGender', id: string, name: string } } | null };
 
 export type FindManyHorseCountQueryVariables = Exact<{
   where?: InputMaybe<HorseWhereInput>;
@@ -5388,7 +5749,7 @@ export const FindManyHorseDocument = gql`
     price
     location
     photos
-    videoURL
+    youtubeVideoId
     description
     vetReport
     xrayResults
@@ -5429,7 +5790,7 @@ export const FindUniqueHorseDocument = gql`
     price
     location
     photos
-    videoURL
+    youtubeVideoId
     description
     vetReport
     xrayResults

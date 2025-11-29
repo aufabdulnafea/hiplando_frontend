@@ -21,7 +21,7 @@ query findManyHorse(
     price
     location
     photos
-    videoURL
+    youtubeVideoId
     description
     vetReport
     xrayResults
@@ -62,7 +62,7 @@ query findUniqueHorse($where: HorseWhereUniqueInput!) {
     price
     location
     photos
-    videoURL
+    youtubeVideoId
     description
     vetReport
     xrayResults
