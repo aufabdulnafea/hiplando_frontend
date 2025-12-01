@@ -60,7 +60,10 @@ export function PhotoManager({ initialPhotos }: { initialPhotos: string[] }) {
     useEffect(() => {
         async function fetchPhotos() {
             const urls = await Promise.all(
-                initialPhotos.map(id => getProtectedFile(id))
+                initialPhotos.map(filename => {
+                    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${filename}`
+                    return getProtectedFile(url)
+                })
             );
             setPhotos(urls);
         }
@@ -90,8 +93,6 @@ export function PhotoManager({ initialPhotos }: { initialPhotos: string[] }) {
                     </div>
                 </SortableContext>
                 <FileUpload
-                    // value={photos}
-                    // onValueChange={el => setPhotos(el)}
                     onValueChange={el => console.log(el)}
                     accept="image/*"
                     maxFiles={3}

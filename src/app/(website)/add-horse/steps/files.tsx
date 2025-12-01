@@ -6,10 +6,11 @@ import { Upload, X } from "lucide-react";
 import { Input } from '@/components/ui/input'
 import { Button } from "@/components/ui/button"
 import { FileUpload, FileUploadDropzone, FileUploadItem, FileUploadItemDelete, FileUploadItemMetadata, FileUploadItemPreview, FileUploadList } from "@/components/ui/file-upload";
-
+import { extractYouTubeVideoId } from "@/lib/helpers";
 
 export default function Files() {
-  const { register, watch, setValue } = useFormContext();
+  const [youtubeVideoURL, setYoutubeVideoURL] = useState<string>("");
+  const { watch, setValue } = useFormContext();
   const photos = watch<"photos">("photos", []) as File[];
   watch("xray", null);
   watch("veterinary", null)
@@ -27,6 +28,16 @@ export default function Files() {
       setPreviewUrls([]);
     }
   }, [photos]);
+
+
+  useEffect(() => {
+    const url = youtubeVideoURL?.trim();
+    if (!url) return;
+    const videoId = extractYouTubeVideoId(url);
+    if (videoId) {
+      setValue("youtubeVideoId", videoId);
+    }
+  }, [youtubeVideoURL])
 
   return (
     <div className="w-full flex flex-col gap-5 py-5">
@@ -85,7 +96,8 @@ export default function Files() {
         </div>
         <Input
           placeholder="https://www.youtube.com/watch?"
-          {...register("video")}
+          value={youtubeVideoURL}
+          onChange={e => setYoutubeVideoURL(e.target.value)}
         />
       </div>
 

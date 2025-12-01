@@ -4,15 +4,15 @@ export function ageFromBirthYear(birthYear: number): number {
     return currentYear - birthYear;
 }
 
-export function extractYouTubeVideoId(url: string | undefined | null): string | undefined {
-    if (!url) return undefined;
+export function extractYouTubeVideoId(url: string | undefined | null): string {
+    if (!url) return "";
     try {
         // Normalize URL
         const u = new URL(url);
 
         // Handle standard YouTube URL: https://www.youtube.com/watch?v=VIDEO_ID
         if (u.hostname.includes("youtube.com")) {
-            return u.searchParams.get("v") || undefined;
+            return u.searchParams.get("v") || "";
         }
 
         // Handle short URL: https://youtu.be/VIDEO_ID
@@ -25,9 +25,9 @@ export function extractYouTubeVideoId(url: string | undefined | null): string | 
             return u.pathname.split("/embed/")[1];
         }
 
-        return undefined; // not a recognized format
+        return ""; // not a recognized format
     } catch {
-        return undefined; // invalid URL
+        return ""; // invalid URL
     }
 }
 
@@ -36,7 +36,12 @@ export function extractYouTubeVideoId(url: string | undefined | null): string | 
  * @param videoId YouTube video ID
  * @returns Embed URL string or null if empty
  */
-export function toYouTubeEmbed(videoId: string | null | undefined): string | undefined {
-    if (!videoId) return undefined
+export function toYouTubeEmbed(videoId: string | null | undefined): string {
+    if (!videoId) return ""
     return `https://www.youtube.com/embed/${videoId}`
+}
+
+export function toYoutubeURL(videoId: string | null | undefined): string {
+    if (!videoId) return ""
+    return `https://www.youtube.com/watch?v=${videoId}`
 }

@@ -12,7 +12,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 export async function getHorseDisciplines() {
-    const disciplinesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/disciplines`, {
+    const disciplinesResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/disciplines`, {
         next: {
             tags: ['disciplines'],
             revalidate: false
@@ -22,7 +22,7 @@ export async function getHorseDisciplines() {
 }
 
 export async function getHorseGenders() {
-    const gendersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/genders`, {
+    const gendersResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/genders`, {
         next: {
             tags: ['genders'],
             revalidate: false
@@ -32,7 +32,7 @@ export async function getHorseGenders() {
 }
 
 export async function getHorseCategories() {
-    const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`, {
+    const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/categories`, {
         next: {
             tags: ['categories'],
             revalidate: false
@@ -45,7 +45,7 @@ export async function getHorseCategories() {
 export async function addToFavorite(horseId: string) {
     const token = await auth.currentUser?.getIdToken()
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/horses/favorite/${horseId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/favorite/${horseId}`, {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -56,7 +56,7 @@ export async function addToFavorite(horseId: string) {
 
 export async function removeFromFavorite(horseId: string) {
     const token = await auth.currentUser?.getIdToken()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/horses/favorite/${horseId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/favorite/${horseId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export type AddCategoryFormData = z.infer<typeof addCategorySchema>;
 
 export async function addCategory(data: FormData) {
     const token = await auth.currentUser?.getIdToken()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/horses/category`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/admin/horses/category`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${token}`
@@ -101,7 +101,7 @@ export type AddDisciplineFormData = z.infer<typeof addDisciplineSchema>;
 
 export async function addDiscipline(data: AddDisciplineFormData) {
     const token = await auth.currentUser?.getIdToken()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/horses/discipline`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/admin/horses/discipline`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export type AddGenderFormData = AddDisciplineFormData
 
 export async function addGender(data: AddGenderFormData) {
     const token = await auth.currentUser?.getIdToken()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/horses/gender`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/admin/horses/gender`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -138,7 +138,6 @@ export const getHorseData = (id: string) => unstable_cache(
 );
 
 export async function getProtectedFile(url: string) {
-    console.log("---", url)
     const token = await auth.currentUser?.getIdToken()
     const response = await fetch(url, {
         headers: {
@@ -150,4 +149,23 @@ export async function getProtectedFile(url: string) {
 
     const blob = await response.blob()
     return URL.createObjectURL(blob)
+}
+
+// http://localhost:4000/api/v1/horses/horse-telex-pedigree
+export async function readHorseTelexPedigree(url: string) {
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/horse-telex-pedigree`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ url }),
+    })
+
+    if (!response.ok) throw new Error(`API Error: ${response.status} ${response.statusText}`)
+
+    const json = await response.json()
+    if (Array.isArray(json)) return json
+    return []
 }

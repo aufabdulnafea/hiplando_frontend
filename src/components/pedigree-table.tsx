@@ -6,8 +6,10 @@ export interface PedigreeItem {
     sex: "stallion" | "mare";
 }
 
+export type PedigreeArray = (PedigreeItem | null)[];
+
 export interface PedigreeTableProps {
-    data: (PedigreeItem | null)[];
+    data: PedigreeArray;
 }
 
 export function PedigreeTable({ data }: PedigreeTableProps) {

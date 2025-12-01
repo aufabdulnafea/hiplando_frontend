@@ -9,14 +9,15 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { RefreshCcw } from "lucide-react";
-import Link from "next/link";
 
 import { PedigreeTable } from "@/components/pedigree-table";
 import { PhotoManager } from "./horse-images-list";
-import { extractYouTubeVideoId, toYouTubeEmbed } from "@/lib/helpers";
-import { getProtectedFile } from "@/lib/api";
+import { extractYouTubeVideoId, toYouTubeEmbed, toYoutubeURL } from "@/lib/helpers";
+import { getProtectedFile, readHorseTelexPedigree } from "@/lib/api";
+import type { PedigreeArray } from "@/components/pedigree-table";
 
 import type { Horse } from "@/graphql/sdk";
+import { auth } from "@/lib/firebase";
 
 interface EditHorseFormProps {
     horse: Horse;
@@ -32,14 +33,28 @@ export function EditHorseForm({
     disciplines,
 }: EditHorseFormProps) {
     const [vetReportURL, setVetReportURL] = useState<string | undefined>();
+    const [youtubeURL, setYoutubeURL] = useState<string>(toYoutubeURL(horse.youtubeVideoId));
     const [xrayURL, setXrayURL] = useState<string | undefined>();
+    const [pedigreeData, setPedigreeData] = useState<PedigreeArray>(horse.pedigree || []);
+    const [pedigreeURL, setPedigreeURL] = useState<string | undefined>(horse.pedigree ? horse.pedigree[0].href || "" : "");
 
-    const { register, watch } = useForm({
+    const { register, watch, setValue, handleSubmit } = useForm({
         defaultValues: {
-            ...horse,
-            category: horse.category.id,
-            gender: horse.gender.id,
-            discipline: horse.discipline.id,
+            name: horse.name,
+            location: horse.location,
+            yearOfBirth: horse.yearOfBirth,
+            height: horse.height,
+            price: horse.price,
+            description: horse.description,
+            youtubeVideoId: horse.youtubeVideoId ?? null,
+
+            genderId: horse.gender.id,
+            disciplineId: horse.discipline.id,
+            categoryId: horse.category.id,
+
+            xrayResults: horse.xrayResults,
+            vetReport: horse.vetReport,
+            pedigree: horse.pedigree,
         },
     });
 
@@ -47,55 +62,141 @@ export function EditHorseForm({
 
     useEffect(() => {
         Promise.all([
-            getProtectedFile(horse.vetReport ?? "").then(setVetReportURL),
-            getProtectedFile(horse.xrayResults ?? "").then(setXrayURL),
+            getProtectedFile(horse.vetReport ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.vetReport}` : "").then(setVetReportURL),
+            getProtectedFile(horse.xrayResults ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.xrayResults}` : "").then(setXrayURL),
         ]);
     }, [horse.vetReport, horse.xrayResults]);
 
-    return (
-        <div className="p-8 max-w-screen-xl mx-auto flex flex-col gap-5">
+    async function onSubmit(formValues: any) {
+        const token = await auth.currentUser?.getIdToken()
+        const fd = new FormData();
 
-            {/* TITLE HEADER */}
+        // Convert YouTube URL → videoId
+        const videoId = extractYouTubeVideoId(youtubeURL);
+        fd.append("youtubeVideoId", videoId ?? "");
+
+        // Append all normal fields
+        fd.append("name", formValues.name);
+        fd.append("yearOfBirth", String(formValues.yearOfBirth));
+        fd.append("genderId", formValues.genderId);
+        fd.append("height", String(formValues.height));
+        fd.append("disciplineId", formValues.disciplineId);
+        fd.append("categoryId", formValues.categoryId);
+        fd.append("location", formValues.location);
+        fd.append("price", String(formValues.price));
+        fd.append("description", formValues.description);
+        fd.append("contactPerson", formValues.contactPerson);
+        fd.append("status", formValues.status);
+
+        // Photos = array of filenames (already uploaded separately)
+        fd.append("photos", JSON.stringify(horse.photos));
+
+        // Xray file
+        if (formValues.xrayResults?.[0]) {
+            fd.append("xrayResults", formValues.xrayResults[0]);
+        } else {
+            fd.append("xrayResults", horse.xrayResults ?? "");
+        }
+
+        // VetReport file
+        if (formValues.vetReport?.[0]) {
+            fd.append("vetReport", formValues.vetReport[0]);
+        } else {
+            fd.append("vetReport", horse.vetReport ?? "");
+        }
+
+
+
+        // Send FormData to backend
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/${horse.id}`,
+            {
+                method: "POST",
+                body: fd,              // <-- FormData
+                headers: {
+                    Authorization: `Bearer ${token}`,   // KEEP THIS
+                    // DO NOT set Content-Type manually
+                },
+            }
+        );
+
+        if (!res.ok) {
+            const err = await res.text();
+            alert("Error: " + err);
+            return;
+        }
+
+        alert("Horse updated successfully!");
+    }
+
+    return (
+        <div className="p-4 w-full max-w-screen-xl mx-auto flex flex-col gap-5">
+
             <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold">Edit Horse</h1>
                 <div className="flex gap-2">
                     <Button variant="outline">Cancel</Button>
-                    <Button>Save Changes</Button>
+                    <Button onClick={handleSubmit(onSubmit)}>Save Changes</Button>
                 </div>
             </div>
 
-            {/* MAIN GRID */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div className="flex flex-col gap-5">
 
-                {/* LEFT: IMAGES */}
-                <Card className="p-6 col-span-1">
+                <Card className="p-6">
                     <SectionTitle>Photos</SectionTitle>
                     <PhotoManager initialPhotos={horse.photos ?? []} />
                 </Card>
 
-                {/* RIGHT (2/3): BASIC INFO */}
-                <Card className="p-8 col-span-1 lg:col-span-2">
+                <Card className="p-8">
+                    <SectionTitle>Video</SectionTitle>
+
+                    <Field label="YouTube Link">
+                        <Input
+                            placeholder="Paste YouTube link"
+                            value={youtubeURL}
+                            onChange={(e) => {
+                                setYoutubeURL(e.target.value)
+                                setValue("youtubeVideoId", extractYouTubeVideoId(e.target.value))
+                            }}
+                        />
+                    </Field>
+
+                    <Card className="mt-6 h-[400px] rounded-xl overflow-hidden shadow-inner">
+                        {videoId ? (
+                            <iframe
+                                src={toYouTubeEmbed(videoId)}
+                                className="w-full h-full"
+                            />
+                        ) : (
+                            <div className="flex items-center justify-center h-full text-muted-foreground">
+                                No video selected
+                            </div>
+                        )}
+                    </Card>
+                </Card>
+
+                <Card className="p-8">
                     <SectionTitle>Basic Information</SectionTitle>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                         <Field label="Name">
-                            <Input {...register("name")} />
+                            <Input {...register("name")} autoComplete="off" />
                         </Field>
 
                         <Field label="Location">
-                            <Input {...register("location")} />
+                            <Input {...register("location")} autoComplete="off" />
                         </Field>
 
                         <Field label="Year of Birth">
-                            <Input type="number" {...register("yearOfBirth")} />
+                            <Input type="number" {...register("yearOfBirth")} autoComplete="off" />
                         </Field>
 
                         <Field label="Height (cm)">
-                            <Input type="number" {...register("height")} />
+                            <Input type="number" {...register("height")} autoComplete="off" />
                         </Field>
 
                         <Field label="Category">
-                            <Select {...register("category")}>
+                            <Select {...register("categoryId")} defaultValue={horse.category.id}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select category" />
                                 </SelectTrigger>
@@ -110,7 +211,7 @@ export function EditHorseForm({
                         </Field>
 
                         <Field label="Gender">
-                            <Select {...register("gender")}>
+                            <Select {...register("genderId")} defaultValue={horse.gender.id}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select gender" />
                                 </SelectTrigger>
@@ -125,7 +226,7 @@ export function EditHorseForm({
                         </Field>
 
                         <Field label="Discipline">
-                            <Select {...register("discipline")}>
+                            <Select {...register("disciplineId")} defaultValue={horse.discipline.id}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select discipline" />
                                 </SelectTrigger>
@@ -140,60 +241,42 @@ export function EditHorseForm({
                         </Field>
 
                         <Field label="Price (€)">
-                            <Input type="number" {...register("price")} />
+                            <Input type="number" {...register("price")} autoComplete="off" />
                         </Field>
                     </div>
 
                     <Field label="Description" className="mt-6">
-                        <Textarea rows={6} {...register("description")} />
+                        <Textarea rows={6} {...register("description")} autoComplete="off" />
                     </Field>
                 </Card>
 
-                {/* PEDIGREE */}
-                <Card className="p-8 col-span-1 lg:col-span-2">
+                <Card className="p-8">
                     <SectionTitle>Pedigree</SectionTitle>
 
-                    <div className="flex gap-2">
-                        <Input {...register("pedigreeURL")} />
-                        <Button variant="outline">
-                            <RefreshCcw className="w-4 h-4" />
-                        </Button>
-                    </div>
-
-                    <Card className="mt-6 border rounded-xl shadow-inner overflow-hidden">
-                        <PedigreeTable data={[]} />
-                    </Card>
-                </Card>
-
-                {/* VIDEO */}
-                <Card className="p-8 col-span-1">
-                    <SectionTitle>Video</SectionTitle>
-
-                    <Field label="YouTube Link">
-                        <Input
-                            placeholder="Paste YouTube link"
-                            {...register("youtubeVideoId", {
-                                setValueAs: (url) => extractYouTubeVideoId(url) || "",
-                            })}
-                        />
+                    <Field label="HorseTelex Link">
+                        <div className="flex gap-2">
+                            <Input id="pedigree-url" value={pedigreeURL} onChange={(e) => setPedigreeURL(e.target.value)} autoComplete="off" />
+                            <Button variant="outline" onClick={() => {
+                                if (pedigreeURL) {
+                                    readHorseTelexPedigree(pedigreeURL).then((data) => {
+                                        setPedigreeData(data)
+                                    })
+                                }
+                            }}>
+                                <RefreshCcw className="w-4 h-4" />
+                            </Button>
+                        </div>
                     </Field>
 
-                    <Card className="mt-6 h-56 rounded-xl overflow-hidden shadow-inner">
-                        {videoId ? (
-                            <iframe
-                                src={toYouTubeEmbed(videoId)}
-                                className="w-full h-full"
-                            />
-                        ) : (
-                            <div className="flex items-center justify-center h-full text-muted-foreground">
-                                No video selected
-                            </div>
-                        )}
+
+                    <Card className="mt-6 border rounded-xl shadow-inner overflow-hidden">
+                        <PedigreeTable data={pedigreeData} />
                     </Card>
                 </Card>
 
-                {/* HEALTH DOCUMENTS */}
-                <Card className="p-8 col-span-3">
+
+
+                <Card className="p-8">
                     <SectionTitle>Health Documents</SectionTitle>
                     <DocUpload
                         label="X-Ray Results"

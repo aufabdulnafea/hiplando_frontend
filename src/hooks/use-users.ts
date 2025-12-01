@@ -20,8 +20,6 @@ export function useUsers(params: UseUsersProps) {
     const orderBy = (params.sorting && params.sorting[0]) ? [spreadToNestedObject(params.sorting[0].id, params.sorting[0].desc ? "desc" : "asc")] : undefined;
     const where = params.search ? { name: { contains: params.search } } : undefined
 
-    console.log(orderBy)
-
     return useQuery({
         queryKey: ["users", params],
         queryFn: async () => {

@@ -21,7 +21,7 @@ import { HorseAddedSuccessCard } from './added-success-card';
 const schema = z.object({
     categoryId: z.string().min(1, "Please select a category"),
     name: z.string().min(2, "Horse name is required"),
-    pedigree: z.url().optional().or(z.literal("")),
+    // pedigreeURL: z.url().optional().or(z.literal("")),
     yearOfBirth: z.number().positive("Year of birth is required"),
     genderId: z.string().min(1, "Gender is required"),
     height: z.number().positive("Height is required"),
@@ -30,9 +30,11 @@ const schema = z.object({
     price: z.number().positive("Price is required"),
     description: z.string().optional(),
     photos: z.array(z.instanceof(File)).refine(f => f.length >= 1 && f.length <= 3, "Upload 1–3 photos"),
-    video: z.url().optional().or(z.literal("")),
+    // video: z.url().optional().or(z.literal("")),
+    youtubeVideoId: z.string().optional(),
     xrayResults: z.array(z.instanceof(File)).optional(),
     vetReport: z.array(z.instanceof(File)).optional(),
+    pedigree: z.array(z.any()).optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -49,13 +51,17 @@ function focusFirstError(methods: any) {
 function convertToFormData(data: FormData) {
     const formData = new FormData();
     data.photos.forEach(file => formData.append('photos', file));
-    data.video && formData.append('video', data.video);
+    // data.video && formData.append('video', data.video);
     data.xrayResults?.forEach(file => formData.append('xrayResults', file));
     data.vetReport?.forEach(file => formData.append('vetReport', file));
 
     Object.entries(data).forEach(([key, value]) => {
-        if (!['photos', 'video', 'xrayResults', 'vetReport'].includes(key) && value !== undefined && value !== null) {
-            formData.append(key, value as string);
+        if (!['photos', 'xrayResults', 'vetReport'].includes(key) && value !== undefined && value !== null) {
+            if (key === "pedigree") {
+                formData.append("pedigree", JSON.stringify(value));
+            } else {
+                formData.append(key, value as any);
+            }
         }
     });
 
@@ -124,7 +130,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
         defaultValues: {
             categoryId: "",
             name: "",
-            pedigree: undefined,
+            // pedigreeURL: undefined,
             yearOfBirth: undefined,
             genderId: "",
             height: undefined,
@@ -133,7 +139,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
             price: undefined,
             description: undefined,
             photos: [],
-            video: undefined,
+            // video: undefined,
             xrayResults: [],
             vetReport: []
         },
@@ -141,8 +147,9 @@ export default function AddHorseForm(props: AddHorseFormProps) {
 
     const stepFields: Record<number, (keyof FormData)[]> = {
         1: ["categoryId"],
-        2: ["name", "pedigree", "yearOfBirth", "genderId", "height", "disciplineId", "location", "price", "description"],
-        3: ["photos", "video"],
+        2: ["name", "yearOfBirth", "genderId", "height", "disciplineId", "location", "price", "description", "pedigree"],
+        // 3: ["photos", "video"],
+        3: ["photos"],
     };
 
     const stepTitles = ["Select Category", "Horse Details", "Upload Files"];
@@ -172,7 +179,6 @@ export default function AddHorseForm(props: AddHorseFormProps) {
             }
         } else {
             direction.current = 1;
-            console.log("here////")
             methods.handleSubmit(onSubmit)();
         }
     }
@@ -185,9 +191,7 @@ export default function AddHorseForm(props: AddHorseFormProps) {
     }
 
     async function onSubmit(data: FormData) {
-        console.log("here 2")
         setIsSubmitting(true);
-        console.log(data)
         const user = auth.currentUser;
         if (!user) {
             toast.error("You must be logged in");
