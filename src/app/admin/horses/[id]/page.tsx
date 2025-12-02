@@ -13,7 +13,8 @@ export default async function HorsePage({ params }: HorsePageProps) {
     const genders = await getHorseGenders()
     const disciplines = await getHorseDisciplines()
 
-    const horse = await getHorseData(id)()
+    // const horse = await getHorseData(id)()
+    const horse = await getHorseData(id)
 
 
     if (!horse) {

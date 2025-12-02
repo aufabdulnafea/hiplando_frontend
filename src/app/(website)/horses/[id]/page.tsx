@@ -13,7 +13,8 @@ export default async function HorsePage({ params }: HorsePageProps) {
     const resolvedParams = await params;
     const { id } = resolvedParams;
 
-    const horse = await getHorseData(id)();
+    // const horse = await getHorseData(id)();
+    const horse = await getHorseData(id);
 
     if (!horse) {
         return (

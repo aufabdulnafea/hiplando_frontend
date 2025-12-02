@@ -1,23 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useForm, UseFormRegisterReturn } from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { RefreshCcw } from "lucide-react";
-
+import { RefreshCcw, Upload } from "lucide-react";
 import { PedigreeTable } from "@/components/pedigree-table";
 import { PhotoManager } from "./horse-images-list";
 import { extractYouTubeVideoId, toYouTubeEmbed, toYoutubeURL } from "@/lib/helpers";
-import { getProtectedFile, readHorseTelexPedigree } from "@/lib/api";
+import { getProtectedFile, readHorseTelexPedigree, updateHorse } from "@/lib/api";
 import type { PedigreeArray } from "@/components/pedigree-table";
-
 import type { Horse } from "@/graphql/sdk";
-import { auth } from "@/lib/firebase";
 
 interface EditHorseFormProps {
     horse: Horse;
@@ -26,20 +23,18 @@ interface EditHorseFormProps {
     disciplines: any[];
 }
 
-export function EditHorseForm({
-    horse,
-    categories,
-    genders,
-    disciplines,
-}: EditHorseFormProps) {
+export function EditHorseForm({ horse, categories, genders, disciplines }: EditHorseFormProps) {
     const [vetReportURL, setVetReportURL] = useState<string | undefined>();
     const [youtubeURL, setYoutubeURL] = useState<string>(toYoutubeURL(horse.youtubeVideoId));
     const [xrayURL, setXrayURL] = useState<string | undefined>();
     const [pedigreeData, setPedigreeData] = useState<PedigreeArray>(horse.pedigree || []);
     const [pedigreeURL, setPedigreeURL] = useState<string | undefined>(horse.pedigree ? horse.pedigree[0].href || "" : "");
 
-    const { register, watch, setValue, handleSubmit } = useForm({
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const { register, watch, setValue, getValues } = useForm({
         defaultValues: {
+            photos: horse.photos,
             name: horse.name,
             location: horse.location,
             yearOfBirth: horse.yearOfBirth,
@@ -47,13 +42,9 @@ export function EditHorseForm({
             price: horse.price,
             description: horse.description,
             youtubeVideoId: horse.youtubeVideoId ?? null,
-
             genderId: horse.gender.id,
             disciplineId: horse.discipline.id,
             categoryId: horse.category.id,
-
-            xrayResults: horse.xrayResults,
-            vetReport: horse.vetReport,
             pedigree: horse.pedigree,
         },
     });
@@ -67,84 +58,57 @@ export function EditHorseForm({
         ]);
     }, [horse.vetReport, horse.xrayResults]);
 
-    async function onSubmit(formValues: any) {
-        const token = await auth.currentUser?.getIdToken()
-        const fd = new FormData();
+    const handleClick = () => {
+        fileInputRef.current?.click();
+    };
 
-        // Convert YouTube URL → videoId
-        const videoId = extractYouTubeVideoId(youtubeURL);
-        fd.append("youtubeVideoId", videoId ?? "");
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) return;
+        const files = Array.from(e.target.files);
+    };
 
-        // Append all normal fields
-        fd.append("name", formValues.name);
-        fd.append("yearOfBirth", String(formValues.yearOfBirth));
-        fd.append("genderId", formValues.genderId);
-        fd.append("height", String(formValues.height));
-        fd.append("disciplineId", formValues.disciplineId);
-        fd.append("categoryId", formValues.categoryId);
-        fd.append("location", formValues.location);
-        fd.append("price", String(formValues.price));
-        fd.append("description", formValues.description);
-        fd.append("contactPerson", formValues.contactPerson);
-        fd.append("status", formValues.status);
-
-        // Photos = array of filenames (already uploaded separately)
-        fd.append("photos", JSON.stringify(horse.photos));
-
-        // Xray file
-        if (formValues.xrayResults?.[0]) {
-            fd.append("xrayResults", formValues.xrayResults[0]);
-        } else {
-            fd.append("xrayResults", horse.xrayResults ?? "");
+    const onSubmit = async () => {
+        const formValues = getValues();
+        try {
+            const newHorse = await updateHorse(horse.id, formValues);
+            console.log("Horse updated successfully", newHorse);
+        } catch (error) {
+            console.error("Failed to update horse:", error);
         }
-
-        // VetReport file
-        if (formValues.vetReport?.[0]) {
-            fd.append("vetReport", formValues.vetReport[0]);
-        } else {
-            fd.append("vetReport", horse.vetReport ?? "");
-        }
-
-
-
-        // Send FormData to backend
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/${horse.id}`,
-            {
-                method: "POST",
-                body: fd,              // <-- FormData
-                headers: {
-                    Authorization: `Bearer ${token}`,   // KEEP THIS
-                    // DO NOT set Content-Type manually
-                },
-            }
-        );
-
-        if (!res.ok) {
-            const err = await res.text();
-            alert("Error: " + err);
-            return;
-        }
-
-        alert("Horse updated successfully!");
-    }
+    };
 
     return (
         <div className="p-4 w-full max-w-screen-xl mx-auto flex flex-col gap-5">
-
             <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold">Edit Horse</h1>
                 <div className="flex gap-2">
                     <Button variant="outline">Cancel</Button>
-                    <Button onClick={handleSubmit(onSubmit)}>Save Changes</Button>
+                    <Button onClick={onSubmit}>Save Changes</Button>
                 </div>
             </div>
 
             <div className="flex flex-col gap-5">
 
                 <Card className="p-6">
-                    <SectionTitle>Photos</SectionTitle>
-                    <PhotoManager initialPhotos={horse.photos ?? []} />
+                    <SectionTitle>
+                        <div className="flex items-center justify-between">
+                            Photos
+                            <Button variant="outline" size='icon' onClick={handleClick}><Upload /></Button>
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                accept="image/*"
+                                multiple
+                                className="hidden"
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </SectionTitle>
+                    <PhotoManager
+                        horseId={horse.id}
+                        initialPhotos={watch("photos")}
+                        action={(filesOrNames) => setValue("photos", filesOrNames as string[])}
+                    />
                 </Card>
 
                 <Card className="p-8">
@@ -267,30 +231,15 @@ export function EditHorseForm({
                             </Button>
                         </div>
                     </Field>
-
-
                     <Card className="mt-6 border rounded-xl shadow-inner overflow-hidden">
                         <PedigreeTable data={pedigreeData} />
                     </Card>
                 </Card>
-
-
-
                 <Card className="p-8">
                     <SectionTitle>Health Documents</SectionTitle>
-                    <DocUpload
-                        label="X-Ray Results"
-                        register={register("xrayResults")}
-                        fileURL={xrayURL}
-                    />
-
+                    <DocUpload label="X-Ray Results" fileURL={xrayURL} />
                     <div className="mt-6" />
-
-                    <DocUpload
-                        label="Vet Report"
-                        register={register("vetReport")}
-                        fileURL={vetReportURL}
-                    />
+                    <DocUpload label="Vet Report" fileURL={vetReportURL} />
                 </Card>
             </div>
         </div>
@@ -299,7 +248,7 @@ export function EditHorseForm({
 
 /* ------------------------- SMALL COMPONENTS ------------------------- */
 
-function SectionTitle({ children }: { children: string }) {
+function SectionTitle({ children }: { children: React.ReactNode }) {
     return <h2 className="text-xl font-semibold mb-4">{children}</h2>;
 }
 
@@ -320,21 +269,11 @@ function Field({
     );
 }
 
-function DocUpload({
-    label,
-    fileURL,
-    register,
-}: {
-    label: string;
-    fileURL?: string;
-    register: UseFormRegisterReturn;
-}) {
+function DocUpload({ label, fileURL }: { label: string; fileURL?: string }) {
     return (
         <div className="flex flex-col gap-3">
             <Label>{label}</Label>
-
-            <Input type="file" accept="application/pdf" {...register} />
-
+            <Input type="file" accept="application/pdf" />
             {fileURL && (
                 <Button
                     variant="link"

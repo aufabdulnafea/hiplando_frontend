@@ -129,13 +129,24 @@ export async function addGender(data: AddGenderFormData) {
 }
 
 
-export const getHorseData = (id: string) => unstable_cache(
-    async () => {
-        const sdk = await getGraphQLClient();
-        const { findUniqueHorse } = await sdk.findUniqueHorse({ where: { id } });
-        return findUniqueHorse;
-    }, ["horses", id], { tags: ["horses", id] }
-);
+// export const getHorseData = (id: string) =>
+//     unstable_cache(
+//         async () => {
+//             const sdk = await getGraphQLClient();
+//             const { findUniqueHorse } = await sdk.findUniqueHorse({ where: { id } });
+//             return findUniqueHorse;
+//         },
+//         ["horses", id],
+//         {
+//             tags: ["horses", id]
+//         }
+//     );
+
+export async function getHorseData(id: string) {
+    const sdk = await getGraphQLClient();
+    const { findUniqueHorse } = await sdk.findUniqueHorse({ where: { id } });
+    return findUniqueHorse;
+}
 
 export async function getProtectedFile(url: string) {
     const token = await auth.currentUser?.getIdToken()
@@ -168,4 +179,32 @@ export async function readHorseTelexPedigree(url: string) {
     const json = await response.json()
     if (Array.isArray(json)) return json
     return []
+}
+
+export async function updateHorse(id: string, data: any): Promise<any> {
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/update/${id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+    return handleResponse<any>(response)
+}
+
+export async function deleteHorseFile(
+    horseId: string,
+    filename: string,
+    imageType: 'photo' | 'vet' | 'xray'
+): Promise<any> {
+    const token = await auth.currentUser?.getIdToken();
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/${horseId}/delete-media?type=${imageType}&filename=${encodeURIComponent(filename)}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    return handleResponse<any>(response);
 }
