@@ -48,6 +48,7 @@ function focusFirstError(methods: any) {
 }
 
 
+// todo one file to xray and vetreport
 function convertToFormData(data: FormData) {
     const formData = new FormData();
     data.photos.forEach(file => formData.append('photos', file));

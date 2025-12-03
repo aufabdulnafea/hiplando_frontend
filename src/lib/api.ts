@@ -1,6 +1,6 @@
 import z from "zod"
 import { auth } from "./firebase"
-import { unstable_cache } from "next/cache"
+// import { unstable_cache } from "next/cache"
 import { getGraphQLClient } from "./graphql"
 
 async function handleResponse<T>(response: Response): Promise<T> {
@@ -148,7 +148,8 @@ export async function getHorseData(id: string) {
     return findUniqueHorse;
 }
 
-export async function getProtectedFile(url: string) {
+export async function getProtectedMedia(url: string) {
+    if (!url) return undefined;
     const token = await auth.currentUser?.getIdToken()
     const response = await fetch(url, {
         headers: {
@@ -194,17 +195,58 @@ export async function updateHorse(id: string, data: any): Promise<any> {
     return handleResponse<any>(response)
 }
 
-export async function deleteHorseFile(
+
+export type HorseMediaType = 'photos' | 'vetReport' | 'xrayResults';
+
+export async function deleteHorseMedia(
     horseId: string,
-    filename: string,
-    imageType: 'photo' | 'vet' | 'xray'
+    mediaType: HorseMediaType,
+    filename?: string,
 ): Promise<any> {
     const token = await auth.currentUser?.getIdToken();
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/${horseId}/delete-media?type=${imageType}&filename=${encodeURIComponent(filename)}`, {
+
+    let url = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/${horseId}/delete-media?type=${mediaType}`;
+    if (filename) {
+        url += `&filename=${encodeURIComponent(filename)}`;
+    }
+    const response = await fetch(url, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`
         }
+    });
+    return handleResponse<any>(response);
+}
+
+interface UploadHorseMediaOptions {
+    horseId: string;
+    photos?: FileList;
+    vetReport?: File;
+    xrayResults?: File;
+}
+
+export async function uploadHorseMedia(
+    options: UploadHorseMediaOptions
+): Promise<any> {
+    const { horseId, photos, vetReport, xrayResults } = options;
+    const token = await auth.currentUser?.getIdToken();
+    const formData = new FormData();
+    if (photos && photos.length > 0) {
+        for (const photo of photos) {
+            formData.append('photos', photo);
+        }
+    } else if (vetReport) {
+        formData.append('vetReport', vetReport);
+    } else if (xrayResults) {
+        formData.append('xrayResults', xrayResults);
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/${horseId}/upload-media`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        body: formData
     });
     return handleResponse<any>(response);
 }

@@ -1,18 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { RefreshCcw, Upload } from "lucide-react";
+import { ExternalLink, RefreshCcw, Trash, Upload, UploadCloud } from "lucide-react";
 import { PedigreeTable } from "@/components/pedigree-table";
 import { PhotoManager } from "./horse-images-list";
 import { extractYouTubeVideoId, toYouTubeEmbed, toYoutubeURL } from "@/lib/helpers";
-import { getProtectedFile, readHorseTelexPedigree, updateHorse } from "@/lib/api";
+import { deleteHorseMedia, getProtectedMedia, readHorseTelexPedigree, updateHorse, uploadHorseMedia } from "@/lib/api";
 import type { PedigreeArray } from "@/components/pedigree-table";
 import type { Horse } from "@/graphql/sdk";
 
@@ -24,15 +24,15 @@ interface EditHorseFormProps {
 }
 
 export function EditHorseForm({ horse, categories, genders, disciplines }: EditHorseFormProps) {
-    const [vetReportURL, setVetReportURL] = useState<string | undefined>();
+    const [vetReportURL, setVetReportURL] = useState<string | undefined>(undefined);
+    const [xrayURL, setXrayURL] = useState<string | undefined>(undefined);
     const [youtubeURL, setYoutubeURL] = useState<string>(toYoutubeURL(horse.youtubeVideoId));
-    const [xrayURL, setXrayURL] = useState<string | undefined>();
     const [pedigreeData, setPedigreeData] = useState<PedigreeArray>(horse.pedigree || []);
     const [pedigreeURL, setPedigreeURL] = useState<string | undefined>(horse.pedigree ? horse.pedigree[0].href || "" : "");
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const { register, watch, setValue, getValues } = useForm({
+    const { register, watch, setValue, getValues, control } = useForm({
         defaultValues: {
             photos: horse.photos,
             name: horse.name,
@@ -50,11 +50,14 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
     });
 
     const videoId = watch("youtubeVideoId");
+    const photos = useWatch({ control, name: "photos" });
 
     useEffect(() => {
         Promise.all([
-            getProtectedFile(horse.vetReport ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.vetReport}` : "").then(setVetReportURL),
-            getProtectedFile(horse.xrayResults ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.xrayResults}` : "").then(setXrayURL),
+            getProtectedMedia(horse.vetReport ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.vetReport}` : "")
+                .then(setVetReportURL),
+            getProtectedMedia(horse.xrayResults ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.xrayResults}` : "")
+                .then(setXrayURL),
         ]);
     }, [horse.vetReport, horse.xrayResults]);
 
@@ -62,9 +65,40 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
         fileInputRef.current?.click();
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files) return;
-        const files = Array.from(e.target.files);
+    const handlePhotosChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files) return;
+        const photos = event.target.files;
+        const updatedHorse = await uploadHorseMedia({ horseId: horse.id, photos });
+        setValue("photos", updatedHorse.photos);
+    };
+
+    const handleDeletePDF = async (type: 'vetReport' | 'xrayResults') => {
+        try {
+            await deleteHorseMedia(horse.id, type);
+            if (type === 'vetReport') setVetReportURL(undefined);
+            else if (type === 'xrayResults') setXrayURL(undefined);
+        } catch (err) {
+            console.error("Failed to delete PDF:", err);
+        }
+    };
+
+    const handleChangePDF = (type: 'vetReport' | 'xrayResults') => {
+        return async (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (!e.target.files || e.target.files.length === 0) return;
+            const file = e.target.files[0];
+            try {
+                const updatedHorse = await uploadHorseMedia({ horseId: horse.id, [type]: file });
+                const url = updatedHorse.status !== "ACCEPTED" ?
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${updatedHorse[type]}` :
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/${updatedHorse[type]}`;
+                const blobURL = await getProtectedMedia(url);
+                console.log("Blob URL:", blobURL);
+                if (type === 'vetReport') setVetReportURL(blobURL);
+                else if (type === 'xrayResults') setXrayURL(blobURL);
+            } catch (err) {
+                console.error('Error uploading file:', err);
+            }
+        }
     };
 
     const onSubmit = async () => {
@@ -100,13 +134,13 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                                 accept="image/*"
                                 multiple
                                 className="hidden"
-                                onChange={handleChange}
+                                onChange={handlePhotosChange}
                             />
                         </div>
                     </SectionTitle>
                     <PhotoManager
                         horseId={horse.id}
-                        initialPhotos={watch("photos")}
+                        initialPhotos={photos}
                         action={(filesOrNames) => setValue("photos", filesOrNames as string[])}
                     />
                 </Card>
@@ -127,10 +161,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
 
                     <Card className="mt-6 h-[400px] rounded-xl overflow-hidden shadow-inner">
                         {videoId ? (
-                            <iframe
-                                src={toYouTubeEmbed(videoId)}
-                                className="w-full h-full"
-                            />
+                            <iframe className="w-full h-full" src={toYouTubeEmbed(videoId)} />
                         ) : (
                             <div className="flex items-center justify-center h-full text-muted-foreground">
                                 No video selected
@@ -166,9 +197,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                                 </SelectTrigger>
                                 <SelectContent>
                                     {categories.map((c) => (
-                                        <SelectItem key={c.id} value={c.id}>
-                                            {c.name}
-                                        </SelectItem>
+                                        <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
@@ -181,9 +210,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                                 </SelectTrigger>
                                 <SelectContent>
                                     {genders.map((g) => (
-                                        <SelectItem key={g.id} value={g.id}>
-                                            {g.name}
-                                        </SelectItem>
+                                        <SelectItem key={g.id} value={g.id}>{g.name}</SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
@@ -196,9 +223,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                                 </SelectTrigger>
                                 <SelectContent>
                                     {disciplines.map((d) => (
-                                        <SelectItem key={d.id} value={d.id}>
-                                            {d.name}
-                                        </SelectItem>
+                                        <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
@@ -216,7 +241,6 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
 
                 <Card className="p-8">
                     <SectionTitle>Pedigree</SectionTitle>
-
                     <Field label="HorseTelex Link">
                         <div className="flex gap-2">
                             <Input id="pedigree-url" value={pedigreeURL} onChange={(e) => setPedigreeURL(e.target.value)} autoComplete="off" />
@@ -237,9 +261,18 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                 </Card>
                 <Card className="p-8">
                     <SectionTitle>Health Documents</SectionTitle>
-                    <DocUpload label="X-Ray Results" fileURL={xrayURL} />
+                    <DocUpload
+                        label="X-Ray Results"
+                        fileURL={xrayURL}
+                        onDelete={() => handleDeletePDF('xrayResults')}
+                        onChange={handleChangePDF('xrayResults')}
+                    />
                     <div className="mt-6" />
-                    <DocUpload label="Vet Report" fileURL={vetReportURL} />
+                    <DocUpload
+                        label="Vet Report"
+                        fileURL={vetReportURL}
+                        onDelete={() => handleDeletePDF('vetReport')}
+                        onChange={handleChangePDF('vetReport')} />
                 </Card>
             </div>
         </div>
@@ -252,11 +285,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
     return <h2 className="text-xl font-semibold mb-4">{children}</h2>;
 }
 
-function Field({
-    label,
-    children,
-    className,
-}: {
+function Field({ label, children, className }: {
     label: string;
     children: React.ReactNode;
     className?: string;
@@ -269,21 +298,54 @@ function Field({
     );
 }
 
-function DocUpload({ label, fileURL }: { label: string; fileURL?: string }) {
+interface DocUploadProps {
+    label: string;
+    fileURL?: string;
+    onDelete?: () => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+}
+
+function DocUpload({ label, fileURL, onDelete, onChange }: DocUploadProps) {
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleClick = () => {
+        fileInputRef.current?.click();
+    };
+
     return (
         <div className="flex flex-col gap-3">
-            <Label>{label}</Label>
-            <Input type="file" accept="application/pdf" />
-            {fileURL && (
-                <Button
-                    variant="link"
-                    className="p-0 w-fit underline"
-                    onClick={() => window.open(fileURL, "_blank")}
-                >
-                    Open {label}
-                </Button>
-            )}
+            <div className="flex justify-between items-center">
+                <Label>{label}</Label>
+                {/* <Input type="file" accept="application/pdf" /> */}
+                <div className="flex gap-2">
+                    {fileURL && (
+                        <Button variant="outline" size="icon" onClick={onDelete}>
+                            <Trash />
+                        </Button>
+                    )}
 
+                    <Button variant="outline" size="icon" onClick={handleClick}>
+                        <Upload />
+                    </Button>
+
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        className="hidden"
+                        accept="application/pdf"
+                        multiple={false}
+                        onChange={onChange}
+                    />
+
+                    {fileURL && (
+                        <Button variant="outline" size="icon" onClick={() => window.open(fileURL, "_blank")}>
+                            <ExternalLink />
+                        </Button>
+                    )}
+                </div>
+
+            </div>
             <Card className="h-[500px] overflow-hidden border rounded-xl shadow-inner p-0">
                 {fileURL ? (
                     <iframe src={fileURL} className="w-full h-full" />
