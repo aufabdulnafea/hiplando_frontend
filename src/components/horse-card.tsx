@@ -6,13 +6,14 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@/components/ui/card'
 import { Heart, MapPin } from 'lucide-react'
 import { FiCheckCircle } from "react-icons/fi";
-import { FindManyHorseQuery } from "@/graphql/sdk";
+import { FindManyHorseQuery, HorseStatus } from "@/graphql/sdk";
 import { Suspense, useEffect, useState } from 'react';
 import { formatPrice } from '@/lib/format-price';
 import { Skeleton } from '@/components/ui/skeleton';
-import { addToFavorite, removeFromFavorite } from '@/lib/api';
+import { addToFavorite, getProtectedMedia, getPublicMedia, removeFromFavorite } from '@/lib/api';
 import { toast } from 'sonner'
 import { getAuth } from 'firebase/auth';
+import { getHorseMedia } from '@/lib/helpers';
 
 interface HorseCardProps {
     horse: FindManyHorseQuery['findManyHorse'][number]
@@ -59,20 +60,11 @@ export default function HorseCard({ horse }: HorseCardProps) {
 
     useEffect(() => {
         async function loadPhoto() {
-            if (!horse.photos.length) return;
-
-            const auth = getAuth();
-            const token = await auth.currentUser?.getIdToken();
-
-            const res = await fetch(horse.photos[0], {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
-            const blob = await res.blob();
-            const objectUrl = URL.createObjectURL(blob);
-            setPhotoUrl(objectUrl);
+            const photoUrl = await getHorseMedia(horse.status, horse.photos[0])
+            if (photoUrl) {
+                setPhotoUrl(photoUrl)
+            }
         }
-
         loadPhoto();
     }, [horse.photos]);
 

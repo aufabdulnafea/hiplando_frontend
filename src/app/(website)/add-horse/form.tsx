@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Activity } from "react";
 import { LuChevronRight, LuChevronLeft } from "react-icons/lu";
 import { motion, AnimatePresence } from "motion/react";
 import { useForm, FormProvider } from "react-hook-form";
@@ -21,7 +21,6 @@ import { HorseAddedSuccessCard } from './added-success-card';
 const schema = z.object({
     categoryId: z.string().min(1, "Please select a category"),
     name: z.string().min(2, "Horse name is required"),
-    // pedigreeURL: z.url().optional().or(z.literal("")),
     yearOfBirth: z.number().positive("Year of birth is required"),
     genderId: z.string().min(1, "Gender is required"),
     height: z.number().positive("Height is required"),
@@ -30,7 +29,6 @@ const schema = z.object({
     price: z.number().positive("Price is required"),
     description: z.string().optional(),
     photos: z.array(z.instanceof(File)).refine(f => f.length >= 1 && f.length <= 3, "Upload 1–3 photos"),
-    // video: z.url().optional().or(z.literal("")),
     youtubeVideoId: z.string().optional(),
     xrayResults: z.array(z.instanceof(File)).optional(),
     vetReport: z.array(z.instanceof(File)).optional(),
@@ -52,7 +50,6 @@ function focusFirstError(methods: any) {
 function convertToFormData(data: FormData) {
     const formData = new FormData();
     data.photos.forEach(file => formData.append('photos', file));
-    // data.video && formData.append('video', data.video);
     data.xrayResults?.forEach(file => formData.append('xrayResults', file));
     data.vetReport?.forEach(file => formData.append('vetReport', file));
 
@@ -77,9 +74,9 @@ function StepTimeLine({ step }: { step: number }) {
                     <div className={`h-10 w-10 text-sm flex items-center justify-center rounded-full transition-colors duration-300 ${step >= idx + 1 ? "font-bold bg-primary text-white" : "bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100"}`}>
                         {idx + 1}
                     </div>
-                    {idx !== 2 && (
+                    <Activity mode={idx !== 2 ? "visible" : "hidden"}>
                         <div className={`h-1 w-12 rounded-full transition-colors duration-300 ${step - 1 > idx ? "bg-primary" : "bg-neutral-200 dark:bg-neutral-700"}`} />
-                    )}
+                    </Activity>
                 </div>
             ))}
         </div>
@@ -102,7 +99,9 @@ function StepController({ step, previousStep, handleNext, isLastStep, isSubmitti
             </Button>
             <Button size="lg" onClick={handleNext} disabled={isSubmitting}>
                 {isLastStep ? isSubmitting ? <Spinner /> : "Submit" : "Next"}
-                {!isLastStep && <LuChevronRight size={18} />}
+                <Activity mode={isLastStep ? "hidden" : "visible"}>
+                    <LuChevronRight size={18} />
+                </Activity>
             </Button>
         </div>
     );
@@ -251,9 +250,15 @@ export default function AddHorseForm(props: AddHorseFormProps) {
                             exit={{ opacity: 0, x: direction.current === -1 ? 50 : -50 }}
                             transition={{ duration: 0.25 }}
                         >
-                            {currentStep === 1 && <SelectCategory categories={categories} />}
-                            {currentStep === 2 && <HorseDetail disciplines={disciplines} genders={genders} />}
-                            {currentStep === 3 && <Files />}
+                            <Activity mode={currentStep === 1 ? "visible" : "hidden"}>
+                                <SelectCategory categories={categories} />
+                            </Activity>
+                            <Activity mode={currentStep === 2 ? "visible" : "hidden"}>
+                                <HorseDetail disciplines={disciplines} genders={genders} />
+                            </Activity>
+                            <Activity mode={currentStep === 3 ? "visible" : "hidden"}>
+                                <Files />
+                            </Activity>
                         </motion.div>
                     </AnimatePresence>
 

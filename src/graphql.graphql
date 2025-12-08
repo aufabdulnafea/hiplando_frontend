@@ -26,6 +26,7 @@ query findManyHorse(
     vetReport
     xrayResults
     pedigree
+    contactPerson
     user {
       uid
       name
@@ -66,6 +67,7 @@ query findUniqueHorse($where: HorseWhereUniqueInput!) {
     vetReport
     xrayResults
     pedigree
+    contactPerson
     user {
       uid
       name
@@ -131,4 +133,30 @@ query findManyUser(
 
 query findManyUserCount($where: UserWhereInput) {
   findManyUserCount(where: $where)
+}
+
+query findManyNotification($where: NotificationWhereInput) {
+  findManyNotification(where: $where, take: 100) {
+    id
+    title
+    message
+    read
+    createdAt
+  }
+}
+
+query findManyEvents($take: Int, $skip: Int) {
+  findManyEvent(take: $take, skip: $skip) {
+    id
+    url
+    showCode
+    name
+    startDate
+    endDate
+    country
+    levels
+    videos
+    createdAt
+    updatedAt
+  }
 }

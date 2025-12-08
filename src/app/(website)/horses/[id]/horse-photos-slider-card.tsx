@@ -6,6 +6,9 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { FindUniqueHorseQuery } from "@/graphql/sdk";
 import { getAuth } from "firebase/auth";
+import { getProtectedMedia, getPublicMedia } from "@/lib/api";
+import { HorseStatus } from "@/graphql/sdk";
+import { getYoutubeThumb, toYouTubeEmbed } from "@/lib/helpers";
 
 interface HorsePhotosSliderProps {
     horse: NonNullable<FindUniqueHorseQuery['findUniqueHorse']>;
@@ -26,15 +29,15 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
             const loaded: string[] = [];
 
             for (const photo of horse.photos) {
-                const res = await fetch(photo, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                let res: string | undefined
 
-                const blob = await res.blob();
-                const url = URL.createObjectURL(blob);
-                loaded.push(url);
+                if (horse.status === HorseStatus.Accepted) {
+                    res = await getPublicMedia(photo);
+                }
+                else {
+                    res = await getProtectedMedia(photo);
+                }
+                if (res) loaded.push(res);
             }
 
             setPhotoUrls(loaded);
@@ -46,15 +49,9 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
     const next = () => setCurrentIndex((i) => (i + 1) % totalSlides);
     const prev = () => setCurrentIndex((i) => (i - 1 + totalSlides) % totalSlides);
 
-    const getYoutubeEmbed = (url: string) => {
-        const id = url.match(/(?:v=|youtu\.be\/)([^#&?]+)/)?.[1];
-        return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : url;
-    };
-
-    const getYoutubeThumb = (url: string) => {
-        const id = url.match(/(?:v=|youtu\.be\/)([^#&?]+)/)?.[1];
-        return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : "";
-    };
+    // const getYoutubeThumb = (id: string) => {
+    //     return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    // };
 
     return (
         <Card className="relative overflow-hidden p-0">
@@ -66,7 +63,7 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
                             <iframe
                                 width="100%"
                                 height="100%"
-                                src={getYoutubeEmbed(horse.youtubeVideoId!)}
+                                src={toYouTubeEmbed(horse.youtubeVideoId!)}
                                 allow="accelerometer; autoplay; encrypted-media;"
                                 allowFullScreen
                             />

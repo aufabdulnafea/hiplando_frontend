@@ -17,7 +17,9 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { X } from "lucide-react";
-import { deleteHorseMedia, getProtectedMedia } from "@/lib/api";
+import { deleteHorseMedia } from "@/lib/api";
+import { getHorseMedia } from "@/lib/helpers";
+import { HorseStatus } from "@/graphql/sdk";
 
 /** -------------------- TYPES -------------------- */
 type Photo = {
@@ -35,6 +37,7 @@ interface SortablePhotoProps {
 
 export interface PhotoManagerProps {
     horseId: string;
+    horseStatus: HorseStatus;
     initialPhotos: string[];
     action: (files: (string | File)[]) => void;
 }
@@ -72,7 +75,7 @@ function SortablePhoto({ id, src, onDelete }: SortablePhotoProps) {
 }
 
 /** -------------------- PHOTO MANAGER -------------------- */
-export function PhotoManager({ horseId, initialPhotos, action }: PhotoManagerProps) {
+export function PhotoManager({ horseId, horseStatus, initialPhotos, action }: PhotoManagerProps) {
     const [photos, setPhotos] = useState<Photo[]>([]);
 
     const sensors = useSensors(
@@ -83,8 +86,7 @@ export function PhotoManager({ horseId, initialPhotos, action }: PhotoManagerPro
         async function loadPhotos() {
             const results = await Promise.all(
                 initialPhotos.map(async (filename) => {
-                    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${filename}`;
-                    const protectedURL = await getProtectedMedia(url);
+                    const protectedURL = await getHorseMedia(horseStatus, filename);
 
                     return {
                         id: filename,

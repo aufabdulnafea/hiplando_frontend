@@ -148,14 +148,27 @@ export async function getHorseData(id: string) {
     return findUniqueHorse;
 }
 
-export async function getProtectedMedia(url: string) {
-    if (!url) return undefined;
+export async function getProtectedMedia(filename: string) {
+    if (!filename) return undefined;
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${filename}`;
     const token = await auth.currentUser?.getIdToken()
     const response = await fetch(url, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
     })
+
+    if (!response.ok) throw new Error(`API Error: ${response.status} ${response.statusText}`)
+
+    const blob = await response.blob()
+    return URL.createObjectURL(blob)
+}
+
+export async function getPublicMedia(filename: string) {
+    if (!filename) return undefined;
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${filename}`;
+    console.log(url)
+    const response = await fetch(url)
 
     if (!response.ok) throw new Error(`API Error: ${response.status} ${response.statusText}`)
 
@@ -182,9 +195,9 @@ export async function readHorseTelexPedigree(url: string) {
     return []
 }
 
-export async function updateHorse(id: string, data: any): Promise<any> {
+export async function updateHorseAdmin(id: string, data: any): Promise<any> {
     const token = await auth.currentUser?.getIdToken()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/update/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/admin/horses/update/${id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -194,7 +207,6 @@ export async function updateHorse(id: string, data: any): Promise<any> {
     })
     return handleResponse<any>(response)
 }
-
 
 export type HorseMediaType = 'photos' | 'vetReport' | 'xrayResults';
 
@@ -249,4 +261,73 @@ export async function uploadHorseMedia(
         body: formData
     });
     return handleResponse<any>(response);
+}
+
+export async function markNotificationAsRead(id: string): Promise<any> {
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/notifications/mark-as-read/${id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    return handleResponse<any>(response)
+}
+
+export async function markAllNotificationsAsRead(): Promise<any> {
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/notifications/mark-all-as-read`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    return handleResponse<any>(response)
+}
+
+export async function deleteNotification(id: string): Promise<any> {
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/notifications/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    return handleResponse<any>(response)
+}
+
+export async function acceptHorse(id: string): Promise<any> {
+    const token = await auth.currentUser?.getIdToken()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/accept/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    return handleResponse<any>(response)
+}
+
+
+export async function fetchAllEvents() {
+    const allEvents: any[] = [];
+    let skip = 0;
+    const take = 100;
+
+    while (true) {
+        const sdk = await getGraphQLClient();
+
+        // Call your GraphQL query with pagination
+        const { findManyEvent } = await sdk.findManyEvents({ skip, take });
+
+        allEvents.push(...findManyEvent);
+
+        if (findManyEvent.length < take) break; // No more records
+        skip += take;
+    }
+
+    return allEvents;
 }

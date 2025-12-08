@@ -50,5 +50,5 @@ export function buildHorseWhere(filters: BuildWhereParams): HorseWhereInput {
 
     if (filters.location) where.location = { equals: filters.location, mode: QueryMode.Insensitive };
 
-    return { ...where, status: { equals: HorseStatus.Approved } };
+    return { ...where, status: { equals: HorseStatus.Accepted } };
 }

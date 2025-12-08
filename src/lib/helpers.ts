@@ -1,3 +1,5 @@
+import { Horse, HorseStatus } from "@/graphql/sdk";
+import { getProtectedMedia, getPublicMedia } from "./api";
 
 export function ageFromBirthYear(birthYear: number): number {
     const currentYear = new Date().getFullYear();
@@ -44,4 +46,45 @@ export function toYouTubeEmbed(videoId: string | null | undefined): string {
 export function toYoutubeURL(videoId: string | null | undefined): string {
     if (!videoId) return ""
     return `https://www.youtube.com/watch?v=${videoId}`
+}
+
+export function getYoutubeThumb(videoId: string | null | undefined): string {
+    if (!videoId) return ""
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+}
+
+export async function getAllHorseMedia(horse: Horse) {
+    let isPrivate = true;
+    const photos: (string | undefined)[] = []
+    let vetReport: string | undefined = undefined
+    let xrayResults: string | undefined = undefined
+    if (horse.status === HorseStatus.Accepted) isPrivate = false;
+
+    for (const photo of horse.photos) {
+        if (isPrivate) photos.push(await getProtectedMedia(photo))
+        else photos.push(await getPublicMedia(photo))
+    }
+
+    if (horse.vetReport) {
+        if (isPrivate) vetReport = await getProtectedMedia(horse.vetReport)
+        else vetReport = await getPublicMedia(horse.vetReport)
+    }
+
+    if (horse.xrayResults) {
+        if (isPrivate) xrayResults = await getProtectedMedia(horse.xrayResults)
+        else xrayResults = await getPublicMedia(horse.xrayResults)
+    }
+
+    return {
+        photos,
+        vetReport,
+        xrayResults
+    }
+}
+
+export async function getHorseMedia(status: HorseStatus, filename: string) {
+    if (status === HorseStatus.Accepted) {
+        return await getPublicMedia(filename)
+    }
+    return await getProtectedMedia(filename)
 }

@@ -8,27 +8,33 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { ExternalLink, RefreshCcw, Trash, Upload, UploadCloud } from "lucide-react";
+import { ExternalLink, RefreshCcw, Trash, Upload } from "lucide-react";
 import { PedigreeTable } from "@/components/pedigree-table";
 import { PhotoManager } from "./horse-images-list";
-import { extractYouTubeVideoId, toYouTubeEmbed, toYoutubeURL } from "@/lib/helpers";
-import { deleteHorseMedia, getProtectedMedia, readHorseTelexPedigree, updateHorse, uploadHorseMedia } from "@/lib/api";
+import { extractYouTubeVideoId, getHorseMedia, toYouTubeEmbed, toYoutubeURL } from "@/lib/helpers";
+import { deleteHorseMedia, getProtectedMedia, getPublicMedia, readHorseTelexPedigree, updateHorseAdmin, uploadHorseMedia } from "@/lib/api";
 import type { PedigreeArray } from "@/components/pedigree-table";
-import type { Horse } from "@/graphql/sdk";
+import { HorseStatus, type FindUniqueHorseQuery } from "@/graphql/sdk";
 
 interface EditHorseFormProps {
-    horse: Horse;
+    horse: NonNullable<FindUniqueHorseQuery['findUniqueHorse']>;
     categories: any[];
     genders: any[];
     disciplines: any[];
 }
 
 export function EditHorseForm({ horse, categories, genders, disciplines }: EditHorseFormProps) {
+    console.log(horse)
     const [vetReportURL, setVetReportURL] = useState<string | undefined>(undefined);
     const [xrayURL, setXrayURL] = useState<string | undefined>(undefined);
     const [youtubeURL, setYoutubeURL] = useState<string>(toYoutubeURL(horse.youtubeVideoId));
     const [pedigreeData, setPedigreeData] = useState<PedigreeArray>(horse.pedigree || []);
     const [pedigreeURL, setPedigreeURL] = useState<string | undefined>(horse.pedigree ? horse.pedigree[0].href || "" : "");
+    const [horseStatus, setHorseStatus] = useState(horse.status);
+
+    const isEditable = horse.status === HorseStatus.Approved || horse.status === HorseStatus.Submitted;
+
+
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +52,8 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
             disciplineId: horse.discipline.id,
             categoryId: horse.category.id,
             pedigree: horse.pedigree,
+            status: horse.status,
+            contactPerson: horse.contactPerson
         },
     });
 
@@ -54,9 +62,9 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
 
     useEffect(() => {
         Promise.all([
-            getProtectedMedia(horse.vetReport ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.vetReport}` : "")
+            getHorseMedia(horse.status, horse.vetReport ?? "")
                 .then(setVetReportURL),
-            getProtectedMedia(horse.xrayResults ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${horse.xrayResults}` : "")
+            getHorseMedia(horse.status, horse.xrayResults ?? "")
                 .then(setXrayURL),
         ]);
     }, [horse.vetReport, horse.xrayResults]);
@@ -88,13 +96,14 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
             const file = e.target.files[0];
             try {
                 const updatedHorse = await uploadHorseMedia({ horseId: horse.id, [type]: file });
-                const url = updatedHorse.status !== "ACCEPTED" ?
-                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/private/${updatedHorse[type]}` :
-                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/${updatedHorse[type]}`;
-                const blobURL = await getProtectedMedia(url);
-                console.log("Blob URL:", blobURL);
-                if (type === 'vetReport') setVetReportURL(blobURL);
-                else if (type === 'xrayResults') setXrayURL(blobURL);
+                let media;
+                if (updatedHorse.status !== "ACCEPTED") {
+                    media = await getProtectedMedia(updatedHorse[type]);
+                } else {
+                    media = await getPublicMedia(updatedHorse[type]);
+                }
+                if (type === 'vetReport') setVetReportURL(media);
+                else if (type === 'xrayResults') setXrayURL(media);
             } catch (err) {
                 console.error('Error uploading file:', err);
             }
@@ -104,20 +113,37 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
     const onSubmit = async () => {
         const formValues = getValues();
         try {
-            const newHorse = await updateHorse(horse.id, formValues);
+            const newHorse = await updateHorseAdmin(horse.id, formValues);
             console.log("Horse updated successfully", newHorse);
         } catch (error) {
             console.error("Failed to update horse:", error);
         }
     };
 
+    const onApprove = async () => {
+
+        const formValues = getValues();
+        formValues.status = HorseStatus.Approved;
+        try {
+            const newHorse = await updateHorseAdmin(horse.id, { ...formValues, status: HorseStatus.Approved });
+            setHorseStatus(newHorse.status);
+        } catch (error) {
+            console.error("Failed to update horse:", error);
+        }
+        // await appriveHorseAdmin(horse.id, getValues().contactPerson);
+    };
+
     return (
         <div className="p-4 w-full max-w-screen-xl mx-auto flex flex-col gap-5">
             <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold">Edit Horse</h1>
+                <div>
+                    <h1 className="text-3xl font-bold">Edit Horse</h1>
+                    <p className="text-xs text-muted-foreground">Status: {horseStatus}</p>
+                </div>
                 <div className="flex gap-2">
-                    <Button variant="outline">Cancel</Button>
-                    <Button onClick={onSubmit}>Save Changes</Button>
+                    {/* <Button variant="outline">Cancel</Button> */}
+                    <Button variant='outline' onClick={onApprove}>Approve</Button>
+                    <Button onClick={onSubmit}>Save</Button>
                 </div>
             </div>
 
@@ -139,6 +165,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                         </div>
                     </SectionTitle>
                     <PhotoManager
+                        horseStatus={horse.status}
                         horseId={horse.id}
                         initialPhotos={photos}
                         action={(filesOrNames) => setValue("photos", filesOrNames as string[])}
@@ -156,6 +183,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                                 setYoutubeURL(e.target.value)
                                 setValue("youtubeVideoId", extractYouTubeVideoId(e.target.value))
                             }}
+                            disabled={!isEditable}
                         />
                     </Field>
 
@@ -175,23 +203,28 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                         <Field label="Name">
-                            <Input {...register("name")} autoComplete="off" />
+                            <Input {...register("name")} autoComplete="off" disabled={!isEditable} />
                         </Field>
 
                         <Field label="Location">
-                            <Input {...register("location")} autoComplete="off" />
+                            <Input {...register("location")} autoComplete="off" disabled={!isEditable} />
                         </Field>
 
                         <Field label="Year of Birth">
-                            <Input type="number" {...register("yearOfBirth")} autoComplete="off" />
+                            <Input type="number" {...register("yearOfBirth")} autoComplete="off" disabled={!isEditable} />
                         </Field>
 
                         <Field label="Height (cm)">
-                            <Input type="number" {...register("height")} autoComplete="off" />
+                            <Input type="number" {...register("height")} autoComplete="off" disabled={!isEditable} />
                         </Field>
 
                         <Field label="Category">
-                            <Select {...register("categoryId")} defaultValue={horse.category.id}>
+                            <Select
+                                // {...register("categoryId")}
+                                onValueChange={(v) => isEditable && setValue("categoryId", v)}
+                                defaultValue={horse.category.id}
+                                disabled={!isEditable}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select category" />
                                 </SelectTrigger>
@@ -204,7 +237,12 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                         </Field>
 
                         <Field label="Gender">
-                            <Select {...register("genderId")} defaultValue={horse.gender.id}>
+                            <Select
+                                // {...register("genderId")}
+                                onValueChange={(v) => isEditable && setValue("genderId", v)}
+                                defaultValue={horse.gender.id}
+                                disabled={!isEditable}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select gender" />
                                 </SelectTrigger>
@@ -217,7 +255,12 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                         </Field>
 
                         <Field label="Discipline">
-                            <Select {...register("disciplineId")} defaultValue={horse.discipline.id}>
+                            <Select
+                                // {...register("disciplineId")}
+                                onValueChange={(v) => isEditable && setValue("disciplineId", v)}
+                                defaultValue={horse.discipline.id}
+                                disabled={!isEditable}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select discipline" />
                                 </SelectTrigger>
@@ -230,12 +273,15 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                         </Field>
 
                         <Field label="Price (€)">
-                            <Input type="number" {...register("price")} autoComplete="off" />
+                            <Input type="number" {...register("price")} autoComplete="off" disabled={!isEditable} />
                         </Field>
                     </div>
 
+                    <Field label="Contact Person">
+                        <Input {...register("contactPerson")} autoComplete="off" />
+                    </Field>
                     <Field label="Description" className="mt-6">
-                        <Textarea rows={6} {...register("description")} autoComplete="off" />
+                        <Textarea rows={6} {...register("description")} autoComplete="off" disabled={!isEditable} />
                     </Field>
                 </Card>
 
@@ -243,7 +289,7 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
                     <SectionTitle>Pedigree</SectionTitle>
                     <Field label="HorseTelex Link">
                         <div className="flex gap-2">
-                            <Input id="pedigree-url" value={pedigreeURL} onChange={(e) => setPedigreeURL(e.target.value)} autoComplete="off" />
+                            <Input id="pedigree-url" value={pedigreeURL} onChange={(e) => setPedigreeURL(e.target.value)} autoComplete="off" disabled={!isEditable} />
                             <Button variant="outline" onClick={() => {
                                 if (pedigreeURL) {
                                     readHorseTelexPedigree(pedigreeURL).then((data) => {
@@ -278,8 +324,6 @@ export function EditHorseForm({ horse, categories, genders, disciplines }: EditH
         </div>
     );
 }
-
-/* ------------------------- SMALL COMPONENTS ------------------------- */
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
     return <h2 className="text-xl font-semibold mb-4">{children}</h2>;
