@@ -22,6 +22,401 @@ export type Scalars = {
   Json: { input: any; output: any; }
 };
 
+export type Agent = {
+  __typename?: 'Agent';
+  _count: AgentCountOutputType;
+  email?: Maybe<Scalars['String']['output']>;
+  horses: Array<Horse>;
+  id: Scalars['String']['output'];
+  user: User;
+  userUid: Scalars['String']['output'];
+  whatsappNumber: Scalars['String']['output'];
+};
+
+
+export type AgentHorsesArgs = {
+  cursor?: InputMaybe<HorseWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<HorseScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<HorseOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<HorseWhereInput>;
+};
+
+export type AgentCountAggregateOutputType = {
+  __typename?: 'AgentCountAggregateOutputType';
+  _all: Scalars['Int']['output'];
+  email: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  userUid: Scalars['Int']['output'];
+  whatsappNumber: Scalars['Int']['output'];
+};
+
+export type AgentCountOrderByAggregateInput = {
+  email?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userUid?: InputMaybe<SortOrder>;
+  whatsappNumber?: InputMaybe<SortOrder>;
+};
+
+export type AgentCountOutputType = {
+  __typename?: 'AgentCountOutputType';
+  horses: Scalars['Int']['output'];
+};
+
+export type AgentCreateInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseCreateNestedManyWithoutAgentInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  user: UserCreateNestedOneWithoutAgentsInput;
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentCreateManyInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  userUid: Scalars['String']['input'];
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentCreateManyUserInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentCreateManyUserInputEnvelope = {
+  data: AgentCreateManyUserInput;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AgentCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<AgentCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<AgentCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<AgentCreateManyUserInputEnvelope>;
+};
+
+export type AgentCreateNestedOneWithoutHorsesInput = {
+  connect?: InputMaybe<AgentWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AgentCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<AgentCreateWithoutHorsesInput>;
+};
+
+export type AgentCreateOrConnectWithoutHorsesInput = {
+  create: AgentCreateWithoutHorsesInput;
+  where: AgentWhereUniqueInput;
+};
+
+export type AgentCreateOrConnectWithoutUserInput = {
+  create: AgentCreateWithoutUserInput;
+  where: AgentWhereUniqueInput;
+};
+
+export type AgentCreateWithoutHorsesInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  user: UserCreateNestedOneWithoutAgentsInput;
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentCreateWithoutUserInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseCreateNestedManyWithoutAgentInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentGroupByOutputType = {
+  __typename?: 'AgentGroupByOutputType';
+  _count?: Maybe<AgentCountAggregateOutputType>;
+  _max?: Maybe<AgentMaxAggregateOutputType>;
+  _min?: Maybe<AgentMinAggregateOutputType>;
+  email?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  userUid: Scalars['String']['output'];
+  whatsappNumber: Scalars['String']['output'];
+};
+
+export type AgentListRelationFilter = {
+  every?: InputMaybe<AgentWhereInput>;
+  none?: InputMaybe<AgentWhereInput>;
+  some?: InputMaybe<AgentWhereInput>;
+};
+
+export type AgentMaxAggregateOutputType = {
+  __typename?: 'AgentMaxAggregateOutputType';
+  email?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  userUid?: Maybe<Scalars['String']['output']>;
+  whatsappNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type AgentMaxOrderByAggregateInput = {
+  email?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userUid?: InputMaybe<SortOrder>;
+  whatsappNumber?: InputMaybe<SortOrder>;
+};
+
+export type AgentMinAggregateOutputType = {
+  __typename?: 'AgentMinAggregateOutputType';
+  email?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  userUid?: Maybe<Scalars['String']['output']>;
+  whatsappNumber?: Maybe<Scalars['String']['output']>;
+};
+
+export type AgentMinOrderByAggregateInput = {
+  email?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  userUid?: InputMaybe<SortOrder>;
+  whatsappNumber?: InputMaybe<SortOrder>;
+};
+
+export type AgentNullableScalarRelationFilter = {
+  is?: InputMaybe<AgentWhereInput>;
+  isNot?: InputMaybe<AgentWhereInput>;
+};
+
+export type AgentOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type AgentOrderByWithAggregationInput = {
+  _count?: InputMaybe<AgentCountOrderByAggregateInput>;
+  _max?: InputMaybe<AgentMaxOrderByAggregateInput>;
+  _min?: InputMaybe<AgentMinOrderByAggregateInput>;
+  email?: InputMaybe<SortOrderInput>;
+  id?: InputMaybe<SortOrder>;
+  userUid?: InputMaybe<SortOrder>;
+  whatsappNumber?: InputMaybe<SortOrder>;
+};
+
+export type AgentOrderByWithRelationInput = {
+  email?: InputMaybe<SortOrderInput>;
+  horses?: InputMaybe<HorseOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userUid?: InputMaybe<SortOrder>;
+  whatsappNumber?: InputMaybe<SortOrder>;
+};
+
+export enum AgentScalarFieldEnum {
+  Email = 'email',
+  Id = 'id',
+  UserUid = 'userUid',
+  WhatsappNumber = 'whatsappNumber'
+}
+
+export type AgentScalarWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<AgentScalarWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<AgentScalarWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<AgentScalarWhereInput>>>;
+  email?: InputMaybe<StringNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  userUid?: InputMaybe<StringFilter>;
+  whatsappNumber?: InputMaybe<StringFilter>;
+};
+
+export type AgentScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<InputMaybe<AgentScalarWhereWithAggregatesInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<AgentScalarWhereWithAggregatesInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<AgentScalarWhereWithAggregatesInput>>>;
+  email?: InputMaybe<StringNullableWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  userUid?: InputMaybe<StringWithAggregatesFilter>;
+  whatsappNumber?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type AgentUncheckedCreateInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutAgentInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  userUid: Scalars['String']['input'];
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentUncheckedCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<AgentCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<AgentCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<AgentCreateManyUserInputEnvelope>;
+};
+
+export type AgentUncheckedCreateWithoutHorsesInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  userUid: Scalars['String']['input'];
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentUncheckedCreateWithoutUserInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutAgentInput>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  whatsappNumber: Scalars['String']['input'];
+};
+
+export type AgentUncheckedUpdateInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutAgentNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUncheckedUpdateManyInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUncheckedUpdateManyWithoutUserInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUncheckedUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<AgentCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<AgentCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<AgentCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<AgentScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<AgentUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<AgentUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<AgentUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type AgentUncheckedUpdateWithoutHorsesInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUncheckedUpdateWithoutUserInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutAgentNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUpdateInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutAgentNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutAgentsNestedInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUpdateManyMutationInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUpdateManyWithWhereWithoutUserInput = {
+  data: AgentUpdateManyMutationInput;
+  where: AgentScalarWhereInput;
+};
+
+export type AgentUpdateManyWithoutUserNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<AgentCreateOrConnectWithoutUserInput>>>;
+  create?: InputMaybe<Array<InputMaybe<AgentCreateWithoutUserInput>>>;
+  createMany?: InputMaybe<AgentCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<AgentScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<AgentWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<AgentUpdateWithWhereUniqueWithoutUserInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<AgentUpdateManyWithWhereWithoutUserInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<AgentUpsertWithWhereUniqueWithoutUserInput>>>;
+};
+
+export type AgentUpdateOneWithoutHorsesNestedInput = {
+  connect?: InputMaybe<AgentWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AgentCreateOrConnectWithoutHorsesInput>;
+  create?: InputMaybe<AgentCreateWithoutHorsesInput>;
+  delete?: InputMaybe<AgentWhereInput>;
+  disconnect?: InputMaybe<AgentWhereInput>;
+  update?: InputMaybe<AgentUpdateToOneWithWhereWithoutHorsesInput>;
+  upsert?: InputMaybe<AgentUpsertWithoutHorsesInput>;
+};
+
+export type AgentUpdateToOneWithWhereWithoutHorsesInput = {
+  data: AgentUpdateWithoutHorsesInput;
+  where?: InputMaybe<AgentWhereInput>;
+};
+
+export type AgentUpdateWithWhereUniqueWithoutUserInput = {
+  data: AgentUpdateWithoutUserInput;
+  where: AgentWhereUniqueInput;
+};
+
+export type AgentUpdateWithoutHorsesInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutAgentsNestedInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUpdateWithoutUserInput = {
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutAgentNestedInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  whatsappNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AgentUpsertWithWhereUniqueWithoutUserInput = {
+  create: AgentCreateWithoutUserInput;
+  update: AgentUpdateWithoutUserInput;
+  where: AgentWhereUniqueInput;
+};
+
+export type AgentUpsertWithoutHorsesInput = {
+  create: AgentCreateWithoutHorsesInput;
+  update: AgentUpdateWithoutHorsesInput;
+  where?: InputMaybe<AgentWhereInput>;
+};
+
+export type AgentWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<AgentWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<AgentWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<AgentWhereInput>>>;
+  email?: InputMaybe<StringNullableFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userUid?: InputMaybe<StringFilter>;
+  whatsappNumber?: InputMaybe<StringFilter>;
+};
+
+export type AgentWhereUniqueInput = {
+  AND?: InputMaybe<Array<InputMaybe<AgentWhereInput>>>;
+  NOT?: InputMaybe<Array<InputMaybe<AgentWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<AgentWhereInput>>>;
+  email?: InputMaybe<StringNullableFilter>;
+  horses?: InputMaybe<HorseListRelationFilter>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  user?: InputMaybe<UserScalarRelationFilter>;
+  userUid?: InputMaybe<StringFilter>;
+  whatsappNumber?: InputMaybe<StringFilter>;
+};
+
+export type AggregateAgent = {
+  __typename?: 'AggregateAgent';
+  _count?: Maybe<AgentCountAggregateOutputType>;
+  _max?: Maybe<AgentMaxAggregateOutputType>;
+  _min?: Maybe<AgentMinAggregateOutputType>;
+};
+
 export type AggregateCountry = {
   __typename?: 'AggregateCountry';
   _count?: Maybe<CountryCountAggregateOutputType>;
@@ -349,6 +744,15 @@ export type CountryWhereUniqueInput = {
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
+export type CreateManyAgentAndReturnOutputType = {
+  __typename?: 'CreateManyAgentAndReturnOutputType';
+  email?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  user: User;
+  userUid: Scalars['String']['output'];
+  whatsappNumber: Scalars['String']['output'];
+};
+
 export type CreateManyCountryAndReturnOutputType = {
   __typename?: 'CreateManyCountryAndReturnOutputType';
   code: Scalars['String']['output'];
@@ -377,6 +781,8 @@ export type CreateManyEventAndReturnOutputType = {
 
 export type CreateManyHorseAndReturnOutputType = {
   __typename?: 'CreateManyHorseAndReturnOutputType';
+  agent?: Maybe<Agent>;
+  agentId?: Maybe<Scalars['String']['output']>;
   category: HorseCategory;
   categoryId: Scalars['String']['output'];
   contactPerson?: Maybe<Scalars['String']['output']>;
@@ -935,6 +1341,8 @@ export type FloatWithAggregatesFilter = {
 export type Horse = {
   __typename?: 'Horse';
   _count: HorseCountOutputType;
+  agent?: Maybe<Agent>;
+  agentId?: Maybe<Scalars['String']['output']>;
   category: HorseCategory;
   categoryId: Scalars['String']['output'];
   contactPerson?: Maybe<Scalars['String']['output']>;
@@ -961,6 +1369,11 @@ export type Horse = {
   xrayResults?: Maybe<Scalars['String']['output']>;
   yearOfBirth: Scalars['Int']['output'];
   youtubeVideoId?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type HorseAgentArgs = {
+  where?: InputMaybe<AgentWhereInput>;
 };
 
 
@@ -1269,6 +1682,7 @@ export type HorseCategoryWhereUniqueInput = {
 export type HorseCountAggregateOutputType = {
   __typename?: 'HorseCountAggregateOutputType';
   _all: Scalars['Int']['output'];
+  agentId: Scalars['Int']['output'];
   categoryId: Scalars['Int']['output'];
   contactPerson: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
@@ -1293,6 +1707,7 @@ export type HorseCountAggregateOutputType = {
 };
 
 export type HorseCountOrderByAggregateInput = {
+  agentId?: InputMaybe<SortOrder>;
   categoryId?: InputMaybe<SortOrder>;
   contactPerson?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
@@ -1322,6 +1737,7 @@ export type HorseCountOutputType = {
 };
 
 export type HorseCreateInput = {
+  agent?: InputMaybe<AgentCreateNestedOneWithoutHorsesInput>;
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1346,7 +1762,37 @@ export type HorseCreateInput = {
   youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type HorseCreateManyAgentInput = {
+  categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  featured?: InputMaybe<Scalars['Boolean']['input']>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['Json']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<HorseStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userUid: Scalars['String']['input'];
+  vetReport?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<Scalars['String']['input']>;
+  yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HorseCreateManyAgentInputEnvelope = {
+  data: HorseCreateManyAgentInput;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type HorseCreateManyCategoryInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
@@ -1375,6 +1821,7 @@ export type HorseCreateManyCategoryInputEnvelope = {
 };
 
 export type HorseCreateManyDisciplineInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1403,6 +1850,7 @@ export type HorseCreateManyDisciplineInputEnvelope = {
 };
 
 export type HorseCreateManyGenderInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1431,6 +1879,7 @@ export type HorseCreateManyGenderInputEnvelope = {
 };
 
 export type HorseCreateManyInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1455,6 +1904,7 @@ export type HorseCreateManyInput = {
 };
 
 export type HorseCreateManyUserInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1480,6 +1930,13 @@ export type HorseCreateManyUserInput = {
 export type HorseCreateManyUserInputEnvelope = {
   data: HorseCreateManyUserInput;
   skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HorseCreateNestedManyWithoutAgentInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutAgentInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutAgentInput>>>;
+  createMany?: InputMaybe<HorseCreateManyAgentInputEnvelope>;
 };
 
 export type HorseCreateNestedManyWithoutCategoryInput = {
@@ -1516,6 +1973,11 @@ export type HorseCreateNestedOneWithoutFavoriteByUsersInput = {
   create?: InputMaybe<HorseCreateWithoutFavoriteByUsersInput>;
 };
 
+export type HorseCreateOrConnectWithoutAgentInput = {
+  create: HorseCreateWithoutAgentInput;
+  where: HorseWhereUniqueInput;
+};
+
 export type HorseCreateOrConnectWithoutCategoryInput = {
   create: HorseCreateWithoutCategoryInput;
   where: HorseWhereUniqueInput;
@@ -1541,7 +2003,33 @@ export type HorseCreateOrConnectWithoutUserInput = {
   where: HorseWhereUniqueInput;
 };
 
+export type HorseCreateWithoutAgentInput = {
+  category: HorseCategoryCreateNestedOneWithoutHorsesInput;
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  discipline: HorseDisciplineCreateNestedOneWithoutHorsesInput;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutHorseInput>;
+  featured?: InputMaybe<Scalars['Boolean']['input']>;
+  gender: HorseGenderCreateNestedOneWithoutHorsesInput;
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['Json']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<HorseStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  user: UserCreateNestedOneWithoutHorsesInput;
+  vetReport?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<Scalars['String']['input']>;
+  yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HorseCreateWithoutCategoryInput = {
+  agent?: InputMaybe<AgentCreateNestedOneWithoutHorsesInput>;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
@@ -1566,6 +2054,7 @@ export type HorseCreateWithoutCategoryInput = {
 };
 
 export type HorseCreateWithoutDisciplineInput = {
+  agent?: InputMaybe<AgentCreateNestedOneWithoutHorsesInput>;
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1590,6 +2079,7 @@ export type HorseCreateWithoutDisciplineInput = {
 };
 
 export type HorseCreateWithoutFavoriteByUsersInput = {
+  agent?: InputMaybe<AgentCreateNestedOneWithoutHorsesInput>;
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1614,6 +2104,7 @@ export type HorseCreateWithoutFavoriteByUsersInput = {
 };
 
 export type HorseCreateWithoutGenderInput = {
+  agent?: InputMaybe<AgentCreateNestedOneWithoutHorsesInput>;
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1638,6 +2129,7 @@ export type HorseCreateWithoutGenderInput = {
 };
 
 export type HorseCreateWithoutUserInput = {
+  agent?: InputMaybe<AgentCreateNestedOneWithoutHorsesInput>;
   category: HorseCategoryCreateNestedOneWithoutHorsesInput;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2182,6 +2674,7 @@ export type HorseGroupByOutputType = {
   _max?: Maybe<HorseMaxAggregateOutputType>;
   _min?: Maybe<HorseMinAggregateOutputType>;
   _sum?: Maybe<HorseSumAggregateOutputType>;
+  agentId?: Maybe<Scalars['String']['output']>;
   categoryId: Scalars['String']['output'];
   contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
@@ -2213,6 +2706,7 @@ export type HorseListRelationFilter = {
 
 export type HorseMaxAggregateOutputType = {
   __typename?: 'HorseMaxAggregateOutputType';
+  agentId?: Maybe<Scalars['String']['output']>;
   categoryId?: Maybe<Scalars['String']['output']>;
   contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2235,6 +2729,7 @@ export type HorseMaxAggregateOutputType = {
 };
 
 export type HorseMaxOrderByAggregateInput = {
+  agentId?: InputMaybe<SortOrder>;
   categoryId?: InputMaybe<SortOrder>;
   contactPerson?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
@@ -2258,6 +2753,7 @@ export type HorseMaxOrderByAggregateInput = {
 
 export type HorseMinAggregateOutputType = {
   __typename?: 'HorseMinAggregateOutputType';
+  agentId?: Maybe<Scalars['String']['output']>;
   categoryId?: Maybe<Scalars['String']['output']>;
   contactPerson?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2280,6 +2776,7 @@ export type HorseMinAggregateOutputType = {
 };
 
 export type HorseMinOrderByAggregateInput = {
+  agentId?: InputMaybe<SortOrder>;
   categoryId?: InputMaybe<SortOrder>;
   contactPerson?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
@@ -2311,6 +2808,7 @@ export type HorseOrderByWithAggregationInput = {
   _max?: InputMaybe<HorseMaxOrderByAggregateInput>;
   _min?: InputMaybe<HorseMinOrderByAggregateInput>;
   _sum?: InputMaybe<HorseSumOrderByAggregateInput>;
+  agentId?: InputMaybe<SortOrderInput>;
   categoryId?: InputMaybe<SortOrder>;
   contactPerson?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
@@ -2335,6 +2833,8 @@ export type HorseOrderByWithAggregationInput = {
 };
 
 export type HorseOrderByWithRelationInput = {
+  agent?: InputMaybe<AgentOrderByWithRelationInput>;
+  agentId?: InputMaybe<SortOrderInput>;
   category?: InputMaybe<HorseCategoryOrderByWithRelationInput>;
   categoryId?: InputMaybe<SortOrder>;
   contactPerson?: InputMaybe<SortOrderInput>;
@@ -2364,6 +2864,7 @@ export type HorseOrderByWithRelationInput = {
 };
 
 export enum HorseScalarFieldEnum {
+  AgentId = 'agentId',
   CategoryId = 'categoryId',
   ContactPerson = 'contactPerson',
   CreatedAt = 'createdAt',
@@ -2396,6 +2897,7 @@ export type HorseScalarWhereInput = {
   AND?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
   NOT?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
   OR?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  agentId?: InputMaybe<StringNullableFilter>;
   categoryId?: InputMaybe<StringFilter>;
   contactPerson?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -2423,6 +2925,7 @@ export type HorseScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
   NOT?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
   OR?: InputMaybe<Array<InputMaybe<HorseScalarWhereWithAggregatesInput>>>;
+  agentId?: InputMaybe<StringNullableWithAggregatesFilter>;
   categoryId?: InputMaybe<StringWithAggregatesFilter>;
   contactPerson?: InputMaybe<StringNullableWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
@@ -2447,7 +2950,6 @@ export type HorseScalarWhereWithAggregatesInput = {
 };
 
 export enum HorseStatus {
-  Accepted = 'ACCEPTED',
   Approved = 'APPROVED',
   Sold = 'SOLD',
   Submitted = 'SUBMITTED'
@@ -2467,6 +2969,7 @@ export type HorseSumOrderByAggregateInput = {
 };
 
 export type HorseUncheckedCreateInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2489,6 +2992,13 @@ export type HorseUncheckedCreateInput = {
   xrayResults?: InputMaybe<Scalars['String']['input']>;
   yearOfBirth: Scalars['Int']['input'];
   youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HorseUncheckedCreateNestedManyWithoutAgentInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutAgentInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutAgentInput>>>;
+  createMany?: InputMaybe<HorseCreateManyAgentInputEnvelope>;
 };
 
 export type HorseUncheckedCreateNestedManyWithoutCategoryInput = {
@@ -2519,7 +3029,33 @@ export type HorseUncheckedCreateNestedManyWithoutUserInput = {
   createMany?: InputMaybe<HorseCreateManyUserInputEnvelope>;
 };
 
+export type HorseUncheckedCreateWithoutAgentInput = {
+  categoryId: Scalars['String']['input'];
+  contactPerson?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description: Scalars['String']['input'];
+  disciplineId: Scalars['String']['input'];
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutHorseInput>;
+  featured?: InputMaybe<Scalars['Boolean']['input']>;
+  genderId: Scalars['String']['input'];
+  height: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['String']['input']>;
+  location: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  pedigree?: InputMaybe<Scalars['Json']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  price: Scalars['Float']['input'];
+  status?: InputMaybe<HorseStatus>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userUid: Scalars['String']['input'];
+  vetReport?: InputMaybe<Scalars['String']['input']>;
+  xrayResults?: InputMaybe<Scalars['String']['input']>;
+  yearOfBirth: Scalars['Int']['input'];
+  youtubeVideoId?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HorseUncheckedCreateWithoutCategoryInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description: Scalars['String']['input'];
@@ -2544,6 +3080,7 @@ export type HorseUncheckedCreateWithoutCategoryInput = {
 };
 
 export type HorseUncheckedCreateWithoutDisciplineInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2568,6 +3105,7 @@ export type HorseUncheckedCreateWithoutDisciplineInput = {
 };
 
 export type HorseUncheckedCreateWithoutFavoriteByUsersInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2592,6 +3130,7 @@ export type HorseUncheckedCreateWithoutFavoriteByUsersInput = {
 };
 
 export type HorseUncheckedCreateWithoutGenderInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2616,6 +3155,7 @@ export type HorseUncheckedCreateWithoutGenderInput = {
 };
 
 export type HorseUncheckedCreateWithoutUserInput = {
+  agentId?: InputMaybe<Scalars['String']['input']>;
   categoryId: Scalars['String']['input'];
   contactPerson?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2640,6 +3180,7 @@ export type HorseUncheckedCreateWithoutUserInput = {
 };
 
 export type HorseUncheckedUpdateInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2665,6 +3206,7 @@ export type HorseUncheckedUpdateInput = {
 };
 
 export type HorseUncheckedUpdateManyInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2688,7 +3230,46 @@ export type HorseUncheckedUpdateManyInput = {
   youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
+export type HorseUncheckedUpdateManyWithoutAgentInput = {
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  featured?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<Scalars['Json']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type HorseUncheckedUpdateManyWithoutAgentNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutAgentInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutAgentInput>>>;
+  createMany?: InputMaybe<HorseCreateManyAgentInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutAgentInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutAgentInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutAgentInput>>>;
+};
+
 export type HorseUncheckedUpdateManyWithoutCategoryInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2726,6 +3307,7 @@ export type HorseUncheckedUpdateManyWithoutCategoryNestedInput = {
 };
 
 export type HorseUncheckedUpdateManyWithoutDisciplineInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2763,6 +3345,7 @@ export type HorseUncheckedUpdateManyWithoutDisciplineNestedInput = {
 };
 
 export type HorseUncheckedUpdateManyWithoutGenderInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2800,6 +3383,7 @@ export type HorseUncheckedUpdateManyWithoutGenderNestedInput = {
 };
 
 export type HorseUncheckedUpdateManyWithoutUserInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2836,7 +3420,33 @@ export type HorseUncheckedUpdateManyWithoutUserNestedInput = {
   upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutUserInput>>>;
 };
 
+export type HorseUncheckedUpdateWithoutAgentInput = {
+  categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  disciplineId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutHorseNestedInput>;
+  featured?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  genderId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<Scalars['Json']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userUid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
 export type HorseUncheckedUpdateWithoutCategoryInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2861,6 +3471,7 @@ export type HorseUncheckedUpdateWithoutCategoryInput = {
 };
 
 export type HorseUncheckedUpdateWithoutDisciplineInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2885,6 +3496,7 @@ export type HorseUncheckedUpdateWithoutDisciplineInput = {
 };
 
 export type HorseUncheckedUpdateWithoutFavoriteByUsersInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2909,6 +3521,7 @@ export type HorseUncheckedUpdateWithoutFavoriteByUsersInput = {
 };
 
 export type HorseUncheckedUpdateWithoutGenderInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2933,6 +3546,7 @@ export type HorseUncheckedUpdateWithoutGenderInput = {
 };
 
 export type HorseUncheckedUpdateWithoutUserInput = {
+  agentId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   categoryId?: InputMaybe<StringFieldUpdateOperationsInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2957,6 +3571,7 @@ export type HorseUncheckedUpdateWithoutUserInput = {
 };
 
 export type HorseUpdateInput = {
+  agent?: InputMaybe<AgentUpdateOneWithoutHorsesNestedInput>;
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -3001,6 +3616,11 @@ export type HorseUpdateManyMutationInput = {
   youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
+export type HorseUpdateManyWithWhereWithoutAgentInput = {
+  data: HorseUpdateManyMutationInput;
+  where: HorseScalarWhereInput;
+};
+
 export type HorseUpdateManyWithWhereWithoutCategoryInput = {
   data: HorseUpdateManyMutationInput;
   where: HorseScalarWhereInput;
@@ -3019,6 +3639,20 @@ export type HorseUpdateManyWithWhereWithoutGenderInput = {
 export type HorseUpdateManyWithWhereWithoutUserInput = {
   data: HorseUpdateManyMutationInput;
   where: HorseScalarWhereInput;
+};
+
+export type HorseUpdateManyWithoutAgentNestedInput = {
+  connect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  connectOrCreate?: InputMaybe<Array<InputMaybe<HorseCreateOrConnectWithoutAgentInput>>>;
+  create?: InputMaybe<Array<InputMaybe<HorseCreateWithoutAgentInput>>>;
+  createMany?: InputMaybe<HorseCreateManyAgentInputEnvelope>;
+  delete?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  deleteMany?: InputMaybe<Array<InputMaybe<HorseScalarWhereInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  set?: InputMaybe<Array<InputMaybe<HorseWhereUniqueInput>>>;
+  update?: InputMaybe<Array<InputMaybe<HorseUpdateWithWhereUniqueWithoutAgentInput>>>;
+  updateMany?: InputMaybe<Array<InputMaybe<HorseUpdateManyWithWhereWithoutAgentInput>>>;
+  upsert?: InputMaybe<Array<InputMaybe<HorseUpsertWithWhereUniqueWithoutAgentInput>>>;
 };
 
 export type HorseUpdateManyWithoutCategoryNestedInput = {
@@ -3090,6 +3724,11 @@ export type HorseUpdateToOneWithWhereWithoutFavoriteByUsersInput = {
   where?: InputMaybe<HorseWhereInput>;
 };
 
+export type HorseUpdateWithWhereUniqueWithoutAgentInput = {
+  data: HorseUpdateWithoutAgentInput;
+  where: HorseWhereUniqueInput;
+};
+
 export type HorseUpdateWithWhereUniqueWithoutCategoryInput = {
   data: HorseUpdateWithoutCategoryInput;
   where: HorseWhereUniqueInput;
@@ -3110,7 +3749,33 @@ export type HorseUpdateWithWhereUniqueWithoutUserInput = {
   where: HorseWhereUniqueInput;
 };
 
+export type HorseUpdateWithoutAgentInput = {
+  category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
+  contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  discipline?: InputMaybe<HorseDisciplineUpdateOneRequiredWithoutHorsesNestedInput>;
+  favoriteByUsers?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutHorseNestedInput>;
+  featured?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  gender?: InputMaybe<HorseGenderUpdateOneRequiredWithoutHorsesNestedInput>;
+  height?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  pedigree?: InputMaybe<Scalars['Json']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  price?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  status?: InputMaybe<EnumHorseStatusFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutHorsesNestedInput>;
+  vetReport?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  xrayResults?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  yearOfBirth?: InputMaybe<IntFieldUpdateOperationsInput>;
+  youtubeVideoId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
 export type HorseUpdateWithoutCategoryInput = {
+  agent?: InputMaybe<AgentUpdateOneWithoutHorsesNestedInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -3135,6 +3800,7 @@ export type HorseUpdateWithoutCategoryInput = {
 };
 
 export type HorseUpdateWithoutDisciplineInput = {
+  agent?: InputMaybe<AgentUpdateOneWithoutHorsesNestedInput>;
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -3159,6 +3825,7 @@ export type HorseUpdateWithoutDisciplineInput = {
 };
 
 export type HorseUpdateWithoutFavoriteByUsersInput = {
+  agent?: InputMaybe<AgentUpdateOneWithoutHorsesNestedInput>;
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -3183,6 +3850,7 @@ export type HorseUpdateWithoutFavoriteByUsersInput = {
 };
 
 export type HorseUpdateWithoutGenderInput = {
+  agent?: InputMaybe<AgentUpdateOneWithoutHorsesNestedInput>;
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -3207,6 +3875,7 @@ export type HorseUpdateWithoutGenderInput = {
 };
 
 export type HorseUpdateWithoutUserInput = {
+  agent?: InputMaybe<AgentUpdateOneWithoutHorsesNestedInput>;
   category?: InputMaybe<HorseCategoryUpdateOneRequiredWithoutHorsesNestedInput>;
   contactPerson?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -3233,6 +3902,12 @@ export type HorseUpdateWithoutUserInput = {
 export type HorseUpdatephotosInput = {
   push?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   set?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type HorseUpsertWithWhereUniqueWithoutAgentInput = {
+  create: HorseCreateWithoutAgentInput;
+  update: HorseUpdateWithoutAgentInput;
+  where: HorseWhereUniqueInput;
 };
 
 export type HorseUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -3269,6 +3944,8 @@ export type HorseWhereInput = {
   AND?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
   NOT?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
   OR?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  agent?: InputMaybe<AgentNullableScalarRelationFilter>;
+  agentId?: InputMaybe<StringNullableFilter>;
   category?: InputMaybe<HorseCategoryScalarRelationFilter>;
   categoryId?: InputMaybe<StringFilter>;
   contactPerson?: InputMaybe<StringNullableFilter>;
@@ -3301,6 +3978,8 @@ export type HorseWhereUniqueInput = {
   AND?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
   NOT?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
   OR?: InputMaybe<Array<InputMaybe<HorseWhereInput>>>;
+  agent?: InputMaybe<AgentNullableScalarRelationFilter>;
+  agentId?: InputMaybe<StringNullableFilter>;
   category?: InputMaybe<HorseCategoryScalarRelationFilter>;
   categoryId?: InputMaybe<StringFilter>;
   contactPerson?: InputMaybe<StringNullableFilter>;
@@ -4053,6 +4732,7 @@ export enum NullsOrder {
 
 export type Query = {
   __typename?: 'Query';
+  aggregateAgent?: Maybe<AggregateAgent>;
   aggregateCountry?: Maybe<AggregateCountry>;
   aggregateEvent?: Maybe<AggregateEvent>;
   aggregateHorse?: Maybe<AggregateHorse>;
@@ -4060,6 +4740,7 @@ export type Query = {
   aggregateUser?: Maybe<AggregateUser>;
   aggregateUserFavoriteHorses?: Maybe<AggregateUserFavoriteHorses>;
   aggregateUserReview?: Maybe<AggregateUserReview>;
+  findFirstAgent?: Maybe<Agent>;
   findFirstCountry?: Maybe<Country>;
   findFirstEvent?: Maybe<Event>;
   findFirstHorse?: Maybe<Horse>;
@@ -4067,6 +4748,8 @@ export type Query = {
   findFirstUser?: Maybe<User>;
   findFirstUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
   findFirstUserReview?: Maybe<UserReview>;
+  findManyAgent: Array<Agent>;
+  findManyAgentCount: Scalars['Int']['output'];
   findManyCountry: Array<Country>;
   findManyCountryCount: Scalars['Int']['output'];
   findManyEvent: Array<Event>;
@@ -4081,6 +4764,7 @@ export type Query = {
   findManyUserFavoriteHorsesCount: Scalars['Int']['output'];
   findManyUserReview: Array<UserReview>;
   findManyUserReviewCount: Scalars['Int']['output'];
+  findUniqueAgent?: Maybe<Agent>;
   findUniqueCountry?: Maybe<Country>;
   findUniqueEvent?: Maybe<Event>;
   findUniqueHorse?: Maybe<Horse>;
@@ -4088,6 +4772,15 @@ export type Query = {
   findUniqueUser?: Maybe<User>;
   findUniqueUserFavoriteHorses?: Maybe<UserFavoriteHorses>;
   findUniqueUserReview?: Maybe<UserReview>;
+};
+
+
+export type QueryAggregateAgentArgs = {
+  cursor?: InputMaybe<AgentWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<AgentOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AgentWhereInput>;
 };
 
 
@@ -4151,6 +4844,16 @@ export type QueryAggregateUserReviewArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindFirstAgentArgs = {
+  cursor?: InputMaybe<AgentWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<AgentScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<AgentOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AgentWhereInput>;
 };
 
 
@@ -4221,6 +4924,26 @@ export type QueryFindFirstUserReviewArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserReviewWhereInput>;
+};
+
+
+export type QueryFindManyAgentArgs = {
+  cursor?: InputMaybe<AgentWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<AgentScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<AgentOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AgentWhereInput>;
+};
+
+
+export type QueryFindManyAgentCountArgs = {
+  cursor?: InputMaybe<AgentWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<AgentScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<AgentOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AgentWhereInput>;
 };
 
 
@@ -4364,6 +5087,11 @@ export type QueryFindManyUserReviewCountArgs = {
 };
 
 
+export type QueryFindUniqueAgentArgs = {
+  where: AgentWhereUniqueInput;
+};
+
+
 export type QueryFindUniqueCountryArgs = {
   where: CountryWhereUniqueInput;
 };
@@ -4498,6 +5226,15 @@ export enum TransactionIsolationLevel {
   Serializable = 'Serializable'
 }
 
+export type UpdateManyAgentAndReturnOutputType = {
+  __typename?: 'UpdateManyAgentAndReturnOutputType';
+  email?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  user: User;
+  userUid: Scalars['String']['output'];
+  whatsappNumber: Scalars['String']['output'];
+};
+
 export type UpdateManyCountryAndReturnOutputType = {
   __typename?: 'UpdateManyCountryAndReturnOutputType';
   code: Scalars['String']['output'];
@@ -4526,6 +5263,8 @@ export type UpdateManyEventAndReturnOutputType = {
 
 export type UpdateManyHorseAndReturnOutputType = {
   __typename?: 'UpdateManyHorseAndReturnOutputType';
+  agent?: Maybe<Agent>;
+  agentId?: Maybe<Scalars['String']['output']>;
   category: HorseCategory;
   categoryId: Scalars['String']['output'];
   contactPerson?: Maybe<Scalars['String']['output']>;
@@ -4628,6 +5367,7 @@ export type UpdateManyUserReviewAndReturnOutputType = {
 export type User = {
   __typename?: 'User';
   _count: UserCountOutputType;
+  agents: Array<Agent>;
   createdAt: Scalars['DateTime']['output'];
   email?: Maybe<Scalars['String']['output']>;
   horses: Array<Horse>;
@@ -4641,6 +5381,16 @@ export type User = {
   userFavoriteHorses: Array<UserFavoriteHorses>;
   verifiedSeller: Scalars['Boolean']['output'];
   whatsAppNumber?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type UserAgentsArgs = {
+  cursor?: InputMaybe<AgentWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<AgentScalarFieldEnum>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<AgentOrderByWithRelationInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<AgentWhereInput>;
 };
 
 
@@ -4711,6 +5461,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserCountOutputType = {
   __typename?: 'UserCountOutputType';
+  agents: Scalars['Int']['output'];
   horses: Scalars['Int']['output'];
   notifications: Scalars['Int']['output'];
   reviews: Scalars['Int']['output'];
@@ -4718,6 +5469,7 @@ export type UserCountOutputType = {
 };
 
 export type UserCreateInput = {
+  agents?: InputMaybe<AgentCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
@@ -4745,6 +5497,12 @@ export type UserCreateManyInput = {
   whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type UserCreateNestedOneWithoutAgentsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutAgentsInput>;
+  create?: InputMaybe<UserCreateWithoutAgentsInput>;
+};
+
 export type UserCreateNestedOneWithoutHorsesInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutHorsesInput>;
@@ -4769,6 +5527,11 @@ export type UserCreateNestedOneWithoutUserFavoriteHorsesInput = {
   create?: InputMaybe<UserCreateWithoutUserFavoriteHorsesInput>;
 };
 
+export type UserCreateOrConnectWithoutAgentsInput = {
+  create: UserCreateWithoutAgentsInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutHorsesInput = {
   create: UserCreateWithoutHorsesInput;
   where: UserWhereUniqueInput;
@@ -4789,7 +5552,24 @@ export type UserCreateOrConnectWithoutUserFavoriteHorsesInput = {
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateWithoutAgentsInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<UserRole>;
+  uid: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UserCreateWithoutHorsesInput = {
+  agents?: InputMaybe<AgentCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -4805,6 +5585,7 @@ export type UserCreateWithoutHorsesInput = {
 };
 
 export type UserCreateWithoutNotificationsInput = {
+  agents?: InputMaybe<AgentCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
@@ -4820,6 +5601,7 @@ export type UserCreateWithoutNotificationsInput = {
 };
 
 export type UserCreateWithoutReviewsInput = {
+  agents?: InputMaybe<AgentCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
@@ -4835,6 +5617,7 @@ export type UserCreateWithoutReviewsInput = {
 };
 
 export type UserCreateWithoutUserFavoriteHorsesInput = {
+  agents?: InputMaybe<AgentCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseCreateNestedManyWithoutUserInput>;
@@ -5339,6 +6122,7 @@ export type UserOrderByWithAggregationInput = {
 };
 
 export type UserOrderByWithRelationInput = {
+  agents?: InputMaybe<AgentOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrderInput>;
   horses?: InputMaybe<HorseOrderByRelationAggregateInput>;
@@ -5793,6 +6577,23 @@ export type UserScalarWhereWithAggregatesInput = {
 };
 
 export type UserUncheckedCreateInput = {
+  agents?: InputMaybe<AgentUncheckedCreateNestedManyWithoutUserInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
+  name: Scalars['String']['input'];
+  notifications?: InputMaybe<NotificationUncheckedCreateNestedManyWithoutUserInput>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
+  reviews?: InputMaybe<UserReviewUncheckedCreateNestedManyWithoutUserInput>;
+  role?: InputMaybe<UserRole>;
+  uid: Scalars['String']['input'];
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedCreateNestedManyWithoutUserInput>;
+  verifiedSeller?: InputMaybe<Scalars['Boolean']['input']>;
+  whatsAppNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserUncheckedCreateWithoutAgentsInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
@@ -5809,6 +6610,7 @@ export type UserUncheckedCreateInput = {
 };
 
 export type UserUncheckedCreateWithoutHorsesInput = {
+  agents?: InputMaybe<AgentUncheckedCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -5824,6 +6626,7 @@ export type UserUncheckedCreateWithoutHorsesInput = {
 };
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
+  agents?: InputMaybe<AgentUncheckedCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
@@ -5839,6 +6642,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
 };
 
 export type UserUncheckedCreateWithoutReviewsInput = {
+  agents?: InputMaybe<AgentUncheckedCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
@@ -5854,6 +6658,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
 };
 
 export type UserUncheckedCreateWithoutUserFavoriteHorsesInput = {
+  agents?: InputMaybe<AgentUncheckedCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseUncheckedCreateNestedManyWithoutUserInput>;
@@ -5869,6 +6674,7 @@ export type UserUncheckedCreateWithoutUserFavoriteHorsesInput = {
 };
 
 export type UserUncheckedUpdateInput = {
+  agents?: InputMaybe<AgentUncheckedUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
@@ -5896,7 +6702,24 @@ export type UserUncheckedUpdateManyInput = {
   whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
+export type UserUncheckedUpdateWithoutAgentsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUncheckedUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUncheckedUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
+  uid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUncheckedUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
 export type UserUncheckedUpdateWithoutHorsesInput = {
+  agents?: InputMaybe<AgentUncheckedUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5912,6 +6735,7 @@ export type UserUncheckedUpdateWithoutHorsesInput = {
 };
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
+  agents?: InputMaybe<AgentUncheckedUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
@@ -5927,6 +6751,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
 };
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
+  agents?: InputMaybe<AgentUncheckedUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
@@ -5942,6 +6767,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
 };
 
 export type UserUncheckedUpdateWithoutUserFavoriteHorsesInput = {
+  agents?: InputMaybe<AgentUncheckedUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUncheckedUpdateManyWithoutUserNestedInput>;
@@ -5957,6 +6783,7 @@ export type UserUncheckedUpdateWithoutUserFavoriteHorsesInput = {
 };
 
 export type UserUpdateInput = {
+  agents?: InputMaybe<AgentUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
@@ -5982,6 +6809,14 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
   whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateOneRequiredWithoutAgentsNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutAgentsInput>;
+  create?: InputMaybe<UserCreateWithoutAgentsInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutAgentsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutAgentsInput>;
 };
 
 export type UserUpdateOneRequiredWithoutHorsesNestedInput = {
@@ -6016,6 +6851,11 @@ export type UserUpdateOneRequiredWithoutUserFavoriteHorsesNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutUserFavoriteHorsesInput>;
 };
 
+export type UserUpdateToOneWithWhereWithoutAgentsInput = {
+  data: UserUpdateWithoutAgentsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
 export type UserUpdateToOneWithWhereWithoutHorsesInput = {
   data: UserUpdateWithoutHorsesInput;
   where?: InputMaybe<UserWhereInput>;
@@ -6036,7 +6876,24 @@ export type UserUpdateToOneWithWhereWithoutUserFavoriteHorsesInput = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type UserUpdateWithoutAgentsInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUpdateManyWithoutUserNestedInput>;
+  phoneNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  reviews?: InputMaybe<UserReviewUpdateManyWithoutUserNestedInput>;
+  role?: InputMaybe<EnumUserRoleFieldUpdateOperationsInput>;
+  uid?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  userFavoriteHorses?: InputMaybe<UserFavoriteHorsesUpdateManyWithoutUserNestedInput>;
+  verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
 export type UserUpdateWithoutHorsesInput = {
+  agents?: InputMaybe<AgentUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -6052,6 +6909,7 @@ export type UserUpdateWithoutHorsesInput = {
 };
 
 export type UserUpdateWithoutNotificationsInput = {
+  agents?: InputMaybe<AgentUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
@@ -6067,6 +6925,7 @@ export type UserUpdateWithoutNotificationsInput = {
 };
 
 export type UserUpdateWithoutReviewsInput = {
+  agents?: InputMaybe<AgentUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
@@ -6082,6 +6941,7 @@ export type UserUpdateWithoutReviewsInput = {
 };
 
 export type UserUpdateWithoutUserFavoriteHorsesInput = {
+  agents?: InputMaybe<AgentUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   horses?: InputMaybe<HorseUpdateManyWithoutUserNestedInput>;
@@ -6094,6 +6954,12 @@ export type UserUpdateWithoutUserFavoriteHorsesInput = {
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   verifiedSeller?: InputMaybe<BoolFieldUpdateOperationsInput>;
   whatsAppNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithoutAgentsInput = {
+  create: UserCreateWithoutAgentsInput;
+  update: UserUpdateWithoutAgentsInput;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 export type UserUpsertWithoutHorsesInput = {
@@ -6124,6 +6990,7 @@ export type UserWhereInput = {
   AND?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
   NOT?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
   OR?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  agents?: InputMaybe<AgentListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringNullableFilter>;
   horses?: InputMaybe<HorseListRelationFilter>;
@@ -6143,6 +7010,7 @@ export type UserWhereUniqueInput = {
   AND?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
   NOT?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
   OR?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
+  agents?: InputMaybe<AgentListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   horses?: InputMaybe<HorseListRelationFilter>;

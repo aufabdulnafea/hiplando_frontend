@@ -299,19 +299,6 @@ export async function deleteNotification(id: string): Promise<any> {
     return handleResponse<any>(response)
 }
 
-export async function acceptHorse(id: string): Promise<any> {
-    const token = await auth.currentUser?.getIdToken()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/horses/accept/${id}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
-    })
-    return handleResponse<any>(response)
-}
-
-
 export async function fetchAllEvents() {
     const allEvents: any[] = [];
     let skip = 0;

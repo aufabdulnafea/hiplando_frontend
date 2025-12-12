@@ -58,7 +58,7 @@ export async function getAllHorseMedia(horse: Horse) {
     const photos: (string | undefined)[] = []
     let vetReport: string | undefined = undefined
     let xrayResults: string | undefined = undefined
-    if (horse.status === HorseStatus.Accepted) isPrivate = false;
+    if (horse.status === HorseStatus.Approved) isPrivate = false;
 
     for (const photo of horse.photos) {
         if (isPrivate) photos.push(await getProtectedMedia(photo))
@@ -83,8 +83,6 @@ export async function getAllHorseMedia(horse: Horse) {
 }
 
 export async function getHorseMedia(status: HorseStatus, filename: string) {
-    if (status === HorseStatus.Accepted) {
-        return await getPublicMedia(filename)
-    }
+    if (status === HorseStatus.Approved) return await getPublicMedia(filename)
     return await getProtectedMedia(filename)
 }

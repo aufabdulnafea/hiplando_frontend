@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { FindUniqueHorseQuery } from "@/graphql/sdk";
-import { getAuth } from "firebase/auth";
 import { getProtectedMedia, getPublicMedia } from "@/lib/api";
 import { HorseStatus } from "@/graphql/sdk";
 import { getYoutubeThumb, toYouTubeEmbed } from "@/lib/helpers";
@@ -23,20 +22,13 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
 
     useEffect(() => {
         const loadPhotos = async () => {
-            const auth = getAuth();
-            const token = await auth.currentUser?.getIdToken();
-
             const loaded: string[] = [];
 
             for (const photo of horse.photos) {
                 let res: string | undefined
+                if (horse.status === HorseStatus.Approved) res = await getPublicMedia(photo);
+                else res = await getProtectedMedia(photo);
 
-                if (horse.status === HorseStatus.Accepted) {
-                    res = await getPublicMedia(photo);
-                }
-                else {
-                    res = await getProtectedMedia(photo);
-                }
                 if (res) loaded.push(res);
             }
 
@@ -48,10 +40,6 @@ export function HorsePhotosSliderCard({ horse }: HorsePhotosSliderProps) {
 
     const next = () => setCurrentIndex((i) => (i + 1) % totalSlides);
     const prev = () => setCurrentIndex((i) => (i - 1 + totalSlides) % totalSlides);
-
-    // const getYoutubeThumb = (id: string) => {
-    //     return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-    // };
 
     return (
         <Card className="relative overflow-hidden p-0">
